@@ -1,4 +1,5 @@
 ﻿/// <reference path="jquery.d.ts" />
+
 $(document).ready(function () {
     var hamburger = $("#menu-toggle");
     var overlay = $(".overlay");
@@ -13,14 +14,14 @@ $(document).ready(function () {
         e.preventDefault();
         var elem = document.getElementById("sidebar-wrapper");
         var left = window.getComputedStyle(elem, null).getPropertyValue("left");
-        var sidebar = document.getElementsByClassName("sidebar-toggle")[0];
+        var sidebar: HTMLElement = (<HTMLElement[]><any>  document.getElementsByClassName("sidebar-toggle"))[0];
         if (left == "200px") {
             sidebar.style.left = "-200px";
             overlay.hide();
-        } else if (left == "-200px") {
+        }
+        else if (left == "-200px") {
             sidebar.style.left = "200px";
             overlay.hide();
         }
     });
 });
-//# sourceMappingURL=sidebar_toggle.js.map

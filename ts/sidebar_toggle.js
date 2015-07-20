@@ -1,8 +1,7 @@
-﻿/// <reference path="jquery.d.ts" />
+/// <reference path="jquery.d.ts" />
 $(document).ready(function () {
     var hamburger = $("#menu-toggle");
     var overlay = $(".overlay");
-
     $('.dropdown').on('show.bs.dropdown', function (e) {
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
     });
@@ -17,10 +16,10 @@ $(document).ready(function () {
         if (left == "200px") {
             sidebar.style.left = "-200px";
             overlay.hide();
-        } else if (left == "-200px") {
+        }
+        else if (left == "-200px") {
             sidebar.style.left = "200px";
             overlay.hide();
         }
     });
 });
-//# sourceMappingURL=sidebar_toggle.js.map
