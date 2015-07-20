@@ -1,0 +1,193 @@
+.navbar-default {
+  background-color: #384f54;
+  border-color: #384f54;
+}
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #384f54;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #384f54;
+}
+.navbar-default .navbar-toggle {
+  border-color: #384f54;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #384f54;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+.navbar-brand-text{
+    color: #ffffff;
+    float:left;
+    display: block;
+}
+
+.navbar-brand-logo{
+    max-height:40px; 
+    margin-top: -10px;
+}
+
+
+
+/* sidebar icons */
+.navbar_icon{
+    background-position: center center;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+}   
+
+.navbar_news_icon{
+    background: url(../img/news.png);
+}
+
+.navbar_scan_icon{
+    background: url(../img/barcode.png);
+}
+
+.navbar_search_icon{
+    background: url(../img/produktsuche.png);
+}
+
+.navbar_cart_icon{
+    background: url(../img/warenkorb.png);
+}
+
+.navbar_about_icon{
+    background: url(../img/about.png);
+}
+
+.navbar_settings_icon{
+    background: url(../img/about.png);
+}
+
+/*sidebar toggle */
+#sidebar-wrapper.sidebar-toggle {
+  transition: all 0.3s ease-out;
+  margin-left: -200px;
+}
+
+#sidebar-wrapper {
+  top: 52px;
+  left: -200px;
+  width: 200px;
+  background-color: #FFFFFF;
+  color: white;
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  list-style: none;
+  height: 100%;
+  background-color: #FFFFFF;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 50px;
+}
+.sidebar-nav li a {
+  color: black;
+  display: block;
+  text-decoration: none;
+}
+.sidebar-nav li a:hover {
+  background: rgba(224, 224, 224, 1);
+  color: black;
+  font-weight: bolder;
+}
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  color: black;
+  font-weight: bold;
+  background: rgba(224, 224, 224, 1);
+}
+#sidebar-wrapper.sidebar-toggle {
+  transition: all 0.3s ease-out;
+  margin-left: -200px;
+}
+
+/*end sidebar */
+
+
+/* Always show menu as toggle */
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #384f54;
+}
+.navbar-header {
+    float: none;
+}
+.navbar-left,.navbar-right {
+    float: none !important;
+}
+.navbar-toggle {
+    display: block;
+}
+.navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.navbar-fixed-top {
+	top: 0;
+	border-width: 0 0 1px;
+}
+.navbar-collapse.collapse {
+    display: none!important;
+}
+.navbar-nav {
+    float: none!important;
+	margin-top: 7.5px;
+}
+.navbar-nav>li {
+    float: none;
+}
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.collapse.in{
+	display:block !important;
+}   
