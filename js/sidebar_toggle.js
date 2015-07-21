@@ -19,7 +19,7 @@ $(document).ready(function () {
             overlay.hide();
         } else if (left == "-200px") {
             sidebar.style.left = "200px";
-            overlay.hide();
+            overlay.show();
         }
     });
 });

@@ -1,0 +1,33 @@
+<body>
+        <nav class="navbar navbar-default navbar-fixed-top navbar-static-top" role="navigation">
+          <div class="container-fluid">       
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle " id="menu-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                       
+              <div class="navbar-brand navbar-brand-text">
+                FAU <a href="#"><img class="navbar-brand-logo" src="img/fablab_icon.png"> </a>FABLAB
+              </div>
+            </div>
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="sidebar-wrapper" class="sidebar-toggle">
+              <ul class="sidebar-nav">
+                <li><a href="../index.html"> <span class="navbar_icon navbar_news_icon"></span>Newso</a></li>
+                <li><a href="../search.html"><span class="navbar_icon navbar_search_icon"></span>Produkt suchen</a></li>
+                <li><a href="../scan.html"><span class="navbar_icon navbar_scan_icon"></span>Produkt scannen</a></li>
+                <li><a href="../cart.html"><span class="navbar_icon navbar_cart_icon"></span>Warenkorb</a></li>
+                <li><a href="../settings.html"><span class="navbar_icon navbar_settings_icon"></span>Einstellungen</a></li>
+                <li><a href="../about.html"><span class="navbar_icon navbar_about_icon"></span>&Uuml;ber</a></li>
+              </ul>
+            </div>
+          </div><!-- /.container-fluid -->
+        </nav>
+         
+        <!-- Overlay when sidebar is opened -->
+        <div class="overlay"></div>
