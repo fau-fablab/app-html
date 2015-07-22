@@ -134,12 +134,18 @@
 }
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
   color: black;
-  font-weight: bold;
+  font-weight: bolder;
   background: rgba(224, 224, 224, 1);
 }
 #sidebar-wrapper.sidebar-toggle {
   transition: all 0.3s ease-out;
   margin-left: -200px;
+}
+
+.active{
+  color: black;
+  font-weight: bolder;
+  background: rgba(224, 224, 224, 1);
 }
 
 /*end sidebar */

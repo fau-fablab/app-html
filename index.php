@@ -7,9 +7,17 @@
               
 <!-- site content-->
 <div id="content" class="container-fluid">
-                   
- <h1> Main Content here </h1> 
-                <span class="navbar_news_icon"></span>     
+
+<!-- rotating gif when content is loading -->
+<img id="loading" src="img/loading.gif" alt="loading" />
+
+<!-- load news.html into #content -->
+<script>
+    $(function(){
+          $("#content").load("news.html");
+    });
+</script>
+    
 </div>
 
     
