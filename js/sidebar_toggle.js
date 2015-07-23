@@ -1,9 +1,10 @@
 /// <reference path="jquery.d.ts" />
 $(document).ready(function () {
     var hamburger = $("#menu-toggle");
-    // open sidebare navigation
+    // open sidebar navigation & animate hamburger
     hamburger.click(function (e) {
         e.preventDefault();
+        $(this).toggleClass("active");
         changeSidebar();
     });
     //check if the URL has a reference to a page and load it 
