@@ -1,3 +1,4 @@
+/*--------- general navbar css ---------*/
 .navbar-default {
   background-color: #384f54;
   border-color: #384f54;
@@ -57,9 +58,57 @@
     margin-top: -10px;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #384f54;
+}
+.navbar-header {
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-toggle {
+    display: block;
+}
+.navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}
+.navbar-collapse.collapse {
+    display: none!important;
+}
+.navbar-nav {
+    float: none!important;
+    margin-top: 7.5px;
+}
+.navbar-nav>li {
+    float: none;
+}
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.collapse.in{
+    display:block !important;
+}   
+/*--------- END general navbar css ---------*/
 
 
-/* sidebar icons */
+
+
+/*--------- sidebar icons ---------*/
 .navbar_icon{
     background-position: center center;
     width: 32px;
@@ -92,8 +141,10 @@
 .navbar_settings_icon{
     background: url(../img/about.png);
 }
+/*--------- END sidebar icons ---------*/
 
-/*sidebar toggle */
+
+/*--------- sidebar toggle ---------*/
 #sidebar-wrapper.sidebar-toggle {
   transition: all 0.3s ease-out;
   margin-left: -200px;
@@ -148,88 +199,39 @@
   font-weight: bolder;
   background: rgba(224, 224, 224, 1);
 }
+/*--------- END sidebar ---------*/
 
-/*end sidebar */
-
-
-/* Always show menu as hamburger-toggle */
-.navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #ecf0f1;
-}
-
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffffff;
-}
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffffff;
-    background-color: #384f54;
-}
-.navbar-header {
-    float: left;
-    text-align: center;
-    width: 100%;
-}
-.navbar-left,.navbar-right {
-    float: none !important;
-}
-.navbar-toggle {
-    display: block;
-}
-.navbar-collapse {
-    border-top: 1px solid transparent;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-}
-.navbar-fixed-top {
-	top: 0;
-	border-width: 0 0 1px;
-}
-.navbar-collapse.collapse {
-    display: none!important;
-}
-.navbar-nav {
-    float: none!important;
-	margin-top: 7.5px;
-}
-.navbar-nav>li {
-    float: none;
-}
-.navbar-nav>li>a {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.collapse.in{
-	display:block !important;
-}   
-
-/* set hamburger-toggle on the left side */
+/*--------- set hamburger-toggle on the left side ---------*/
 .custom-navbar .navbar-toggle {
     float: left;
 }
+/*--------- END hamburger-toggle on right side ---------*/
 
-/* animate hamburger-toggle on click */
+/*--------- animate hamburger-toggle on click ---------*/
 .navbar-toggle .icon-bar:nth-of-type(2) {
-	  top: 1px;
+    top: 1px;
 }
 
 .navbar-toggle .icon-bar:nth-of-type(3) {
-  	top: 2px;
+    top: 2px;
 }
 
 .navbar-toggle .icon-bar {
-	  position: relative;
-	  transition: all 500ms ease-in-out;
+    position: relative;
+    transition: all 500ms ease-in-out;
 }
 
 .navbar-toggle.active .icon-bar:nth-of-type(1) {
-	  top: 6px;
-	  transform: rotate(45deg);
+    top: 6px;
+    transform: rotate(45deg);
 }
 
 .navbar-toggle.active .icon-bar:nth-of-type(2) {
-	  background-color: transparent;
+    background-color: transparent;
 }
 
 .navbar-toggle.active .icon-bar:nth-of-type(3) {
-	  top: -6px;
-	  transform: rotate(-45deg);
+    top: -6px;
+    transform: rotate(-45deg);
 }
+/*--------- END hamburger animation ---------*/
