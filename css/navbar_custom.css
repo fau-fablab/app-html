@@ -4,6 +4,7 @@
 }
 .navbar-default .navbar-brand {
   color: #ecf0f1;
+  float:none;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #ffffff;
@@ -164,7 +165,9 @@
     background-color: #384f54;
 }
 .navbar-header {
-    float: none;
+    float: left;
+    text-align: center;
+    width: 100%;
 }
 .navbar-left,.navbar-right {
     float: none !important;
