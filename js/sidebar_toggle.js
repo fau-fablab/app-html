@@ -11,6 +11,7 @@ $(document).ready(function () {
     checkURL(null);
     // recognize navigation link clicks
     $('ul li a').click(function (e) {
+        hamburger.toggleClass("active");
         changeSidebar();
         checkURL(this.hash);
     });
