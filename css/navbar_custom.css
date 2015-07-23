@@ -1,50 +1,63 @@
 /*--------- general navbar css ---------*/
 .navbar-default {
-  background-color: #384f54;
-  border-color: #384f54;
+    background-color: #384f54;
+    border-color: #384f54;
 }
+
 .navbar-default .navbar-brand {
-  color: #ecf0f1;
-  float:none;
+    color: #ecf0f1;
+    float:none;
 }
+
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #ffffff;
+    color: #ffffff;
 }
+
 .navbar-default .navbar-text {
-  color: #ecf0f1;
+    color: #ecf0f1;
 }
+
 .navbar-default .navbar-nav > li > a {
-  color: #ecf0f1;
+    color: #ecf0f1;
 }
+
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #ffffff;
+    color: #ffffff;
 }
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: #ffffff;
-  background-color: #384f54;
+    color: #ffffff;
+    background-color: #384f54;
 }
+
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #ffffff;
-  background-color: #384f54;
+    color: #ffffff;
+    background-color: #384f54;
 }
+
 .navbar-default .navbar-toggle {
-  border-color: #384f54;
+    border-color: #384f54;
 }
+
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color: #384f54;
+    background-color: #384f54;
 }
+
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #ecf0f1;
+    background-color: #ecf0f1;
 }
+
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #ecf0f1;
+    border-color: #ecf0f1;
 }
+
 .navbar-default .navbar-link {
-  color: #ecf0f1;
+    color: #ecf0f1;
 }
+
 .navbar-default .navbar-link:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .navbar-brand-text{
