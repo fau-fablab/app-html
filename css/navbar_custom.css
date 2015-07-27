@@ -116,8 +116,6 @@
 .collapse.in{
     display:block !important;
 }   
-/*--------- END general navbar css ---------*/
-
 
 
 
@@ -154,7 +152,6 @@
 .navbar_settings_icon{
     background: url(../img/about.png);
 }
-/*--------- END sidebar icons ---------*/
 
 
 /*--------- sidebar toggle ---------*/
@@ -212,13 +209,13 @@
   font-weight: bolder;
   background: rgba(224, 224, 224, 1);
 }
-/*--------- END sidebar ---------*/
+
 
 /*--------- set hamburger-toggle on the left side ---------*/
 .custom-navbar .navbar-toggle {
     float: left;
 }
-/*--------- END hamburger-toggle on right side ---------*/
+
 
 /*--------- animate hamburger-toggle on click ---------*/
 .navbar-toggle .icon-bar:nth-of-type(2) {
@@ -247,4 +244,3 @@
     top: -6px;
     transform: rotate(-45deg);
 }
-/*--------- END hamburger animation ---------*/

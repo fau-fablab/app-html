@@ -6,7 +6,7 @@
       
               
 <!-- site content-->
-<div id="content" class="container-fluid">
+<div id="content">
 
 <!-- rotating gif when content is loading -->
 <img id="loading" src="img/loading.gif" alt="loading" />
@@ -14,7 +14,7 @@
 <!-- load news.html into #content -->
 <script>
     $(function(){
-          $("#content").load("news.html");
+          //$("#content").load("news.html");
     });
 </script>
     

@@ -10,9 +10,10 @@ body, html{
     height: 100%;
     padding-top: 52px;
     position: relative;
+    background-color: #E0E0E0;
 }
 
-/* Overlay when sidebar is opened */
+/*--------- Overlay when sidebar is opened ---------*/
 .overlay {
     position: fixed;
     display: none;
@@ -26,7 +27,7 @@ body, html{
     z-index: 10;
 }
 
-/* loading gif */
+/*--------- loading gif ---------*/
 #loading{	
     visibility:hidden;
     z-index: 1100;
@@ -37,4 +38,41 @@ body, html{
     margin-top: -20px;
     margin-left: -20px;
     position: absolute;
+}
+
+/*--------- news ---------*/
+.card{
+    background: #fafafa;
+    overflow: hidden;
+    height: 80px;
+    margin: 8px;
+    border:1px solid #AAA;
+    border-bottom:3px solid #BBB;
+}
+
+.card h2{
+    margin: 0px;
+    padding: 15px 15px 0px 0px;
+    font-size: 17px;
+}
+
+.card p{
+    margin: 0px;
+    padding: 15px 15px 0px 0px;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card-image {
+    width: 74px;
+    height: 74px;
+    padding: 0px;
+    margin: 1px 15px 2px 1px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    float: left;
 }

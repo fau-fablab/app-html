@@ -8,7 +8,7 @@ $(document).ready(function () {
         changeSidebar();
     });
     //check if the URL has a reference to a page and load it 
-    checkURL(null);
+    checkURL("");
     // recognize navigation link clicks
     $('ul li a').click(function (e) {
         hamburger.toggleClass("active");
@@ -22,8 +22,13 @@ $(document).ready(function () {
 var lasturl = "";
 function checkURL(hash) {
     // if no parameter is provided, use the hash value from the current address
-    if (!hash)
+    if (!hash) {
         hash = window.location.hash;
+        if (hash == "" || hash == null) {
+            hash = "#news";
+            window.location.hash = hash;
+        }
+    }
     // hash value changed
     if (hash != lasturl) {
         lasturl = hash;

@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     //check if the URL has a reference to a page and load it 
-    checkURL(null);	
+    checkURL("");	
 
     // recognize navigation link clicks
     $('ul li a').click(function (e){
@@ -32,7 +32,13 @@ var lasturl="";
 
 function checkURL(hash){
     // if no parameter is provided, use the hash value from the current address
-    if(!hash) hash=window.location.hash;	
+    if (!hash){
+        hash = window.location.hash;
+        if (hash == "" || hash == null){
+            hash = "#news";
+	    window.location.hash = hash;
+	}
+    }	
 
     // hash value changed
     if(hash != lasturl){
