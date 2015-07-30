@@ -29,9 +29,10 @@ $.getScript("js/RestClient.js", function(){
             var maxHeight = $(window).height() - marginTop - marginBottom;
             $("#newsDialogInner").css("max-height", maxHeight);
 
-            // disable scroll in the background and remember position
-            $("#openNewsDialog").attr("data-scroll", $(document).scrollTop());
-            $("#content").css("overflow", "hidden");
+            // disable scroll in the background
+            $('body').css('overflow', 'hidden').on('touchmove', function(event) {
+                event.preventDefault();
+            });
 
             // get content
             var image = card.attr("data-image");
@@ -53,9 +54,8 @@ $.getScript("js/RestClient.js", function(){
             // close dialog
             $("#openNewsDialog").removeClass("newsDialog-active");
 
-            // allow scroll and set scroll pos
-            $("#content").css("overflow", "visible");
-            $(document).scrollTop(<any>$("#openNewsDialog").attr("data-scroll"));
+            // allow scrolling again
+            $('body').css('overflow', 'auto').off('touchmove');
 
         });
 	}
