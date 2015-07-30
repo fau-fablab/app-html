@@ -48,18 +48,19 @@ body, html{
     margin: 8px;
     border:1px solid #AAA;
     border-bottom:3px solid #BBB;
+    cursor: pointer;
 }
 
 .card h2{
     margin: 0px;
-    padding: 15px 15px 0px 0px;
-    font-size: 17px;
+    padding: 10px 15px 0px 0px;
+    font-size: 16px;
 }
 
 .card p{
     margin: 0px;
-    padding: 15px 15px 0px 0px;
-    font-size: 14px;
+    padding: 10px 15px 0px 0px;
+    font-size: 13px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -70,9 +71,86 @@ body, html{
     height: 74px;
     padding: 0px;
     margin: 1px 15px 2px 1px;
-    background-position: center;
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
+    background-size: cover;
+    text-aling: center;
     float: left;
+}
+
+/* news onclick dialog*/
+.newsDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.newsDialog-active {
+    opacity:1;
+    pointer-events: auto;
+}
+
+#newsDialogInner {
+    margin: 45px 35px 35px 35px;
+    padding: 15px 20px 10px 20px;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    overflow: auto;
+}
+
+
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: 22px;
+    text-align: center;
+    top: 32px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+    opacity: 1;
+}
+
+.close:hover {
+    background: #c42028;
+    opacity: 1;
+}
+
+#dialogImage{
+    max-height: 220px;
+    max-width: 100%;
+    margin: 5px 0px 5px 0px;
+}
+
+#dialogDescriptionShort{
+    text-align: left;
+    font-size: 14px;
+}
+
+#dialogTitle{
+    margin: 0px 0px 5px 0px ;
+    padding: 0px;
+    font-size: 18px;
+    font-weight: bold;
 }

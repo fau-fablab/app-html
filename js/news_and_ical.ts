@@ -16,6 +16,46 @@ $.getScript("js/RestClient.js", function(){
 				"<h2>" + news[i].title + "</h2>" +
 				"<p>" + news[i].descriptionShort + "</p></div>");
 		}
-	}
 
+        // show news dialog click function
+        $(".card").click(function(event){
+
+             var card = $(this);
+
+            // set max-height off dialog
+            var marginTop:any = $("#newsDialogInner").css("margin-top").replace("px", "");
+            var marginBottom:any = $("#newsDialogInner").css("margin-bottom").replace("px", "");
+            var maxHeight = $(window).height() - marginTop - marginBottom;
+            $("#newsDialogInner").css("max-height", maxHeight);
+
+            // disable scroll in the background and remember position
+            $("#openNewsDialog").attr("data-scroll", $(document).scrollTop());
+            $("#content").css("overflow", "hidden");
+
+            // get content
+            var image = card.attr("data-image");
+            var title = card.attr("data-title");
+            var descriptionShort = card.attr("data-descriptionShort");
+
+            // set content
+            $("#dialogTitle").text(title);
+            $("#dialogDescriptionShort").text(descriptionShort);
+            $("#dialogImage").attr("src", image);
+
+             // show dialog
+            $("#openNewsDialog").addClass("newsDialog-active");
+
+        });
+
+        // close dialog
+        $("#closeNewsDialog").click(function(event){
+            // close dialog
+            $("#openNewsDialog").removeClass("newsDialog-active");
+
+            // allow scroll and set scroll pos
+            $("#content").css("overflow", "visible");
+            $(document).scrollTop(<any>$("#openNewsDialog").attr("data-scroll"));
+
+        });
+	}
 });

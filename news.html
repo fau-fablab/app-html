@@ -1,6 +1,16 @@
-<h1> News </h1>
-<div id="news_container" >
+<!-- contains all the news retrieved from the server -->
+<div id="news_container" />
 
+<!-- hidden dialog
+     gets visible and filled with content when news is clicked -->
+<div id="openNewsDialog" class="newsDialog">
+    <div id="newsDialogInner">
+        <a id="closeNewsDialog" href="#close" title="Close" class="close">X</a>
+        <h2 id="dialogTitle"/>
+        <img id="dialogImage"/>
+        <p id="dialogDescriptionShort"/>
+    </div>
 </div>
 
+<!-- loads news and icals into the news_container/ical_container -->
 <script src="js/news_and_ical.js"></script>

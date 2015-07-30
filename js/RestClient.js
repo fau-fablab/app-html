@@ -44,3 +44,4 @@ var RestClient = (function () {
     };
     return RestClient;
 })();
+//# sourceMappingURL=RestClient.js.map
