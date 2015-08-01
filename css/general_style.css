@@ -154,3 +154,69 @@ body, html{
     font-size: 18px;
     font-weight: bold;
 }
+
+/* iCals */
+#ical_container{
+    width: 5000px;
+    height: 120px;
+    padding: 8px;
+    margin: 0px;
+}
+
+.ical{
+    height: 100px;
+    width: 130px;
+    margin: 0px 10px 0px 10px;
+    text-align: center;
+    float: left;
+}
+
+.ical h2{
+    margin: 10px;
+    font-size: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+    overflow: hidden;
+}
+
+.ical_line{
+    margin: 0px;
+}
+
+.ical img{
+    height:45px;
+    width: 45px;
+    float: left;
+    margin: 8px 5px 5px 5px;
+}
+
+.ical p{
+    padding: 0px;
+    margin: 5px 5px 5px 0px;
+    font-size: 11px;
+    color: white;
+    text-align: left;
+}
+
+/* iScroll horizontal */
+#wrapperICal{
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+    float: clear;
+}
+
+/* iScroll vertical */
+#wrapperNews{
+    overflow:hidden;
+    top: 50px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+}
+
+#verticalScroller{
+    width: 100%;
+    overflow: hidden;
+}
