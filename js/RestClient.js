@@ -3,7 +3,7 @@
 // General REST class
 var RestClient = (function () {
     function RestClient() {
-        this.url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com";
+        this.url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
     }
     // CORS request
     RestClient.prototype.request = function (method, path, callback) {
