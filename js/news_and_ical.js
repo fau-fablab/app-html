@@ -92,6 +92,10 @@ $.getScript("js/RestClient.js", function () {
                 iCalDiv.css("background-color", "#9C5151");
             }
         }
+        // adapt width of horizontal scroll area to #icals
+        var count = $("#ical_container span").length;
+        var iCalsWidth = count * (parseInt($("#ical_container span").css("width").replace("px", "")) + parseInt($("#ical_container span").css("margin-right").replace("px", "")) + parseInt($("#ical_container span").css("margin-left").replace("px", "")));
+        $("#ical_container").css("width", (iCalsWidth + 16) + "px");
         // add horizontal touch scrolling
         var horScroll = new IScroll("#wrapperICal", {
             scrollX: true

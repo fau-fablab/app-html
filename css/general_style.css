@@ -157,7 +157,7 @@ body, html{
 
 /* iCals */
 #ical_container{
-    width: 5000px;
+    width: 2850px;
     height: 120px;
     padding: 8px;
     margin: 0px;
@@ -202,7 +202,6 @@ body, html{
 /* iScroll horizontal */
 #wrapperICal{
     height: 120px;
-    width: 100%;
     overflow: hidden;
     float: clear;
 }
@@ -217,6 +216,5 @@ body, html{
 }
 
 #verticalScroller{
-    width: 100%;
     overflow: hidden;
 }

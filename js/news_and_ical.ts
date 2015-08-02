@@ -98,7 +98,6 @@ $.getScript("js/RestClient.js", function(){
     // add iCals to ical_container
     function addICals(icals){
         for (var i = 0; i < icals.length; i++) {
-
             // get parsed ical Event
             var ical = parseICalEvent(icals[i]);
             var title = ical[0];
@@ -127,12 +126,19 @@ $.getScript("js/RestClient.js", function(){
             }
         }
 
+        // adapt width of horizontal scroll area to #icals
+        var count = $("#ical_container span").length;
+        var iCalsWidth = count * (parseInt($("#ical_container span").css("width").replace("px", "")) +
+            parseInt($("#ical_container span").css("margin-right").replace("px", "")) +
+            parseInt($("#ical_container span").css("margin-left").replace("px", "")));
+        $("#ical_container").css("width", (iCalsWidth+16)+"px");
 
         // add horizontal touch scrolling
         var horScroll = new IScroll("#wrapperICal",{
             scrollX: true
         });
         horScroll.refresh();
+
     }
 
     // return two digits representation of year/day/hours/minutes
