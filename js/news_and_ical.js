@@ -30,15 +30,9 @@ $.getScript("js/RestClient.js", function () {
             }
             var card = $(this);
             // set max-height off dialog
-            var marginTop = $("#newsDialogInner").css("margin-top").replace("px", "");
-            var marginBottom = $("#newsDialogInner").css("margin-bottom").replace("px", "");
-            var maxHeight = $(window).height() - marginTop - marginBottom;
-            $("#newsDialogInner").css("max-height", maxHeight);
+            $("#newsDialogInner").css("max-height", getMaxHeightDialog());
             // disable scroll in the background
-            $('body').css('overflow', 'hidden').on('touchmove', function (event) {
-                event.preventDefault();
-            });
-            // get content
+            disableScroll();
             var image = card.attr("data-image");
             var title = card.attr("data-title");
             var descriptionShort = convertToLinks(card.attr("data-descriptionShort"));
@@ -57,18 +51,6 @@ $.getScript("js/RestClient.js", function () {
             $('body').css('overflow', 'auto').off('touchmove');
         });
     }
-    // find links in the description and convert them to real links
-    function convertToLinks(text) {
-        var replacedText, replacePattern1, replacePattern2;
-        //URLs starting with http://, https://
-        replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])/ig;
-        replacedText = text.replace(replacePattern1, '<a class="colored-link-1" title="$1" href="$1" target="_blank">$1</a>');
-        //URLs starting with "www."
-        replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-        replacedText = replacedText.replace(replacePattern2, '$1<a class="colored-link-1" href="http://$2" target="_blank">$2</a>');
-        //returns the text result
-        return replacedText;
-    }
     // add iCals to ical_container
     function addICals(icals) {
         for (var i = 0; i < icals.length; i++) {
@@ -78,8 +60,9 @@ $.getScript("js/RestClient.js", function () {
             var date = ical[1];
             var time = ical[2];
             var location = ical[3];
+            var description = ical[4];
             // add iCal
-            $("#ical_container").append("<span class='ical' id='ical" + i + "'>" + "<h2>" + title + "</h2>" + "<hr class='ical_line'>" + "<img src='img/ic_nav_news.png'>" + "<p>" + date + "<br/>" + time + "<br/>" + location + "</p>" + "</span>");
+            $("#ical_container").append("<span class='ical' id='ical" + i + "'  data-title='" + title + "' data-date='" + date + "' data-time='" + time + "' data-location='" + location + "' data-description='" + description + "'>" + "<h2>" + title + "</h2>" + "<hr class='ical_line'>" + "<img src='img/ic_nav_news.png'>" + "<p>" + date + "<br/>" + time + "<br/>" + location + "</p>" + "</span>");
             // color the background of iCal according to event type
             var iCalDiv = $("#ical" + i);
             if (title.toUpperCase() == "SELFLAB") {
@@ -98,9 +81,54 @@ $.getScript("js/RestClient.js", function () {
         $("#ical_container").css("width", (iCalsWidth + 16) + "px");
         // add horizontal touch scrolling
         var horScroll = new IScroll("#wrapperICal", {
-            scrollX: true
+            scrollX: true,
+            hideScrollbar: true
         });
         horScroll.refresh();
+        // show iCal dialog click function
+        $(".ical").click(function (event) {
+            // return if it is a drag and not a click
+            if (horScroll.moved) {
+                return false;
+            }
+            var ical = $(this);
+            // set max-height off dialog
+            $("#iCalDialogInner").css("max-height", getMaxHeightDialog());
+            // disable scroll in the background
+            disableScroll();
+            // get content
+            var title = ical.attr("data-title");
+            var date = ical.attr("data-date");
+            var location = ical.attr("data-location");
+            var time = ical.attr("data-time");
+            var description = ical.attr("data-description");
+            // set content
+            $("#iCalTitle").text(title);
+            if (!(location == null || location == "" || location == "null")) {
+                var temp = location;
+                location = "</br>Wo: " + temp;
+            }
+            else {
+                location = "";
+            }
+            if (!(description == null || description == "" || description == "null")) {
+                var temp = description;
+                description = "</br></br>" + temp;
+            }
+            else {
+                description = "";
+            }
+            $("#iCalInfos").html("Uhrzeit: " + time + "<br/>Datum: " + date + location + description);
+            // show dialog
+            $("#openICalDialog").addClass("iCalDialog-active");
+        });
+        // close dialog
+        $("#closeICalDialog").click(function (event) {
+            // close dialog
+            $("#openICalDialog").removeClass("iCalDialog-active");
+            // allow scrolling again
+            $('body').css('overflow', 'auto').off('touchmove');
+        });
     }
     // return two digits representation of year/day/hours/minutes
     function twoDigits(n) {
@@ -137,8 +165,36 @@ $.getScript("js/RestClient.js", function () {
             // set duration
             time = twoDigits(dateObjectStart.getUTCHours()) + ":" + twoDigits(dateObjectStart.getUTCMinutes()) + " - " + twoDigits(dateObjectEnd.getUTCHours()) + ":" + twoDigits(dateObjectEnd.getUTCMinutes());
         }
+        // get title
         var title = ical.summery;
-        return [title, date, time, location];
+        // get description
+        var description = ical.description;
+        return [title, date, time, location, description];
+    }
+    // disable scroll when a dialog is opened
+    function disableScroll() {
+        $('body').css('overflow', 'hidden').on('touchmove', function (event) {
+            event.preventDefault();
+        });
+    }
+    // get maximum height of a dialog
+    function getMaxHeightDialog() {
+        var marginTop = $("#iCalDialogInner").css("margin-top").replace("px", "");
+        var marginBottom = $("#iCalDialogInner").css("margin-bottom").replace("px", "");
+        var maxHeight = $(window).height() - marginTop - marginBottom;
+        return maxHeight;
+    }
+    // find links in the description and convert them to real links
+    function convertToLinks(text) {
+        var replacedText, replacePattern1, replacePattern2;
+        //URLs starting with http://, https://
+        replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])/ig;
+        replacedText = text.replace(replacePattern1, '<a class="colored-link-1" title="$1" href="$1" target="_blank">$1</a>');
+        //URLs starting with "www."
+        replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        replacedText = replacedText.replace(replacePattern2, '$1<a class="colored-link-1" href="http://$2" target="_blank">$2</a>');
+        //returns the text result
+        return replacedText;
     }
 });
 //# sourceMappingURL=news_and_ical.js.map
