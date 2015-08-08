@@ -262,16 +262,22 @@ $.getScript("js/RestClient.js", function(){
         var dateStart = ical.start.split("T")[0];
         var timeStart = ical.start.split("T")[1].split("Z")[0];
         var dateObjectStart = new Date(dateStart.substr(0,4),dateStart.substr(4,2)-1,parseInt(dateStart.substr(6)),
-            timeStart.substr(0,2),timeStart.substr(2,2), timeStart.substr(4,2));
+            parseInt(timeStart.substr(0,2)) + 2,timeStart.substr(2,2), timeStart.substr(4,2));
 
         // get end date and time
         var dateEnd = ical.end.split("T")[0];
         var timeEnd = ical.end.split("T")[1].split("Z")[0];
-        var dateObjectEnd = new Date(dateEnd.substr(0,4),dateEnd.substr(4,2),parseInt(dateEnd.substr(6))-1,
-            timeStart.substr(0,2),timeEnd.substr(2,2), timeEnd.substr(4,2));
+        var dateObjectEnd = new Date(dateEnd.substr(0,4),dateEnd.substr(4,2)-1,parseInt(dateEnd.substr(6)),
+            parseInt(timeEnd.substr(0,2)) + 2,timeEnd.substr(2,2), timeEnd.substr(4,2));
 
         // get current date
         var currentDate = new Date();
+
+        // date is longer than 1 day?
+        var eventEnd = "";
+        if(dateObjectStart.getUTCDate() != dateObjectEnd.getUTCDate()){
+            var eventEnd = "-"+ twoDigits(dateObjectEnd.getUTCDate());
+        }
 
         // date == today?
         var date;
@@ -279,9 +285,11 @@ $.getScript("js/RestClient.js", function(){
             dateObjectStart.getUTCFullYear() == currentDate.getUTCFullYear()){
             date = "Heute";
         }else{
-            date = twoDigits(dateObjectStart.getUTCDate()) + "." + twoDigits((dateObjectStart.getUTCMonth()+1)) +
+            date = twoDigits(dateObjectStart.getUTCDate())+ eventEnd + "." + twoDigits((dateObjectStart.getUTCMonth()+1)) +
                 "." + dateObjectStart.getUTCFullYear();
         }
+
+
 
         // get location
         var location = ical.location || "";
@@ -292,8 +300,8 @@ $.getScript("js/RestClient.js", function(){
             time = "ganztägig";
         }else{
             // set duration
-            time = twoDigits(dateObjectStart.getUTCHours()) + ":" + twoDigits(dateObjectStart.getUTCMinutes()) + " - " +
-                twoDigits(dateObjectEnd.getUTCHours()) + ":" + twoDigits(dateObjectEnd.getUTCMinutes());
+            time = twoDigits(dateObjectStart.getHours()) + ":" + twoDigits(dateObjectStart.getMinutes()) + " - " +
+                twoDigits(dateObjectEnd.getHours()) + ":" + twoDigits(dateObjectEnd.getMinutes());
         }
 
         // get title
