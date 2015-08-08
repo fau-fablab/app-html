@@ -260,3 +260,12 @@ body, html{
     text-align: center;
     overflow: auto;
 }
+
+
+#basicICal ul {
+    float: left; margin-left: 10px;
+    background-color: transparent; border: none;
+}
+#basicICal li {
+    margin: 0px 5px;
+}

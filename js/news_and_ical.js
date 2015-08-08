@@ -103,7 +103,7 @@ $.getScript("js/RestClient.js", function () {
             var location = ical[3];
             var description = ical[4];
             // add iCal
-            $("#ical_container").append("<span class='ical' id='ical" + i + "'  data-title='" + title + "' data-date='" + date + "' data-time='" + time + "' data-location='" + location + "' data-description='" + description + "'>" + "<h2>" + title + "</h2>" + "<hr class='ical_line'>" + "<img src='img/ic_nav_news.png'>" + "<p>" + date + "<br/>" + time + "<br/>" + location + "</p>" + "</span>");
+            $("#ical_container").append("<span class='ical' id='ical" + i + "'  data-title='" + title + "' data-date='" + date + "' data-time='" + time + "' data-location='" + location + "' data-description='" + description + "' data-dateStart='" + icals[i - alreadyLoadedICals].start + "'" + "data-dateEnd='" + icals[i - alreadyLoadedICals].end + "'>" + "<h2>" + title + "</h2>" + "<hr class='ical_line'>" + "<img src='img/ic_nav_news.png'>" + "<p>" + date + "<br/>" + time + "<br/>" + location + "</p>" + "</span>");
             // color the background of iCal according to event type
             var iCalDiv = $("#ical" + i);
             if (title.toUpperCase() == "SELFLAB") {
@@ -163,6 +163,19 @@ $.getScript("js/RestClient.js", function () {
                 description = "";
             }
             $("#iCalInfos").html("Uhrzeit: " + time + "<br/>Datum: " + date + location + description);
+            // add information to calendar event
+            var adaptedDateStart = ical.attr("data-dateStart").split("T")[0];
+            var adaptedTimeStart = ical.attr("data-dateStart").split("T")[1];
+            adaptedTimeStart = adaptedTimeStart.split("Z")[0];
+            adaptedDateStart = adaptedDateStart.substr(0, 4) + "-" + adaptedDateStart.substr(4, 2) + "-" + (parseInt(adaptedDateStart.substr(6, 2))) + "T" + adaptedTimeStart.substr(0, 2) + ":" + adaptedTimeStart.substr(2, 2) + ":" + adaptedTimeStart.substr(4, 2) + "Z";
+            var d_start = new Date(adaptedDateStart);
+            var adaptedDateEnd = ical.attr("data-dateEnd").split("T")[0];
+            var adaptedTimeEnd = ical.attr("data-dateEnd").split("T")[1];
+            adaptedTimeEnd = adaptedTimeEnd.split("Z")[0];
+            adaptedDateEnd = adaptedDateEnd.substr(0, 4) + "-" + adaptedDateEnd.substr(4, 2) + "-" + (parseInt(adaptedDateEnd.substr(6, 2))) + "T" + adaptedTimeEnd.substr(0, 2) + ":" + adaptedTimeEnd.substr(2, 2) + ":" + adaptedTimeEnd.substr(4, 2) + "Z";
+            var d_end = new Date(adaptedDateEnd);
+            var iCal_event = { start: d_start, end: d_end, title: ical.attr("data-title"), description: ical.attr("data-description"), location: ical.attr("data-location") };
+            $('#basicICal').icalendar($.extend({ icons: 'img/icalendar.png', sites: ['outlook', 'icalendar', 'google', 'yahoo'], compact: true, echoUrl: 'iCalEcho.php' }, iCal_event));
             // show dialog
             $("#openICalDialog").addClass("iCalDialog-active");
         });
@@ -205,7 +218,7 @@ $.getScript("js/RestClient.js", function () {
             date = "Heute";
         }
         else {
-            date = twoDigits(dateObjectStart.getUTCDate()) + eventEnd + "." + twoDigits((dateObjectStart.getUTCMonth() + 1)) + "." + dateObjectStart.getUTCFullYear();
+            date = twoDigits(dateObjectStart.getDate()) + eventEnd + "." + twoDigits((dateObjectStart.getUTCMonth() + 1)) + "." + dateObjectStart.getUTCFullYear();
         }
         // get location
         var location = ical.location || "";
