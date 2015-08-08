@@ -4,20 +4,49 @@
 
 // import RestClient.js in order to use it and append this js
 $.getScript("js/RestClient.js", function(){
+
+    // prevent loading news/icals when they are already loading
+    var searchingNews = false;
+    var searchingICals = false;
+
+    // number of news/icals that should be loaded at once
+    var LOADLIMIT = 10;
+
 	// make CORS REST calls by using class RestClient
 	var client:RestClient = new RestClient();
 
-    // get news
-	client.request("GET","/news/all", addNews);
+    // show one loader gif for the start loading
+    $('#loadMoreNewsLoader').show();
 
-    // get icals
-    client.request("GET","/ical/all", addICals);
 
     // touch scrolling for iCals and news
     var vertScroll, horScroll;
 
+
+    // get news
+	client.request("GET","/news?offset=0&limit="+LOADLIMIT, addNews);
+
+    // get icals
+    client.request("GET","/ical?offset=0&limit="+LOADLIMIT, addICals);
+
+
     // callback function to add news to the news_container
 	function addNews(news) {
+        // all news loaded -> prevent further requests
+        if(news.errorMessage){
+            // hide loader
+            $('div#loadMoreNewsLoader').hide();
+            return;
+        }
+
+        // remember scroll position
+        var pos = [0,0];
+        if(vertScroll){
+            pos[0] = vertScroll.x;
+            pos[1] = vertScroll.y;
+            vertScroll.destroy();
+        }
+
 		for (var i = 0; i < news.length; i++) {
             var image = news[i].linkToPreviewImage || "img/news_nopicture.png";
 			$("#news_container").append("<div class='card' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
@@ -26,12 +55,18 @@ $.getScript("js/RestClient.js", function(){
 				"<h2>" + news[i].title + "</h2>" +
 				"<p>" + news[i].descriptionShort + "</p></div>");
 
-            // add vertical touch scrolling
-            vertScroll = new IScroll("#wrapperNews",{
-                hideScrollbar: true
-            });
-            vertScroll.refresh();
 		}
+
+
+        // add vertical touch scrolling
+        vertScroll = new IScroll("#wrapperNews",{
+            probeType: 3
+        });
+        // check scroll position to load dynamically more news
+        vertScroll.on("scroll", loadMoreNews);
+        vertScroll.refresh;
+        vertScroll.scrollTo(pos[0],pos[1]);
+
 
         // show news dialog click function
         $(".card").click(function(event){
@@ -60,6 +95,7 @@ $.getScript("js/RestClient.js", function(){
              // show dialog
             $("#openNewsDialog").addClass("newsDialog-active");
 
+
         });
 
         // close dialog
@@ -72,13 +108,35 @@ $.getScript("js/RestClient.js", function(){
 
         });
 
+        // hide loader
+        $('div#loadMoreNewsLoader').hide();
+
+        // news loaded -> new news can be loaded while scrolling
+        searchingNews = false;
+
 	}
 
     // add iCals to ical_container
     function addICals(icals){
-        for (var i = 0; i < icals.length; i++) {
+        // all iCals loaded -> prevent further requests
+        if(icals.errorMessage){
+            // hide loader
+            $('div#loadMoreICalsLoader').hide();
+            return;
+        }
+
+        // remember scroll position
+        var pos = [0,0];
+        if(horScroll){
+            pos[0] = vertScroll.x;
+            pos[1] = vertScroll.y;
+            horScroll.destroy();
+        }
+
+        var alreadyLoadedICals = $("#ical_container span").length;
+        for (var i = alreadyLoadedICals; i < icals.length + alreadyLoadedICals; i++) {
             // get parsed ical Event
-            var ical = parseICalEvent(icals[i]);
+            var ical = parseICalEvent(icals[i - alreadyLoadedICals]);
             var title = ical[0];
             var date = ical[1];
             var time = ical[2];
@@ -115,12 +173,18 @@ $.getScript("js/RestClient.js", function(){
             parseInt($("#ical_container span").css("margin-left").replace("px", "")));
         $("#ical_container").css("width", (iCalsWidth+16)+"px");
 
+
+
         // add horizontal touch scrolling
-        var horScroll = new IScroll("#wrapperICal",{
+        horScroll = new IScroll("#wrapperICal",{
             scrollX: true,
-            hideScrollbar: true
+            probeType: 3
         });
-        horScroll.refresh();
+
+        // check scroll position to load dynamically more icals
+        horScroll.on("scroll", loadMoreICals);
+        horScroll.refresh;
+        horScroll.scrollTo(pos[0],pos[1]);
 
         // show iCal dialog click function
         $(".ical").click(function(event){
@@ -180,6 +244,11 @@ $.getScript("js/RestClient.js", function(){
 
         });
 
+        // hide loader
+        $('div#loadMoreICalsLoader').hide();
+
+        // iCals loaded -> new iCals can be loaded while scrolling
+        searchingICals = false;
     }
 
     // return two digits representation of year/day/hours/minutes
@@ -267,4 +336,37 @@ $.getScript("js/RestClient.js", function(){
         //returns the text result
         return replacedText;
     }
+
+
+    // load more news when scrolling
+    function loadMoreNews(){
+       if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
+            if (!searchingNews) {
+                searchingNews = true;
+                // show loader gif
+                $('#loadMoreNewsLoader').show();
+                // number of news that are already loaded
+                var count = $("#news_container div").length;
+                // send request
+                client.request("GET", "/news?offset=" + count + "&limit=" + LOADLIMIT, addNews);
+            }
+        }
+    }
+
+    // load more iCals when scrolling
+    function loadMoreICals(){
+        if( Math.abs(horScroll.maxScrollX) - Math.abs(horScroll.x) <= 10) {
+            if (!searchingICals) {
+                searchingICals = true;
+                // show loader gif
+                $('#loadMoreICalsLoader').show();
+                // number of news that are already loaded
+                var count = $("#ical_container span").length;
+                // send request
+
+                client.request("GET", "/ical?offset=" + count + "&limit=" + LOADLIMIT, addICals);
+            }
+        }
+    }
+
 });

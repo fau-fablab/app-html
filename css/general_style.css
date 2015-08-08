@@ -27,7 +27,7 @@ body, html{
     z-index: 10;
 }
 
-/*--------- loading gif ---------*/
+/*--------- loading gifs ---------*/
 #loading{	
     visibility:hidden;
     z-index: 1100;
@@ -38,6 +38,16 @@ body, html{
     margin-top: -20px;
     margin-left: -20px;
     position: absolute;
+}
+
+#loadMoreICalsLoader{
+    display:none;
+    text-align: center;
+}
+
+#loadMoreNewsLoader{
+    display:none;
+    text-align: center;
 }
 
 /*--------- news ---------*/
