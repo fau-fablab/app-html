@@ -254,7 +254,7 @@ $.getScript("js/RestClient.js", function(){
                 title: ical.attr("data-title"),
                 description: ical.attr("data-description"),
                 location: ical.attr("data-location")};
-            $('#basicICal').icalendar($.extend({icons: 'img/icalendar.png',
+            (<any>$('#basicICal')).icalendar($.extend({icons: 'img/icalendar.png',
                 sites: ['outlook','icalendar','google', 'yahoo'],
                 compact: true,
                 echoUrl: 'iCalEcho.php'}, iCal_event));
