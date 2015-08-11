@@ -18,7 +18,7 @@ class RestClient{
 		    return null;
 		  }
 		  
-		  // return json response and handle reponse in the specific callback function
+		  // return json response and handle response in the specific callback function
 		  xhr.onload = function() {
 		    var response:string = JSON.parse(xhr.responseText);
 		    callback(response);
