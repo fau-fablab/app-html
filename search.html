@@ -1,16 +1,34 @@
-<h1> Produkt  </h1>
 
-<div id="seach_container">
+<div class="container">
+    <div id="seach_container">
 
-    <div id="search_field">
-        <h2>bla</h2>
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Produktsuche</legend>
+                    <div class="form-group">
+                        <label for="inputSuche" class="col-lg-2 control-label">Suche</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputSuche" placeholder="Hier bitte den Suchbegriff ...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default" onclick="search()">Suchen!</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+        <h2 id="empty_text"></h2>
+
+        <div id="search_results_container">
+            <table id= "search_results" class="table table-hover table-condensed">
+
+            </table>
+        </div>
+
     </div>
-
-
-    <div id="seach_results">
-
-    </div>
-
 </div>
 
 <script src="js/product_search.js"></script>
