@@ -54,10 +54,29 @@ function checkURL(hash){
 }
 
 // load page
-function loadPage(url){	
-
+function loadPage(url){
     // remove hashtag from URL
     url=url.replace('#','');
+
+    // URL as h1 title for page
+    var title = url.toUpperCase();
+
+    switch(title){
+        case "NEWS":
+            break;
+        case "SEARCH":
+            title = "PRODUKTSUCHE";
+            break;
+        case "SCAN":
+            title = "PRODUKTSCAN";
+            break;
+        case "CART":
+            title = "WARENKORB";
+            break;
+        default:
+            title = "NO TITLE DEFINED check sidebar_toggle.ts";
+            break;
+    }
 
     // create full URL
     var fullURL = url + ".html";
@@ -70,6 +89,7 @@ function loadPage(url){
         pageContent = data;
         $("#content").fadeOut("fast", function(){
 	        $("#content").html(pageContent).fadeIn("fast");
+            $("#h1_title").text(title);
         });
 
     });
