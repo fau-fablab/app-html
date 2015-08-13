@@ -2,11 +2,6 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 
-// import RestClient.js in order to use it and append this js
-$.getScript("js/RestClient.js", function(){
-
-});
-
 function sayHallo(){
     alert("asdfaf")
 }
