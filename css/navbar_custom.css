@@ -248,13 +248,15 @@
 /*--------- heading of a page ---------*/
 #h1_div{
     width: 100%;
+    position: absolute;
     background-color: #384f54;
     margin-top: 51px;
     padding: 2px 2px 2px 8px;
+    z-index: 10;
 }
 
 #h1_title{
     color: white;
     font-size: 16px;
-    margin: 3px;
+    margin: 1px;
 }

@@ -90,6 +90,12 @@ function loadPage(url){
         $("#content").fadeOut("fast", function(){
 	        $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
+            // adapt height according to carts height
+            if(title == "WARENKORB"){
+                //var cart_footer_height = $("#cart_footer").css("height");
+                //$("#content").css("margin-bottom", cart_footer_height);
+
+            }
         });
 
     });

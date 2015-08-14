@@ -10,6 +10,7 @@ body, html{
     height: 100%;
     position: relative;
     background-color: #E0E0E0;
+    padding-top: 73px;
 }
 
 /*--------- Overlay when sidebar is opened ---------*/
@@ -268,3 +269,59 @@ body, html{
 #basicICal li {
     margin: 0px 5px;
 }
+
+/* Cart */
+#cart_footer {
+    width: 100%;
+    background-color: #384f54;
+    bottom: 0;
+    position: absolute;
+    padding: 3px;
+    font-size: 13px;
+    color: white;
+}
+
+#cart_checkout_btn{
+    float: right;
+    border-radius: 17px !important;
+    border: 1px solid;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+#cart_total_price{
+    float:  left;
+    padding: 0;
+    margin: 0;
+}
+
+#cart_total_price > p{
+    font-weight: bold;
+    margin: 0;
+    font-size: 14px;
+    padding:0;
+}
+
+.cart_card{
+    background-color: white;
+    height: 80px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.cart_card_left{
+    float: left;
+    width: 80%;
+}
+
+.cart_card_left > p,h4{
+    margin: 0;
+}
+.cart_card_right{
+    float: right;
+    width: 20%;
+    text-align: right;
+}
+
+
