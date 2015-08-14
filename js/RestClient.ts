@@ -2,15 +2,15 @@
 /// <reference path="lib.d.ts" />
 // General REST class
 class RestClient{
-	url:string;	
+	private _url:string;
 
 	constructor(){
-		this.url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
 	}
 	
 	// CORS request
 	request(method:string, path:string, callback: (s: string) => any){
-		  var urlPath:string = this.url + path;
+		  var urlPath:string = this._url + path;
 
 		  var xhr = this.createCORSRequest(method, urlPath);
 		  if (!xhr) {
