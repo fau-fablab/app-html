@@ -2,16 +2,14 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 
-function sayHallo(){
-    alert("asdfaf")
-}
+declare var $;
 
-function search(){
+function search(): void{
     var restClient = new RestClient();
-    var LOADLIMIT = 50;
-    var OFFSET = 0;
-    var researchCriteria = $('#inputSuche').val();
-    console.log(researchCriteria);
+    var LOADLIMIT: number = 50;
+    var OFFSET: number = 0;
+    var researchCriteria: any = $('#inputSuche').val();
+
 
     hideEmptyResultText();
 
@@ -31,7 +29,7 @@ function search(){
 
 }
 
-function showProducts(records){
+function showProducts(records: any): void{
     cleanTable();
 
     if(records.length == 0){
@@ -48,7 +46,7 @@ function showProducts(records){
     }
 }
 
-function isNumber(value: String){
+function isNumber(value: String): boolean{
     for(var index = 0; index < value.length; index++){
         if(value[index].search(/[0-9]/) == -1) {
             return false;
@@ -57,17 +55,17 @@ function isNumber(value: String){
     return true;
 }
 
-function cleanTable(){
+function cleanTable(): void{
     console.log("clickt cleanTable");
     $("#search_results").empty();
 }
 
-function showEmptyResultText(){
+function showEmptyResultText(): void{
     var headline = $("#empty_text").show();
     headline.text("Keine Treffer!");
 }
 
-function hideEmptyResultText(){
+function hideEmptyResultText(): void{
     $("#empty_text").hide();
 }
 
