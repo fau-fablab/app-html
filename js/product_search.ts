@@ -1,28 +1,28 @@
 /// <reference path="RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
+/// <reference path="common/model/category.ts" />
+/// <reference path="common/model/product.ts" />
 
-declare var $;
 
 function search(): void{
+    console.log("Start 06");
     var restClient = new RestClient();
     var LOADLIMIT: number = 50;
     var OFFSET: number = 0;
     var researchCriteria: any = $('#inputSuche').val();
 
-
     hideEmptyResultText();
+
 
     if(researchCriteria == ""){
         console.log("war leer");
         restClient.request("GET","/products?offset="+OFFSET+"&limit="+LOADLIMIT, showProducts);
     }
     else if(isNumber(researchCriteria)){
-        console.log("War number");
         restClient.request("GET","/products/find/id?id="+researchCriteria, showProducts);
     }
     else{
-        console.log("War ein String");
         restClient.request("GET","/products/find/name?search="+researchCriteria+"&limit="+LOADLIMIT+"&offset="+OFFSET, showProducts);
     }
 
@@ -32,16 +32,20 @@ function search(): void{
 function showProducts(records: any): void{
     cleanTable();
 
+    console.log("Hallo");
+
     if(records.length == 0){
         console.log("Records waren leer");
         showEmptyResultText();
     }
     for (var i = 0; i < records.length; i++) {
+        var product = new common.product(records[i]);
+
         $("#search_results").append("<tr>" +
-            " <td>"+ records[i].productId+"</td>" +
-            " <td><div>"+ records[i].name+"</div><div>"+ records[i].category.name+"</div></td>" +
-            " <td>"+ records[i].location+"</td>" +
-            " <td><div>"+ records[i].price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ records[i].uom.name+"</div></td>" +
+            " <td>"+ product._productId+"</td>" +
+            " <td><div>"+ product._name+"</div><div>"+ records[i].category.name+"</div></td>" +
+            " <td>"+ product._locationString+"</td>" +
+            " <td><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ records[i].uom.name+"</div></td>" +
             "</tr>");
     }
 }
