@@ -9,10 +9,10 @@ class RestClient{
 	}
 	
 	// CORS request
-	request(method:string, path:string, callback: (s: string) => any){
+	request(method:string, path:string, callback: (s: string) => any):void{
 		  var urlPath:string = this._url + path;
 
-		  var xhr = this.createCORSRequest(method, urlPath);
+		  var xhr:XMLHttpRequest = this.createCORSRequest(method, urlPath);
 		  if (!xhr) {
 		    alert('CORS not supported');
 		    return null;
@@ -34,8 +34,8 @@ class RestClient{
 
 
 	// Create the XHR object
-	createCORSRequest(method:string,url:string){
-	  	  var xhr = new XMLHttpRequest();
+	createCORSRequest(method:string,url:string):XMLHttpRequest{
+	  	  var xhr:XMLHttpRequest = new XMLHttpRequest();
 		  if ("withCredentials" in xhr) {
 		    // XHR for Chrome/Firefox/Opera/Safari.
 		    xhr.open(method, url, true);

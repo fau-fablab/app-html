@@ -28,15 +28,21 @@ $(document).ready(function () {
     });
 
     //check for a change in the URL every 250 ms to detect if the history buttons have been used
-    setInterval("checkURL()",250);	
+    setInterval("checkURL()",250);
+
+    // click listener for cart icon
+    $("#cart_button").click(function(){
+        window.location.hash = "#cart";
+        checkURL("#cart");
+    })
 
 });
 
 
 // current URL hash
-var lasturl="";	
+var lasturl:string = "";
 
-function checkURL(hash){
+function checkURL(hash):void{
     // if no parameter is provided, use the hash value from the current address
     if (!hash) {
         hash = window.location.hash;
@@ -54,12 +60,12 @@ function checkURL(hash){
 }
 
 // load page
-function loadPage(url){
+function loadPage(url):void{
     // remove hashtag from URL
     url=url.replace('#','');
 
     // URL as h1 title for page
-    var title = url.toUpperCase();
+    var title:string = url.toUpperCase();
 
     switch(title){
         case "NEWS":
@@ -79,10 +85,10 @@ function loadPage(url){
     }
 
     // create full URL
-    var fullURL = url + ".html";
+    var fullURL:string = url + ".html";
 
     // page content
-    var pageContent;
+    var pageContent:string;
 
     // load site content
     $.get(fullURL, function(data){
@@ -90,12 +96,6 @@ function loadPage(url){
         $("#content").fadeOut("fast", function(){
 	        $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
-            // adapt height according to carts height
-            if(title == "WARENKORB"){
-                //var cart_footer_height = $("#cart_footer").css("height");
-                //$("#content").css("margin-bottom", cart_footer_height);
-
-            }
         });
 
     });
@@ -105,13 +105,13 @@ function loadPage(url){
 function changeSidebar(){
 
     // show active site <-> link 
-    var nav_links = $("a.nav_link");
+    var nav_links:any = $("a.nav_link");
     nav_links.removeClass("active");
     $(window.location.hash).addClass("active");
 
     // get sidebar-wrapper and its position
-    var elem = document.getElementById("sidebar-wrapper");
-    var left = window.getComputedStyle(elem, null).getPropertyValue("left");
+    var elem:HTMLElement = document.getElementById("sidebar-wrapper");
+    var left:string = window.getComputedStyle(elem, null).getPropertyValue("left");
 
     // close sidebar when opened and vice versa
     if (left == "200px") {
@@ -123,7 +123,7 @@ function changeSidebar(){
 }
 
 // explicit function to close sidebar
-function closeSidebar(){
+function closeSidebar():void{
     // close sidebar
     (<HTMLElement[]><any>  document.getElementsByClassName("sidebar-toggle"))[0].style.left = "-200px";
 
@@ -132,10 +132,11 @@ function closeSidebar(){
 }
 
 // explicit function to open sidebar
-function openSidebar(){
+function openSidebar():void{
     // show sidebar for navigation
     (<HTMLElement[]><any>  document.getElementsByClassName("sidebar-toggle"))[0].style.left = "200px";
 
     // overlay to gray out background
     $(".overlay").show();
 }
+

@@ -4,11 +4,11 @@
 /// <reference path="lib.d.ts" />
 
 // prevent loading news/icals when they are already loading
-var searchingNews = false;
-var searchingICals = false;
+var searchingNews:boolean = false;
+var searchingICals:boolean = false;
 
 // number of news/icals that should be loaded at once
-var LOADLIMIT = 10;
+var LOADLIMIT:number = 10;
 
 // make CORS REST calls by using class RestClient
 var client:RestClient = new RestClient();
@@ -18,7 +18,7 @@ $('#loadMoreNewsLoader').show();
 
 
 // touch scrolling for iCals and news
-var vertScroll, horScroll;
+var vertScroll:any, horScroll:any;
 
 
 // get news
@@ -29,7 +29,7 @@ client.request("GET","/ical?offset=0&limit="+LOADLIMIT, addICals);
 
 
 // callback function to add news to the news_container
-function addNews(news) {
+function addNews(news):void {
     // all news loaded -> prevent further requests
     if(news.errorMessage){
         // hide loader
@@ -38,7 +38,7 @@ function addNews(news) {
     }
 
     // remember scroll position
-    var pos = [0,0];
+    var pos:number[] = [0,0];
     if(vertScroll){
         pos[0] = vertScroll.x;
         pos[1] = vertScroll.y;
@@ -46,7 +46,7 @@ function addNews(news) {
     }
 
     for (var i = 0; i < news.length; i++) {
-        var image = news[i].linkToPreviewImage || "img/news_nopicture.png";
+        var image:string = news[i].linkToPreviewImage || "img/news_nopicture.png";
         $("#news_container").append("<div class='card' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
             news[i].descriptionShort +"'>" +
             "<div class=\"card-image\" style=\"background-image:url('" + image + "');\"/>" +
@@ -81,9 +81,9 @@ function addNews(news) {
         // disable scroll in the background
         disableScroll();
 
-        var image = card.attr("data-image");
-        var title = card.attr("data-title");
-        var descriptionShort = convertToLinks(card.attr("data-descriptionShort"));
+        var image:string = card.attr("data-image");
+        var title:string = card.attr("data-title");
+        var descriptionShort:string = convertToLinks(card.attr("data-descriptionShort"));
 
         // set content
         $("#dialogTitle").text(title);
@@ -115,7 +115,7 @@ function addNews(news) {
 }
 
 // add iCals to ical_container
-function addICals(icals){
+function addICals(icals):void{
     // all iCals loaded -> prevent further requests
     if(icals.errorMessage){
         // hide loader
@@ -124,22 +124,22 @@ function addICals(icals){
     }
 
     // remember scroll position
-    var pos = [0,0];
+    var pos:number[] = [0,0];
     if(horScroll){
         pos[0] = vertScroll.x;
         pos[1] = vertScroll.y;
         horScroll.destroy();
     }
 
-    var alreadyLoadedICals = $("#ical_container span").length;
+    var alreadyLoadedICals:number = $("#ical_container span").length;
     for (var i = alreadyLoadedICals; i < icals.length + alreadyLoadedICals; i++) {
         // get parsed ical Event
-        var ical = parseICalEvent(icals[i - alreadyLoadedICals]);
-        var title = ical[0];
-        var date = ical[1];
-        var time = ical[2];
-        var location = ical[3];
-        var description = ical[4];
+        var ical:string[] = parseICalEvent(icals[i - alreadyLoadedICals]);
+        var title:string = ical[0];
+        var date:string = ical[1];
+        var time:string = ical[2];
+        var location:string = ical[3];
+        var description:string = ical[4];
 
         // add iCal
         $("#ical_container").append("<span class='ical' id='ical" + i + "'  data-title='"+ title +
@@ -166,8 +166,8 @@ function addICals(icals){
     }
 
     // adapt width of horizontal scroll area to #icals
-    var count = $("#ical_container span").length;
-    var iCalsWidth = count * (parseInt($("#ical_container span").css("width").replace("px", "")) +
+    var count:number = $("#ical_container span").length;
+    var iCalsWidth:number = count * (parseInt($("#ical_container span").css("width").replace("px", "")) +
         parseInt($("#ical_container span").css("margin-right").replace("px", "")) +
         parseInt($("#ical_container span").css("margin-left").replace("px", "")));
     $("#ical_container").css("width", (iCalsWidth+16)+"px");
@@ -202,24 +202,24 @@ function addICals(icals){
         disableScroll();
 
         // get content
-        var title = ical.attr("data-title");
-        var date = ical.attr("data-date");
-        var location = ical.attr("data-location");
-        var time = ical.attr("data-time");
-        var description = ical.attr("data-description");
+        var title:string = ical.attr("data-title");
+        var date:string = ical.attr("data-date");
+        var location:string = ical.attr("data-location");
+        var time:string = ical.attr("data-time");
+        var description:string = ical.attr("data-description");
 
         // set content
         $("#iCalTitle").text(title);
 
         if(!(location == null || location == "" || location == "null")){
-            var temp = location;
+            var temp:string = location;
             location = "</br>Wo: " + temp;
         }else{
             location = "";
         }
 
         if(!(description == null || description == "" || description == "null")){
-            var temp = description;
+            var temp:string = description;
             description = "</br></br>" + temp;
         }else{
             description = "";
@@ -229,8 +229,8 @@ function addICals(icals){
 
 
         // add information to calendar event
-        var adaptedDateStart = ical.attr("data-dateStart").split("T")[0];
-        var adaptedTimeStart = ical.attr("data-dateStart").split("T")[1];
+        var adaptedDateStart:string = ical.attr("data-dateStart").split("T")[0];
+        var adaptedTimeStart:string = ical.attr("data-dateStart").split("T")[1];
         adaptedTimeStart = adaptedTimeStart.split("Z")[0];
         adaptedDateStart = adaptedDateStart.substr(0,4)+"-"+
             adaptedDateStart.substr(4,2) + "-" +(parseInt(adaptedDateStart.substr(6,2))) +
@@ -239,13 +239,13 @@ function addICals(icals){
 
         var d_start = new Date(adaptedDateStart);
 
-        var adaptedDateEnd = ical.attr("data-dateEnd").split("T")[0];
-        var adaptedTimeEnd = ical.attr("data-dateEnd").split("T")[1];
+        var adaptedDateEnd:string = ical.attr("data-dateEnd").split("T")[0];
+        var adaptedTimeEnd:string = ical.attr("data-dateEnd").split("T")[1];
         adaptedTimeEnd = adaptedTimeEnd.split("Z")[0];
         adaptedDateEnd = adaptedDateEnd.substr(0,4)+"-"+adaptedDateEnd.substr(4,2) + "-" +
             (parseInt(adaptedDateEnd.substr(6,2)))+ "T" + adaptedTimeEnd.substr(0,2) + ":" + adaptedTimeEnd.substr(2,2) + ":" +
             adaptedTimeEnd.substr(4,2)+"Z";
-        var d_end = new Date(adaptedDateEnd);
+        var d_end:Date = new Date(adaptedDateEnd);
 
         var iCal_event = {start: d_start,
             end: d_end,
@@ -288,28 +288,28 @@ function twoDigits(n){
 // parse iCal Event and return array with [title, date, time, location]
 function parseICalEvent(ical){
     // get start date and time
-    var dateStart = ical.start.split("T")[0];
-    var timeStart = ical.start.split("T")[1].split("Z")[0];
-    var dateObjectStart = new Date(dateStart.substr(0,4),dateStart.substr(4,2)-1,parseInt(dateStart.substr(6)),
-        parseInt(timeStart.substr(0,2)) + 2,timeStart.substr(2,2), timeStart.substr(4,2));
+    var dateStart:string = ical.start.split("T")[0];
+    var timeStart:string = ical.start.split("T")[1].split("Z")[0];
+    var dateObjectStart:Date = new Date(parseInt(dateStart.substr(0,4)),parseInt(dateStart.substr(4,2))-1,parseInt(dateStart.substr(6)),
+        parseInt(timeStart.substr(0,2)) + 2,parseInt(timeStart.substr(2,2)), parseInt(timeStart.substr(4,2)));
 
     // get end date and time
-    var dateEnd = ical.end.split("T")[0];
-    var timeEnd = ical.end.split("T")[1].split("Z")[0];
-    var dateObjectEnd = new Date(dateEnd.substr(0,4),dateEnd.substr(4,2)-1,parseInt(dateEnd.substr(6)),
-        parseInt(timeEnd.substr(0,2)) + 2,timeEnd.substr(2,2), timeEnd.substr(4,2));
+    var dateEnd:string = ical.end.split("T")[0];
+    var timeEnd:string = ical.end.split("T")[1].split("Z")[0];
+    var dateObjectEnd:Date = new Date(parseInt(dateEnd.substr(0,4)),parseInt(dateEnd.substr(4,2))-1,parseInt(dateEnd.substr(6)),
+        parseInt(timeEnd.substr(0,2)) + 2,parseInt(timeEnd.substr(2,2)), parseInt(timeEnd.substr(4,2)));
 
     // get current date
-    var currentDate = new Date();
+    var currentDate:Date = new Date();
 
     // date is longer than 1 day?
-    var eventEnd = "";
+    var eventEnd:string = "";
     if(dateObjectStart.getUTCDate() != dateObjectEnd.getUTCDate()){
-        var eventEnd = "-"+ twoDigits(dateObjectEnd.getUTCDate());
+        var eventEnd:string = "-"+ twoDigits(dateObjectEnd.getUTCDate());
     }
 
     // date == today?
-    var date;
+    var date:string;
     if(dateObjectStart.getUTCDate() == currentDate.getUTCDate() && dateObjectStart.getUTCMonth() == currentDate.getUTCMonth() &&
         dateObjectStart.getUTCFullYear() == currentDate.getUTCFullYear()){
         date = "Heute";
@@ -321,10 +321,10 @@ function parseICalEvent(ical){
 
 
     // get location
-    var location = ical.location || "";
+    var location:string = ical.location || "";
 
     // allDay event?
-    var time;
+    var time:string;
     if(ical.allday){
         time = "ganztägig";
     }else{
@@ -334,33 +334,33 @@ function parseICalEvent(ical){
     }
 
     // get title
-    var title = ical.summery;
+    var title:string = ical.summery;
 
     // get description
-    var description = ical.description;
+    var description:string = ical.description;
 
     return [title, date, time, location, description];
 }
 
 // disable scroll when a dialog is opened
-function disableScroll(){
+function disableScroll():void{
     $('body').css('overflow', 'hidden').on('touchmove', function(event) {
         event.preventDefault();
     });
 }
 
 // get maximum height of a dialog
-function getMaxHeightDialog(){
+function getMaxHeightDialog():number{
     var marginTop:any = $("#iCalDialogInner").css("margin-top").replace("px", "");
     var marginBottom:any = $("#iCalDialogInner").css("margin-bottom").replace("px", "");
-    var maxHeight = $(window).height() - marginTop - marginBottom;
+    var maxHeight:number = $(window).height() - marginTop - marginBottom;
 
     return maxHeight;
 }
 
 // find links in the description and convert them to real links
-function convertToLinks(text) {
-    var replacedText, replacePattern1, replacePattern2;
+function convertToLinks(text):string {
+    var replacedText:string, replacePattern1:RegExp, replacePattern2:RegExp;
 
     //URLs starting with http://, https://
     replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])/ig;
@@ -376,14 +376,14 @@ function convertToLinks(text) {
 
 
 // load more news when scrolling
-function loadMoreNews(){
+function loadMoreNews():void{
    if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
         if (!searchingNews) {
             searchingNews = true;
             // show loader gif
             $('#loadMoreNewsLoader').show();
             // number of news that are already loaded
-            var count = $("#news_container div").length;
+            var count:number = $("#news_container div").length;
             // send request
             client.request("GET", "/news?offset=" + count + "&limit=" + LOADLIMIT, addNews);
         }
@@ -391,14 +391,14 @@ function loadMoreNews(){
 }
 
 // load more iCals when scrolling
-function loadMoreICals(){
+function loadMoreICals():void{
     if( Math.abs(horScroll.maxScrollX) - Math.abs(horScroll.x) <= 10) {
         if (!searchingICals) {
             searchingICals = true;
             // show loader gif
             $('#loadMoreICalsLoader').show();
             // number of news that are already loaded
-            var count = $("#ical_container span").length;
+            var count:number = $("#ical_container span").length;
             // send request
 
             client.request("GET", "/ical?offset=" + count + "&limit=" + LOADLIMIT, addICals);

@@ -7,18 +7,18 @@ function showAllCartEntries(){
         return;
     }
 
-    var cart = getCart();
+    var cart:string[] = getCart();
 
     for(var i=0;i<cart.length; i++){
-        var key = cart[i];
-        var product = JSON.parse(localStorage[key]);
+        var key:string = cart[i];
+        var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = CartEntry.prototype;
         addProductToDom(product);
     }
 }
 
 
-function browserLocalStorageSupport(){
+function browserLocalStorageSupport():boolean{
     // return if browser does not support local storage and inform the user
     if (!window["localStorage"]) {
         alert("No local storage support");
@@ -28,9 +28,9 @@ function browserLocalStorageSupport(){
 
 }
 
-function addProductToDom(entry:CartEntry){
+function addProductToDom(entry:CartEntry):void{
     // add product to DOM
-    var card = "<div class='cart_card'><div class='cart_card_left'>" +
+    var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
         "<h4>" + entry.name + "</h4>"+
         "<p>" + entry.price + " pro " + entry.unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
@@ -43,7 +43,7 @@ function addProductToDom(entry:CartEntry){
 }
 
 // add a product to a cart
-function addProduct(entry:CartEntry){
+function addProduct(entry:CartEntry):void{
     // return if browser does not support local storage and inform the user
     if (!browserLocalStorageSupport()) {
         return;
@@ -51,10 +51,10 @@ function addProduct(entry:CartEntry){
 
 
     // get cart from storage
-    var cart = getCart();
+    var cart:string[] = getCart();
 
     // set key for new product
-    var key = entry.product_id.toString();
+    var key:string = entry.product_id.toString();
 
     // store product and cart
     localStorage.setItem(key, JSON.stringify(entry));
@@ -71,13 +71,14 @@ function addProduct(entry:CartEntry){
 }
 
 // get valid cart or create one
-function getCart(){
-    var cart = localStorage.getItem("cart");
-    if(!cart){
+function getCart():string[]{
+    var storageString:string = localStorage.getItem("cart");
+    var cart:string[];
+    if(!storageString){
         cart = [];
         localStorage.setItem("cart", JSON.stringify(cart));
     }else{
-        cart = JSON.parse(cart);
+        cart = JSON.parse(storageString);
     }
     return cart;
 }
@@ -90,7 +91,7 @@ function checkOut(){
 
 }
 
-function productExists(cart, key){
+function productExists(cart, key):boolean{
     for(var i=0;i<cart.length; i++){
         if(cart[i] == key){
             return true;
@@ -102,7 +103,10 @@ function productExists(cart, key){
 // show all cart entries that are in the current cart
 showAllCartEntries();
 
+// DEBUG
 addProduct(new CartEntry(12, "test", 5, 5,"auto", "stück", "untere kiste", 3));
+// TODO: consider full storage
+
 
 // Just for debugging
 $("#clearCache").click(function(){
