@@ -16,6 +16,10 @@ module common {
         public _categoryId:number;
         public _oumId:number;
 
+        public _categoryObject: common.category;
+        public _uomObject: common.uom;
+
+
         constructor(record) {
             this._productId = record.productId;
             this._name = record.name;
@@ -29,6 +33,11 @@ module common {
 
             this._categoryString = record.categoryString;
             this._locationString = record.location;
+
+
+            this._categoryObject = new common.category(record.category);
+
+            this._uomObject = new common.uom(record.uom);
         }
 
     }

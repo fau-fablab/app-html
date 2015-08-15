@@ -6,7 +6,7 @@
 
 
 function search(): void{
-    console.log("Start 06");
+    console.log("Start 07");
     var restClient = new RestClient();
     var LOADLIMIT: number = 50;
     var OFFSET: number = 0;
@@ -26,14 +26,10 @@ function search(): void{
         restClient.request("GET","/products/find/name?search="+researchCriteria+"&limit="+LOADLIMIT+"&offset="+OFFSET, showProducts);
     }
 
-
 }
 
 function showProducts(records: any): void{
     cleanTable();
-
-    console.log("Hallo");
-
     if(records.length == 0){
         console.log("Records waren leer");
         showEmptyResultText();
@@ -41,11 +37,21 @@ function showProducts(records: any): void{
     for (var i = 0; i < records.length; i++) {
         var product = new common.product(records[i]);
 
+
+        // probleme mit
+        var categoryName: string= product._categoryObject._name;
+        var uomName: string = product._uomObject._name;
+
+
+
+
+
+
         $("#search_results").append("<tr>" +
             " <td>"+ product._productId+"</td>" +
-            " <td><div>"+ product._name+"</div><div>"+ records[i].category.name+"</div></td>" +
+            " <td><div>"+ product._name+"</div><div>"+ categoryName+"</div></td>" +
             " <td>"+ product._locationString+"</td>" +
-            " <td><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ records[i].uom.name+"</div></td>" +
+            " <td><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ uomName+"</div></td>" +
             "</tr>");
     }
 }
