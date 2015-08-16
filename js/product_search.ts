@@ -17,11 +17,9 @@ function search(): void{
 
 
     if(researchCriteria == ""){
-        console.log("war leer");
         restClient.request("GET","/products?offset="+OFFSET+"&limit="+LOADLIMIT, showProducts);
     }
     else if(isNumber(researchCriteria)){
-        console.log("war eine zahl!: " + researchCriteria);
         restClient.request("GET","/products/find/id?id="+researchCriteria, showProduct);
     }
     else{
@@ -90,8 +88,13 @@ function showProducts(records: any): void{
     });
 }
 
-function clickedProductElement(){
-    alert("asdfasdf ");
+function createTableHeader(){
+    $("#search_results").append("<tr> " +
+            " <th onclick='sortById()'>"+"Id"+"</th>" +
+            " <th onclick='sortByName()'>"+"Name"+"</th>" +
+            " <th onclick='sortByLocation()'>"+"Lagerort"+"</th>" +
+            " <th onclick='sortByPrice()'>"+"Preis"+"</th>" +
+        "</tr>");
 }
 
 function isNumber(value: String): boolean{
@@ -106,6 +109,7 @@ function isNumber(value: String): boolean{
 function cleanTable(): void{
     currentProcutList.length = 0;
     $("#search_results").empty();
+    createTableHeader();
 }
 
 function showEmptyResultText(): void{
@@ -117,3 +121,18 @@ function hideEmptyResultText(): void{
     $("#empty_text").hide();
 }
 
+function sortById(){
+    console.log("sortByID");
+}
+
+function sortByName(){
+    console.log("sortByName");
+}
+
+function sortByLocation(){
+    console.log("sortByLocation");
+}
+
+function sortByPrice(){
+    console.log("sortByPrice");
+}
