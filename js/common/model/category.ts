@@ -16,5 +16,4 @@ module common {
             this._locationId = record.location_id;
         }
     }
-
 }

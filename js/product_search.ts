@@ -4,9 +4,10 @@
 /// <reference path="common/model/category.ts" />
 /// <reference path="common/model/product.ts" />
 
+var currentProcutList: Array<common.Product> = new Array<common.Product>();
 
 function search(): void{
-    console.log("Start 07");
+    console.log("Start 08");
     var restClient = new RestClient();
     var LOADLIMIT: number = 50;
     var OFFSET: number = 0;
@@ -34,26 +35,56 @@ function showProducts(records: any): void{
         console.log("Records waren leer");
         showEmptyResultText();
     }
-    for (var i = 0; i < records.length; i++) {
-        var product = new common.Product(records[i]);
-
-
+    for (var index = 0; index < records.length; index++) {
+        var product = new common.Product(records[index]);
+        currentProcutList.push(product);
         // probleme mit
         var categoryName: string= product._categoryObject._name;
         var uomName: string = product._uomObject._name;
 
 
-
-
-
-
-        $("#search_results").append("<tr>" +
-            " <td>"+ product._productId+"</td>" +
-            " <td><div>"+ product._name+"</div><div>"+ categoryName+"</div></td>" +
-            " <td>"+ product._locationString+"</td>" +
-            " <td><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ uomName+"</div></td>" +
+        $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='"+ product._productId +"' arrayindex='"+index+"'> " +
+            " <td id='productId' '>"+ product._productId+"</td>" +
+            " <td id='productName'><div>"+ product._name+"</div><div>"+ categoryName+"</div></td>" +
+            " <td id='productLocation'>"+ product._locationString+"</td>" +
+            " <td id='productPrice'><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ uomName+"</div></td>" +
             "</tr>");
     }
+
+
+    $(".product_row").click(function(event){
+
+        var currentElement = $(this);
+        var productId = currentElement.attr("productid");
+        var arrayIndex = currentElement.attr("arrayindex");
+        var currentProduct: common.Product = currentProcutList[arrayIndex];
+        console.log("ProductId: " + productId);
+        console.log("ArrayIndex: " + arrayIndex);
+        console.log("ProductId: " + currentProcutList[arrayIndex]._productId)
+
+        var modalHeaderName = $("#myModalLabel");
+        var modalProductIdLabel = $("#modal-productid");
+        var modalProductNameLabel = $("#modal-productname");
+        var modalProductDescriptionLabel = $("#modal-productdescription");
+        var modalProductPriceLabel = $("#modal-productprice");
+        var modalProductUnitLabel = $("#modal-productunit");
+        var modalProductLocationLabel = $("#modal-productlocation");
+        var modalProductCategoryLabel = $("#modal-productCategory");
+
+        modalHeaderName.text(currentProduct._name);
+        modalProductIdLabel.text(currentProduct._productId+"");
+        modalProductNameLabel.text(currentProduct._name);
+        modalProductDescriptionLabel.text(currentProduct._description);
+        modalProductPriceLabel.text(currentProduct._price + " \u20AC");
+        modalProductUnitLabel.text(currentProduct._unit);
+        modalProductLocationLabel.text(currentProduct._locationString);
+        modalProductCategoryLabel.text(currentProduct._categoryString);
+
+    });
+}
+
+function clickedProductElement(){
+    alert("asdfasdf ");
 }
 
 function isNumber(value: String): boolean{
@@ -66,7 +97,7 @@ function isNumber(value: String): boolean{
 }
 
 function cleanTable(): void{
-    console.log("clickt cleanTable");
+    currentProcutList.length = 0;
     $("#search_results").empty();
 }
 
