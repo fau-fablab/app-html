@@ -178,6 +178,6 @@ var test ={
     }
 
 };
-var testProduct:common.product = new common.product(test);
+var testProduct:common.Product = new common.Product(test);
 var testEntry:common.cartEntry = new common.cartEntry(testProduct, 2);
 //addProduct(testEntry);
