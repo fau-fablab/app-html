@@ -7,9 +7,6 @@
               
 <!-- site content-->
 <div id="content">
-
-<!-- rotating gif when content is loading -->
-<img id="loading" src="img/loading.gif" alt="loading" />
     
 </div>
 

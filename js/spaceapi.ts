@@ -1,7 +1,7 @@
-/// <reference path="restClient.ts" />
+/// <reference path="RestClient.ts" />
 /// <reference path="jquery.d.ts" />
 
-enum DoorState {invalid, open, close};
+enum DoorState {invalid, open, close}
 
 class SpaceApi {
     spaceName : string = "FAU+FabLab";

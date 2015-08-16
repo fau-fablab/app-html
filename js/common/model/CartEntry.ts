@@ -1,6 +1,6 @@
-/// <reference path="product.ts" />
+/// <reference path="Product.ts" />
 module common{
-    export class cartEntry{
+    export class CartEntry{
         private _amount:number;
         private _product:common.Product;
 

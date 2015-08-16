@@ -222,7 +222,7 @@
     border-radius: 5px;
     width: 22px;
     text-align: center;
-
+    display: none;
 }
 
 .cart_icon{

@@ -1,8 +1,8 @@
-/// <reference path="restClient.ts"/>
+/// <reference path="RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
-/// <reference path="common/model/category.ts" />
-/// <reference path="common/model/product.ts" />
+/// <reference path="common/model/Category.ts" />
+/// <reference path="common/model/Product.ts" />
 
 var currentProcutList: Array<common.Product> = new Array<common.Product>();
 

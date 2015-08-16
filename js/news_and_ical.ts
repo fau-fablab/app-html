@@ -1,4 +1,4 @@
-/// <reference path="restClient.ts"/>
+/// <reference path="RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 /// <reference path="lib.d.ts" />
@@ -73,7 +73,7 @@ function addNews(news):void {
             return false;
         }
 
-         var card = $(this);
+        var card = $(this);
 
         // set max-height off dialog
         $("#newsDialogInner").css("max-height", getMaxHeightDialog());
@@ -90,7 +90,7 @@ function addNews(news):void {
         $("#dialogDescriptionShort").html(descriptionShort);
         $("#dialogImage").attr("src", image);
 
-         // show dialog
+        // show dialog
         $("#openNewsDialog").addClass("newsDialog-active");
 
 
@@ -235,7 +235,7 @@ function addICals(icals):void{
         adaptedDateStart = adaptedDateStart.substr(0,4)+"-"+
             adaptedDateStart.substr(4,2) + "-" +(parseInt(adaptedDateStart.substr(6,2))) +
             "T" + adaptedTimeStart.substr(0,2) + ":" + adaptedTimeStart.substr(2,2) + ":" +
-                adaptedTimeStart.substr(4,2)+"Z";
+            adaptedTimeStart.substr(4,2)+"Z";
 
         var d_start = new Date(adaptedDateStart);
 
@@ -377,7 +377,7 @@ function convertToLinks(text):string {
 
 // load more news when scrolling
 function loadMoreNews():void{
-   if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
+    if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
         if (!searchingNews) {
             searchingNews = true;
             // show loader gif
