@@ -1,5 +1,5 @@
 module common {
-    export class category {
+    export class Category {
 
         public _categoryId:number;
         public _name:string;

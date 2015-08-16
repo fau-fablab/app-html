@@ -35,7 +35,7 @@ function showProducts(records: any): void{
         showEmptyResultText();
     }
     for (var i = 0; i < records.length; i++) {
-        var product = new common.product(records[i]);
+        var product = new common.Product(records[i]);
 
 
         // probleme mit

@@ -1,5 +1,5 @@
 module common{
-    export class location{
+    export class Location{
         public _locationId: number;
         public _name: string;
         public _code: string;

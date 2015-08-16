@@ -1,5 +1,5 @@
 module common {
-    export class uom {
+    export class Uom {
         public _uomId: number;
         public _name: string;
         public _rounding: number;

@@ -1,7 +1,7 @@
 /// <reference path="category.ts" />
 /// <reference path="uom.ts" />
 module common {
-    export class product {
+    export class Product {
 
         public _productId:number;
         public _name:string;
@@ -16,8 +16,8 @@ module common {
         public _categoryId:number;
         public _oumId:number;
 
-        public _categoryObject: common.category;
-        public _uomObject: common.uom;
+        public _categoryObject: common.Category;
+        public _uomObject: common.Uom;
 
 
         constructor(record) {
@@ -35,9 +35,9 @@ module common {
             this._locationString = record.location;
 
 
-            this._categoryObject = new common.category(record.category);
+            this._categoryObject = new common.Category(record.category);
 
-            this._uomObject = new common.uom(record.uom);
+            this._uomObject = new common.Uom(record.uom);
         }
 
     }
