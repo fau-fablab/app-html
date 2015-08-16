@@ -9,18 +9,26 @@ function showAllCartEntries(){
 
     var cart:string[] = getCart();
 
+    var total_price:number = 0;
+
     for(var i=0;i<cart.length; i++){
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
-        product.__proto__ = common.cartEntry.prototype;
+        product.__proto__ = common.CartEntry.prototype;
+        product.product.__proto__ = common.Product.prototype;
+        total_price += product.product.price*product.amount;
         addProductToDom(product);
     }
+
+    // set total price in footer
+    $("#cart_total_price_text").text(total_price.toString()+ " €");
 
     // show amount in cart icon in header
     var cart_quantity = $("#cart_button_quantity");
     if(cart.length != 0 ){
-    cart_quantity.text(cart.length.toString());
-    cart_quantity.show();
+        var cart_quantity = $("#cart_button_quantity");
+        cart_quantity.text(cart.length.toString());
+        cart_quantity.show();
     }else{
         cart_quantity.hide();
     }
@@ -37,7 +45,7 @@ function browserLocalStorageSupport():boolean{
 
 }
 
-function addProductToDom(entry:common.cartEntry):void{
+function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
     var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
         "<h4>" + entry.product.name + "</h4>"+
@@ -52,7 +60,7 @@ function addProductToDom(entry:common.cartEntry):void{
 }
 
 // add a product to a cart
-function addProduct(entry:common.cartEntry):void{
+function addProduct(entry:common.CartEntry):void{
     // return if browser does not support local storage and inform the user
     if (!browserLocalStorageSupport()) {
         return;
@@ -188,5 +196,5 @@ var test ={
 
 };
 var testProduct:common.Product = new common.Product(test);
-var testEntry:common.cartEntry = new common.cartEntry(testProduct, 2);
-//addProduct(testEntry);
+var testEntry:common.CartEntry = new common.CartEntry(testProduct, 2);
+addProduct(testEntry);
