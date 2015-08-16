@@ -21,7 +21,7 @@ function showAllCartEntries(){
     }
 
     // set total price in footer
-    $("#cart_total_price_text").text(total_price.toString()+ " €");
+    $("#cart_total_price_text").text(total_price.toFixed(2).toString()+ " €");
 
     // show amount in cart icon in header
     var cart_quantity = $("#cart_button_quantity");
@@ -49,11 +49,11 @@ function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
     var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
         "<h4>" + entry.product.name + "</h4>"+
-        "<p>" + entry.product.price + " pro " + entry.product.unit +"</p>" +
+        "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
         "</div>" +
         "<div class='cart_card_right'>"+
-        "<p>" + Math.round((entry.product.price*entry.amount) * 100)/100 + "</p>"+
+        "<p>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</div></div>";
 
     $("#cart_container").append(card);
