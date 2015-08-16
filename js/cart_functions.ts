@@ -40,12 +40,12 @@ function browserLocalStorageSupport():boolean{
 function addProductToDom(entry:common.cartEntry):void{
     // add product to DOM
     var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
-        "<h4>" + entry.product._name + "</h4>"+
-        "<p>" + entry.product._price + " pro " + entry.product._unit +"</p>" +
+        "<h4>" + entry.product.name + "</h4>"+
+        "<p>" + entry.product.price + " pro " + entry.product.unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
         "</div>" +
         "<div class='cart_card_right'>"+
-        "<p>" + Math.round((entry.product._price*entry.amount) * 100)/100 + "</p>"+
+        "<p>" + Math.round((entry.product.price*entry.amount) * 100)/100 + "</p>"+
         "</div></div>";
 
     $("#cart_container").append(card);
@@ -63,7 +63,7 @@ function addProduct(entry:common.cartEntry):void{
     var cart:string[] = getCart();
 
     // set key for new product
-    var key:string = entry.product._productId.toString();
+    var key:string = entry.product.productId.toString();
 
     // store product and cart
     //try{
