@@ -1,5 +1,5 @@
 /// <reference path="jquery.d.ts" />
-/// <reference path="common/model/cartEntry.ts"/>
+/// <reference path="common/model/CartEntry.ts"/>
 
 // show all cart entries when cart is loaded
 function showAllCartEntries(){
@@ -14,6 +14,15 @@ function showAllCartEntries(){
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.cartEntry.prototype;
         addProductToDom(product);
+    }
+
+    // show amount in cart icon in header
+    var cart_quantity = $("#cart_button_quantity");
+    if(cart.length != 0 ){
+    cart_quantity.text(cart.length.toString());
+    cart_quantity.show();
+    }else{
+        cart_quantity.hide();
     }
 }
 
@@ -125,7 +134,7 @@ $("#clearCache").click(function(){
     }
     cart = [];
     localStorage.setItem("cart",JSON.stringify(cart));
-})
+});
 
 // debug
 var test ={

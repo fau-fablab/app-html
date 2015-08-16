@@ -1,5 +1,5 @@
-/// <reference path="category.ts" />
-/// <reference path="uom.ts" />
+/// <reference path="Category.ts" />
+/// <reference path="Uom.ts" />
 module common {
     export class Product {
 
