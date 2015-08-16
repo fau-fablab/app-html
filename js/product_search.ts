@@ -21,16 +21,23 @@ function search(): void{
         restClient.request("GET","/products?offset="+OFFSET+"&limit="+LOADLIMIT, showProducts);
     }
     else if(isNumber(researchCriteria)){
-        restClient.request("GET","/products/find/id?id="+researchCriteria, showProducts);
+        console.log("war eine zahl!: " + researchCriteria);
+        restClient.request("GET","/products/find/id?id="+researchCriteria, showProduct);
     }
     else{
         restClient.request("GET","/products/find/name?search="+researchCriteria+"&limit="+LOADLIMIT+"&offset="+OFFSET, showProducts);
     }
 
 }
+function showProduct(record:any): void{
+    var recordArray = [];
+    recordArray.push(record);
+    showProducts(recordArray);
+}
 
 function showProducts(records: any): void{
     cleanTable();
+    console.log(records);
     if(records.length == 0){
         console.log("Records waren leer");
         showEmptyResultText();
