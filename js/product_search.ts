@@ -9,7 +9,7 @@ var currentProcutList: Array<common.Product> = new Array<common.Product>();
 function search(): void{
     console.log("Start 08");
     var restClient = new RestClient();
-    var LOADLIMIT: number = 50;
+    var LOADLIMIT: number = 0;
     var OFFSET: number = 0;
     var researchCriteria: any = $('#inputSuche').val();
 
@@ -39,15 +39,15 @@ function showProducts(records: any): void{
         var product = new common.Product(records[index]);
         currentProcutList.push(product);
         // probleme mit
-        var categoryName: string= product._categoryObject._name;
-        var uomName: string = product._uomObject._name;
+        var categoryName: string= product.categoryObject.name;
+        var uomName: string = product.uomObject.name;
 
 
-        $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='"+ product._productId +"' arrayindex='"+index+"'> " +
-            " <td id='productId' '>"+ product._productId+"</td>" +
-            " <td id='productName'><div>"+ product._name+"</div><div>"+ categoryName+"</div></td>" +
-            " <td id='productLocation'>"+ product._locationString+"</td>" +
-            " <td id='productPrice'><div>"+ product._price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ uomName+"</div></td>" +
+        $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='"+ product.productId +"' arrayindex='"+index+"'> " +
+            " <td id='productId' '>"+ product.productId+"</td>" +
+            " <td id='productName'><div>"+ product.name+"</div><div>"+ categoryName+"</div></td>" +
+            " <td id='productLocation'>"+ product.locationString+"</td>" +
+            " <td id='productPrice'><div>"+ product.price+" <span class=\"glyphicon glyphicon-euro\"></span></div><div>"+ uomName+"</div></td>" +
             "</tr>");
     }
 
@@ -71,14 +71,14 @@ function showProducts(records: any): void{
         var modalProductLocationLabel = $("#modal-productlocation");
         var modalProductCategoryLabel = $("#modal-productCategory");
 
-        modalHeaderName.text(currentProduct._name);
-        modalProductIdLabel.text(currentProduct._productId+"");
-        modalProductNameLabel.text(currentProduct._name);
-        modalProductDescriptionLabel.text(currentProduct._description);
-        modalProductPriceLabel.text(currentProduct._price + " \u20AC");
-        modalProductUnitLabel.text(currentProduct._unit);
-        modalProductLocationLabel.text(currentProduct._locationString);
-        modalProductCategoryLabel.text(currentProduct._categoryString);
+        modalHeaderName.text(currentProduct.name);
+        modalProductIdLabel.text(currentProduct.productId+"");
+        modalProductNameLabel.text(currentProduct.name);
+        modalProductDescriptionLabel.text(currentProduct.description);
+        modalProductPriceLabel.text(currentProduct.price + " \u20AC");
+        modalProductUnitLabel.text(currentProduct.unit);
+        modalProductLocationLabel.text(currentProduct.locationString);
+        modalProductCategoryLabel.text(currentProduct.categoryString);
 
     });
 }
