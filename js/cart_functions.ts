@@ -1,5 +1,5 @@
 /// <reference path="jquery.d.ts" />
-/// <reference path="CartEntry.ts"/>
+/// <reference path="common/model/cartEntry.ts"/>
 
 // show all cart entries when cart is loaded
 function showAllCartEntries(){
@@ -12,7 +12,7 @@ function showAllCartEntries(){
     for(var i=0;i<cart.length; i++){
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
-        product.__proto__ = CartEntry.prototype;
+        product.__proto__ = common.cartEntry.prototype;
         addProductToDom(product);
     }
 }
@@ -28,22 +28,22 @@ function browserLocalStorageSupport():boolean{
 
 }
 
-function addProductToDom(entry:CartEntry):void{
+function addProductToDom(entry:common.cartEntry):void{
     // add product to DOM
     var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
-        "<h4>" + entry.name + "</h4>"+
-        "<p>" + entry.price + " pro " + entry.unit +"</p>" +
+        "<h4>" + entry.product._name + "</h4>"+
+        "<p>" + entry.product._price + " pro " + entry.product._unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
         "</div>" +
         "<div class='cart_card_right'>"+
-        "<p>" + Math.round((entry.price*entry.amount) * 100)/100 + "</p>"+
+        "<p>" + Math.round((entry.product._price*entry.amount) * 100)/100 + "</p>"+
         "</div></div>";
 
     $("#cart_container").append(card);
 }
 
 // add a product to a cart
-function addProduct(entry:CartEntry):void{
+function addProduct(entry:common.cartEntry):void{
     // return if browser does not support local storage and inform the user
     if (!browserLocalStorageSupport()) {
         return;
@@ -54,10 +54,15 @@ function addProduct(entry:CartEntry):void{
     var cart:string[] = getCart();
 
     // set key for new product
-    var key:string = entry.product_id.toString();
+    var key:string = entry.product._productId.toString();
 
     // store product and cart
-    localStorage.setItem(key, JSON.stringify(entry));
+    //try{
+        localStorage.setItem(key, JSON.stringify(entry));
+    //}catch(e){
+
+    //}
+
 
     // product already exists?
     if(productExists(cart,key)){
@@ -65,7 +70,11 @@ function addProduct(entry:CartEntry):void{
     }
 
     cart.push(key);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    //try{
+        localStorage.setItem("cart", JSON.stringify(cart));
+    //}catch(e){
+
+    //}
 
     showAllCartEntries();
 }
@@ -103,8 +112,6 @@ function productExists(cart, key):boolean{
 // show all cart entries that are in the current cart
 showAllCartEntries();
 
-// DEBUG
-addProduct(new CartEntry(12, "test", 5, 5,"auto", "stück", "untere kiste", 3));
 // TODO: consider full storage
 
 
@@ -119,3 +126,58 @@ $("#clearCache").click(function(){
     cart = [];
     localStorage.setItem("cart",JSON.stringify(cart));
 })
+
+// debug
+var test ={
+
+    "productId": "0008",
+    "name": "Keramik 10pF (SMD 0805)",
+    "description": null,
+    "unit": "Stück",
+    "oum_id": 1,
+    "categoryId": 7,
+    "categoryString": "Alle Produkte / Elektronik / Elektronikmaterial / Kondensator",
+    "price": 0.1,
+    "itemsAvailable": 0,
+    "location": "unknown location",
+    "location_id": 0,
+    "locationObject":
+
+    {
+
+        "id": 0,
+        "locationId": 0,
+        "name": null,
+        "code": null
+
+    },
+    "category":
+    {
+
+        "id": 0,
+        "categoryId": 7,
+        "name": "Kondensator",
+        "location_id": 18,
+        "categories":
+
+            [
+                20,
+                19,
+                252,
+                9
+            ]
+
+    },
+    "uom":
+
+    {
+        "uom_id": 1,
+        "name": "Stück",
+        "rounding": 1,
+        "uomType": "reference"
+    }
+
+};
+var testProduct:common.product = new common.product(test);
+var testEntry:common.cartEntry = new common.cartEntry(testProduct, 2);
+//addProduct(testEntry);
