@@ -62,7 +62,7 @@ function addNews(news):void {
     });
     // check scroll position to load dynamically more news
     vertScroll.on("scroll", loadMoreNews);
-    vertScroll.refresh;
+    vertScroll.refresh();
     vertScroll.scrollTo(pos[0],pos[1]);
 
 
@@ -182,7 +182,7 @@ function addICals(icals):void{
 
     // check scroll position to load dynamically more icals
     horScroll.on("scroll", loadMoreICals);
-    horScroll.refresh;
+    horScroll.refresh();
     horScroll.scrollTo(pos[0],pos[1]);
 
     // show iCal dialog click function

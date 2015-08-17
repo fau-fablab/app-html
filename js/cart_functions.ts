@@ -1,8 +1,12 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
+/// <reference path="iscroll.d.ts" />
+
+// scrollelement
+var vertScroll;
 
 // show all cart entries when cart is loaded
-function showAllCartEntries(){
+function showAllCartEntries() {
     if (!browserLocalStorageSupport()) {
         return;
     }
@@ -11,12 +15,12 @@ function showAllCartEntries(){
 
     var total_price:number = 0;
 
-    for(var i=0;i<cart.length; i++){
+    for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.CartEntry.prototype;
         product.product.__proto__ = common.Product.prototype;
-        total_price += product.product.price*product.amount;
+        total_price += product.product.price * product.amount;
         addProductToDom(product);
     }
 
@@ -25,14 +29,22 @@ function showAllCartEntries(){
 
     // show amount in cart icon in header
     var cart_quantity = $("#cart_button_quantity");
-    if(cart.length != 0 ){
+    if (cart.length != 0) {
         var cart_quantity = $("#cart_button_quantity");
         cart_quantity.text(cart.length.toString());
         cart_quantity.show();
-    }else{
+    } else {
         cart_quantity.hide();
     }
+
+    // add vertical touch scrolling
+    vertScroll = new IScroll("#cart_container");
+    setTimeout(function () {
+        vertScroll.refresh();
+    }, 0);
+
 }
+
 
 
 function browserLocalStorageSupport():boolean{
@@ -47,16 +59,17 @@ function browserLocalStorageSupport():boolean{
 
 function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
-    var card:string = "<div class='cart_card'><div class='cart_card_left'>" +
+    var card:string = "<tr>" +
+        "<td>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
-        "</div>" +
-        "<div class='cart_card_right'>"+
+        "</td>" +
+        "<td>"+
         "<p>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
-        "</div></div>";
+        "</td></tr>";
 
-    $("#cart_container").append(card);
+    $("#cartEntries_container").append(card);
 }
 
 // add a product to a cart
@@ -197,4 +210,6 @@ var test ={
 };
 var testProduct:common.Product = new common.Product(test);
 var testEntry:common.CartEntry = new common.CartEntry(testProduct, 2);
-addProduct(testEntry);
+// addProduct(testEntry);
+
+
