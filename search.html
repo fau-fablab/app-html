@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label for="inputSuche" class="col-lg-2 control-label">Suche</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputSuche" placeholder="Hier bitte den Suchbegriff ...">
+                            <input onkeyup="if(event.keyCode == 13){search();};" type="text" class="form-control" id="inputSuche" placeholder="Hier bitte den Suchbegriff ...">
                         </div>
                     </div>
 

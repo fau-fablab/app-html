@@ -6,10 +6,17 @@
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 
+document.onkeydown = function(event) {
+    if(event.keyCode == 13){
+
+        search();
+    }
+}
+
 function search():void {
 
     var restClient = new RestClient();
-    var LOADLIMIT:number = 50;
+    var LOADLIMIT:number = 0;
     var OFFSET:number = 0;
     var researchCriteria:any = $('#inputSuche').val();
 
@@ -35,16 +42,15 @@ function showProduct(record:any):void {
 function showProducts(records:any):void {
     cleanTable();
     currentProcutList.length = 0;
-    console.log(records);
+
     if (records.length == 0) {
-        console.log("Records waren leer");
         showEmptyResultText();
     }
     for (var index = 0; index < records.length; index++) {
         var product = new common.Product(records[index]);
         currentProcutList.push(product);
     }
-    buildTableRows(currentProcutList);
+    createTableRows(currentProcutList);
     prepareDialogFunktions();
 }
 
@@ -55,9 +61,6 @@ function prepareDialogFunktions() {
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
-        console.log("ProductId: " + productId);
-        console.log("ArrayIndex: " + arrayIndex);
-        console.log("ProductId: " + currentProcutList[arrayIndex]._productId)
 
         var modalHeaderName = $("#myModalLabel");
         var modalProductIdLabel = $("#modal-productid");
@@ -80,7 +83,7 @@ function prepareDialogFunktions() {
     });
 }
 
-function buildTableRows(productArray:Array<common.Product>) {
+function createTableRows(productArray:Array<common.Product>) {
     cleanTable();
     for (var index = 0; index < productArray.length; index++) {
         var product = productArray[index];
@@ -130,7 +133,6 @@ function hideEmptyResultText():void {
 }
 
 function sortById() {
-    console.log("sortByID");
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
 
@@ -140,7 +142,6 @@ function sortById() {
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-            console.log("Vergleiche: " + newArrayAscendingOrder[innerIndex].productId + " und " + newArrayAscendingOrder[innerIndex + 1].productId)
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
                 newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
@@ -148,33 +149,19 @@ function sortById() {
             }
         }
     }
-    for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
-        console.log(newArrayAscendingOrder[newindex].productId);
-    }
-    buildTableRows(newArrayAscendingOrder);
+    createTableRows(newArrayAscendingOrder);
 }
 
 function sortByName() {
-    console.log("sortByName");
     newArrayAscendingOrder: Array<common.Product>();
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
 
     newArrayAscendingOrder = currentProcutList;
 
-
     var tempProduct:common.Product = null;
     //Von klein nach groﬂ
-    var bla = 0;
-
-    bla++;
-    var round = 1;
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-        console.log("Round: " + round);
-        round++;
-        for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
-            console.log(newArrayAscendingOrder[newindex].name);
-        }
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
@@ -183,21 +170,15 @@ function sortByName() {
             }
         }
     }
-
-
-
-    buildTableRows(newArrayAscendingOrder);
+    createTableRows(newArrayAscendingOrder);
 }
 
 function sortByLocation() {
-    console.log("sortByLocation");
     newArrayAscendingOrder: Array<common.Product>();
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
 
     newArrayAscendingOrder = currentProcutList;
-
-
     var tempProduct:common.Product = null;
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
@@ -209,14 +190,10 @@ function sortByLocation() {
             }
         }
     }
-    for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
-        console.log(newArrayAscendingOrder[newindex].locationString[0]);
-    }
-    buildTableRows(newArrayAscendingOrder);
+    createTableRows(newArrayAscendingOrder);
 }
 
 function sortByPrice() {
-    console.log("sortByPrice");
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
 
@@ -226,7 +203,6 @@ function sortByPrice() {
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-            console.log("Vergleiche: " + (newArrayAscendingOrder[innerIndex].price * 1000) + " und " + (newArrayAscendingOrder[innerIndex + 1].price + 1000))
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
                 newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
@@ -234,9 +210,6 @@ function sortByPrice() {
             }
         }
     }
-    for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
-        console.log(newArrayAscendingOrder[newindex].price);
-    }
-    buildTableRows(newArrayAscendingOrder);
+    createTableRows(newArrayAscendingOrder);
 
 }
