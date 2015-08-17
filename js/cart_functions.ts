@@ -14,7 +14,6 @@ function showAllCartEntries() {
     var cart:string[] = getCart();
 
     var total_price:number = 0;
-
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
@@ -28,6 +27,50 @@ function showAllCartEntries() {
     $("#cart_total_price_text").text(total_price.toFixed(2).toString()+ " €");
 
     // show amount in cart icon in header
+    adaptQuantityInHeader();
+
+    // add vertical touch scrolling
+    vertScroll = new IScroll("#cart_container");
+    setTimeout(function () {
+        vertScroll.refresh();
+    }, 0);
+
+    // click function for a removed cart entry
+    $(".btn_remove").click(function(event){
+        var cartEntry = $(this);
+
+        var key:string = cartEntry.attr("data-key");
+
+        // adapt total price
+        var cart_total_price_text = $("#cart_total_price_text");
+        var price:string = cartEntry.attr("data-total");
+        var total_price:number = parseFloat(cart_total_price_text.text().split(" €")[0]);
+        total_price -= parseFloat(price);
+        cart_total_price_text.text(total_price.toFixed(2));
+
+        // remove product from storage
+        localStorage.removeItem(key);
+        var pos:number = cart.indexOf(key);
+        if (pos > -1) {
+            cart.splice(pos, 1);
+        }
+        // save changed cart array
+        localStorage.setItem("cart",JSON.stringify(cart));
+
+        // remove row from DOM
+        $('#cartEntries_container tr:eq('+pos+')').remove();
+
+        // adapt quantity icon in the header
+        adaptQuantityInHeader();
+
+    });
+
+}
+
+// adapt quantity for shopping cart icon in the header
+function adaptQuantityInHeader():void{
+    // show amount in cart icon in header
+    var cart:string[] = getCart();
     var cart_quantity = $("#cart_button_quantity");
     if (cart.length != 0) {
         var cart_quantity = $("#cart_button_quantity");
@@ -36,17 +79,9 @@ function showAllCartEntries() {
     } else {
         cart_quantity.hide();
     }
-
-    // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container");
-    setTimeout(function () {
-        vertScroll.refresh();
-    }, 0);
-
 }
 
-
-
+// used browser supports local storage usage?
 function browserLocalStorageSupport():boolean{
     // return if browser does not support local storage and inform the user
     if (!window["localStorage"]) {
@@ -57,16 +92,22 @@ function browserLocalStorageSupport():boolean{
 
 }
 
+// add a product to the DOM
 function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
+    var cartEntry_total:string = (entry.product.price*entry.amount).toFixed(2);
     var card:string = "<tr>" +
         "<td>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
         "<p>Menge:" +entry.amount +"</p>" +
         "</td>" +
-        "<td>"+
-        "<p>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
+        "<td class='cart_card_right'>" +
+        "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
+        "data-total='"+cartEntry_total+"'>" +
+        "<span class='glyphicon glyphicon-remove'></span>" +
+        "</button>" +
+        "<p class='cart_card_total_price'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
     $("#cartEntries_container").append(card);
@@ -122,6 +163,7 @@ function getCart():string[]{
     return cart;
 }
 
+
 function removeProduct(){
 
 }
@@ -139,22 +181,31 @@ function productExists(cart, key):boolean{
     return false;
 }
 
+// clear cache -> remove all products that have ever been stored including related carts
+function clearCache():void{
+    var cart = getCart();
+
+    // remove single cart entries
+    for(var i=0;i<cart.length;i++){
+        var key = cart[i];
+        localStorage.removeItem(key);
+    }
+
+    // remove array
+    localStorage.removeItem("cart");
+
+}
+
 // show all cart entries that are in the current cart
 showAllCartEntries();
 
 // TODO: consider full storage
 
 
+
 // Just for debugging
 $("#clearCache").click(function(){
-    var cart = getCart();
-
-    for(var i=0;i<cart.length;i++){
-        var key = cart[i];
-        localStorage.removeItem(key);
-    }
-    cart = [];
-    localStorage.setItem("cart",JSON.stringify(cart));
+    clearCache();
 });
 
 // debug
@@ -210,6 +261,6 @@ var test ={
 };
 var testProduct:common.Product = new common.Product(test);
 var testEntry:common.CartEntry = new common.CartEntry(testProduct, 2);
-// addProduct(testEntry);
+//addProduct(testEntry);
 
 
