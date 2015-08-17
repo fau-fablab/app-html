@@ -15,7 +15,6 @@ function search():void {
 
     hideEmptyResultText();
 
-
     if (researchCriteria == "") {
         restClient.request("GET", "/products?offset=" + OFFSET + "&limit=" + LOADLIMIT, showProducts);
     }
@@ -25,8 +24,8 @@ function search():void {
     else {
         restClient.request("GET", "/products/find/name?search=" + researchCriteria + "&limit=" + LOADLIMIT + "&offset=" + OFFSET, showProducts);
     }
-
 }
+
 function showProduct(record:any):void {
     var recordArray = [];
     recordArray.push(record);
@@ -140,7 +139,7 @@ function sortById() {
     var tempProduct:common.Product = null;
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-        for (var innerIndex = index + 1; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             console.log("Vergleiche: " + newArrayAscendingOrder[innerIndex].productId + " und " + newArrayAscendingOrder[innerIndex + 1].productId)
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
@@ -148,8 +147,6 @@ function sortById() {
                 newArrayAscendingOrder[innerIndex + 1] = tempProduct;
             }
         }
-
-
     }
     for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
         console.log(newArrayAscendingOrder[newindex].productId);
@@ -171,8 +168,14 @@ function sortByName() {
     var bla = 0;
 
     bla++;
+    var round = 1;
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-        for (var innerIndex = index + 1; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+        console.log("Round: " + round);
+        round++;
+        for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
+            console.log(newArrayAscendingOrder[newindex].name);
+        }
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
                 newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
@@ -181,9 +184,7 @@ function sortByName() {
         }
     }
 
-    for (var newindex = 0; newindex < newArrayAscendingOrder.length; newindex++) {
-        console.log(newArrayAscendingOrder[newindex].locationString[0]);
-    }
+
 
     buildTableRows(newArrayAscendingOrder);
 }
@@ -200,7 +201,7 @@ function sortByLocation() {
     var tempProduct:common.Product = null;
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-        for (var innerIndex = index + 1; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
                 newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
@@ -224,7 +225,7 @@ function sortByPrice() {
     var tempProduct:common.Product = null;
     //Von klein nach groﬂ
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-        for (var innerIndex = index + 1; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             console.log("Vergleiche: " + (newArrayAscendingOrder[innerIndex].price * 1000) + " und " + (newArrayAscendingOrder[innerIndex + 1].price + 1000))
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
                 tempProduct = newArrayAscendingOrder[innerIndex];
@@ -237,8 +238,5 @@ function sortByPrice() {
         console.log(newArrayAscendingOrder[newindex].price);
     }
     buildTableRows(newArrayAscendingOrder);
-}
 
-function startup():void {
-    console.log("Start 08");
 }
