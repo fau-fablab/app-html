@@ -6,8 +6,8 @@ enum DoorState {invalid, open, close}
 class SpaceApi {
     spaceName : string = "FAU+FabLab";
     state : DoorState = DoorState.invalid;
-    time : number;
-    message : string;
+    time : number = 0;
+    message : string = "";
     callback : (state : SpaceApi) => any = null;
 
     constructor(callback : (state : SpaceApi) => any) {
