@@ -8,7 +8,6 @@ var currentProcutList:Array<common.Product> = new Array<common.Product>();
 
 document.onkeydown = function(event) {
     if(event.keyCode == 13){
-
         search();
     }
 }
@@ -70,6 +69,7 @@ function prepareDialogFunktions() {
         var modalProductUnitLabel = $("#modal-productunit");
         var modalProductLocationLabel = $("#modal-productlocation");
         var modalProductCategoryLabel = $("#modal-productCategory");
+        var modalProductMapLink = $("#modal-productMap");
 
         modalHeaderName.text(currentProduct.name);
         modalProductIdLabel.text(currentProduct.productId + "");
@@ -79,7 +79,12 @@ function prepareDialogFunktions() {
         modalProductUnitLabel.text(currentProduct.unit);
         modalProductLocationLabel.text(currentProduct.locationString);
         modalProductCategoryLabel.text(currentProduct.categoryString);
-
+        var newlocationString = "https://52.28.16.59:4433/productMap/index.html" + "?id=" + currentProduct.locationString;
+        console.log("NewLocationString: " + newlocationString);
+        newlocationString = newlocationString.replace(" / ", "/" );
+        newlocationString = newlocationString.replace(" ","_");
+        modalProductMapLink.attr("href", newlocationString);
+        console.log(modalProductMapLink.attr("href"));
     });
 }
 
