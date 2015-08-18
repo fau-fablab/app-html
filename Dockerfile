@@ -17,7 +17,7 @@ COPY ./ /var/www/html
 RUN chmod 755 /runApache.sh
 
 # compile type script files
-RUN tsc /var/www/html/js/*.ts 
+RUN tsc --target es5 /var/www/html/js/*.ts
 
 #delete some files
 RUN rm -rvf /var/www/html/index.html
