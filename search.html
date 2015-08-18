@@ -1,44 +1,37 @@
-
-<div class="container">
+<div class="container-fluid">
 
     <div id="seach_container">
 
-            <form class="form-horizontal">
-                <fieldset>
-                    <legend>Produktsuche</legend>
-                    <div class="form-group">
-                        <label for="inputSuche" class="col-lg-2 control-label">Suche</label>
-                        <div class="col-lg-10">
-                            <input onkeyup="if(event.keyCode == 13){search();};" type="text" class="form-control" id="inputSuche" placeholder="Hier bitte den Suchbegriff ...">
-                        </div>
+        <form class="form-horizontal">
+            <div class="form-group has-feedback">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <span onclick="search()" class="input-group-addon glyphicon glyphicon-search"
+                              aria-hidden="true"></span>
+                        <input onkeyup="if(event.keyCode == 13){search();};"
+                               placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
+                               id="inputSuche">
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default" onclick="search()">Suchen!</button>
-
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-
-        <h2 id="empty_text"></h2>
-
-        <div id="search_results_container">
-            <table id= "search_results" class="table table-hover table-condensed">
-
-            </table>
-        </div>
-
-        <div>
-            <ul id="second_search_result">
-
-            </ul>
-        </div>
-
-
+                </div>
+            </div>
+        </form>
 
     </div>
+
+    <div id="search_results_container">
+        <!--<input id="empty_text"/>-->
+        <table id="search_results" class="table table-hover table-condensed">
+
+        </table>
+    </div>
+
+    <div>
+        <ul id="second_search_result">
+
+        </ul>
+    </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -52,6 +45,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="modal-productid" class="col-lg-4">Produkt ID</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productid"></label>
                                 </div>
@@ -59,6 +53,7 @@
 
                             <div class="form-group">
                                 <label for="modal-productname" class="col-lg-4">Name</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productname"></label>
                                 </div>
@@ -67,6 +62,7 @@
 
                             <div class="form-group">
                                 <label for="modal-productdescription" class="col-lg-4">Beschreibung</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productdescription"></label>
                                 </div>
@@ -74,6 +70,7 @@
 
                             <div class="form-group">
                                 <label for="modal-productprice" class="col-lg-4">Preis</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productprice"></label>
                                 </div>
@@ -82,6 +79,7 @@
 
                             <div class="form-group">
                                 <label for="modal-productunit" class="col-lg-4">Einheit</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productunit"></label>
                                 </div>
@@ -89,6 +87,7 @@
 
                             <div class="form-group">
                                 <label for="modal-productlocation" class="col-lg-4">Standort</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productlocation"></label>
                                 </div>
@@ -96,10 +95,21 @@
 
                             <div class="form-group">
                                 <label for="modal-productCategory" class="col-lg-4">Kategorie</label>
+
                                 <div class="col-lg-8">
                                     <label id="modal-productCategory"></label>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="modal-productMap" class="col-lg-4"></label>
+
+                                <div class="col-lg-8">
+                                    <a id="modal-productMap" href="https://52.28.16.59:4433/productMap/index.html">Zur
+                                        Produktmap</a>
+                                </div>
+                            </div>
+
 
                         </fieldset>
                     </form>
