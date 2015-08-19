@@ -11,12 +11,14 @@ class SpaceApi {
     callback : (state : SpaceApi) => any = null;
 
     constructor(callback : (state : SpaceApi) => any) {
+        console.log("lege SpaceAPI an");
         this.callback = callback;
         this.update();
     }
 
     update() {
         var c : RestClient = new RestClient();
+        console.log("rufe update auf und hole die spaceApi-News");
         c.request("GET", "/spaceapi/spaces/" + this.spaceName, this.setState);
     }
 
