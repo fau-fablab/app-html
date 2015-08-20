@@ -58,7 +58,10 @@ function addNews(news):void {
 
     // add vertical touch scrolling
     vertScroll = new IScroll("#wrapperNews",{
-        probeType: 3
+        probeType: 3,
+        scrollbars: true,
+        mouseWheel: true,
+        interactiveScrollbars: true
     });
     // check scroll position to load dynamically more news
     vertScroll.on("scroll", loadMoreNews);
@@ -177,7 +180,9 @@ function addICals(icals):void{
     // add horizontal touch scrolling
     horScroll = new IScroll("#wrapperICal",{
         scrollX: true,
-        probeType: 3
+        probeType: 3,
+        scrollbars: true,
+        interactiveScrollbars: true
     });
 
     // check scroll position to load dynamically more icals
@@ -406,3 +411,9 @@ function loadMoreICals():void{
     }
 }
 
+// toggle icals
+$("dt").click(function(){
+    $(this).next("dd").slideToggle("fast");
+    $("#upDownPanelIcal").toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
+    horScroll.refresh();
+});

@@ -1,21 +1,28 @@
 <!-- wrapper for vertical touch scrolling -->
 <div id="wrapperNews">
-    <div id="verticalScroller">
-        <!-- wrapper for horizontal touch scrolling -->
-        <div id="wrapperICal">
-            <!-- contains all the iCals retrieved from the server -->
-            <div id="ical_container"/>
-        </div>
-        <div id="loadMoreICalsLoader" ><img src="img/ajax-loader.gif" /></div>
-
-        <!-- contains all the news retrieved from the server -->
-        <div id="news_container"/>
-        <div id="loadMoreNewsLoader" ><img src="img/ajax-loader.gif" /></div>
-    </div>
+    <!-- contains all the news retrieved from the server -->
+    <div id="news_container"/>
+    <div id="loadMoreNewsLoader" ><img src="img/ajax-loader.gif" /></div>
 </div>
 
+
+<dl>
+    <dt>Termine anzeigen...
+        <button type='button' class='btn_remove'>
+            <span id="upDownPanelIcal" class='glyphicon glyphicon-chevron-down'></span>
+        </button>
+    </dt>
+    <dd>
+        <!-- wrapper for horizontal touch scrolling -->
+        <div id="wrapperICal">
+        <!-- contains all the iCals retrieved from the server -->
+        <div id="ical_container"/>
+        </div>
+        <div id="loadMoreICalsLoader" ><img src="img/ajax-loader.gif" /></div>
+    </dd>
+</dl>
 <!-- hidden dialog
-     gets visible and filled with content when news is clicked -->
+ gets visible and filled with content when news is clicked -->
 <div id="openNewsDialog" class="newsDialog">
     <div id="newsDialogInner">
         <a id="closeNewsDialog" href="#close" title="Close" class="close">X</a>

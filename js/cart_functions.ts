@@ -38,7 +38,10 @@ function showAllCartEntries() {
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container",{scrollbars: true});
+    vertScroll = new IScroll("#cart_container",{
+        scrollbars: true,
+        interactiveScrollbars: true
+    });
     setTimeout(function () {
         vertScroll.refresh();
     }, 0);
