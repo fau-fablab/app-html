@@ -19,7 +19,6 @@
 
     </div>
 
-
     <div id="search_results_container">
         <!--<input id="empty_text"/>-->
         <table id="search_results" class="table table-hover table-condensed">
@@ -133,11 +132,8 @@
 
                             <div class="form-group">
                                 <label for="modal-productMap" class="col-lg-4"></label>
-
                                 <div class="col-lg-8">
-                                    <a id="modal-productMap"
-                                       href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html"
-                                       target="_blank">Zur
+                                    <a id="modal-productMap" href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html" target="_blank">Zur
                                         Produktmap</a>
                                 </div>
                             </div>
@@ -147,11 +143,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-
-                        <button type="button" class="btn btn-success" data-dismiss="modal">In den Warenkorpf
-                        </button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
+                    <button id="modal-productAddToCart" type="button" class="btn btn-success" data-dismiss="modal">In den Warenkorb</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -159,4 +152,5 @@
 
 </div>
 
+<!-- loads cart functions and product search script -->
 <script src="js/product_search.js"></script>
