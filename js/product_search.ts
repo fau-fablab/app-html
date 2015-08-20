@@ -70,7 +70,9 @@ function prepareDialogFunktions() {
         var modalProductLocationLabel = $("#modal-productlocation");
         var modalProductCategoryLabel = $("#modal-productCategory");
         var modalProductMapLink = $("#modal-productMap");
+        var modalProductAddToCart = $("#modal-productAddToCart");
 
+        modalProductAddToCart.attr("data-product", JSON.stringify(currentProduct));
         modalHeaderName.text(currentProduct.name);
         modalProductIdLabel.text(currentProduct.productId + "");
         modalProductNameLabel.text(currentProduct.name);
@@ -144,7 +146,7 @@ function sortById() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
@@ -165,7 +167,7 @@ function sortByName() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
@@ -185,7 +187,7 @@ function sortByLocation() {
 
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
@@ -205,7 +207,7 @@ function sortByPrice() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {

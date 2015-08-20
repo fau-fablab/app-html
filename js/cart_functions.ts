@@ -30,7 +30,7 @@ function showAllCartEntries() {
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container");
+    vertScroll = new IScroll("#cart_container",{scrollbars: true});
     setTimeout(function () {
         vertScroll.refresh();
     }, 0);
@@ -38,31 +38,7 @@ function showAllCartEntries() {
     // click function for a removed cart entry
     $(".btn_remove").click(function(event){
         var cartEntry = $(this);
-
-        var key:string = cartEntry.attr("data-key");
-
-        // adapt total price
-        var cart_total_price_text = $("#cart_total_price_text");
-        var price:string = cartEntry.attr("data-total");
-        var total_price:number = parseFloat(cart_total_price_text.text().split(" €")[0]);
-        total_price -= parseFloat(price);
-        cart_total_price_text.text(total_price.toFixed(2));
-
-        // remove product from storage
-        localStorage.removeItem(key);
-        var pos:number = cart.indexOf(key);
-        if (pos > -1) {
-            cart.splice(pos, 1);
-        }
-        // save changed cart array
-        localStorage.setItem("cart",JSON.stringify(cart));
-
-        // remove row from DOM
-        $('#cartEntries_container tr:eq('+pos+')').remove();
-
-        // adapt quantity icon in the header
-        adaptQuantityInHeader();
-
+        removeProduct(cartEntry);
     });
 
 }
@@ -146,8 +122,8 @@ function addProduct(entry:common.CartEntry):void{
     //}catch(e){
 
     //}
-
-    showAllCartEntries();
+    // show amount in cart icon in header
+    adaptQuantityInHeader();
 }
 
 // get valid cart or create one
@@ -163,9 +139,32 @@ function getCart():string[]{
     return cart;
 }
 
+// removes the product
+function removeProduct(cartEntry:any){
+    var key:string = cartEntry.attr("data-key");
 
-function removeProduct(){
+    // adapt total price
+    var cart_total_price_text = $("#cart_total_price_text");
+    var price:string = cartEntry.attr("data-total");
+    var total_price:number = parseFloat(cart_total_price_text.text().split(" €")[0]);
+    total_price -= parseFloat(price);
+    cart_total_price_text.text(total_price.toFixed(2));
 
+    // remove product from storage
+    var cart:string[] = getCart();
+    localStorage.removeItem(key);
+    var pos:number = cart.indexOf(key);
+    if (pos > -1) {
+        cart.splice(pos, 1);
+    }
+    // save changed cart array
+    localStorage.setItem("cart",JSON.stringify(cart));
+
+    // remove row from DOM
+    $('#cartEntries_container tr:eq('+pos+')').remove();
+
+    // adapt quantity icon in the header
+    adaptQuantityInHeader();
 }
 
 function checkOut(){
@@ -196,71 +195,18 @@ function clearCache():void{
 
 }
 
-// show all cart entries that are in the current cart
-showAllCartEntries();
-
-// TODO: consider full storage
-
-
+// add product to cart button from product search
+$("#modal-productAddToCart").click(function(){
+    var btn = $(this);
+    var product:any = JSON.parse(btn.attr("data-product"));
+    product.__proto__ = common.Product.prototype;
+    addProduct(new common.CartEntry(product,1));
+});
 
 // Just for debugging
 $("#clearCache").click(function(){
     clearCache();
 });
 
-// debug
-var test ={
-
-    "productId": "0008",
-    "name": "Keramik 10pF (SMD 0805)",
-    "description": null,
-    "unit": "Stück",
-    "oum_id": 1,
-    "categoryId": 7,
-    "categoryString": "Alle Produkte / Elektronik / Elektronikmaterial / Kondensator",
-    "price": 0.1,
-    "itemsAvailable": 0,
-    "location": "unknown location",
-    "location_id": 0,
-    "locationObject":
-
-    {
-
-        "id": 0,
-        "locationId": 0,
-        "name": null,
-        "code": null
-
-    },
-    "category":
-    {
-
-        "id": 0,
-        "categoryId": 7,
-        "name": "Kondensator",
-        "location_id": 18,
-        "categories":
-
-            [
-                20,
-                19,
-                252,
-                9
-            ]
-
-    },
-    "uom":
-
-    {
-        "uom_id": 1,
-        "name": "Stück",
-        "rounding": 1,
-        "uomType": "reference"
-    }
-
-};
-var testProduct:common.Product = new common.Product(test);
-var testEntry:common.CartEntry = new common.CartEntry(testProduct, 2);
-//addProduct(testEntry);
 
 
