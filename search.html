@@ -19,6 +19,7 @@
 
     </div>
 
+
     <div id="search_results_container">
         <!--<input id="empty_text"/>-->
         <table id="search_results" class="table table-hover table-condensed">
@@ -38,7 +39,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+
+
+                    <div class="row">
+                        <div class="col-md-9 col-xs-9" >
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+
+                        <div class="input-group number-spinner" class="col-md-3 col-xs-3" >
+                        <span class="input-group-btn data-dwn">
+                            <button class="btn btn-default btn-info" data-dir="dwn"><span
+                                    class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                            <input type="text" class="form-control text-center" value="1" min="-10" max="40">
+                        <span class="input-group-btn data-up">
+                            <button class="btn btn-default btn-info" data-dir="up"><span
+                                    class="glyphicon glyphicon-plus"></span></button>
+                        </span>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
@@ -113,8 +133,11 @@
 
                             <div class="form-group">
                                 <label for="modal-productMap" class="col-lg-4"></label>
+
                                 <div class="col-lg-8">
-                                    <a id="modal-productMap" href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html" target="_blank">Zur
+                                    <a id="modal-productMap"
+                                       href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html"
+                                       target="_blank">Zur
                                         Produktmap</a>
                                 </div>
                             </div>
@@ -124,8 +147,11 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">In den Warenkorpf</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-success" data-dismiss="modal">In den Warenkorpf
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
         </div>
