@@ -3,6 +3,7 @@
 /// <reference path="iscroll.d.ts" />
 /// <reference path="common/model/Category.ts" />
 /// <reference path="common/model/Product.ts" />
+/// <reference path="cart_functions.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 
@@ -220,3 +221,13 @@ function sortByPrice() {
     createTableRows(newArrayAscendingOrder);
 
 }
+
+// add product to cart button from product search
+$("#modal-productAddToCart").click(function(){
+    var btn = $(this);
+    var product:any = JSON.parse(btn.attr("data-product"));
+    product.__proto__ = common.Product.prototype;
+    addProduct(new common.CartEntry(product,1));
+    // let it bounce
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+});

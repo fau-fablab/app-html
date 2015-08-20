@@ -171,6 +171,7 @@ function removeProduct(cartEntry:any){
     if (pos > -1) {
         cart.splice(pos, 1);
     }
+
     // save changed cart array
     localStorage.setItem("cart",JSON.stringify(cart));
 
@@ -180,7 +181,8 @@ function removeProduct(cartEntry:any){
     // adapt quantity icon in the header
     adaptQuantityInHeader();
     // let it bounce
-    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+    if(cart.length > 0)
+        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 }
 
 function checkOut(){
@@ -210,16 +212,6 @@ function clearCache():void{
     localStorage.removeItem("cart");
 
 }
-
-// add product to cart button from product search
-$("#modal-productAddToCart").click(function(){
-    var btn = $(this);
-    var product:any = JSON.parse(btn.attr("data-product"));
-    product.__proto__ = common.Product.prototype;
-    addProduct(new common.CartEntry(product,1));
-    // let it bounce
-    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
-});
 
 // Just for debugging
 $("#clearCache").click(function(){
