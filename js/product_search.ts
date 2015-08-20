@@ -147,7 +147,7 @@ function sortById() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groï¿½
+    //Von klein nach groß
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
@@ -168,7 +168,7 @@ function sortByName() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groï¿½
+    //Von klein nach groß
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
@@ -188,7 +188,7 @@ function sortByLocation() {
 
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
-    //Von klein nach groï¿½
+    //Von klein nach groß
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
@@ -208,7 +208,7 @@ function sortByPrice() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groï¿½
+    //Von klein nach groß
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
@@ -224,10 +224,39 @@ function sortByPrice() {
 
 // add product to cart button from product search
 $("#modal-productAddToCart").click(function(){
+
     var btn = $(this);
     var product:any = JSON.parse(btn.attr("data-product"));
+    var numberValue: any = $("#modal-number").val();
+
+    var count: number = parseInt(numberValue);
+
     product.__proto__ = common.Product.prototype;
-    addProduct(new common.CartEntry(product,1));
+    addProduct(new common.CartEntry(product,count));
     // let it bounce
     (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 });
+
+$("#modal-number-down").click(function(){
+
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count--;
+    if(count >= 0){
+        var newValue: any = count;
+        $("#modal-number").val(newValue);
+    }
+});
+
+$("#modal-number-up").click(function(){
+
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count++;
+    if(count < 1000){
+        var newValue: any = count;
+        $("#modal-number").val(newValue);
+    }
+});
+
+

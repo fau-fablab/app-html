@@ -19,6 +19,7 @@
 
     </div>
 
+
     <div id="search_results_container">
         <!--<input id="empty_text"/>-->
         <table id="search_results" class="table table-hover table-condensed">
@@ -38,7 +39,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+
+
+                    <div class="row">
+                        <div class="col-md-9 col-xs-9" >
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+
+                        <div class="input-group number-spinner" class="col-md-3 col-xs-3" >
+                        <span class="input-group-btn data-dwn">
+                            <button class="btn btn-default btn-default" data-dir="dwn" id="modal-number-down"><span
+                                    class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                            <input id="modal-number" type="text" class="form-control text-center" value="1" min="0" max="1000">
+                        <span class="input-group-btn data-up">
+                            <button class="btn btn-default btn-default" data-dir="up" id="modal-number-up"><span
+                                    class="glyphicon glyphicon-plus"></span></button>
+                        </span>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
