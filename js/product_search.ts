@@ -147,7 +147,7 @@ function sortById() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
@@ -168,7 +168,7 @@ function sortByName() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
@@ -188,7 +188,7 @@ function sortByLocation() {
 
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
@@ -208,7 +208,7 @@ function sortByPrice() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach groß
+    //Von klein nach groï¿½
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
@@ -234,7 +234,9 @@ $("#modal-productAddToCart").click(function(){
     product.__proto__ = common.Product.prototype;
     addProduct(new common.CartEntry(product,count));
     // let it bounce
-    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+    setTimeout(function () {
+        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+    }, 200);
 });
 
 $("#modal-number-down").click(function(){

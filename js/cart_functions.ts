@@ -44,7 +44,7 @@ function showAllCartEntries() {
     });
     setTimeout(function () {
         vertScroll.refresh();
-    }, 0);
+    }, 20);
 
     // click function for a removed cart entry
     $(".btn_remove").click(function(event){
