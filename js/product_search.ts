@@ -224,10 +224,39 @@ function sortByPrice() {
 
 // add product to cart button from product search
 $("#modal-productAddToCart").click(function(){
+
     var btn = $(this);
     var product:any = JSON.parse(btn.attr("data-product"));
+    var numberValue: any = $("#modal-number").val();
+
+    var count: number = parseInt(numberValue);
+
     product.__proto__ = common.Product.prototype;
-    addProduct(new common.CartEntry(product,1));
+    addProduct(new common.CartEntry(product,count));
     // let it bounce
     (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 });
+
+$("#modal-number-down").click(function(){
+
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count--;
+    if(count >= 0){
+        var newValue: any = count;
+        $("#modal-number").val(newValue);
+    }
+});
+
+$("#modal-number-up").click(function(){
+
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count++;
+    if(count < 1000){
+        var newValue: any = count;
+        $("#modal-number").val(newValue);
+    }
+});
+
+
