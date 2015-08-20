@@ -6,7 +6,8 @@
 $( document ).ready(function() {
     adaptQuantityInHeader();
     // let it bounce
-    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+    if(getCart().length >0)
+        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 });
 
 // scrollelement
