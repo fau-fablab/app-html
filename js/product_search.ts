@@ -82,10 +82,16 @@ function prepareDialogFunktions() {
         modalProductUnitLabel.text(currentProduct.unit);
         modalProductLocationLabel.text(currentProduct.locationString);
         modalProductCategoryLabel.text(currentProduct.categoryString);
-        var newlocationString = "https://52.28.16.59:4433/productMap/index.html" + "?id=" + currentProduct.locationString;
+
+        var preparedLocationString = currentProduct.locationString;
+        console.log("Origin value: " + preparedLocationString);
+
+        preparedLocationString = preparedLocationString.replace(" / ", "/" );
+        preparedLocationString = preparedLocationString.replace(" ","_");
+
+        console.log("New Value  : " + preparedLocationString);
+        var newlocationString = "https://52.28.16.59:4433/productMap/index.html" + "?id=" + preparedLocationString;
         console.log("NewLocationString: " + newlocationString);
-        newlocationString = newlocationString.replace(" / ", "/" );
-        newlocationString = newlocationString.replace(" ","_");
         modalProductMapLink.attr("href", newlocationString);
         console.log(modalProductMapLink.attr("href"));
     });
