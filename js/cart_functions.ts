@@ -2,6 +2,13 @@
 /// <reference path="common/model/CartEntry.ts"/>
 /// <reference path="iscroll.d.ts" />
 
+//always show quantity in header
+$( document ).ready(function() {
+    adaptQuantityInHeader();
+    // let it bounce
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+});
+
 // scrollelement
 var vertScroll;
 
@@ -50,7 +57,14 @@ function adaptQuantityInHeader():void{
     var cart_quantity = $("#cart_button_quantity");
     if (cart.length != 0) {
         var cart_quantity = $("#cart_button_quantity");
-        cart_quantity.text(cart.length.toString());
+        var quantity:number = 0;
+        for (var i = 0; i < cart.length; i++) {
+            var key:string = cart[i];
+            var product:any = JSON.parse(localStorage[key]);
+            product.__proto__ = common.CartEntry.prototype;
+            quantity += product.amount;
+        }
+        cart_quantity.text(quantity.toString());
         cart_quantity.show();
     } else {
         cart_quantity.hide();
@@ -165,6 +179,8 @@ function removeProduct(cartEntry:any){
 
     // adapt quantity icon in the header
     adaptQuantityInHeader();
+    // let it bounce
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 }
 
 function checkOut(){
@@ -201,6 +217,8 @@ $("#modal-productAddToCart").click(function(){
     var product:any = JSON.parse(btn.attr("data-product"));
     product.__proto__ = common.Product.prototype;
     addProduct(new common.CartEntry(product,1));
+    // let it bounce
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 });
 
 // Just for debugging
