@@ -70,7 +70,7 @@ function adaptQuantityInHeader():void{
             var key:string = cart[i];
             var product:any = JSON.parse(localStorage[key]);
             product.__proto__ = common.CartEntry.prototype;
-            quantity += product.amount;
+            quantity += parseInt(product.amount);
         }
         cart_quantity.text(quantity.toString());
         cart_quantity.show();
