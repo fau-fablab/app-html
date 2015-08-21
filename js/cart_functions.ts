@@ -35,6 +35,12 @@ function showAllCartEntries() {
 
     var cart:string[] = getCart();
 
+    // show info msg when cart is empy
+    if(cart.length == 0){
+        $("#cart_container").append("<div class='info'><i>Dein Warenkorb ist leider noch leer.</i></div>");
+    }
+
+    // add producs to dom
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);

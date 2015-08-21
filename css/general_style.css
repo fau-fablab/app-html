@@ -13,6 +13,10 @@ body, html{
     padding-top: 73px;
 }
 
+.info{
+    text-align: center;
+}
+
 /*--------- Overlay when sidebar is opened ---------*/
 .overlay {
     position: fixed;
