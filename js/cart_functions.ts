@@ -13,6 +13,20 @@ $( document ).ready(function() {
 // scrollelement
 var vertScroll;
 
+// get total price of shopping cart
+function getTotalPrice():number{
+    var cart:string[] = getCart();
+    var total_price:number = 0;
+    for (var i = 0; i < cart.length; i++) {
+        var key:string = cart[i];
+        var product:any = JSON.parse(localStorage[key]);
+        product.__proto__ = common.CartEntry.prototype;
+        product.product.__proto__ = common.Product.prototype;
+        total_price += product.product.price * product.amount;
+    }
+    return total_price;
+}
+
 // show all cart entries when cart is loaded
 function showAllCartEntries() {
     if (!browserLocalStorageSupport()) {
@@ -21,18 +35,16 @@ function showAllCartEntries() {
 
     var cart:string[] = getCart();
 
-    var total_price:number = 0;
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.CartEntry.prototype;
         product.product.__proto__ = common.Product.prototype;
-        total_price += product.product.price * product.amount;
         addProductToDom(product);
     }
 
     // set total price in footer
-    $("#cart_total_price_text").text(total_price.toFixed(2).toString()+ " €");
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
 
     // show amount in cart icon in header
     adaptQuantityInHeader();
@@ -49,11 +61,6 @@ function showAllCartEntries() {
     $(".btn_remove").click(function(event){
         var cartEntry = $(this);
         removeProduct(cartEntry);
-    });
-
-    // Just for debugging
-    $("#clearCache").click(function(){
-        clearCache();
     });
 
 }
@@ -137,6 +144,9 @@ function updateCartEntry(entry:common.CartEntry){
     // adapt shopping cart icon
     adaptQuantityInHeader();
     (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+
+    // change total price
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
 }
 
 // add a product to a cart
@@ -193,13 +203,6 @@ function getCart():string[]{
 function removeProduct(cartEntry:any){
     var key:string = cartEntry.attr("data-key");
 
-    // adapt total price
-    var cart_total_price_text = $("#cart_total_price_text");
-    var price:string = cartEntry.attr("data-total");
-    var total_price:number = parseFloat(cart_total_price_text.text().split(" €")[0]);
-    total_price -= parseFloat(price);
-    cart_total_price_text.text(total_price.toFixed(2));
-
     // remove product from storage
     var cart:string[] = getCart();
     localStorage.removeItem(key);
@@ -216,6 +219,10 @@ function removeProduct(cartEntry:any){
 
     // adapt quantity icon in the header
     adaptQuantityInHeader();
+
+    // adapt total price
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
+
     // let it bounce
     if(cart.length > 0)
         (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
