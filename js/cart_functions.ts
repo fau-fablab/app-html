@@ -230,8 +230,12 @@ function removeProduct(cartEntry:any){
     $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
 
     // let it bounce
-    if(cart.length > 0)
-        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+    if(cart.length > 0) {
+        (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
+    }else{
+        // show info msg when cart is empy
+        $("#cart_container").append("<div class='info'><i>Dein Warenkorb ist leider noch leer.</i></div>");
+    }
 }
 
 function checkOut(){
