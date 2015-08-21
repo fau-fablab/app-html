@@ -38,15 +38,22 @@ function showAllCartEntries() {
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container",{scrollbars: true, });
+    vertScroll = new IScroll("#cart_container",{
+        scrollbars: true
+    });
     setTimeout(function () {
         vertScroll.refresh();
-    }, 0);
+    }, 200);
 
     // click function for a removed cart entry
     $(".btn_remove").click(function(event){
         var cartEntry = $(this);
         removeProduct(cartEntry);
+    });
+
+    // Just for debugging
+    $("#clearCache").click(function(){
+        clearCache();
     });
 
 }
@@ -88,12 +95,12 @@ function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
     var cartEntry_total:string = (entry.product.price*entry.amount).toFixed(2);
     var card:string = "<tr>" +
-        "<td>" +
+        "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
-        "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
-        "<p>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
+        "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
+        "<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
         "</td>" +
-        "<td class='cart_card_right'>" +
+        "<td class='cart_card_right' style='line-height: 30px !important;height:30px !important;'>" +
         "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
         "data-total='"+cartEntry_total+"'>" +
         "<span class='glyphicon glyphicon-remove'></span>" +
@@ -229,6 +236,7 @@ function productExists(cart, key):boolean{
 
 // clear cache -> remove all products that have ever been stored including related carts
 function clearCache():void{
+    alert("hi");
     var cart = getCart();
 
     // remove single cart entries
@@ -242,10 +250,7 @@ function clearCache():void{
 
 }
 
-// Just for debugging
-$("#clearCache").click(function(){
-    clearCache();
-});
+
 
 
 

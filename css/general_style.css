@@ -221,7 +221,7 @@ body, html{
 #wrapperNews{
     position: absolute;
     overflow:hidden;
-    top:90px;
+    top:70px;
     width: 100%;
     bottom: 0px;
 }
@@ -276,7 +276,7 @@ body, html{
     width: 100%;
     background-color: #384f54;
     bottom: 0;
-    position: absolute;
+    position: fixed;
     padding: 3px;
     font-size: 13px;
     color: white;
@@ -310,17 +310,16 @@ body, html{
 
 #cart_container{
     position: absolute;
-    top: 70px;
+    top: 49px;
     left: 0px;
     width: 100%;
     overflow: hidden;
-    height: auto;
     bottom: 47px;
 }
 
 #cart_scroller{
-    width: 100%;
-    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn_remove{
@@ -332,11 +331,19 @@ body, html{
 .cart_card_right{
     text-align: right;
     position: relative;
+    padding-right: 10px;
 }
+
+.cart_cartEntry_text{
+    margin-top: -10px;
+}
+
 
 .cart_card_total_price{
     right: 0;
     bottom: 0;
+    white-space: nowrap;
+    margin-top: 30px;
 }
 
 .bootstrap-select > .btn {
@@ -345,6 +352,11 @@ body, html{
     padding-left: 10px;
     background: white;
 }
+
+h4{
+    font-weight: bolder;
+}
+
 
 
 .dropdown-menu > li{
@@ -388,5 +400,5 @@ dd {
 dl{
     width: 100%;
     position: absolute;
-    top: 70px;
+    top: 49px;
 }
