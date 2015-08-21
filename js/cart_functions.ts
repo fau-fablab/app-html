@@ -38,13 +38,10 @@ function showAllCartEntries() {
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container",{
-        scrollbars: true,
-        interactiveScrollbars: true
-    });
+    vertScroll = new IScroll("#cart_container",{scrollbars: true, });
     setTimeout(function () {
         vertScroll.refresh();
-    }, 20);
+    }, 0);
 
     // click function for a removed cart entry
     $(".btn_remove").click(function(event){
@@ -94,7 +91,7 @@ function addProductToDom(entry:common.CartEntry):void{
         "<td>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
-        "<p>Menge:" +entry.amount +"</p>" +
+        "<p>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
         "</td>" +
         "<td class='cart_card_right'>" +
         "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
@@ -104,7 +101,35 @@ function addProductToDom(entry:common.CartEntry):void{
         "<p class='cart_card_total_price'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
+    // enable quantity picker
     $("#cartEntries_container").append(card);
+    (<any>$(".selectpicker")).selectpicker();
+    var picker = $("#picker_"+entry.product.productId.toString());
+    for(var i=1;i<201;i++){
+        picker.append("<option>"+i+"</option><option data-divider='true'></option>");
+    }
+    picker.val(<any>entry.amount);
+    (<any>$(".selectpicker")).selectpicker('refresh');
+
+    // save changes
+    picker.change(function(event){
+        entry.amount = $(this).val();
+        updateCartEntry(entry);
+
+    });
+}
+
+// save quantity changes that have been made to the CartEntry
+function updateCartEntry(entry:common.CartEntry){
+    // get key for the entry
+    var key:string = entry.product.productId.toString();
+
+    // store product
+    localStorage.setItem(key, JSON.stringify(entry));
+
+    // adapt shopping cart icon
+    adaptQuantityInHeader();
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
 }
 
 // add a product to a cart

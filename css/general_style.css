@@ -335,9 +335,22 @@ body, html{
 }
 
 .cart_card_total_price{
-    position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.bootstrap-select > .btn {
+    height: 25px;
+    padding-top: 2px;
+    padding-left: 10px;
+    background: white;
+}
+
+
+.dropdown-menu > li{
+    padding: 0 !important;
+    margin: 0!important;
+    text-align: center !important;
 }
 
 
