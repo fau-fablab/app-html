@@ -1,17 +1,34 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
 /// <reference path="iscroll.d.ts" />
+/// <reference path="common/model/CartServer.ts"/>
+/// <reference path="common/model/CartEntryServer.ts"/>
+/// <reference path="RestClient.ts"/>
 
 //always show quantity in header
 $( document ).ready(function() {
     adaptQuantityInHeader();
     // let it bounce
     if(getCart().length >0)
-        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+        bounceShoppingCartIcon();
 });
 
 // scrollelement
 var vertScroll;
+
+// get total price of shopping cart
+function getTotalPrice():number{
+    var cart:string[] = getCart();
+    var total_price:number = 0;
+    for (var i = 0; i < cart.length; i++) {
+        var key:string = cart[i];
+        var product:any = JSON.parse(localStorage[key]);
+        product.__proto__ = common.CartEntry.prototype;
+        product.product.__proto__ = common.Product.prototype;
+        total_price += product.product.price * product.amount;
+    }
+    return total_price;
+}
 
 // show all cart entries when cart is loaded
 function showAllCartEntries() {
@@ -21,36 +38,56 @@ function showAllCartEntries() {
 
     var cart:string[] = getCart();
 
-    var total_price:number = 0;
+    // show info msg when cart is empty
+    if(cart.length == 0){
+        disableCart();
+    }else{
+        // enable checkout
+        $("#cart_checkout_btn").prop("disabled", false);
+    }
+
+    // add producs to dom
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.CartEntry.prototype;
         product.product.__proto__ = common.Product.prototype;
-        total_price += product.product.price * product.amount;
         addProductToDom(product);
     }
 
     // set total price in footer
-    $("#cart_total_price_text").text(total_price.toFixed(2).toString()+ " €");
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
 
     // show amount in cart icon in header
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
     vertScroll = new IScroll("#cart_container",{
-        scrollbars: true,
-        interactiveScrollbars: true
+        scrollbars: true
     });
     setTimeout(function () {
         vertScroll.refresh();
-    }, 20);
+    }, 200);
 
     // click function for a removed cart entry
     $(".btn_remove").click(function(event){
         var cartEntry = $(this);
         removeProduct(cartEntry);
     });
+
+    // checkout button click function
+    $("#cart_checkout_btn").click(function(event){
+        checkOut();
+    });
+
+    // close checkout dialog
+    $("#closeCheckoutDialog").click(function(event){
+        $("#openCheckoutDialog").removeClass("checkoutDialog-active");
+    });
+}
+
+// callback of sent cart
+function cartCreationCallback(callback):void{
 
 }
 
@@ -66,7 +103,7 @@ function adaptQuantityInHeader():void{
             var key:string = cart[i];
             var product:any = JSON.parse(localStorage[key]);
             product.__proto__ = common.CartEntry.prototype;
-            quantity += product.amount;
+            quantity += parseInt(product.amount);
         }
         cart_quantity.text(quantity.toString());
         cart_quantity.show();
@@ -75,28 +112,19 @@ function adaptQuantityInHeader():void{
     }
 }
 
-// used browser supports local storage usage?
-function browserLocalStorageSupport():boolean{
-    // return if browser does not support local storage and inform the user
-    if (!window["localStorage"]) {
-        alert("No local storage support");
-        return false;
-    }
-    return true;
 
-}
 
 // add a product to the DOM
 function addProductToDom(entry:common.CartEntry):void{
     // add product to DOM
     var cartEntry_total:string = (entry.product.price*entry.amount).toFixed(2);
     var card:string = "<tr>" +
-        "<td>" +
+        "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
-        "<p>" + entry.product.price + " € pro " + entry.product.unit +"</p>" +
-        "<p>Menge:" +entry.amount +"</p>" +
+        "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
+        "<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
         "</td>" +
-        "<td class='cart_card_right'>" +
+        "<td class='cart_card_right' style='line-height: 30px !important;height:30px !important;'>" +
         "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
         "data-total='"+cartEntry_total+"'>" +
         "<span class='glyphicon glyphicon-remove'></span>" +
@@ -104,7 +132,37 @@ function addProductToDom(entry:common.CartEntry):void{
         "<p class='cart_card_total_price'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
+    // enable quantity picker
     $("#cartEntries_container").append(card);
+    (<any>$(".selectpicker")).selectpicker();
+    var picker = $("#picker_"+entry.product.productId.toString());
+    for(var i=1;i<201;i++){
+        picker.append("<option>"+i+"</option><option data-divider='true'></option>");
+    }
+    picker.val(<any>entry.amount);
+    (<any>$(".selectpicker")).selectpicker('refresh');
+
+    // save changes
+    picker.change(function(event){
+        entry.amount = $(this).val();
+        updateCartEntry(entry);
+    });
+}
+
+// save quantity changes that have been made to the CartEntry
+function updateCartEntry(entry:common.CartEntry){
+    // get key for the entry
+    var key:string = entry.product.productId.toString();
+
+    // store product
+    localStorage.setItem(key, JSON.stringify(entry));
+
+    // adapt shopping cart icon
+    adaptQuantityInHeader();
+    bounceShoppingCartIcon();
+
+    // change total price
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
 }
 
 // add a product to a cart
@@ -114,7 +172,6 @@ function addProduct(entry:common.CartEntry):void{
         return;
     }
 
-
     // get cart from storage
     var cart:string[] = getCart();
 
@@ -122,12 +179,7 @@ function addProduct(entry:common.CartEntry):void{
     var key:string = entry.product.productId.toString();
 
     // store product and cart
-    //try{
-        localStorage.setItem(key, JSON.stringify(entry));
-    //}catch(e){
-
-    //}
-
+    localStorage.setItem(key, JSON.stringify(entry));
 
     // product already exists?
     if(productExists(cart,key)){
@@ -135,38 +187,16 @@ function addProduct(entry:common.CartEntry):void{
     }
 
     cart.push(key);
-    //try{
-        localStorage.setItem("cart", JSON.stringify(cart));
-    //}catch(e){
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    //}
     // show amount in cart icon in header
     adaptQuantityInHeader();
 }
 
-// get valid cart or create one
-function getCart():string[]{
-    var storageString:string = localStorage.getItem("cart");
-    var cart:string[];
-    if(!storageString){
-        cart = [];
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }else{
-        cart = JSON.parse(storageString);
-    }
-    return cart;
-}
 
 // removes the product
 function removeProduct(cartEntry:any){
     var key:string = cartEntry.attr("data-key");
-
-    // adapt total price
-    var cart_total_price_text = $("#cart_total_price_text");
-    var price:string = cartEntry.attr("data-total");
-    var total_price:number = parseFloat(cart_total_price_text.text().split(" €")[0]);
-    total_price -= parseFloat(price);
-    cart_total_price_text.text(total_price.toFixed(2));
 
     // remove product from storage
     var cart:string[] = getCart();
@@ -184,15 +214,62 @@ function removeProduct(cartEntry:any){
 
     // adapt quantity icon in the header
     adaptQuantityInHeader();
-    // let it bounce
-    if(cart.length > 0)
-        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+
+    // adapt total price
+    $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
+
+    // let it bounce and adabt cart functionalities
+    if(cart.length > 0) {
+        bounceShoppingCartIcon();
+        enableCart();
+    }else{
+        // show info msg when cart is empty and disable checkout button
+        disableCart();
+    }
 }
 
+// checkout process triggered by button click
 function checkOut(){
+    // show dialog
+    $("#openCheckoutDialog").addClass("checkoutDialog-active");
 
+    // listener for qr code input
+    $("#submitQRCode").click(function(){
+        var val:any = $("#qrCodeInput").val();
+        if(val.length < 9 || isNaN(Number(val))){
+            $("#qrCodeInfo").html("Der QR Code muss aus 9 Zahlen bestehen!");
+            return;
+        }
+
+        // TODO: HIER WARENKORB AN DEN SERVER SENDEN!
+        // create new Cart
+        var cartServer:common.CartServer = new common.CartServer();
+        var cartCode:string = val;
+        cartServer.cartCode = cartCode;
+        cartServer.status = common.CartStatus.PENDING;
+        cartServer.pushID = "HTML";
+        var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
+        var cart:string[] = getCart();
+        for(var i= 0; i<cart.length; i++){
+            var key:string = cart[i];
+            var product:any = JSON.parse(localStorage[key]);
+            product.__proto__ = common.CartEntry.prototype;
+            product.product.__proto__ = common.Product.prototype;
+            cartEntriesServer.push(new common.CartEntryServer(product.product.productId, cartServer, product.amount));
+        }
+        cartServer.items = cartEntriesServer;
+
+        // REST CALL
+        var client:RestClient = new RestClient();
+        // post cart
+        alert(JSON.stringify((<any>JSON).decycle(cartServer)));
+        //client.request("POST","/carts/create", cartCreationCallback, JSON.stringify(cart));
+    });
 }
 
+/**** Small helping functions *****/
+
+// product exists?
 function productExists(cart, key):boolean{
     for(var i=0;i<cart.length; i++){
         if(cart[i] == key){
@@ -204,6 +281,7 @@ function productExists(cart, key):boolean{
 
 // clear cache -> remove all products that have ever been stored including related carts
 function clearCache():void{
+    alert("hi");
     var cart = getCart();
 
     // remove single cart entries
@@ -217,10 +295,44 @@ function clearCache():void{
 
 }
 
-// Just for debugging
-$("#clearCache").click(function(){
-    clearCache();
-});
+// get valid cart or create one
+function getCart():string[]{
+    var storageString:string = localStorage.getItem("cart");
+    var cart:string[];
+    if(!storageString){
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }else{
+        cart = JSON.parse(storageString);
+    }
+    return cart;
+}
 
+// used browser supports local storage usage?
+function browserLocalStorageSupport():boolean{
+    // return if browser does not support local storage and inform the user
+    if (!window["localStorage"]) {
+        alert("Dein Browser unterstützt leider unsere Speicherform LocalStorage nicht.");
+        return false;
+    }
+    return true;
 
+}
 
+// let the shopping cart icon bounce in header
+function bounceShoppingCartIcon(){
+    (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+}
+
+// cart == empty -> show info msg and disable checkout button
+function disableCart(){
+    $("#cart_container").append("<div class='info'><i>Dein Warenkorb ist leider noch leer.</i></div>");
+    // disable checkout
+    $("#cart_checkout_btn").prop("disabled", true);
+}
+
+// cart != empty -> enable checkout button
+function enableCart(){
+    // disable checkout
+    $("#cart_checkout_btn").prop("disabled", false);
+}

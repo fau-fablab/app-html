@@ -1,7 +1,9 @@
-enum CartStatus{
-    SHOPPING,
-    PENDING,
-    PAID,
-    CANCELLED,
-    FAILED
+module common {
+  export enum CartStatus{
+        SHOPPING,
+        PENDING,
+        PAID,
+        CANCELLED,
+        FAILED
+    }
 }

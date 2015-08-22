@@ -9,7 +9,7 @@ class RestClient{
 	}
 	
 	// CORS request
-	request(method:string, path:string, callback: (s: string) => any):void{
+	request(method:string, path:string, callback: (s: string) => any, param?:string):void{
 		  var urlPath:string = this._url + path;
 
 		  var xhr:XMLHttpRequest = this.createCORSRequest(method, urlPath);
@@ -29,7 +29,11 @@ class RestClient{
 		    return null;
 		  };
 
-		  xhr.send();
+		  if(method == "POST"){
+			  xhr.send(param);
+		  }else{
+			  xhr.send();
+		  }
         }
 
 

@@ -11,9 +11,31 @@
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-default" id="clearCache" style="float:right;">CLEAR CACHE</button>
     <button type="button" class="btn btn-default" id="cart_checkout_btn">Zur Kasse</button>
 </footer>
+
+<!-- hidden dialog
+     gets visible when checkout buttons is clicked -->
+<div id="openCheckoutDialog" class="checkoutDialog">
+    <div id="checkoutDialogInner">
+        <a id="closeCheckoutDialog" href="#closeCheckout" title="Close" class="close">X</a>
+        <h4>Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4><br/>
+        <form class="form-horizontal">
+            <div class="form-group has-feedback">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-" maxlength="9">
+                      <span class="input-group-btn">
+                        <button id="submitQRCode" class="btn btn-default" type="button">Absenden!</button>
+                      </span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <p id="qrCodeInfo"></p>
+    </div>
+</div>
 
 <!-- show entries -->
 <script>
