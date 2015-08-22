@@ -50,6 +50,11 @@ function checkURL(hash):void{
             hash = "#news";
             window.location.hash = hash;
         }
+
+        if(hash == "#closeCheckout"){
+            hash = "#cart";
+            window.location.hash = hash;
+        }
     }
 
     // hash value changed
