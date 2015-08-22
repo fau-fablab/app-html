@@ -5,7 +5,8 @@ class RestClient{
 	private _url:string;
 
 	constructor(){
-		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		//this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		this._url = "http://192.168.2.102:8080"
 	}
 	
 	// CORS request
@@ -36,7 +37,6 @@ class RestClient{
 		  }
         }
 
-
 	// Create the XHR object
 	createCORSRequest(method:string,url:string):XMLHttpRequest{
 	  	  var xhr:XMLHttpRequest = new XMLHttpRequest();
@@ -52,5 +52,27 @@ class RestClient{
 		    xhr = null;
 		  }
 		  return xhr;
+	}
+
+	postRequest(message:Object, path:string, callback: (s: string) => any, param?:string):void{
+		var urlPath:string = this._url + path;
+
+		var xhr:XMLHttpRequest = this.createCORSRequest("POST", urlPath);
+		if (!xhr) {
+			alert('CORS not supported');
+			return null;
+		}
+
+		// return json response and handle response in the specific callback function
+		xhr.onload = function() {
+			var response:string = JSON.parse(xhr.responseText);
+			callback(response);
+		};
+
+		xhr.onerror = function() {
+			alert('An error occured while loading the content.');
+			return null;
+		};
+		xhr.send(message);
 	}
 }
