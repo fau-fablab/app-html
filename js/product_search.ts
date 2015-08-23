@@ -83,16 +83,16 @@ function prepareDialogFunktions() {
         modalProductLocationLabel.text(currentProduct.locationString);
         modalProductCategoryLabel.text(currentProduct.categoryString);
 
-        var preparedLocationString = currentProduct.locationString;
+        var preparedLocationString = currentProduct.locationForProductMap;
         console.log("Origin value: " + preparedLocationString);
 
-        preparedLocationString = preparedLocationString.replace(" / ", "/" );
-        preparedLocationString = preparedLocationString.replace(" ","_");
+        //preparedLocationString = preparedLocationString.replace(" / ", "/" );
+        //preparedLocationString = preparedLocationString.replace(" ","_");
 
         console.log("New Value  : " + preparedLocationString);
-        var newlocationString = "https://52.28.16.59:4433/productMap/index.html" + "?id=" + preparedLocationString;
-        console.log("NewLocationString: " + newlocationString);
-        modalProductMapLink.attr("href", newlocationString);
+        var newlocationURL = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html" + "?id=" + preparedLocationString;
+        console.log("NewLocationString: " + newlocationURL);
+        modalProductMapLink.attr("href", newlocationURL);
         console.log(modalProductMapLink.attr("href"));
     });
 }
