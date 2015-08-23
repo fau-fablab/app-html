@@ -32,6 +32,10 @@ function selected(){
     console.log("Selected title: " + selectedItem);
     var selectedFabTool: common.FabTool = getSelectedFabTool(selectedItem);
 
+    var fabToolImage = $('#error_message_fabtool_image').attr("src", selectedFabTool.link);
+    console.log("Link: " + selectedFabTool.link);
+    console.log("LinkToPicture: " + selectedFabTool.linkToPicture);
+    var fabToolTitle = $('#error_message_fabtool_title').text(selectedFabTool.title);
 
 }
 
