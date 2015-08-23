@@ -1,45 +1,64 @@
 <body>
-        <nav class="navbar navbar-default navbar-fixed-top navbar-static-top custom-navbar" role="navigation">
-          <div class="container-fluid">       
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle " id="menu-toggle">
+<nav class="navbar navbar-default navbar-fixed-top navbar-static-top custom-navbar" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle " id="menu-toggle">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>        
-              <div class="navbar-brand navbar-brand-text">
-                 FAU<a href="#news" id="fablab_icon" ><img class="navbar-brand-logo" src="img/fablab_icon_no_border.png"></a>FABLAB
-              </div>
-              <div id="doorState">Tuerstatus</div>
+            </button>
+            <div class="navbar-brand navbar-brand-text">
+                FAU<a href="#news" id="fablab_icon"><img class="navbar-brand-logo" src="img/fablab_icon_no_border.png"></a>FABLAB
             </div>
-            
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div id="sidebar-wrapper" class="sidebar-toggle">
-              <ul class="sidebar-nav">
-                <li><a id="news" href="#news" class="nav_link"> <span class="navbar_icon glyphicon glyphicon-globe"></span>News</a></li>
-                <li><a id="search" href="#search" class="nav_link"><span class="navbar_icon glyphicon glyphicon-search"></span>Produkt suchen</a></li>
-                <li><a id="scan" href="#scan" class="nav_link"><span class="navbar_icon glyphicon glyphicon-camera"></span>Produkt scannen</a></li>
-                <li><a id="cart" href="#cart" class="nav_link"><span class="navbar_icon glyphicon glyphicon-shopping-cart"></span>Warenkorb</a></li>
-                <li><a id="contact" href="#contact" class="nav_link"><span class="navbar_icon glyphicon glyphicon-info-sign"></span>Kontakt</a></li>
-                <li><a id="about" href="#about" class="nav_link"><span class="navbar_icon glyphicon glyphicon-info-sign"></span>&Uuml;ber</a></li>
-              </ul>
-            </div>
-              <!-- shopping cart icon -->
-              <button type="button" class="btn btn-default btn-lg" id="cart_button">
-                  <span class="glyphicon glyphicon-shopping-cart cart_icon" aria-hidden="true"></span><div id="cart_button_quantity"></div>
-              </button>
-          </div><!-- /.container-fluid -->
-        </nav>
-
-        <!-- Title of a page -->
-        <div id="h1_div">
-            <h1 id="h1_title"></h1>
+            <div id="doorState">Tuerstatus</div>
         </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="sidebar-wrapper" class="sidebar-toggle">
+            <ul class="sidebar-nav">
+                <li><a id="news" href="#news" class="nav_link"> <span
+                        class="navbar_icon glyphicon glyphicon-globe"></span>News</a></li>
+                <li><a id="search" href="#search" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-search"></span>Produkt suchen</a></li>
+                <li><a id="scan" href="#scan" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-camera"></span>Produkt scannen</a></li>
+                <li><a id="cart" href="#cart" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-shopping-cart"></span>Warenkorb</a></li>
+                <li><a id="contact" href="#contact" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-info-sign"></span>Kontakt</a></li>
+                <li><a id="error_message" href="#error_message" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-fire"></span>St&#246;rmeldung</a></li>
+                <li><a id="about" href="#about" class="nav_link"><span
+                        class="navbar_icon glyphicon glyphicon-info-sign"></span>&Uuml;ber</a></li>
+            </ul>
+        </div>
+        <!--
+        <div>
+          <button type="button" class="btn btn-default btn-lg" id="error_button">
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+          </button>
+        </div>
+        -->
+        <!-- shopping cart icon -->
+        <div>
+            <button type="button" class="btn btn-default btn-lg" id="cart_button">
+                <span class="glyphicon glyphicon-shopping-cart cart_icon" aria-hidden="true"></span>
+
+                <div id="cart_button_quantity"></div>
+            </button>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<!-- Title of a page -->
+<div id="h1_div">
+    <h1 id="h1_title"></h1>
+</div>
 
 
-        <!-- Overlay when sidebar is opened -->
-        <div class="overlay"></div>
+<!-- Overlay when sidebar is opened -->
+<div class="overlay"></div>
 
-        <script src="js/app.js"></script>
+<script src="js/app.js"></script>
