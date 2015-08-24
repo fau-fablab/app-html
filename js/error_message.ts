@@ -36,6 +36,8 @@ function selected(){
     console.log("Link: " + selectedFabTool.link);
     console.log("LinkToPicture: " + selectedFabTool.linkToPicture);
     var fabToolTitle = $('#error_message_fabtool_title').text(selectedFabTool.title);
+    var fabToolDescription= $('#error_message_fabtool_description').text(selectedFabTool.description);
+    var fabToolDetails= $('#error_message_fabtool_details').text(selectedFabTool.details);
 
 }
 
