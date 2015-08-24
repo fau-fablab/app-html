@@ -12,12 +12,15 @@ module common {
 
         private _categoryString:string;
         private _locationString:string;
+        private _locationForProductMap;
 
         private _categoryId:number;
         private _oumId:number;
 
         private _categoryObject: common.Category;
         private _uomObject: common.Uom;
+
+
 
 
         constructor(record) {
@@ -33,7 +36,7 @@ module common {
 
             this._categoryString = record.categoryString;
             this._locationString = record.location;
-
+            this._locationForProductMap = record.locationForProductMap;
 
             this._categoryObject = new common.Category(record.category);
 
@@ -136,5 +139,14 @@ module common {
         public set uomObject(value:common.Uom) {
             this._uomObject = value;
         }
+
+        public get locationForProductMap() {
+            return this._locationForProductMap;
+        }
+
+        public set locationForProductMap(value) {
+            this._locationForProductMap = value;
+        }
+
     }
 }

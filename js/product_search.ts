@@ -83,16 +83,16 @@ function prepareDialogFunktions() {
         modalProductLocationLabel.text(currentProduct.locationString);
         modalProductCategoryLabel.text(currentProduct.categoryString);
 
-        var preparedLocationString = currentProduct.locationString;
+        var preparedLocationString = currentProduct.locationForProductMap;
         console.log("Origin value: " + preparedLocationString);
 
-        preparedLocationString = preparedLocationString.replace(" / ", "/" );
-        preparedLocationString = preparedLocationString.replace(" ","_");
+        //preparedLocationString = preparedLocationString.replace(" / ", "/" );
+        //preparedLocationString = preparedLocationString.replace(" ","_");
 
         console.log("New Value  : " + preparedLocationString);
-        var newlocationString = "https://52.28.16.59:4433/productMap/index.html" + "?id=" + preparedLocationString;
-        console.log("NewLocationString: " + newlocationString);
-        modalProductMapLink.attr("href", newlocationString);
+        var newlocationURL = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html" + "?id=" + preparedLocationString;
+        console.log("NewLocationString: " + newlocationURL);
+        modalProductMapLink.attr("href", newlocationURL);
         console.log(modalProductMapLink.attr("href"));
     });
 }
@@ -153,7 +153,7 @@ function sortById() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach gro�
+
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
@@ -174,7 +174,7 @@ function sortByName() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach gro�
+
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
@@ -194,7 +194,7 @@ function sortByLocation() {
 
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
-    //Von klein nach gro�
+
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
@@ -214,7 +214,7 @@ function sortByPrice() {
     newArrayAscendingOrder = currentProcutList;
 
     var tempProduct:common.Product = null;
-    //Von klein nach gro�
+
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
