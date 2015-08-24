@@ -20,17 +20,24 @@ class RestClient{
 		  
 		  // return json response and handle response in the specific callback function
 		  xhr.onload = function() {
-		    var response:string = JSON.parse(xhr.responseText);
-		    callback(response);
+              var response:string;
+              if(method == "POST"){
+                  response = xhr.responseText;
+              }else{
+                  response = JSON.parse(xhr.responseText);
+              }
+              callback(response);
 		  };
 
 		  xhr.onerror = function() {
-		    alert('An error occured while loading the content.');
-		    return null;
+              alert('An error occured while loading the content.');
+              return null;
 		  };
 
+
 		  if(method == "POST"){
-			  xhr.send(param);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(param);
 		  }else{
 			  xhr.send();
 		  }

@@ -2,50 +2,50 @@
 /// <reference path="CartEntryServer.ts" />
 module common{
     export class CartServer{
-        private _cartCode:string;
-        private _items:Array<CartEntryServer>;
-        private _status:CartStatus;
-        private _pushID:string;
-        private _sentToServer:number;
+        private cartCode:string;
+        private items:Array<CartEntryServer>;
+        private status:string;
+        private pushID:string;
+        private sentToServer:number;
 
-        public set cartCode(code:string){
-            this._cartCode = code;
+        public set cartCartCode(code:string){
+            this.cartCode = code;
         }
 
-        public get cartCode():string{
-            return this._cartCode;
+        public get cartCartCode():string{
+            return this.cartCode;
         }
 
-        public set items(items:Array<CartEntryServer>){
-            this._items = items;
+        public set cartItems(items:Array<CartEntryServer>){
+            this.items = items;
         }
 
-        public get items():Array<CartEntryServer>{
+        public get cartItems():Array<CartEntryServer>{
             return this.items;
         }
 
-        public set status(status:CartStatus){
-            this._status = status;
+        public set cartStatus(status:string){
+            this.status = status;
         }
 
-        public get status():CartStatus{
-            return this._status;
+        public get cartStatus():string{
+            return this.status;
         }
 
-        public set pushID(pushID:string){
-            this._pushID = pushID;
+        public set cartPushID(pushID:string){
+            this.pushID = pushID;
         }
 
-        public get pushID():string{
-            return this._pushID;
+        public get cartPushID():string{
+            return this.pushID;
         }
 
         public setSentToServer():void{
-            this._sentToServer = new Date().getTime();
+            this.sentToServer = new Date().getTime();
         }
 
         public getSentToServer():number{
-            return this._sentToServer;
+            return this.sentToServer;
         }
     }
 }

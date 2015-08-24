@@ -1,47 +1,47 @@
 /// <reference path="CartServer.ts" />
 module common{
     export class CartEntryServer{
-        private _id:number;
-        private _productID:string;
-        private _amount:number;
-        private _cart:CartServer;
+        private id:number;
+        private productID:string;
+        private amount:number;
+        private cart:CartServer;
 
         constructor(productID:string, cart:CartServer, amount:number){
-            this._productID = productID;
-            this._cart = cart;
-            this._amount = amount;
+            this.productID = productID;
+            this.cart = cart;
+            this.amount = amount;
         }
 
-        public set id(id:number){
-            this._id = id;
+        public set cartID(id:number){
+            this.id = id;
         }
 
-        public get id():number{
-            return this._id;
+        public get cartID():number{
+            return this.id;
         }
 
-        public set productID(productID:string){
-            this._productID = productID;
+        public set cartProductID(productID:string){
+            this.productID = productID;
         }
 
-        public get productID():string{
-            return this._productID;
+        public get cartProductID():string{
+            return this.productID;
         }
 
-        public set amount(amount:number){
-            this._amount = amount;
+        public set cartAmount(amount:number){
+            this.amount = amount;
         }
 
-        public get amount():number{
-            return this._amount;
+        public get cartAmount():number{
+            return this.amount;
         }
 
-        public set cart(cart:CartServer){
-            this._cart = cart;
+        public set cartCart(cart:CartServer){
+            this.cart = cart;
         }
 
-        public get cart():CartServer{
-            return this._cart;
+        public get cartCart():CartServer{
+            return this.cart;
         }
     }
 }

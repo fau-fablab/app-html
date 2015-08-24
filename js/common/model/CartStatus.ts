@@ -1,5 +1,5 @@
 module common {
-  export enum CartStatus{
+  export  enum CartStatus{
         SHOPPING,
         PENDING,
         PAID,

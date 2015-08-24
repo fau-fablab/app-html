@@ -88,7 +88,7 @@ function showAllCartEntries() {
 
 // callback of sent cart
 function cartCreationCallback(callback):void{
-
+    alert(callback);
 }
 
 // adapt quantity for shopping cart icon in the header
@@ -245,9 +245,12 @@ function checkOut(){
         // create new Cart
         var cartServer:common.CartServer = new common.CartServer();
         var cartCode:string = val;
-        cartServer.cartCode = cartCode;
-        cartServer.status = common.CartStatus.PENDING;
-        cartServer.pushID = "HTML";
+        cartServer.cartCartCode = cartCode;
+        var stat:common.CartStatus = common.CartStatus.PENDING;
+        var cartStatusString:string = common.CartStatus[stat];
+        cartServer.cartStatus = cartStatusString;
+
+        cartServer.cartPushID = "HTML";
         var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
         var cart:string[] = getCart();
         for(var i= 0; i<cart.length; i++){
@@ -257,13 +260,29 @@ function checkOut(){
             product.product.__proto__ = common.Product.prototype;
             cartEntriesServer.push(new common.CartEntryServer(product.product.productId, cartServer, product.amount));
         }
-        cartServer.items = cartEntriesServer;
+        cartServer.cartItems = cartEntriesServer;
 
         // REST CALL
         var client:RestClient = new RestClient();
         // post cart
-        alert(JSON.stringify((<any>JSON).decycle(cartServer)));
-        //client.request("POST","/carts/create", cartCreationCallback, JSON.stringify(cart));
+        var res = JSON.stringify(cartServer, function(key, val) {
+
+            if(key == 'cart') {
+                //return val.cartCartCode;
+                return cartCode;
+            } else {
+                return val;
+            }
+        });
+
+        res = res.replace(/["]/g, "");
+        res = res.replace(/[[]/g, "(" );
+        res = res.replace(/[\]]/g, ");" );
+        res = res.replace(/[:]/g, "=" );
+
+      var test = "{\"cartCode\":\"exampleCartCode\",\"items\":[{\"id\":5234,\"productId\":\"0042\",\"amount\":23.0},{\"id\":7534,\"productId\":\"0062\",\"amount\":83.0}],\"status\":\"CANCELLED\",\"pushId\":\"asdfas123\",\"sentToServer\":1440274939390}";
+       // alert(test);
+        client.request("POST","/carts?create", cartCreationCallback, JSON.stringify(test));
     });
 }
 
