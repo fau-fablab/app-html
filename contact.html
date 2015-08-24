@@ -9,20 +9,28 @@
     </div>
     <p/>
 
-    <form>
+    <div>
+        Was wollen Sie tun?
+    </div>
 
-        <div class="form-group">
+    <div>
+        <select class="form-control" id="whattodo_select" onchange="todoSectionChanged()">
+            <option value="0">---</option>
+            <option value="1">Feedback versenden</option>
+            <option value="2">Einen Fehler melden</option>
+            <option value="3">Ausfall einer Maschine melden</option>
+        </select>
+    </div>
+
+    <form id="contact-form">
+
+        <div class="form-group" id="contact_email_div">
             <label for="contact_email">Email Adresse</label>
             <input type="text" class="form-control" id="contact_email" placeholder="Email (optional)">
+            <p class="help-block">Für eine Rückmeldung, ob das Anliegen bearbeitet wurde, können Sie Ihre Email-Adresse hinterlegen.</p>
         </div>
 
-        <div class="checkbox" >
-            <label>
-                <input id="error_message_checkbox" type="checkbox" onchange="showSelect()"> Ausfall einer Maschine melden.
-            </label>
-        </div>
-
-        <div class="row" id="error_message_fabTool_div" style="visibility: visible">
+        <div class="row" id="error_message_fabTool_div">
             <div class="col-md-12">
                 <label>Was wollen Sie melden?</label>
             </div>
@@ -34,20 +42,10 @@
             </div>
         </div>
 
-
-        <div class="form-group">
+        <div class="form-group" id="contact_message_div">
             <label for="contact_message">Nachricht</label>
             <textarea class="form-control" id="contact_message" placeholder="Bitte hier Ihre Nachricht"></textarea>
         </div>
-
-
-        <!--
-        <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
-        </div>
-        -->
 
         <button type="submit" class="btn btn-default" onclick="sendMail()">Nachricht versenden</button>
     </form>

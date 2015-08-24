@@ -378,6 +378,7 @@ function checkOut(){
             }
         });
 
+        console.log(res);
         // send cart to cash desk
         client.request("POST","/carts?create", cartCreationCallback, res);
     });

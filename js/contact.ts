@@ -37,11 +37,7 @@ function sendMail() {
 
     var urlPath:string = "http://192.168.2.102:8080" + "/mail/test";
     var xhr:XMLHttpRequest = this.createCORSRequest("POST", urlPath);
-    //xhr.setRequestHeader("Content-Type", "application/json");
-    //xhr.setRequestHeader("Accept", "application/json");
-    //restClient.postRequest(testObject2,"/mail/test",callback);
 
-    //xhr.send(testObject2);
 
     $("#contact_email").val("");
     $("#contact_message").val("");
@@ -55,10 +51,46 @@ function showResponseFeedbackMessage(){
     console.log("showResponseFeedbackMessage")
 }
 
+function todoSectionChanged(){
+    console.log("todoSectionChanged")
+    var selectedValue = $('#whattodo_select').find(":selected").val();
+    console.log(selectedValue);
+    if(selectedValue != 0){
+        console.log("show form")
+        $('#contact-form').show();
+    }
+    if(selectedValue == 0){
+        console.log("hide form")
+        $('#contact-form').hide();
+    }
 
-function callback(value:any):void {
-    console.log("In Callack");
-    console.log("ReturnValue: " + value);
+    if(selectedValue == 1){
+        feedbackSelected();
+    }
+    if(selectedValue == 2){
+        bugSelected();
+    }
+    if(selectedValue == 3){
+        errorSelected();
+    }
+}
+
+function feedbackSelected(){
+    $('#contact_email_div').show();
+    $('#error_message_fabTool_div').hide();
+    $('#contact_message_div').show();
+}
+
+function bugSelected(){
+    $('#contact_email_div').show();
+    $('#error_message_fabTool_div').hide();
+    $('#contact_message_div').show();
+}
+
+function errorSelected(){
+    $('#contact_email_div').show();
+    $('#error_message_fabTool_div').show();
+    $('#contact_message_div').show();
 }
 
 function createCORSRequest(method:string, url:string):XMLHttpRequest {
@@ -79,19 +111,20 @@ function createCORSRequest(method:string, url:string):XMLHttpRequest {
 
 function showSelect(){
     console.log("In methode showSelect");
-
+    $("#error_message_fabTool_div").hide();
     var selectDivAttribute = $("#error_message_fabTool_div").is(":visible");
     console.log("Ist div sichtbar: " + selectDivAttribute);
     if(selectDivAttribute){
-        var selectDiv = $("#error_message_fabTool_div").attr("style", "visibility: visible");
+        $("#error_message_fabTool_div").show();
     }
     if(!selectDivAttribute){
-        var selectDiv = $("#error_message_fabTool_div").attr("style", "visibility: hidden");
+        $("#error_message_fabTool_div").hide();
     }
 }
 
 
 $(document).ready(function () {
+    $('#contact-form').hide();
     var restClient:RestClient = new RestClient();
     console.log("Starte error_message.html");
     restClient.request("GET","/drupal/tools",drupalCallback);
