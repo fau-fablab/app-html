@@ -78,9 +78,6 @@ function loadPage(url):void{
         case "SEARCH":
             title = "PRODUKTSUCHE";
             break;
-        case "SCAN":
-            title = "PRODUKTSCAN";
-            break;
         case "CART":
             title = "WARENKORB";
             break;
