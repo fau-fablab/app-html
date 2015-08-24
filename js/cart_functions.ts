@@ -145,6 +145,25 @@ function checkoutCancelledSuccesfully(){
     }, 2000);
 }
 
+// cart is paid and checkout is successfully performed
+function checkoutPaidSuccesfully(){
+    // TODO: SAVE OLD CART ?
+    // delete cart
+    clearCache();
+    // remove entries from DOM
+    $("#cartEntries_container").empty();
+    // adapt shopping cart icon and total price
+    $("#cart_total_price_text").text("");
+    adaptQuantityInHeader();
+    disableCart();
+
+    $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
+    resetCheckoutDialog();
+    setTimeout(function(){
+        $("#closeCheckoutDialog").trigger("click");
+    }, 2000);
+}
+
 // function start polling from server
 function startPollingFromServer(){
     clearTimeout(requestRepeater);
@@ -161,8 +180,7 @@ function callbackPolling(response){
         case "PAID":
             // success msg
             // show info msg for a short time, hide loader
-            $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
-            $("#cartSentLoader").hide();
+            checkoutPaidSuccesfully();
             break;
         case "CANCELLED":
             // cancelled msg
@@ -379,7 +397,6 @@ function productExists(cart, key):boolean{
 
 // clear cache -> remove all products that have ever been stored including related carts
 function clearCache():void{
-    alert("hi");
     var cart = getCart();
 
     // remove single cart entries
