@@ -1,12 +1,14 @@
 <div class="container">
 
-<h1>Talk to Fablab!</h1>
+    <h1>Talk to Fablab!</h1>
 
 
     <div>
-        Sie haben Fragen, einen Verbesserungsvorschlag oder möchten einen Fehler melden? Nutzen Sie den direkten Kontakt zu uns.
+        Sie haben Fragen, einen Verbesserungsvorschlag oder möchten einen Fehler melden? Nutzen Sie den direkten Kontakt
+        zu uns.
     </div>
     <p/>
+
     <form>
 
         <div class="form-group">
@@ -14,14 +16,30 @@
             <input type="text" class="form-control" id="contact_email" placeholder="Email (optional)">
         </div>
 
+        <div class="checkbox" >
+            <label>
+                <input id="error_message_checkbox" type="checkbox" onchange="showSelect()"> Ausfall einer Maschine melden.
+            </label>
+        </div>
 
+        <div class="row" id="error_message_fabTool_div" style="visibility: visible">
+            <div class="col-md-12">
+                <label>Was wollen Sie melden?</label>
+            </div>
 
+            <div class="col-md-12">
+                <select class="form-control" id="error_message_toolsection" onchange="selected()">
+
+                </select>
+            </div>
+        </div>
 
 
         <div class="form-group">
             <label for="contact_message">Nachricht</label>
             <textarea class="form-control" id="contact_message" placeholder="Bitte hier Ihre Nachricht"></textarea>
         </div>
+
 
         <!--
         <div class="form-group">
@@ -46,18 +64,23 @@
                     <li>Martensstr. 3</li>
                     <li>91058 Erlangen </p></li>
                 </ul>
-            </div><!--/.col-xs-6.col-lg-4-->
+            </div>
+            <!--/.col-xs-6.col-lg-4-->
             <div class="col-xs-6 col-lg-6">
                 <h2>Telefon</h2>
-                <p><p>
-                    09131 / 85 28013
-                </p>
+
                 <p>
 
-            </div><!--/.col-xs-6.col-lg-4-->
-        </div><!--/row-->
+                <p>
+                    09131 / 85 28013
+                </p>
 
+                <p>
 
+            </div>
+            <!--/.col-xs-6.col-lg-4-->
+        </div>
+        <!--/row-->
 
 
     </div>
