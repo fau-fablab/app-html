@@ -7,6 +7,12 @@
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 
+
+$(document).ready(function () {
+    var ajaxLoader: any = $('#ajax_loader_div');
+    ajaxLoader.hide();
+});
+
 document.onkeydown = function(event) {
     if(event.keyCode == 13){
         search();
@@ -19,7 +25,8 @@ function search():void {
     var LOADLIMIT:number = 0;
     var OFFSET:number = 0;
     var researchCriteria:any = $('#inputSuche').val();
-
+    var ajaxLoader: any = $('#ajax_loader_div');
+    ajaxLoader.show();
     hideEmptyResultText();
 
     if (researchCriteria == "") {
@@ -52,6 +59,8 @@ function showProducts(records:any):void {
     }
     createTableRows(currentProcutList);
     prepareDialogFunktions();
+    var ajaxLoader: any = $('#ajax_loader_div');
+    ajaxLoader.hide();
 }
 
 function prepareDialogFunktions() {
