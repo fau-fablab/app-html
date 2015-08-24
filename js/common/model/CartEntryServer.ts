@@ -2,12 +2,12 @@
 module common{
     export class CartEntryServer{
         private id:number;
-        private productID:string;
+        private productId:string;
         private amount:number;
         private cart:CartServer;
 
         constructor(productID:string, cart:CartServer, amount:number){
-            this.productID = productID;
+            this.productId = productID;
             this.cart = cart;
             this.amount = amount;
         }
@@ -21,11 +21,11 @@ module common{
         }
 
         public set cartProductID(productID:string){
-            this.productID = productID;
+            this.productId = productID;
         }
 
         public get cartProductID():string{
-            return this.productID;
+            return this.productId;
         }
 
         public set cartAmount(amount:number){

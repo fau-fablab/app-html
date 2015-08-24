@@ -16,6 +16,15 @@ $( document ).ready(function() {
 // scrollelement
 var vertScroll;
 
+// cart being used right now
+var sentCartCode:string;
+
+// repeater for polling cart status
+var requestRepeater;
+
+// Rest Client
+var client:RestClient = new RestClient();
+
 // get total price of shopping cart
 function getTotalPrice():number{
     var cart:string[] = getCart();
@@ -88,7 +97,82 @@ function showAllCartEntries() {
 
 // callback of sent cart
 function cartCreationCallback(callback):void{
-    alert(callback);
+    if(callback == "" || callback == undefined){
+        // succesfully sent -> start polling
+        startPollingFromServer();
+        // disable input and X-button
+        $("#submitQRCode").prop("disabled", true);
+        $("#qrCodeInput").prop("disabled", true);
+        $("#closeCheckoutDialog").hide();
+        // show info msg and loader
+        $("#cartSentLoader").show();
+        $("#qrCodeInfo").html("Bitte Bezahlvorgang abschließen!");
+        // show cancel button
+        var cancelCheck = $("#cart_cancelCheckout");
+        cancelCheck.click(function(){
+            //cancel checkout
+            cancelCheckout();
+        })
+        cancelCheck.show();
+    }else{
+        // error
+        $("#qrCodeInfo").html("Überprüfe den QR Code!");
+    }
+}
+
+// function cancel checkout via button
+function cancelCheckout(){
+    client.request("POST", "/checkout/cancelled/"+sentCartCode, callbackCheckoutCancelled);
+}
+
+// callback response from checkout cancel
+function callbackCheckoutCancelled(response){
+    if(response == true){
+        checkoutCancelledSuccesfully();
+    }else{
+        $("#qrCodeInfo").html("Warenkorb ist nicht mehr gültig oder wurde schon abgebrochen!");
+        // reset to initial dialog representation
+        resetCheckoutDialog();
+    }
+}
+
+// checkout was cancelled succesfully
+function checkoutCancelledSuccesfully(){
+    $("#qrCodeInfo").html("Vorgang abgebrochen!");
+    resetCheckoutDialog();
+    setTimeout(function(){
+        $("#closeCheckoutDialog").trigger("click");
+    }, 2000);
+}
+
+// function start polling from server
+function startPollingFromServer(){
+    clearTimeout(requestRepeater);
+    client.request("GET","/checkout/"+sentCartCode, callbackPolling);
+}
+
+// callback response from polling
+function callbackPolling(response){
+    switch (response.status){
+        case "PENDING":
+            // nothing happened --> continue polling
+            requestRepeater = setTimeout(startPollingFromServer, 500);
+            break;
+        case "PAID":
+            // success msg
+            // show info msg for a short time, hide loader
+            $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
+            $("#cartSentLoader").hide();
+            break;
+        case "CANCELLED":
+            // cancelled msg
+            // show info msg for a short time, hide loader
+            checkoutCancelledSuccesfully();
+            break;
+        default:
+            console.log("error polling");
+            break;
+    }
 }
 
 // adapt quantity for shopping cart icon in the header
@@ -236,16 +320,18 @@ function checkOut(){
     // listener for qr code input
     $("#submitQRCode").click(function(){
         var val:any = $("#qrCodeInput").val();
-        if(val.length < 9 || isNaN(Number(val))){
-            $("#qrCodeInfo").html("Der QR Code muss aus 9 Zahlen bestehen!");
+        if(isNaN(Number(val))){
+            $("#qrCodeInfo").html("Überprüfe den QR Code!");
             return;
         }
 
-        // TODO: HIER WARENKORB AN DEN SERVER SENDEN!
+        // remove old information
+        $("#qrCodeInfo").html("");
+
         // create new Cart
         var cartServer:common.CartServer = new common.CartServer();
-        var cartCode:string = val;
-        cartServer.cartCartCode = cartCode;
+        sentCartCode = val;
+        cartServer.cartCartCode = sentCartCode;
         var stat:common.CartStatus = common.CartStatus.PENDING;
         var cartStatusString:string = common.CartStatus[stat];
         cartServer.cartStatus = cartStatusString;
@@ -263,26 +349,19 @@ function checkOut(){
         cartServer.cartItems = cartEntriesServer;
 
         // REST CALL
-        var client:RestClient = new RestClient();
         // post cart
         var res = JSON.stringify(cartServer, function(key, val) {
-
+            // remove cyclic references
             if(key == 'cart') {
-                //return val.cartCartCode;
-                return cartCode;
+                //return nothing;
+                return;
             } else {
                 return val;
             }
         });
 
-        res = res.replace(/["]/g, "");
-        res = res.replace(/[[]/g, "(" );
-        res = res.replace(/[\]]/g, ");" );
-        res = res.replace(/[:]/g, "=" );
-
-      var test = "{\"cartCode\":\"exampleCartCode\",\"items\":[{\"id\":5234,\"productId\":\"0042\",\"amount\":23.0},{\"id\":7534,\"productId\":\"0062\",\"amount\":83.0}],\"status\":\"CANCELLED\",\"pushId\":\"asdfas123\",\"sentToServer\":1440274939390}";
-       // alert(test);
-        client.request("POST","/carts?create", cartCreationCallback, JSON.stringify(test));
+        // send cart to cash desk
+        client.request("POST","/carts?create", cartCreationCallback, res);
     });
 }
 
@@ -331,7 +410,7 @@ function getCart():string[]{
 function browserLocalStorageSupport():boolean{
     // return if browser does not support local storage and inform the user
     if (!window["localStorage"]) {
-        alert("Dein Browser unterstützt leider unsere Speicherform LocalStorage nicht.");
+        alert("Dein Browser unterstützt leider die Speicherform LocalStorage nicht.");
         return false;
     }
     return true;
@@ -354,4 +433,13 @@ function disableCart(){
 function enableCart(){
     // disable checkout
     $("#cart_checkout_btn").prop("disabled", false);
+}
+
+// reset checkout modal
+function resetCheckoutDialog(){
+    $("#closeCheckoutDialog").show();
+    $("#submitQRCode").prop("disabled", false);
+    $("#qrCodeInput").prop("disabled", false);
+    $("#cartSentLoader").hide();
+    $("#cart_cancelCheckout").hide();
 }

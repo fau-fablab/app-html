@@ -5,7 +5,7 @@ module common{
         private cartCode:string;
         private items:Array<CartEntryServer>;
         private status:string;
-        private pushID:string;
+        private pushId:string;
         private sentToServer:number;
 
         public set cartCartCode(code:string){
@@ -33,11 +33,11 @@ module common{
         }
 
         public set cartPushID(pushID:string){
-            this.pushID = pushID;
+            this.pushId = pushID;
         }
 
         public get cartPushID():string{
-            return this.pushID;
+            return this.pushId;
         }
 
         public setSentToServer():void{
