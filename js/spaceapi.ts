@@ -4,43 +4,62 @@
 enum DoorState {invalid, open, close}
 
 class SpaceApi {
-    spaceName : string = "FAU+FabLab";
+    spaceName : string = "";
     state : DoorState = DoorState.invalid;
     time : number = 0;
     message : string = "";
+    iconUrl : string = "";
     callback : (state : SpaceApi) => any = null;
 
-    constructor(callback : (state : SpaceApi) => any) {
-        console.log("lege SpaceAPI an");
+    constructor(spaceName : string, callback : (state : SpaceApi) => any) {
+        this.spaceName = spaceName;
         this.callback = callback;
         this.update();
     }
 
     update() {
+        // this is a hack to pass object and method to callback
+        // otherwise connection of method to object will be lost
+        // see: http://bitstructures.com/2007/11/javascript-method-callbacks.html
+        var sp : SpaceApi = this;
         var c : RestClient = new RestClient();
-        console.log("rufe update auf und hole die spaceApi-News");
-        c.request("GET", "/spaceapi/spaces/" + this.spaceName, this.setState);
+        c.request("GET", "/spaceapi/spaces/" + this.spaceName, function(newState) {sp.setState(newState);});
     }
 
     setState(newState) {
 
-        if (newState.state.open)
+        if (newState.state.open) {
+            this.iconUrl = newState.state.icon.open;
             this.state = DoorState.open;
-        else
+        }
+        else {
+            this.iconUrl = newState.state.icon.closed;
             this.state = DoorState.close;
+        }
 
         this.time = newState.state.lastchange;
         this.message = newState.state.message;
 
-        if (this.callback) {
-            this.callback(this);
-        }
+        if (this.callback != undefined)
+                this.callback(this);
     }
 
     getTimeAsString() {
-        var now = Date.now();
-        var seconds = now - this.time;
+        var seconds : number = Math.floor(Date.now() / 1000 - this.time);
 
-        return seconds;
+        if (seconds <= 60)
+            return seconds + " Sekunden";
+
+        var minutes : number = Math.floor(seconds / 60);
+        if (minutes <= 60)
+            return minutes + " Minuten";
+
+        var hours : number = Math.floor(minutes / 60);
+        minutes = minutes - (hours * 60);
+
+        if (hours == 1)
+            return " einer Stunde und " + minutes + " Minuten";
+        else
+            return hours + " Stunden und " + minutes + " Minuten";
     }
 }
