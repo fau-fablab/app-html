@@ -1,23 +1,34 @@
 /// <reference path="spaceapi.ts" />
 
-
-function updateDoorState(state : SpaceApi) {
-    console.log("im in callback now: " + state.message);
-    var message : string = "state: " + spaceapi.state + " message: " + spaceapi.message + " lastchange: " + spaceapi.time;
-    $("#doorState").html(message);
-}
-
 var spaceapi:SpaceApi = null;
 
-function triggerUpdate() {
-    console.log("triggering update");
+function updateDoorState(state : SpaceApi) {
+    var message : string;
+    if (state.state == DoorState.close)
+        message = "Das FabLab war zuletzt vor " + state.getTimeAsString() + " geöffnet.";
+    else
+        message = "Das FabLab ist seit " + state.getTimeAsString() + " geöffnet.";
+
+    $("#doorState").text(message);
+
+    var doorStateImg = $(document.createElement('img'));
+    doorStateImg.attr('src', state.iconUrl);
+    doorStateImg.attr('alt', state.message);
+    doorStateImg.attr('class', "navbar-brand-logo");
+
+    var doorStateDiv = $("#doorStateIcon");
+
+    doorStateDiv.html("");
+    doorStateImg.appendTo(doorStateDiv);
+}
+
+function triggerDoorStateUpdate() {
     spaceapi.update();
 }
 
 $(document).ready(function () {
 
-    console.log("Starte App und lege SpaceAPI an");
-    spaceapi = new SpaceApi(updateDoorState);
-    $("#doorState").click(triggerUpdate);
+    spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
+    $("#doorState").click(triggerDoorStateUpdate);
 
 });
