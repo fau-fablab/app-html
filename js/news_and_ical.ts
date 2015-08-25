@@ -52,7 +52,6 @@ function addNews(news):void {
             "<div class=\"card-image\" style=\"background-image:url('" + image + "');\"/>" +
             "<h2>" + news[i].title + "</h2>" +
             "<p>" + news[i].descriptionShort + "</p></div>");
-
     }
 
 
