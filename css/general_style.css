@@ -59,6 +59,11 @@ body, html{
     text-align: center;
 }
 
+#loadMoreProductsLoader{
+    display:none;
+    text-align: center;
+}
+
 /*--------- news ---------*/
 .card{
     background: #fafafa;
@@ -445,4 +450,19 @@ dl{
 
 #cart_cancelCheckout{
     display: none;
+}
+
+/*** Product search **/
+#search_results_container{
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+    bottom: 0px;
+}
+
+#search_results{
+    position: relative;
+    overflow: hidden;
 }

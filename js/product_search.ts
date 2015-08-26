@@ -11,6 +11,12 @@ var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var searchingProducts:boolean = false;
 var restClient = new RestClient();
+// scrollelement
+var vertScroll;
+// prevent loading further products when they are already loading
+var searchingProducts:boolean = false;
+// which search was used?
+var findAllSearch:string = "false";
 
 $(document).ready(function () {
     var ajaxLoader: any = $('#ajax_loader_div');
@@ -24,79 +30,47 @@ document.onkeydown = function(event) {
 }
 
 function search():void {
-
+    cleanTable();
     var researchCriteria:any = $('#inputSuche').val();
-    var ajaxLoader: any = $('#ajax_loader_div');
-    ajaxLoader.show();
+    $('#loadMoreProductsLoader').show();
 
     if (researchCriteria == "") {
-        restClient.request("GET", "/products?offset=" + OFFSET + "&limit=" + LOADLIMIT, showProducts);
+        findAllSearch = "true";
+        restClient.request("GET", "/products?offset=" + OFFSET + "&limit=" + LOADLIMIT, showSearchResults);
     }
     else if (isNumber(researchCriteria)) {
         restClient.request("GET", "/products/find/id?id=" + researchCriteria, showProduct);
     }
     else {
-        restClient.request("GET", "/products/find/name?search=" + researchCriteria + "&limit=" + LOADLIMIT + "&offset=" + OFFSET, showProducts);
+        findAllSearch = researchCriteria;
+        restClient.request("GET", "/products/find/name?search=" + researchCriteria + "&limit=" + LOADLIMIT + "&offset=" + OFFSET, showSearchResults);
     }
 }
-/*
-function addMoreProducts(record:any){
-
-    var pos:number[] = [0,0];
-    if(vertScroll){
-        pos[0] = vertScroll.x;
-        pos[1] = vertScroll.y;
-        vertScroll.destroy();
-    }
-}
-
- function loadMoreProducts(){
- if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
- if (!searchingProducts) {
- searchingProducts = true;
- // show loader gif
-
- // number of news that are already loaded
- var count:number = $("#search_results table").length;
- console.log("Anzahl der counts beim scrolln: " + count);
- // send request
- client.request("GET", "/products?offset=" + count + "&limit=" + LOADLIMIT, showProducts);
- }
- }
- }
-*/
 
 function showProduct(record:any):void {
     var recordArray = [];
     recordArray.push(record);
+    createTableHeader();
     showProducts(recordArray);
 }
 
+function showSearchResults(records:any):void{
+    cleanTable();
+    currentProcutList.length = 0;
+    createTableHeader();
+    showProducts(records);
+}
 
 
 function showProducts(records:any):void {
-    cleanTable();
-    currentProcutList.length = 0;
 
-/*
+    // remember scroll position
     var pos:number[] = [0,0];
     if(vertScroll){
         pos[0] = vertScroll.x;
         pos[1] = vertScroll.y;
         vertScroll.destroy();
     }
-
-    vertScroll = new IScroll("#search_results_container",{
-        probeType: 3,
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
-    // check scroll position to load dynamically more news
-    vertScroll.on("scroll", loadMoreNews);
-    vertScroll.refresh();
-    vertScroll.scrollTo(pos[0],pos[1]);
-*/
 
     if (records.length == 0) {
         showEmptyResultText();
@@ -107,12 +81,55 @@ function showProducts(records:any):void {
     }
     createTableRows(currentProcutList);
     prepareDialogFunktions();
-    var ajaxLoader: any = $('#ajax_loader_div');
-    ajaxLoader.hide();
+    $('#loadMoreProductsLoader').hide();
+
+    // add vertical touch scrolling
+    vertScroll = new IScroll("#search_results_container",{
+        probeType: 3,
+        scrollbars: true,
+        interactiveScrollbars: true
+    });
+    setTimeout(function () {
+        vertScroll.refresh();
+    }, 200);
+
+    // check scroll position to load dynamically more Products
+    vertScroll.on("scroll", loadMoreProducts);
+    vertScroll.refresh();
+    vertScroll.scrollTo(pos[0],pos[1]);
+    // Products loaded -> new iCals can be loaded while scrolling
+    searchingProducts = false;
+}
+
+// load more products when scrolling
+function loadMoreProducts():void{
+    if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
+        if (!searchingProducts) {
+            searchingProducts = true;
+            // show loader gif
+            $('#loadMoreProductsLoader').prop("position", "absolute");
+            $('#loadMoreProductsLoader').prop("bottom", "0px");
+            $('#loadMoreProductsLoader').show();
+            // number of products that are already loaded
+            var count:number = $("#search_results tr").length-1;
+
+            // send request
+            // which search was used?
+            if(findAllSearch == "true"){
+                restClient.request("GET", "/products?offset=" + count + "&limit=" + LOADLIMIT, showProducts);
+            }else{
+                restClient.request("GET", "/products/find/name?search=" + findAllSearch + "&limit=" + LOADLIMIT + "&offset=" + count, showProducts);
+            }
+        }
+    }
 }
 
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
+        // return if it is a drag and not a click
+        if (vertScroll.moved) {
+            return false;
+        }
 
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
@@ -150,7 +167,6 @@ function prepareDialogFunktions() {
 }
 
 function createTableRows(productArray:Array<common.Product>) {
-    cleanTable();
     for (var index = 0; index < productArray.length; index++) {
         var product = productArray[index];
         var categoryName:string = product.categoryObject.name;
@@ -186,7 +202,6 @@ function isNumber(value:String):boolean {
 
 function cleanTable():void {
     $("#search_results").empty();
-    createTableHeader();
 }
 
 function showEmptyResultText():void {

@@ -72,7 +72,9 @@ function showAllCartEntries() {
 
     // add vertical touch scrolling
     vertScroll = new IScroll("#cart_container",{
-        scrollbars: true
+        scrollbars: true,
+        mouseWheel: true,
+        interactiveScrollbars: true
     });
     setTimeout(function () {
         vertScroll.refresh();
@@ -231,7 +233,7 @@ function addProductToDom(entry:common.CartEntry):void{
         "data-total='"+cartEntry_total+"'>" +
         "<span class='glyphicon glyphicon-remove'></span>" +
         "</button>" +
-        "<p class='cart_card_total_price'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
+        "<p class='cart_card_total_price' id='cart_card_total_price_"+entry.product.productId.toString()+"'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
     // enable quantity picker
@@ -244,15 +246,16 @@ function addProductToDom(entry:common.CartEntry):void{
     picker.val(<any>entry.amount);
     (<any>$(".selectpicker")).selectpicker('refresh');
 
+    var cartEntry_total_price = $("#cart_card_total_price_"+entry.product.productId.toString());
     // save changes
     picker.change(function(event){
         entry.amount = $(this).val();
-        updateCartEntry(entry);
+        updateCartEntry(entry, cartEntry_total_price);
     });
 }
 
 // save quantity changes that have been made to the CartEntry
-function updateCartEntry(entry:common.CartEntry){
+function updateCartEntry(entry:common.CartEntry, card_total_price){
     // get key for the entry
     var key:string = entry.product.productId.toString();
 
@@ -262,6 +265,9 @@ function updateCartEntry(entry:common.CartEntry){
     // adapt shopping cart icon
     adaptQuantityInHeader();
     bounceShoppingCartIcon();
+
+    // change total price for card
+    card_total_price.text((entry.amount*entry.product.price).toFixed(2));
 
     // change total price
     $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
