@@ -50,20 +50,17 @@ function search():void {
 function showProduct(record:any):void {
     var recordArray = [];
     recordArray.push(record);
-    createTableHeader();
     showProducts(recordArray);
 }
 
 function showSearchResults(records:any):void{
     cleanTable();
     currentProcutList.length = 0;
-    createTableHeader();
     showProducts(records);
 }
 
 
 function showProducts(records:any):void {
-
     // remember scroll position
     var pos:number[] = [0,0];
     if(vertScroll){
@@ -87,6 +84,7 @@ function showProducts(records:any):void {
     vertScroll = new IScroll("#search_results_container",{
         probeType: 3,
         scrollbars: true,
+        mouseWheel: true,
         interactiveScrollbars: true
     });
     setTimeout(function () {
@@ -165,6 +163,7 @@ function prepareDialogFunktions() {
 }
 
 function createTableRows(productArray:Array<common.Product>) {
+    cleanTable();
     for (var index = 0; index < productArray.length; index++) {
         var product = productArray[index];
         var categoryName:string = product.categoryObject.name;
@@ -200,6 +199,7 @@ function isNumber(value:String):boolean {
 
 function cleanTable():void {
     $("#search_results").empty();
+    createTableHeader();
 }
 
 function showEmptyResultText():void {
