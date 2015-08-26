@@ -28,6 +28,9 @@ function triggerDoorStateUpdate() {
 }
 
 $(document).ready(function () {
+    var productApi: ProductApi = new ProductApi();
+    productApi.findAll(3,0);
+
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 

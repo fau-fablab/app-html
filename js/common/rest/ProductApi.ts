@@ -1,16 +1,27 @@
 /// <reference path="../model/Product.ts" />
+/// <reference path="../../RestClient.ts"/>
 
 class ProductApi {
 
+    private _restClient: RestClient;
+
     constructor() {
+        this._restClient = new RestClient();
         console.log("Wurde erstellt");
     }
 
     public findAll(aLimit:number, aOffset:number):Array<common.Product> {
+        this._restClient.getRequest("/products?offset=" + aOffset + "&limit=" + aLimit,this.findAllCallback);
+
+
         return null;
     }
 
-    public findById(aId:number):Array<common.Product> {
+    private findAllCallback(records:any): Array<common.Product>{
+        console.log(records);
+    }
+
+    public findById(aId:number):common.Product {
         return null;
     }
 

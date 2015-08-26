@@ -2,6 +2,7 @@
 /// <reference path="lib.d.ts" />
 // General REST class
 class RestClient{
+
 	private _url:string;
 
 	constructor(){
@@ -61,7 +62,7 @@ class RestClient{
 		  return xhr;
 	}
 
-	postRequest(message:Object, path:string, callback: (s: string) => any, param?:string):void{
+	public postRequest(message:Object, path:string, callback: (s: string) => any, param?:string):void {
 		var urlPath:string = this._url + path;
 
 		var xhr:XMLHttpRequest = this.createCORSRequest("POST", urlPath);
@@ -71,16 +72,38 @@ class RestClient{
 		}
 
 		// return json response and handle response in the specific callback function
-		xhr.onload = function() {
+		xhr.onload = function () {
 			var response:string = JSON.parse(xhr.responseText);
 			callback(response);
 		};
 
-		xhr.onerror = function() {
+		xhr.onerror = function () {
 			alert('An error occured while loading the content.');
 			return null;
 		};
 		xhr.send(message);
 	}
 
+	public getRequest(aPath:string,callback: (s: string) => any){
+		var urlPath:string = this._url + aPath;
+
+		var xmlHttpRequest:XMLHttpRequest = this.createCORSRequest("GET", urlPath);
+		if (!xmlHttpRequest) {
+			alert('CORS not supported');
+			return null;
+		}
+
+		xmlHttpRequest.onload = function() {
+			var response:string;
+			response = JSON.parse(xmlHttpRequest.responseText);
+			callback(response);
+		};
+
+		xmlHttpRequest.onerror = function() {
+			alert('An error occured while loading the content.');
+			return null;
+		};
+
+		xmlHttpRequest.send();
+	}
 }

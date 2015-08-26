@@ -20,9 +20,6 @@ module common {
         private _categoryObject: common.Category;
         private _uomObject: common.Uom;
 
-
-
-
         constructor(record) {
             this._productId = record.productId;
             this._name = record.name;
