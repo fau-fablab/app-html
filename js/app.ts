@@ -1,4 +1,5 @@
 /// <reference path="spaceapi.ts" />
+/// <reference path="common/rest/ProductApi.ts" />
 
 var spaceapi:SpaceApi = null;
 
@@ -27,7 +28,6 @@ function triggerDoorStateUpdate() {
 }
 
 $(document).ready(function () {
-
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 
