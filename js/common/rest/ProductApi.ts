@@ -11,13 +11,13 @@ class ProductApi {
     }
 
     public findAll(aLimit:number, aOffset:number):Array<common.Product> {
-        this._restClient.getRequest("/products?offset=" + aOffset + "&limit=" + aLimit,this.findAllCallback);
+        this._restClient.getRequest("/products?offset=" + aOffset + "&limit=" + aLimit);
 
 
         return null;
     }
 
-    private findAllCallback(records:any): Array<common.Product>{
+    private findAllCallback(records:any){
         console.log(records);
     }
 

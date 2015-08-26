@@ -84,7 +84,7 @@ class RestClient{
 		xhr.send(message);
 	}
 
-	public getRequest(aPath:string,callback: (s: string) => any){
+	public getRequest(aPath:string):any{
 		var urlPath:string = this._url + aPath;
 
 		var xmlHttpRequest:XMLHttpRequest = this.createCORSRequest("GET", urlPath);
@@ -96,7 +96,7 @@ class RestClient{
 		xmlHttpRequest.onload = function() {
 			var response:string;
 			response = JSON.parse(xmlHttpRequest.responseText);
-			callback(response);
+			return response;
 		};
 
 		xmlHttpRequest.onerror = function() {
