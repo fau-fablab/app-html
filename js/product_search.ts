@@ -107,8 +107,6 @@ function loadMoreProducts():void{
         if (!searchingProducts) {
             searchingProducts = true;
             // show loader gif
-            $('#loadMoreProductsLoader').prop("position", "absolute");
-            $('#loadMoreProductsLoader').prop("bottom", "0px");
             $('#loadMoreProductsLoader').show();
             // number of products that are already loaded
             var count:number = $("#search_results tr").length-1;

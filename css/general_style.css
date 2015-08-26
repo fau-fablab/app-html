@@ -3,14 +3,14 @@ body, html{
     margin: 0 !important;
     padding: 0 !important; 
     height: 100%;
+    background-color: #E0E0E0;
 }
 
 #content{
+    top: 70px;
     width: 100%;
-    height: 100%;
-    position: relative;
-    background-color: #E0E0E0;
-    padding-top: 73px;
+    bottom: 0px;
+    position: absolute;
 }
 
 .info{
@@ -235,7 +235,7 @@ body, html{
 #wrapperNews{
     position: absolute;
     overflow:hidden;
-    top:70px;
+    top:20px;
     width: 100%;
     bottom: 0px;
 }
@@ -324,7 +324,7 @@ body, html{
 
 #cart_container{
     position: absolute;
-    top: 49px;
+    top: 0px;
     left: 0px;
     width: 100%;
     overflow: hidden;
@@ -414,7 +414,7 @@ dd {
 dl{
     width: 100%;
     position: absolute;
-    top: 49px;
+    top: 0px;
 }
 
 /* checkout onClick */
@@ -455,7 +455,7 @@ dl{
 /*** Product search **/
 #search_results_container{
     position: absolute;
-    top: 110px;
+    top: 60px;
     left: 0px;
     width: 100%;
     overflow: hidden;
