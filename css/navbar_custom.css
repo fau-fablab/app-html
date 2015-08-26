@@ -180,7 +180,7 @@
 /*--------- heading of a page ---------*/
 #h1_div{
     width: 100%;
-    position: absolute;
+    position: fixed;
     background-color: #384f54;
     top: 50px;
     padding-left: 9px;
