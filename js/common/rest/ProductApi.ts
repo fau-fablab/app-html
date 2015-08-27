@@ -7,33 +7,25 @@ class ProductApi {
 
     constructor() {
         this._restClient = new RestClient();
-        console.log("Wurde erstellt");
     }
 
-    public findAll(aLimit:number, aOffset:number):Array<common.Product> {
-        this._restClient.getRequest("/products?offset=" + aOffset + "&limit=" + aLimit);
-
-
-        return null;
+    public findAll(aLimit:number, aOffset:number,callback: (value: any) => any):void {
+        this._restClient.requestGET("/products?offset=" + aOffset + "&limit=" + aLimit,callback);
     }
 
-    private findAllCallback(records:any){
-        console.log(records);
+    public findById(aId:string,callback: (value: any) => any):void {
+        this._restClient.requestGET("/products/find/id?search=" + aId,callback);
     }
 
-    public findById(aId:number):common.Product {
-        return null;
+    public findByName(aName:string, aLimit:number, aOffset:number,callback: (value: any) => any):void {
+        this._restClient.requestGET("/products/find/name?search=" + aName + "&limit=" + aLimit + "&offset=" + aOffset,callback);
     }
 
-    public findByName(aName:string, aLimit:number, aOffset:number):Array<common.Product> {
-        return null;
+    public findByCategory(aName:string, aLimit:number, aOffset:number,callback: (value: any) => any):void {
+        this._restClient.requestGET("/products/find/category?search=" + aName + "&limit=" + aLimit + "&offset=" + aOffset,callback);
     }
 
-    public findByCategory(aName:string, aLimit:number, aOffset:number):Array<common.Product> {
-        return null;
-    }
-
-    public findAllNames():Array<string> {
-        return null;
+    public findAllNames(callback: (value: any) => any):void {
+        this._restClient.requestGET("/products/names",callback);
     }
 }
