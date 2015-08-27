@@ -48,6 +48,7 @@ function search():void {
 }
 
 function showProduct(record:any):void {
+    cleanTable();
     var recordArray = [];
     recordArray.push(record);
     showProducts(recordArray);
