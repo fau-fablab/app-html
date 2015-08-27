@@ -1,8 +1,9 @@
+/// <reference path="common/rest/ProductApi.ts"/>
+/// <reference path="common/model/Category.ts" />
+/// <reference path="common/model/Product.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
-/// <reference path="common/model/Category.ts" />
-/// <reference path="common/model/Product.ts" />
 /// <reference path="cart_functions.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
@@ -10,7 +11,7 @@ var vertScroll:any;
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var searchingProducts:boolean = false;
-var restClient = new RestClient();
+var productApi: ProductApi = new ProductApi();
 // scrollelement
 var vertScroll;
 // prevent loading further products when they are already loading
@@ -36,14 +37,17 @@ function search():void {
 
     if (researchCriteria == "") {
         findAllSearch = "true";
-        restClient.request("GET", "/products?offset=" + OFFSET + "&limit=" + LOADLIMIT, showSearchResults);
+
+        productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
     else if (isNumber(researchCriteria)) {
-        restClient.request("GET", "/products/find/id?id=" + researchCriteria, showProduct);
+
+        productApi.findById(researchCriteria,showProduct);
     }
     else {
         findAllSearch = researchCriteria;
-        restClient.request("GET", "/products/find/name?search=" + researchCriteria + "&limit=" + LOADLIMIT + "&offset=" + OFFSET, showSearchResults);
+
+        productApi.findByName(researchCriteria,LOADLIMIT,OFFSET,showSearchResults);
     }
 }
 
@@ -113,9 +117,9 @@ function loadMoreProducts():void{
             // send request
             // which search was used?
             if(findAllSearch == "true"){
-                restClient.request("GET", "/products?offset=" + count + "&limit=" + LOADLIMIT, showProducts);
+                productApi.findAll(LOADLIMIT,count,showProducts);
             }else{
-                restClient.request("GET", "/products/find/name?search=" + findAllSearch + "&limit=" + LOADLIMIT + "&offset=" + count, showProducts);
+                productApi.findByName(findAllSearch,LOADLIMIT,count,showProducts);
             }
         }
     }
