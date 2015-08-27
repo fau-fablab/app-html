@@ -3,7 +3,7 @@
 /// <reference path="iscroll.d.ts" />
 /// <reference path="common/model/CartServer.ts"/>
 /// <reference path="common/model/CartEntryServer.ts"/>
-/// <reference path="RestClient.ts"/>
+/// <reference path="util/RestClient.ts"/>
 
 //always show quantity in header
 $( document ).ready(function() {

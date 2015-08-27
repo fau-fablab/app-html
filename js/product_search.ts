@@ -1,4 +1,4 @@
-/// <reference path="RestClient.ts"/>
+/// <reference path="util/RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 /// <reference path="common/model/Category.ts" />

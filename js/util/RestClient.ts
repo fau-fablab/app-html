@@ -1,12 +1,13 @@
 ﻿// typescript import to create XDomainRequests
-/// <reference path="lib.d.ts" />
+/// <reference path="../lib.d.ts" />
 // General REST class
 class RestClient{
 
 	private _url:string;
 
 	constructor(){
-		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		//this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		this._url = "http://192.168.2.102:8080"
 	}
 	
 	// CORS request
@@ -84,26 +85,34 @@ class RestClient{
 		xhr.send(message);
 	}
 
-	public getRequest(aPath:string):any{
+	public requestGET(aPath:string,callback: (value: any) => any):void{
 		var urlPath:string = this._url + aPath;
-
-		var xmlHttpRequest:XMLHttpRequest = this.createCORSRequest("GET", urlPath);
-		if (!xmlHttpRequest) {
+		var method = "GET";
+		var xhr:XMLHttpRequest = this.createCORSRequest(method, urlPath);
+		if (!xhr) {
 			alert('CORS not supported');
 			return null;
 		}
 
-		xmlHttpRequest.onload = function() {
+		// return json response and handle response in the specific callback function
+		xhr.onload = function() {
 			var response:string;
-			response = JSON.parse(xmlHttpRequest.responseText);
-			return response;
+			if(method == "POST"){
+				response = xhr.responseText;
+			}else{
+				response = JSON.parse(xhr.responseText);
+			}
+			callback(response);
 		};
 
-		xmlHttpRequest.onerror = function() {
+		xhr.onerror = function() {
 			alert('An error occured while loading the content.');
 			return null;
 		};
 
-		xmlHttpRequest.send();
+
+
+		xhr.send();
+
 	}
 }

@@ -1,5 +1,5 @@
 /// <reference path="../model/Product.ts" />
-/// <reference path="../../RestClient.ts"/>
+/// <reference path="../../util/RestClient.ts"/>
 
 class ProductApi {
 

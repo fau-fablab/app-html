@@ -1,5 +1,5 @@
 /// <reference path="jquery.d.ts" />
-/// <reference path="RestClient.ts"/>
+/// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/Product.ts" />
 /// <reference path="lib.d.ts" />
