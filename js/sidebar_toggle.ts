@@ -81,6 +81,12 @@ function loadPage(url):void{
         case "CART":
             title = "WARENKORB";
             break;
+        case "ABOUT":
+            title = "ÜBER UNS";
+            break;
+        case "CONTACT":
+            title = "KONTAKT";
+            break;
         default:
             title = "NO TITLE DEFINED check sidebar_toggle.ts";
             break;
