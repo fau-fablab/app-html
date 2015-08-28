@@ -10,7 +10,6 @@ var currentProcutList:Array<common.Product> = new Array<common.Product>();
 var vertScroll:any;
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
-var searchingProducts:boolean = false;
 var productApi: ProductApi = new ProductApi();
 // scrollelement
 var vertScroll;
@@ -20,8 +19,7 @@ var searchingProducts:boolean = false;
 var findAllSearch:string = "false";
 
 $(document).ready(function () {
-    var ajaxLoader: any = $('#ajax_loader_div');
-    ajaxLoader.hide();
+    $('#loadMoreProductsLoader').hide();
 });
 
 document.onkeydown = function(event) {

@@ -1,0 +1,134 @@
+/** CSS class for the cart page **/
+
+/*--------- Cart ---------*/
+#cart_footer {
+    width: 100%;
+    background-color: #384f54;
+    bottom: 0;
+    position: fixed;
+    padding: 3px;
+    font-size: 13px;
+    color: white;
+}
+
+#cart_checkout_btn{
+    float: right;
+    border-radius: 17px !important;
+    border: 1px solid;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+#cart_total_price{
+    float:  left;
+    padding: 0;
+    margin: 0;
+}
+
+#cart_total_price > p{
+    font-weight: bold;
+    margin: 0;
+    font-size: 14px;
+    padding:0;
+}
+
+.cart_table{
+    background-color: white;
+}
+
+#cart_container{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+    bottom: 47px;
+}
+
+#cart_scroller{
+    position: relative;
+    overflow: hidden;
+}
+
+.btn_remove{
+    border: none;
+    outline: none !important;
+    background-color: transparent;
+}
+
+.cart_card_right{
+    text-align: right;
+    position: relative;
+    padding-right: 10px;
+}
+
+.cart_cartEntry_text{
+    margin-top: -10px;
+}
+
+
+.cart_card_total_price{
+    right: 0;
+    bottom: 0;
+    white-space: nowrap;
+    margin-top: 30px;
+}
+
+.bootstrap-select > .btn {
+    height: 25px;
+    padding-top: 2px;
+    padding-left: 10px;
+    background: white;
+}
+
+h4{
+    font-weight: bolder;
+}
+
+.dropdown-menu > li{
+    padding: 0 !important;
+    margin: 0!important;
+    text-align: center !important;
+}
+
+/*--------- checkout onClick ---------*/
+.checkoutDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.checkoutDialog-active {
+    opacity:1;
+    pointer-events: auto;
+}
+
+#checkoutDialogInner {
+    margin: 45px 35px 35px 35px;
+    padding: 15px 20px 10px 20px;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    overflow: auto;
+}
+
+#cart_cancelCheckout{
+    display: none;
+}
+
+/*--------- loading gif ---------*/
+#cartSentLoader{
+    display:none;
+    text-align: center;
+}

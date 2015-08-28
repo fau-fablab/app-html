@@ -1,0 +1,23 @@
+/** CSS class for the search page**/
+
+/*--------- Product search ---------*/
+#search_results_container{
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+    bottom: 0px;
+}
+
+#search_results{
+
+    position: relative;
+    overflow: hidden;
+}
+
+/*--------- loading gif ---------*/
+#loadMoreProductsLoader{
+    display:none;
+    text-align: center;
+}

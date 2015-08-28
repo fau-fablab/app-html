@@ -1,0 +1,17 @@
+/** general CSS class **/
+
+body, html{
+    color: black; 
+    margin: 0 !important;
+    padding: 0 !important; 
+    height: 100%;
+    background-color: #E0E0E0;
+}
+
+#content{
+    top: 70px;
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+}
+
