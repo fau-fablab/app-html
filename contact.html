@@ -1,91 +1,81 @@
-<div class="container">
-
-    <h1>Talk to Fablab!</h1>
+<h1>Talk to Fablab!</h1>
 
 
-    <div>
-        Sie haben Fragen, einen Verbesserungsvorschlag oder möchten einen Fehler melden? Nutzen Sie den direkten Kontakt
-        zu uns.
-    </div>
-    <p/>
-
-    <div>
-        Was wollen Sie tun?
-    </div>
-
-    <div>
-        <select class="form-control" id="whattodo_select" onchange="todoSectionChanged()">
-            <option value="0">Bitte wählen</option>
-            <option value="1">Feedback versenden</option>
-            <option value="2">Einen Fehler melden</option>
-            <option value="3">Ausfall einer Maschine melden</option>
-        </select>
-    </div>
-
-    <form id="contact-form">
-
-        <div class="form-group" id="contact_email_div">
-            <label for="contact_email">Email Adresse</label>
-            <input type="text" class="form-control" id="contact_email" placeholder="Email (optional)">
-            <p class="help-block">Für eine Rückmeldung, können Sie Ihre Email-Adresse hinterlegen.</p>
-        </div>
-
-        <div class="row" id="error_message_fabTool_div">
-            <div class="col-md-12">
-                <label>Was wollen Sie melden?</label>
-            </div>
-
-            <div class="col-md-12">
-                <select class="form-control" id="error_message_toolsection" onchange="selected()">
-
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group" id="contact_message_div">
-            <label for="contact_message">Nachricht</label>
-            <textarea class="form-control" id="contact_message" placeholder="Bitte hier Ihre Nachricht"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-default" onclick="sendMail()">Nachricht versenden</button>
-    </form>
-
-
-    <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="row">
-            <div class="col-xs-4 col-lg-4">
-                <h2>Adresse</h2>
-                <ul>
-                    <li>FAU FabLab</li>
-                    <li>c/o Lehrstuhl für Informatik 3</li>
-                    <li>Martensstr. 3</li>
-                    <li>91058 Erlangen </p></li>
-                </ul>
-            </div>
-            <!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-4 col-lg-4">
-                <h2>Telefon</h2>
-
-                <p>
-                    09131 / 85 28013
-                </p>
-
-
-            </div>
-            <div class="col-xs-4 col-lg-4">
-                <h2>Email</h2>
-
-            </div>
-            <p>
-                fablab@i2.cs.fau.de
-            </p>
-
-            <!--/.col-xs-6.col-lg-4-->
-        </div>
-        <!--/row-->
-
-
-    </div>
-    <script type="text/javascript" src="js/contact.js"></script>
+<div>
+    Sie haben Fragen, einen Verbesserungsvorschlag oder möchten einen Fehler melden? Nutzen Sie den direkten Kontakt
+    zu uns.
 </div>
+<p/>
+
+<div>
+    Was wollen Sie tun?
+</div>
+
+<div>
+    <select class="form-control" id="whattodo_select" onchange="todoSectionChanged()">
+        <option value="0">Bitte wählen</option>
+        <option value="1">Feedback versenden</option>
+        <option value="2">Einen Fehler melden</option>
+        <option value="3">Ausfall einer Maschine melden</option>
+    </select>
+</div>
+
+<form id="contact-form">
+
+    <div class="form-group" id="contact_email_div">
+        <label for="contact_email">Email Adresse</label>
+        <input type="text" class="form-control" id="contact_email" placeholder="Email (optional)">
+
+        <p class="help-block">Für eine Rückmeldung, können Sie Ihre Email-Adresse hinterlegen.</p>
+    </div>
+
+    <div class="row" id="error_message_fabTool_div">
+        <div class="col-md-12">
+            <label>Was wollen Sie melden?</label>
+        </div>
+
+        <div class="col-md-12">
+            <select class="form-control" id="error_message_toolsection" onchange="selected()">
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" id="contact_message_div">
+        <label for="contact_message">Nachricht</label>
+        <textarea class="form-control" id="contact_message" placeholder="Bitte hier Ihre Nachricht"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default" onclick="sendMail()"><span class="glyphicon glyphicon-send"
+                                                                             aria-hidden="true"></span> Nachricht
+        versenden
+    </button>
+</form>
+
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <h2>Adresse</h2>
+        <ul>
+            <li>FAU FabLab</li>
+            <li>c/o Lehrstuhl f&uuml;r Informatik 3</li>
+            <li>Martensstr. 3</li>
+            <li>91058 Erlangen </p></li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <h2>Telefon</h2>
+
+        <p>09131 / 85 28013</p>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h2>Email</h2>
+
+        <p>fablab@i2.cs.fau.de</p>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/contact.js"></script>
