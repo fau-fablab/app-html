@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     if(currentHash != lasturl){
         lasturl=currentHash;
-        reloadPage();
+        loadPage(currentHash);
     }
 });
 
@@ -56,7 +56,7 @@ $(window).ready(function(){
 
 
 function loadPage(url):void{
-    console.log("loagPage: " + window.location.hash);
+    console.log("loadPage: " + window.location.hash);
     // remove hashtag from URL
     var newUrl = url.replace('#','');
     // URL as h1 title for page
@@ -66,7 +66,7 @@ function loadPage(url):void{
 
     // page content
     var pageContent:string;
-
+    console.log("FullURL: " + fullURL);
     // load site content
     $.get(fullURL, function(data){
         lasturl = url;
@@ -75,7 +75,6 @@ function loadPage(url):void{
             $("#content").html(pageContent).fadeIn("fast");
         });
     });
-
 }
 
 function reloadPage(){
