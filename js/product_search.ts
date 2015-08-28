@@ -7,7 +7,6 @@
 /// <reference path="cart_functions.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
-var vertScroll:any;
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
