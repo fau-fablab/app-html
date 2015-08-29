@@ -6,8 +6,8 @@ class RestClient{
 	private _url:string;
 
 	constructor(){
-		//this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
-		this._url = "http://192.168.2.102:8080"
+		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		//this._url = "http://192.168.2.102:8080"
 	}
 	
 	// CORS request
@@ -35,7 +35,6 @@ class RestClient{
               alert('An error occured while loading the content.');
               return null;
 		  };
-
 
 		  if(method == "POST"){
 			  console.log("send Postrequest")
