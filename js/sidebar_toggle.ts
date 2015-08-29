@@ -98,15 +98,26 @@ function loadPage(url):void{
     // page content
     var pageContent:string;
 
+
     // load site content
-    $.get(fullURL, function(data){
+    $.ajax({type: "GET",
+    url: fullURL,
+    async: true,
+    success: function(data){
+        pageContent = data;
+        $("#content").fadeOut("fast", function(){
+            $("#content").html(pageContent).fadeIn("fast");
+            $("#h1_title").text(title);
+        });
+    }});
+    /*$.get(fullURL, function(data){
         pageContent = data;
         $("#content").fadeOut("fast", function(){
 	        $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
         });
 
-    });
+    });*/
 }
 
 // change status of sidebar to opened/closed

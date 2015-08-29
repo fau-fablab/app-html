@@ -7,7 +7,7 @@
               
 <!-- site content-->
 <div id="content">
-    
+    <!-- site content gets loaded dynamically through ajax -->
 </div>
 
     

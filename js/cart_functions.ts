@@ -55,7 +55,7 @@ function showAllCartEntries() {
         $("#cart_checkout_btn").prop("disabled", false);
     }
 
-    // add producs to dom
+    // add products to dom
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
