@@ -13,7 +13,7 @@
 
 /*--------- news ---------*/
 .card{
-    background: #fafafa;
+
     overflow: hidden;
     height: 80px;
     margin: 8px;
@@ -109,16 +109,16 @@
 
 dt {
     font-weight: bolder;
-    background: #E0E0E0;
+
     float:left;
     width:100%;
-    padding:1px 1px 1px 5px;
+
     cursor:pointer;
 }
 
 dd {
     display:none;
-    background:#E0E0E0;
+
     float:left;
     width:100%;
     -webkit-box-shadow:0 1px 1px rgba(0,0,0,1);
@@ -139,7 +139,7 @@ dd {
 
 dl{
     width: 100%;
-    position: absolute;
+    position: relative;
     top: 0px;
 }
 
@@ -184,17 +184,19 @@ dl{
 #wrapperICal{
     height: 120px;
     overflow: hidden;
-    float: clear;
+
 }
 
 /*--------- iScroll vertical ---------*/
 #wrapperNews{
-    position: absolute;
+    position: relative;
     overflow:hidden;
-    top:20px;
+    top: 5px;
     width: 100%;
     bottom: 0px;
 }
+
+
 
 #news_container{
     position: relative;
@@ -204,12 +206,11 @@ dl{
 /*--------- iCal dialog onclick ---------*/
 .iCalDialog {
     position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
+
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    background: rgba(0,0,0,0.8);
     z-index: 99999;
     opacity:0;
     -webkit-transition: opacity 400ms ease-in;
@@ -224,10 +225,6 @@ dl{
 }
 
 #iCalDialogInner {
-    margin: 45px 35px 35px 35px;
-    padding: 15px 20px 10px 20px;
-    border-radius: 10px;
-    background: #fff;
     text-align: center;
     overflow: auto;
 }
@@ -235,7 +232,7 @@ dl{
 
 #basicICal ul {
     float: left; margin-left: 10px;
-    background-color: transparent; border: none;
+
 }
 #basicICal li {
     margin: 0px 5px;
@@ -244,7 +241,6 @@ dl{
 
 /*--------- dialogs close ---------*/
 .close {
-    background: #606061;
     color: #FFFFFF;
     line-height: 25px;
     position: absolute;
