@@ -19,6 +19,7 @@ var findAllSearch:string = "false";
 
 $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
+    
 });
 
 document.onkeydown = function(event) {
@@ -26,6 +27,8 @@ document.onkeydown = function(event) {
         search();
     }
 }
+
+
 
 function search():void {
     cleanTable();

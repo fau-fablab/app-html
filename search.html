@@ -10,17 +10,20 @@
                               aria-hidden="true"></span>
                         <input onkeyup="if(event.keyCode == 13){search();};"
                                placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
-                               id="inputSuche">
+                               id="inputSuche" list="product_options" />
+                        <datalist id="product_options">
+                            <option value="Sowas"></option>
+                            <option value="Nochwas"></option>
+                            <option value="Zusätzlich"></option>
+                        </datalist>
                     </div>
-
                 </div>
             </div>
         </form>
-
     </div>
 
-    <div id="search_results_container">
 
+    <div id="search_results_container">
         <!--<input id="empty_text"/>-->
         <table id="search_results" class="table table-hover table-condensed">
         </table>
@@ -39,9 +42,6 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-
-
-
                         <div class="col-md-9 col-xs-9">
                             <h4 class="modal-title" id="myModalLabel"></h4>
                         </div>
@@ -60,7 +60,6 @@
                                 </button>
                             </span>
                         </div>
-
 
 
                 </div>
@@ -162,3 +161,4 @@
 
 <!-- loads cart functions and product search script --> 
 <script src="js/product_search.js"></script>
+

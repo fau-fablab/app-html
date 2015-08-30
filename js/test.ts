@@ -16,7 +16,6 @@ function test(){
     console.log(res);
     // send cart to cash desk
     restClient.request("POST","/mail/test", callback2, res);
-    console.log("Ende");
 }
 
 function callback2(value){
