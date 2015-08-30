@@ -7,7 +7,7 @@ class RestClient{
 
 	constructor(){
 		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
-		//this._url = "http://192.168.2.102:8080"
+
 	}
 	
 	// CORS request
