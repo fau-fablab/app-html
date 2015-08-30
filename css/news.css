@@ -51,36 +51,6 @@
 }
 
 /*--------- news onclick dialog ---------*/
-.newsDialog {
-    position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background: rgba(0,0,0,0.8);
-    z-index: 99999;
-    opacity:0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
-}
-
-.newsDialog-active {
-    opacity:1;
-    pointer-events: auto;
-}
-
-#newsDialogInner {
-    margin: 45px 35px 35px 35px;
-    padding: 15px 20px 10px 20px;
-    border-radius: 10px;
-    background: #fff;
-    text-align: center;
-    overflow: auto;
-}
-
 #dialogImage{
     max-height: 220px;
     max-width: 100%;
@@ -105,20 +75,21 @@
     height: 120px;
     padding: 8px;
     margin: 0px;
+    -webkit-transform: translate3d(0, 0, 0);
+    z-index: 0;
 }
 
 dt {
     font-weight: bolder;
-
     float:left;
     width:100%;
-
+    padding:1px 1px 1px 5px;
     cursor:pointer;
 }
 
 dd {
     display:none;
-
+    background:#E0E0E0;
     float:left;
     width:100%;
     -webkit-box-shadow:0 1px 1px rgba(0,0,0,1);
@@ -139,7 +110,7 @@ dd {
 
 dl{
     width: 100%;
-    position: relative;
+    position: absolute;
     top: 0px;
 }
 
@@ -184,82 +155,31 @@ dl{
 #wrapperICal{
     height: 120px;
     overflow: hidden;
-
 }
 
 /*--------- iScroll vertical ---------*/
 #wrapperNews{
-    position: relative;
+    position: absolute;
     overflow:hidden;
-    top: 5px;
+    top:20px;
     width: 100%;
     bottom: 0px;
 }
 
-
-
 #news_container{
     position: relative;
     overflow: hidden;
-}
-
-/*--------- iCal dialog onclick ---------*/
-.iCalDialog {
-    position: fixed;
-
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: 99999;
-    opacity:0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
-}
-
-.iCalDialog-active {
-    opacity:1;
-    pointer-events: auto;
-}
-
-#iCalDialogInner {
-    text-align: center;
-    overflow: auto;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 
 #basicICal ul {
-    float: left; margin-left: 10px;
-
+    float: left;
+    margin:0px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
 }
 #basicICal li {
     margin: 0px 5px;
-}
-
-
-/*--------- dialogs close ---------*/
-.close {
-    color: #FFFFFF;
-    line-height: 25px;
-    position: absolute;
-    right: 22px;
-    text-align: center;
-    top: 32px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
-    box-shadow: 1px 1px 3px #000;
-    opacity: 1;
-}
-
-.close:hover {
-    background: #c42028;
-    opacity: 1;
 }
