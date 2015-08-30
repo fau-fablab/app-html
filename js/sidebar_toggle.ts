@@ -10,15 +10,14 @@ $(document).ready(function () {
 	    changeSidebar();
     });
 
-    //check if the URL has a reference to a page and load it 
-    checkURL("");	
+    //check if the URL has a reference to a page and load it
+    checkURL(null);
 
     // recognize navigation link clicks
     $('ul li a').click(function (e){
         hamburger.toggleClass("active");
         changeSidebar();
-        var currentHash = window.location.hash;
-        checkURL(currentHash);
+        checkURL(null);
 
     });
 
@@ -47,7 +46,7 @@ function checkURL(hash):void{
     // if no parameter is provided, use the hash value from the current address
     if (!hash) {
         hash = window.location.hash;
-        if (hash == "" || hash == null || hash == "#close") {
+        if (hash == "" || hash == null || hash == "#close" || hash == undefined) {
             hash = "#news";
             window.location.hash = hash;
         }
@@ -102,16 +101,14 @@ function loadPage(url):void{
 
 
     // load site content
-    $.ajax({type: "GET",
-    url: fullURL,
-    async: true,
-    success: function(data){
+    $.get(fullURL, function(data){
         pageContent = data;
         $("#content").fadeOut("fast", function(){
             $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
         });
-    }});
+
+    });
 }
 
 // change status of sidebar to opened/closed

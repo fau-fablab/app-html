@@ -13,7 +13,7 @@
 
 /*--------- news ---------*/
 .card{
-    background: #fafafa;
+
     overflow: hidden;
     height: 80px;
     margin: 8px;
@@ -109,7 +109,6 @@
 
 dt {
     font-weight: bolder;
-    background: #E0E0E0;
     float:left;
     width:100%;
     padding:1px 1px 1px 5px;
@@ -184,7 +183,6 @@ dl{
 #wrapperICal{
     height: 120px;
     overflow: hidden;
-    float: clear;
 }
 
 /*--------- iScroll vertical ---------*/
@@ -204,7 +202,6 @@ dl{
 /*--------- iCal dialog onclick ---------*/
 .iCalDialog {
     position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -235,7 +232,6 @@ dl{
 
 #basicICal ul {
     float: left; margin-left: 10px;
-    background-color: transparent; border: none;
 }
 #basicICal li {
     margin: 0px 5px;

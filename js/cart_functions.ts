@@ -134,7 +134,6 @@ function cancelCheckout(){
 
 // callback response from checkout cancel
 function callbackCheckoutCancelled(response){
-    alert(response);
     if(response == true){
         checkoutCancelledSuccesfully();
     }else{
@@ -148,9 +147,8 @@ function callbackCheckoutCancelled(response){
 function checkoutCancelledSuccesfully(){
     $("#qrCodeInfo").html("Vorgang abgebrochen!");
     resetCheckoutDialog();
-    setTimeout(function(){
-        $("#closeCheckoutDialog").trigger("click");
-    }, 2000);
+    $("#closeCheckoutDialog").hide;
+    $("#cart_cancelledCheckout").show();
 }
 
 // cart is paid and checkout is successfully performed
