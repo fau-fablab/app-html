@@ -127,8 +127,24 @@ h4{
     display: none;
 }
 
+.cart_checkoutError{
+    color:red;
+    font-weight: bolder;
+}
+
+.cart_checkoutSuccess{
+    color: green;
+    font-weight: bolder;
+}
+
+#qrCodeInfo{
+    font-style: italic;
+}
+
 /*--------- loading gif ---------*/
 #cartSentLoader{
     display:none;
     text-align: center;
 }
+
+

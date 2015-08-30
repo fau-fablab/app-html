@@ -7,7 +7,7 @@ $(document).ready(function () {
     hamburger.click(function (event) {
         event.preventDefault();
         $(this).toggleClass("active");
-	changeSidebar();
+	    changeSidebar();
     });
 
     //check if the URL has a reference to a page and load it 
@@ -17,7 +17,8 @@ $(document).ready(function () {
     $('ul li a').click(function (e){
         hamburger.toggleClass("active");
         changeSidebar();
-        checkURL(this.hash);
+        var currentHash = window.location.hash;
+        checkURL(currentHash);
 
     });
 
@@ -92,6 +93,7 @@ function loadPage(url):void{
             break;
     }
 
+
     // create full URL
     var fullURL:string = url + ".html";
 
@@ -110,14 +112,6 @@ function loadPage(url):void{
             $("#h1_title").text(title);
         });
     }});
-    /*$.get(fullURL, function(data){
-        pageContent = data;
-        $("#content").fadeOut("fast", function(){
-	        $("#content").html(pageContent).fadeIn("fast");
-            $("#h1_title").text(title);
-        });
-
-    });*/
 }
 
 // change status of sidebar to opened/closed
@@ -126,6 +120,7 @@ function changeSidebar(){
     // show active site <-> link 
     var nav_links:any = $("a.nav_link");
     nav_links.removeClass("active");
+
     $(window.location.hash).addClass("active");
 
     // get sidebar-wrapper and its position

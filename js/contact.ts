@@ -12,7 +12,6 @@ var vertScroll;
 $(document).ready(function () {
     $('#contact-form').hide();
     var restClient:RestClient = new RestClient();
-    console.log("Starte error_message.html");
     restClient.request("GET","/drupal/tools",drupalCallback);
 
     // add vertical touch scrolling
@@ -102,11 +101,9 @@ function errorSelected(){
 }
 
 function drupalCallback(value:any):void{
-    console.log("error_message_toolsection");
     toolArray = value;
     var mySelect = $('#error_message_toolsection');
     for(var index = 0; index < toolArray.length;index++){
-        console.log(toolArray[index])
         mySelect.append("<option>"+toolArray[index].title+"</option>");
     }
     mySelect.prop("selectedIndex", -1);

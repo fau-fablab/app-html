@@ -36,7 +36,6 @@ class RestClient{
               return null;
 		  };
 
-
 		  if(method == "POST"){
 			  console.log("send Postrequest")
               xhr.setRequestHeader('Content-Type', 'application/json');

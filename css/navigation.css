@@ -79,10 +79,6 @@
     opacity: 0.7;
 }
 
-.navbar_icon > p{
-
-}
-
 
 /*--------- sidebar toggle ---------*/
 #sidebar-wrapper.sidebar-toggle {
@@ -239,4 +235,13 @@
 
 .cart_icon{
     position: relative;
+}
+
+/*--------- fablab icon ---------*/
+#doorStateIcon{
+    cursor: pointer;
+}
+
+#fablab_icon{
+    cursor: pointer;
 }

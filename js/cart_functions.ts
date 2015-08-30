@@ -1,5 +1,6 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
+/// <reference path="common/model/PlatformType.ts"/>
 /// <reference path="iscroll.d.ts" />
 /// <reference path="common/model/CartServer.ts"/>
 /// <reference path="common/model/CartEntryServer.ts"/>
@@ -118,7 +119,11 @@ function cartCreationCallback(callback):void{
         cancelCheck.show();
     }else{
         // error
-        $("#qrCodeInfo").html("Überprüfe den QR Code!");
+        $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
+        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
+        $("#qrCodeStatus").html("Falscher QR Code");
+        $("#qrCodeInfo").html("Überprüfe den QR Code!<br/>Generiere dir an der Kasse einen neuen, " +
+            "falls dieser Fehler wiederholt, trotz korrekter Eingabe, auftritt.");
     }
 }
 
@@ -129,6 +134,7 @@ function cancelCheckout(){
 
 // callback response from checkout cancel
 function callbackCheckoutCancelled(response){
+    alert(response);
     if(response == true){
         checkoutCancelledSuccesfully();
     }else{
@@ -345,12 +351,16 @@ function checkOut(){
     $("#submitQRCode").click(function(){
         var val:any = $("#qrCodeInput").val();
         if(isNaN(Number(val))){
-            $("#qrCodeInfo").html("Überprüfe den QR Code!");
+            $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
+            $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
+            $("#qrCodeStatus").html("Falscher QR Code");
+            $("#qrCodeInfo").html("Überprüfe den QR Code!<br/>Er besteht aus negativen oder positiven Zahl.");
             return;
         }
 
         // remove old information
         $("#qrCodeInfo").html("");
+        $("#qrCodeStatus").html("");
 
         // create new Cart
         var cartServer:common.CartServer = new common.CartServer();
@@ -359,8 +369,12 @@ function checkOut(){
         var stat:common.CartStatus = common.CartStatus.PENDING;
         var cartStatusString:string = common.CartStatus[stat];
         cartServer.cartStatus = cartStatusString;
-
-        cartServer.cartPushID = "HTML";
+        //var platformType:common.PlatformType = common.PlatformType.HTML;
+        // TODO: Fix platform type problem for HTML
+        var platformType:common.PlatformType = common.PlatformType.ANDROID;
+        var platformType_string:string = common.PlatformType[platformType];
+        cartServer.cartPlatformType = platformType_string;
+        cartServer.cartPushToken = "HTML";
         var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
         var cart:string[] = getCart();
         for(var i= 0; i<cart.length; i++){
@@ -386,7 +400,7 @@ function checkOut(){
 
         console.log(res);
         // send cart to cash desk
-        client.request("POST","/carts?create", cartCreationCallback, res);
+        client.request("POST","/carts", cartCreationCallback, res);
     });
 }
 

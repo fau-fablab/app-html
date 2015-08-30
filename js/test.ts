@@ -23,3 +23,8 @@ function callback2(value){
     //console.log(value.first);
     console.log("war im callback");
 }
+
+
+$(document).ready(function () {
+    console.log("test.js wird geladen");
+});

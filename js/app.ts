@@ -1,7 +1,9 @@
+/// <reference path="sidebar_toggle.ts" />
 /// <reference path="spaceapi.ts" />
-/// <reference path="common/rest/ProductApi.ts" />
+
 
 var spaceapi:SpaceApi = null;
+var lasturl: string = "";
 
 function updateDoorState(state : SpaceApi) {
     var message : string;
@@ -21,6 +23,14 @@ function updateDoorState(state : SpaceApi) {
 
     doorStateDiv.html("");
     doorStateImg.appendTo(doorStateDiv);
+
+    // add click event
+    // recognize fablab icon click
+    $("#doorStateIcon").click(function (event){
+        window.location.hash = "#news";
+        $("#menu-toggle").toggleClass("active", false);
+        closeSidebar();
+    });
 }
 
 function triggerDoorStateUpdate() {
@@ -31,4 +41,44 @@ $(document).ready(function () {
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 });
+
+$(document).ready(function () {
+    console.log("Document was loaded: " + window.location.hash)
+    var currentHash = "";
+    var nav_links:any = $("a.nav_link2");
+    nav_links.click(reloadPage);
+    //setInterval("reloadPage()",250);
+    if(currentHash == "" || currentHash == null || currentHash == "#close"){
+        currentHash = "#news";
+        window.location.hash = currentHash;
+    }
+
+    if(currentHash != lasturl){
+        lasturl=currentHash;
+        loadPage(currentHash);
+    }
+});
+
+$(window).ready(function(){
+    console.log("Window was loaded" + window.location.hash);
+});
+
+
+function reloadPage(){
+    var currentAttribute = $(this).attr("href");
+    console.log("ReloadPage: " + window.location.hash)
+    var currentHash2 = window.location.hash;
+    console.log("CurrentHash: " + currentHash2);
+    loadPage(currentAttribute);
+}
+
+function showHashValue(){
+    console.log("CurrentHash: " + window.location.hash);
+}
+
+
+
+
+
+
 
