@@ -6,6 +6,7 @@
       
               
 <!-- site content-->
+<!--<div id="content" class="container-fluid">-->
 <div id="content" class="container">
     
 </div>
