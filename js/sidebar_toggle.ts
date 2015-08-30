@@ -46,13 +46,8 @@ function checkURL(hash):void{
     // if no parameter is provided, use the hash value from the current address
     if (!hash) {
         hash = window.location.hash;
-        if (hash == "" || hash == null || hash == "#close" || hash == undefined) {
+        if (hash == "" || hash == null || hash == undefined) {
             hash = "#news";
-            window.location.hash = hash;
-        }
-
-        if(hash == "#closeCheckout"){
-            hash = "#cart";
             window.location.hash = hash;
         }
     }
@@ -86,6 +81,9 @@ function loadPage(url):void{
             break;
         case "CONTACT":
             title = "KONTAKT";
+            break;
+        case "ERROR_MESSAGE":
+            title = "Störmeldung";
             break;
         default:
             title = "NO TITLE DEFINED check sidebar_toggle.ts";
