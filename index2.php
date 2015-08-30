@@ -1,8 +1,8 @@
 <!-- <head> part -->
-<?php require_once("includes2/header2.html"); ?>
+<?php require_once("includes/header.html"); ?>
 
 <!-- <body> begin with navigation -->
-<?php require_once("includes2/navigation2.html"); ?>
+<?php require_once("includes/navigation.html"); ?>
 
 
 <!-- site content-->
@@ -12,4 +12,4 @@
 
 
 <!-- (empty) footer with </body> and </html> -->
-<?php require_once("includes2/footer2.html"); ?>
+<?php require_once("includes/footer.html"); ?>
