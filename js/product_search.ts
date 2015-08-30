@@ -1,12 +1,12 @@
 /// <reference path="common/rest/ProductApi.ts"/>
 /// <reference path="common/model/Category.ts" />
 /// <reference path="common/model/Product.ts" />
-/// <reference path="util/RestClient.ts"/>
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 /// <reference path="cart_functions.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
+var autoComplitionArray:Array<string> = new Array<string>();
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
@@ -19,13 +19,28 @@ var findAllSearch:string = "false";
 
 $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
-    $("#product_options").append("<options")
+
+    var productApi: ProductApi = new ProductApi();
+    productApi.getAutocompletions(callbackAutoCompletions)
+
 
 
 
 
     
 });
+
+function callbackAutoCompletions(records){
+
+    autoComplitionArray = records;
+    var datalist = $("#product_options");
+
+    for(var index = 0; index < autoComplitionArray.length;index++){
+        datalist.append("<option value='" + autoComplitionArray[index] +"'></option>");
+    }
+
+}
+
 
 document.onkeydown = function(event) {
     if(event.keyCode == 13){
