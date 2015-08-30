@@ -1,0 +1,6 @@
+# Ignore generated javascript (map) files
+*.js
+*.js.map
+
+# ignore idea files
+.idea*
