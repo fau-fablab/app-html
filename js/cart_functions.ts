@@ -109,6 +109,9 @@ function cartCreationCallback(callback):void{
         $("#closeCheckoutDialog").hide();
         // show info msg and loader
         $("#cartSentLoader").show();
+        $("#qrCodeStatus").toggleClass("cart_checkoutError", false);
+        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
+        $("#qrCodeStatus").html("Warenkorb erfolgreich an Kasse gesendet!");
         $("#qrCodeInfo").html("Bitte Bezahlvorgang abschließen!");
         // show cancel button
         var cancelCheck = $("#cart_cancelCheckout");
@@ -134,20 +137,24 @@ function cancelCheckout(){
 
 // callback response from checkout cancel
 function callbackCheckoutCancelled(response){
-    if(response == true){
-        checkoutCancelledSuccesfully();
-    }else{
+    resetCheckoutDialog();
+    callbackPolling(null);
+    if(response != "true"){
+        $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
+        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
+        $("#qrCodeStatus").html("Fehler!");
         $("#qrCodeInfo").html("Warenkorb ist nicht mehr gültig oder wurde schon abgebrochen!");
-        // reset to initial dialog representation
-        resetCheckoutDialog();
     }
 }
 
 // checkout was cancelled succesfully
 function checkoutCancelledSuccesfully(){
-    $("#qrCodeInfo").html("Vorgang abgebrochen!");
-    resetCheckoutDialog();
-    $("#closeCheckoutDialog").hide;
+    $("#qrCodeInfo").html("Der Bezahlvorgang wurde abgebrochen...");
+    $("#qrCodeStatus").html("Abgebrochen!");
+    $("#closeCheckoutDialog").show();
+    $("#cart_cancelledCheckout").click(function(){
+       $("#closeCheckoutDialog").trigger("click");
+    });
     $("#cart_cancelledCheckout").show();
 }
 
@@ -164,10 +171,6 @@ function checkoutPaidSuccesfully(){
     disableCart();
 
     $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
-    resetCheckoutDialog();
-    setTimeout(function(){
-        $("#closeCheckoutDialog").trigger("click");
-    }, 2000);
 }
 
 // function start polling from server
@@ -190,7 +193,7 @@ function callbackPolling(response){
             break;
         case "CANCELLED":
             // cancelled msg
-            // show info msg for a short time, hide loader
+            resetCheckoutDialog();
             checkoutCancelledSuccesfully();
             break;
         default:
@@ -344,9 +347,10 @@ function removeProduct(cartEntry:any){
 function checkOut(){
     // show dialog
     $("#openCheckoutDialog").addClass("checkoutDialog-active");
-
+    resetCheckoutDialog();
     // listener for qr code input
     $("#submitQRCode").click(function(){
+        $("#cart_cancelledCheckout").hide();
         var val:any = $("#qrCodeInput").val();
         if(isNaN(Number(val))){
             $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
@@ -478,4 +482,8 @@ function resetCheckoutDialog(){
     $("#qrCodeInput").prop("disabled", false);
     $("#cartSentLoader").hide();
     $("#cart_cancelCheckout").hide();
+    $("#cart_cancelledCheckout").hide();
+    $("#qrCodeStatus").html("");
+    $("#qrCodeInfo").html("");
+    $("#qrCodeInput").val("");
 }
