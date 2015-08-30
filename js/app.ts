@@ -1,7 +1,6 @@
 /// <reference path="sidebar_toggle.ts" />
 /// <reference path="spaceapi.ts" />
 
-
 var spaceapi:SpaceApi = null;
 var lasturl: string = "";
 
@@ -75,6 +74,35 @@ function reloadPage(){
 function showHashValue(){
     console.log("CurrentHash: " + window.location.hash);
 }
+
+
+
+
+
+
+
+$(document).ready(function () {
+    console.log("Document was loaded: " + window.location.hash)
+    var currentHash = "";
+    var nav_links:any = $("a.nav_link2");
+    nav_links.click(reloadPage);
+    //setInterval("reloadPage()",250);
+    if(currentHash == "" || currentHash == null || currentHash == "#close"){
+        currentHash = "#news";
+        window.location.hash = currentHash;
+    }
+
+    if(currentHash != lasturl){
+        lasturl=currentHash;
+        loadPage(currentHash);
+    }
+});
+
+$(window).ready(function(){
+    console.log("Window was loaded" + window.location.hash);
+});
+
+
 
 
 

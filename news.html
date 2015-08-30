@@ -1,57 +1,46 @@
 <!-- wrapper for vertical touch scrolling -->
-<div>
-
-    <dl>
-        <dt>Termine anzeigen...
-            <button type='button' class='btn_remove'>
-                <span id="upDownPanelIcal" class='glyphicon glyphicon-chevron-down'></span>
-            </button>
-        </dt>
-        <dd>
-            <!-- wrapper for horizontal touch scrolling -->
-            <div id="wrapperICal">
-                <!-- contains all the iCals retrieved from the server -->
-                <div id="ical_container"/>
-            </div>
-            <div id="loadMoreICalsLoader"><img src="img/ajax-loader.gif"/></div>
-        </dd>
-    </dl>
-
-    <div id="wrapperNews">
-        <!-- contains all the news retrieved from the server -->
-        <div id="news_container"/>
-        <div id="loadMoreNewsLoader"><img src="img/ajax-loader.gif"/></div>
-    </div>
+<div id="wrapperNews">
+    <!-- contains all the news retrieved from the server -->
+    <div id="news_container"/>
+    <div id="loadMoreNewsLoader" ><img src="img/ajax-loader.gif" /></div>
+</div>
 
 
-
-    <!-- hidden dialog
-     gets visible and filled with content when news is clicked -->
-    <div id="openNewsDialog" class="newsDialog">
-        <div id="newsDialogInner">
-            <a id="closeNewsDialog" href="#close" title="Close" class="close">X</a>
-
-            <h2 id="dialogTitle"/>
-            <img id="dialogImage"/>
-
-            <p id="dialogDescriptionShort"/>
+<dl>
+    <dt>Termine anzeigen...
+        <button type='button' class='btn_remove'>
+            <span id="upDownPanelIcal" class='glyphicon glyphicon-chevron-down'></span>
+        </button>
+    </dt>
+    <dd>
+        <!-- wrapper for horizontal touch scrolling -->
+        <div id="wrapperICal">
+            <!-- contains all the iCals retrieved from the server -->
+            <div id="ical_container"/>
         </div>
+        <div id="loadMoreICalsLoader" ><img src="img/ajax-loader.gif" /></div>
+    </dd>
+</dl>
+<!-- hidden dialog
+ gets visible and filled with content when news is clicked -->
+<div id="openNewsDialog" class="newsDialog">
+    <div id="newsDialogInner">
+        <a id="closeNewsDialog" href="#close" title="Close" class="close">X</a>
+        <h2 id="dialogTitle"/>
+        <img id="dialogImage"/>
+        <p id="dialogDescriptionShort"/>
     </div>
+</div>
 
-    <!-- hidden dialog
-         gets visible and filled with content when iCal is clicked -->
-    <div id="openICalDialog" class="iCalDialog">
-        <div id="iCalDialogInner">
-            <a id="closeICalDialog" href="#close" title="Close" class="close">X</a>
-
-            <div id="basicICal"></div>
-            <h2 id="iCalTitle"/>
-
-            <p id="iCalInfos"/>
-        </div>
+<!-- hidden dialog
+     gets visible and filled with content when iCal is clicked -->
+<div id="openICalDialog" class="iCalDialog">
+    <div id="iCalDialogInner">
+        <a id="closeICalDialog" href="#close" title="Close" class="close">X</a>
+        <div id="basicICal"></div>
+        <h2 id="iCalTitle"/>
+        <p id="iCalInfos"/>
     </div>
-
-
 </div>
 
 <!-- loads news and icals into the news_container/ical_container -->
