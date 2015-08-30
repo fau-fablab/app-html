@@ -1,9 +1,7 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
 /// <reference path="iscroll.d.ts" />
-/// <reference path="common/model/CartServer.ts"/>
-/// <reference path="common/model/CartEntryServer.ts"/>
-/// <reference path="util/RestClient.ts"/>
+/// <reference path="checkout.ts"/>
 
 //always show quantity in header
 $( document ).ready(function() {
@@ -15,15 +13,6 @@ $( document ).ready(function() {
 
 // scrollelement
 var vertScroll;
-
-// cart being used right now
-var sentCartCode:string;
-
-// repeater for polling cart status
-var requestRepeater;
-
-// Rest Client
-var client:RestClient = new RestClient();
 
 // get total price of shopping cart
 function getTotalPrice():number{
@@ -55,7 +44,7 @@ function showAllCartEntries() {
         $("#cart_checkout_btn").prop("disabled", false);
     }
 
-    // add producs to dom
+    // add products to dom
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
@@ -88,111 +77,13 @@ function showAllCartEntries() {
 
     // checkout button click function
     $("#cart_checkout_btn").click(function(event){
-        checkOut();
+        checkout();
     });
 
     // close checkout dialog
     $("#closeCheckoutDialog").click(function(event){
         $("#openCheckoutDialog").removeClass("checkoutDialog-active");
     });
-}
-
-// callback of sent cart
-function cartCreationCallback(callback):void{
-    if(callback == "" || callback == undefined){
-        // succesfully sent -> start polling
-        startPollingFromServer();
-        // disable input and X-button
-        $("#submitQRCode").prop("disabled", true);
-        $("#qrCodeInput").prop("disabled", true);
-        $("#closeCheckoutDialog").hide();
-        // show info msg and loader
-        $("#cartSentLoader").show();
-        $("#qrCodeInfo").html("Bitte Bezahlvorgang abschließen!");
-        // show cancel button
-        var cancelCheck = $("#cart_cancelCheckout");
-        cancelCheck.click(function(){
-            //cancel checkout
-            cancelCheckout();
-        })
-        cancelCheck.show();
-    }else{
-        // error
-        $("#qrCodeInfo").html("Überprüfe den QR Code!");
-    }
-}
-
-// function cancel checkout via button
-function cancelCheckout(){
-    client.request("POST", "/checkout/cancelled/"+sentCartCode, callbackCheckoutCancelled);
-}
-
-// callback response from checkout cancel
-function callbackCheckoutCancelled(response){
-    if(response == true){
-        checkoutCancelledSuccesfully();
-    }else{
-        $("#qrCodeInfo").html("Warenkorb ist nicht mehr gültig oder wurde schon abgebrochen!");
-        // reset to initial dialog representation
-        resetCheckoutDialog();
-    }
-}
-
-// checkout was cancelled succesfully
-function checkoutCancelledSuccesfully(){
-    $("#qrCodeInfo").html("Vorgang abgebrochen!");
-    resetCheckoutDialog();
-    setTimeout(function(){
-        $("#closeCheckoutDialog").trigger("click");
-    }, 2000);
-}
-
-// cart is paid and checkout is successfully performed
-function checkoutPaidSuccesfully(){
-    // TODO: SAVE OLD CART ?
-    // delete cart
-    clearCache();
-    // remove entries from DOM
-    $("#cartEntries_container").empty();
-    // adapt shopping cart icon and total price
-    $("#cart_total_price_text").text("");
-    adaptQuantityInHeader();
-    disableCart();
-
-    $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
-    resetCheckoutDialog();
-    setTimeout(function(){
-        $("#closeCheckoutDialog").trigger("click");
-    }, 2000);
-}
-
-// function start polling from server
-function startPollingFromServer(){
-    clearTimeout(requestRepeater);
-    client.request("GET","/checkout/"+sentCartCode, callbackPolling);
-}
-
-// callback response from polling
-function callbackPolling(response){
-    switch (response.status){
-        case "PENDING":
-            // nothing happened --> continue polling
-            requestRepeater = setTimeout(startPollingFromServer, 500);
-            break;
-        case "PAID":
-            // success msg
-            // show info msg for a short time, hide loader
-            checkoutPaidSuccesfully();
-            break;
-        case "CANCELLED":
-            // cancelled msg
-            // show info msg for a short time, hide loader
-            checkoutCancelledSuccesfully();
-            break;
-        default:
-            console.log("error polling");
-            break;
-    }
 }
 
 // adapt quantity for shopping cart icon in the header
@@ -226,7 +117,14 @@ function addProductToDom(entry:common.CartEntry):void{
         "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
-        "<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
+        //"<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
+        "<div class='input-group number-spinner col-md-3 col-xs-3'><span class='input-group-btn data-dwn'><button class='btn btn-default'" +
+        " data-dir='dwn' id='picker_down_"+entry.product.productId.toString()+"'><span class='glyphicon glyphicon-minus'></span>" +
+        "</button></span>" +
+        "<input id='picker_input_"+entry.product.productId.toString()+"' type='text' class='form-control text-center'  min='1'>" +
+        "<span class='input-group-btn data-up'>" +
+        "<button class='btn btn-default' data-dir='up' id='picker_up_"+entry.product.productId.toString()+"'>" +
+        "<span class='glyphicon glyphicon-plus'></span></button></span></div>"+
         "</td>" +
         "<td class='cart_card_right' style='line-height: 30px !important;height:30px !important;'>" +
         "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
@@ -236,22 +134,39 @@ function addProductToDom(entry:common.CartEntry):void{
         "<p class='cart_card_total_price' id='cart_card_total_price_"+entry.product.productId.toString()+"'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
-    // enable quantity picker
+    // set amount in the picker
     $("#cartEntries_container").append(card);
-    (<any>$(".selectpicker")).selectpicker();
-    var picker = $("#picker_"+entry.product.productId.toString());
-    for(var i=1;i<201;i++){
-        picker.append("<option>"+i+"</option><option data-divider='true'></option>");
-    }
-    picker.val(<any>entry.amount);
-    (<any>$(".selectpicker")).selectpicker('refresh');
+    var picker_input = $("#picker_input_"+entry.product.productId.toString());
+    picker_input.val(<any>entry.amount);
 
+    // add listeners for the picker
     var cartEntry_total_price = $("#cart_card_total_price_"+entry.product.productId.toString());
-    // save changes
-    picker.change(function(event){
+    picker_input.change(function(event){
         entry.amount = $(this).val();
         updateCartEntry(entry, cartEntry_total_price);
     });
+
+    var picker_up = $("#picker_up_"+entry.product.productId.toString());
+    picker_up.click(function(){
+        var old:string = picker_input.val();
+        var newAmount:number = parseFloat(old)+1;
+        picker_input.val(newAmount.toString());
+        picker_input.trigger("change");
+        picker_up.blur();
+    });
+
+    var picker_down = $("#picker_down_"+entry.product.productId.toString());
+    picker_down.click(function(){
+        var old:string = picker_input.val();
+        var newAmount:number = parseFloat(old)-1;
+        if(newAmount < 0 ){
+            newAmount = 0;
+        }
+        picker_input.val(newAmount.toString());
+        picker_input.trigger("change");
+        picker_down.blur();
+    });
+
 }
 
 // save quantity changes that have been made to the CartEntry
@@ -336,59 +251,7 @@ function removeProduct(cartEntry:any){
     }
 }
 
-// checkout process triggered by button click
-function checkOut(){
-    // show dialog
-    $("#openCheckoutDialog").addClass("checkoutDialog-active");
 
-    // listener for qr code input
-    $("#submitQRCode").click(function(){
-        var val:any = $("#qrCodeInput").val();
-        if(isNaN(Number(val))){
-            $("#qrCodeInfo").html("Überprüfe den QR Code!");
-            return;
-        }
-
-        // remove old information
-        $("#qrCodeInfo").html("");
-
-        // create new Cart
-        var cartServer:common.CartServer = new common.CartServer();
-        sentCartCode = val;
-        cartServer.cartCartCode = sentCartCode;
-        var stat:common.CartStatus = common.CartStatus.PENDING;
-        var cartStatusString:string = common.CartStatus[stat];
-        cartServer.cartStatus = cartStatusString;
-
-        cartServer.cartPushID = "HTML";
-        var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
-        var cart:string[] = getCart();
-        for(var i= 0; i<cart.length; i++){
-            var key:string = cart[i];
-            var product:any = JSON.parse(localStorage[key]);
-            product.__proto__ = common.CartEntry.prototype;
-            product.product.__proto__ = common.Product.prototype;
-            cartEntriesServer.push(new common.CartEntryServer(product.product.productId, cartServer, product.amount));
-        }
-        cartServer.cartItems = cartEntriesServer;
-
-        // REST CALL
-        // post cart
-        var res = JSON.stringify(cartServer, function(key, val) {
-            // remove cyclic references
-            if(key == 'cart') {
-                //return nothing;
-                return;
-            } else {
-                return val;
-            }
-        });
-
-        console.log(res);
-        // send cart to cash desk
-        client.request("POST","/carts?create", cartCreationCallback, res);
-    });
-}
 
 /**** Small helping functions *****/
 
@@ -459,11 +322,3 @@ function enableCart(){
     $("#cart_checkout_btn").prop("disabled", false);
 }
 
-// reset checkout modal
-function resetCheckoutDialog(){
-    $("#closeCheckoutDialog").show();
-    $("#submitQRCode").prop("disabled", false);
-    $("#qrCodeInput").prop("disabled", false);
-    $("#cartSentLoader").hide();
-    $("#cart_cancelCheckout").hide();
-}
