@@ -1,17 +1,5 @@
 /** CSS class for the about page **/
 
 
-#about_container{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    overflow: hidden;
-    bottom: 0px;
-}
 
-#about_scroller{
-    position: relative;
-    overflow: hidden;
-}
 

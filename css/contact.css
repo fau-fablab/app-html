@@ -1,15 +1,1 @@
 /** CSS class for the contact page **/
-
-#contact_container{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    overflow: hidden;
-    bottom: 0px;
-}
-
-#contact_scroller{
-    position: relative;
-    overflow: hidden;
-}

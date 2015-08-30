@@ -43,8 +43,8 @@ function checkout(){
         // TODO: Fix platform type problem for HTML
         var platformType:common.PlatformType = common.PlatformType.ANDROID;
         var platformType_string:string = common.PlatformType[platformType];
-        cartServer.cartPlatformType = platformType_string;
-        cartServer.cartPushToken = "HTML";
+        //cartServer.cartPlatformType = platformType_string;
+        //cartServer.cartPushToken = "HTML";
         var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
         var cart:string[] = getCart();
         for(var i= 0; i<cart.length; i++){

@@ -6,8 +6,9 @@
       
               
 <!-- site content-->
-<div id="content">
-    <!-- site content gets loaded dynamically through ajax -->
+<!--<div id="content" class="container-fluid">-->
+<div id="content" class="container">
+    
 </div>
 
     

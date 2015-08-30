@@ -3,26 +3,15 @@
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/Product.ts" />
 /// <reference path="lib.d.ts" />
-/// <reference path="iscroll.d.ts" />
+// General REST class
 
 var toolArray: Array<common.FabTool>;
-// scrollelement
-var vertScroll;
+
 
 $(document).ready(function () {
     $('#contact-form').hide();
     var restClient:RestClient = new RestClient();
     restClient.request("GET","/drupal/tools",drupalCallback);
-
-    // add vertical touch scrolling
-    vertScroll = new IScroll("#contact_container",{
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
-    setTimeout(function () {
-        vertScroll.refresh();
-    }, 200);
 });
 
 function sendMail() {
@@ -76,10 +65,6 @@ function todoSectionChanged(){
     if(selectedValue == 3){
         errorSelected();
     }
-
-    setTimeout(function () {
-        vertScroll.refresh();
-    }, 200);
 }
 
 function feedbackSelected(){

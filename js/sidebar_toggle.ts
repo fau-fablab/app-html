@@ -10,14 +10,15 @@ $(document).ready(function () {
 	    changeSidebar();
     });
 
-    //check if the URL has a reference to a page and load it
-    checkURL(null);
+    //check if the URL has a reference to a page and load it 
+    checkURL("");	
 
     // recognize navigation link clicks
     $('ul li a').click(function (e){
         hamburger.toggleClass("active");
         changeSidebar();
-        checkURL(null);
+        var currentHash = window.location.hash;
+        checkURL(currentHash);
 
     });
 
@@ -97,12 +98,11 @@ function loadPage(url):void{
     // page content
     var pageContent:string;
 
-
     // load site content
     $.get(fullURL, function(data){
         pageContent = data;
         $("#content").fadeOut("fast", function(){
-            $("#content").html(pageContent).fadeIn("fast");
+	        $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
         });
 

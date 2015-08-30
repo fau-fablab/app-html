@@ -89,7 +89,7 @@ dt {
 
 dd {
     display:none;
-    background:#E0E0E0;
+    /*background:#E0E0E0;*/
     float:left;
     width:100%;
     -webkit-box-shadow:0 1px 1px rgba(0,0,0,1);
@@ -110,7 +110,8 @@ dd {
 
 dl{
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     top: 0px;
 }
 
@@ -159,7 +160,8 @@ dl{
 
 /*--------- iScroll vertical ---------*/
 #wrapperNews{
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     overflow:hidden;
     top:20px;
     width: 100%;
@@ -177,7 +179,7 @@ dl{
     float: left;
     margin:0px;
     padding: 0px;
-    background-color: transparent;
+    /*background-color: transparent;*/
     border: none;
 }
 #basicICal li {

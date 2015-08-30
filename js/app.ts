@@ -1,5 +1,5 @@
-/// <reference path="sidebar_toggle.ts" />
 /// <reference path="spaceapi.ts" />
+
 
 var spaceapi:SpaceApi = null;
 var lasturl: string = "";
@@ -22,14 +22,6 @@ function updateDoorState(state : SpaceApi) {
 
     doorStateDiv.html("");
     doorStateImg.appendTo(doorStateDiv);
-
-    // add click event
-    // recognize fablab icon click
-    $("#doorStateIcon").click(function (event){
-        window.location.hash = "#news";
-        $("#menu-toggle").toggleClass("active", false);
-        closeSidebar();
-    });
 }
 
 function triggerDoorStateUpdate() {
@@ -42,7 +34,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    /*console.log("Document was loaded: " + window.location.hash)
+    console.log("Document was loaded: " + window.location.hash)
     var currentHash = "";
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
@@ -55,13 +47,35 @@ $(document).ready(function () {
     if(currentHash != lasturl){
         lasturl=currentHash;
         loadPage(currentHash);
-    }*/
+    }
 });
 
 $(window).ready(function(){
     console.log("Window was loaded" + window.location.hash);
 });
 
+
+function loadPage(url):void{
+    console.log("loadPage: " + window.location.hash);
+    // remove hashtag from URL
+    var newUrl = url.replace('#','');
+    // URL as h1 title for page
+
+    // create full URL
+    var fullURL:string = newUrl + ".html";
+
+    // page content
+    var pageContent:string;
+    console.log("FullURL: " + fullURL);
+    // load site content
+    $.get(fullURL, function(data){
+        lasturl = url;
+        pageContent = data;
+        $("#content").fadeOut("fast", function(){
+            $("#content").html(pageContent).fadeIn("fast");
+        });
+    });
+}
 
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
@@ -74,9 +88,6 @@ function reloadPage(){
 function showHashValue(){
     console.log("CurrentHash: " + window.location.hash);
 }
-
-
-
 
 
 
