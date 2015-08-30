@@ -185,3 +185,25 @@ dl{
 #basicICal li {
     margin: 0px 5px;
 }
+
+#cart_cancelledCheckout{
+    display: none;
+}
+
+#cart_paidCheckout{
+    display: none;
+}
+
+.cart_checkoutError{
+     color:red;
+     font-weight: bolder;
+}
+
+.cart_checkoutSuccess{
+     color: green;
+     font-weight: bolder;
+}
+
+#qrCodeInfo{
+    font-style: italic;
+}
