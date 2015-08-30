@@ -1,4 +1,5 @@
 /// <reference path="spaceapi.ts" />
+/// <reference path="common/rest/ProductApi.ts"/>
 
 
 var spaceapi:SpaceApi = null;
@@ -35,6 +36,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     console.log("Document was loaded: " + window.location.hash)
+
     var currentHash = "";
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
@@ -50,9 +52,7 @@ $(document).ready(function () {
     }
 });
 
-$(window).ready(function(){
-    console.log("Window was loaded" + window.location.hash);
-});
+
 
 
 function loadPage(url):void{
