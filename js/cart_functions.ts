@@ -169,8 +169,17 @@ function checkoutPaidSuccesfully(){
     $("#cart_total_price_text").text("");
     adaptQuantityInHeader();
     disableCart();
-
+    resetCheckoutDialog();
+    $("#submitQRCode").prop("disabled", true);
+    $("#qrCodeInput").prop("disabled", true);
+    $("#qrCodeStatus").toggleClass("cart_checkoutError", false);
+    $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", true);
+    $("#qrCodeStatus").html("Bestellung abgeschlossen");
     $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
+    $("#cart_paidCheckout").click(function(){
+        $("#closeCheckoutDialog").trigger("click");
+    })
+    $("#cart_paidCheckout").show();
 }
 
 // function start polling from server
@@ -483,6 +492,7 @@ function resetCheckoutDialog(){
     $("#cartSentLoader").hide();
     $("#cart_cancelCheckout").hide();
     $("#cart_cancelledCheckout").hide();
+    $("#cart_paidCheckout").hide();
     $("#qrCodeStatus").html("");
     $("#qrCodeInfo").html("");
     $("#qrCodeInput").val("");
