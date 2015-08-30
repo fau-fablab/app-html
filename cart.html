@@ -11,34 +11,45 @@
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-default" id="cart_checkout_btn">Zur Kasse</button>
+    <button type="button" class="btn btn-default" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">Zur Kasse</button>
 </footer>
 
 <!-- hidden dialog
      gets visible when checkout buttons is clicked -->
-<div id="openCheckoutDialog" class="checkoutDialog">
-    <div id="checkoutDialogInner">
-        <a id="closeCheckoutDialog" href="#closeCheckout" title="Close" class="close">X</a>
-        <h4>Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4><br/>
-        <form class="form-horizontal">
-            <div class="form-group has-feedback">
-                <div class="col-sm-12">
-                    <div class="input-group">
-                        <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-" >
-                      <span class="input-group-btn">
-                        <button id="submitQRCode" class="btn btn-default" type="button">Absenden!</button>
-                      </span>
-                    </div>
-
-                </div>
+<!-- Modal -->
+<div id="checkoutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <a id="closeCheckoutDialog" data-dismiss="modal" title="Close" class="close">&times;</a>
+                <h3>Checkout</h3>
             </div>
-        </form>
-        <div id="cartSentLoader" ><img src="img/ajax-loader.gif" /></div><br/>
-        <h5 id="qrCodeStatus"></h5>
-        <p id="qrCodeInfo"></p>
-        <button id="cart_cancelCheckout" class="btn btn-danger" type="button" >Vorgang abbrechen!</button>
-        <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" href="#closeCheckout">Ok</button>
-        <button id="cart_paidCheckout" class="btn btn btn-success" type="button" href="#closeCheckout">Ok</button>
+            <div class="modal-body">
+                <h4> Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4>
+                <form class="form-horizontal">
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-" >
+                              <span class="input-group-btn">
+                                <button id="submitQRCode" class="btn btn-default" type="button">Absenden!</button>
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div id="cartSentLoader" ><img src="img/ajax-loader.gif" /></div><br/>
+                <h5 id="qrCodeStatus"></h5>
+                <p id="qrCodeInfo"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="cart_cancelCheckout" class="btn btn-danger" type="button" >Vorgang abbrechen!</button>
+                <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok</button>
+                <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+
     </div>
 </div>
 

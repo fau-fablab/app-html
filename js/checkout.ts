@@ -15,8 +15,6 @@ var client:RestClient = new RestClient();
 
 // checkout process triggered by button click
 function checkout(){
-    // show dialog
-    $("#openCheckoutDialog").addClass("checkoutDialog-active");
     resetCheckoutDialog();
     // listener for qr code input
     $("#submitQRCode").click(function(){

@@ -236,30 +236,3 @@ dl{
 #basicICal li {
     margin: 0px 5px;
 }
-
-
-/*--------- dialogs close ---------*/
-.close {
-    background: #606061;
-    color: #FFFFFF;
-    line-height: 25px;
-    position: absolute;
-    right: 22px;
-    text-align: center;
-    top: 32px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
-    box-shadow: 1px 1px 3px #000;
-    opacity: 1;
-}
-
-.close:hover {
-    background: #c42028;
-    opacity: 1;
-}
