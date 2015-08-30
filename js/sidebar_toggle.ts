@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     //check if the URL has a reference to a page and load it 
-    checkURL("");	
+    checkURL(null);
 
     // recognize navigation link clicks
     $('ul li a').click(function (e){

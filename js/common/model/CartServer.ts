@@ -5,8 +5,9 @@ module common{
         private cartCode:string;
         private items:Array<CartEntryServer>;
         private status:string;
-        private pushId:string;
+        private pushToken:string;
         private sentToServer:number;
+        private platformType:string;
 
         public set cartCartCode(code:string){
             this.cartCode = code;
@@ -32,12 +33,12 @@ module common{
             return this.status;
         }
 
-        public set cartPushID(pushID:string){
-            this.pushId = pushID;
+        public set cartPushToken(pushToken:string){
+            this.pushToken = pushToken;
         }
 
-        public get cartPushID():string{
-            return this.pushId;
+        public get cartPushToken():string{
+            return this.pushToken;
         }
 
         public setSentToServer():void{
@@ -46,6 +47,14 @@ module common{
 
         public getSentToServer():number{
             return this.sentToServer;
+        }
+
+        public set cartPlatformType(platformType:string){
+            this.platformType = platformType;
+        }
+
+        public get cartPlatformType():string{
+            return this.platformType;
         }
     }
 }
