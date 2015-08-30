@@ -242,7 +242,14 @@ function addProductToDom(entry:common.CartEntry):void{
         "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
-        "<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
+        //"<p class='cart_cartEntry_text'>Menge:  <select id='picker_"+entry.product.productId.toString()+"' data-width='63px' class='selectpicker'></select></p>" +
+        "<div class='input-group number-spinner col-md-3 col-xs-3'><span class='input-group-btn data-dwn'><button class='btn btn-default'" +
+        " data-dir='dwn' id='picker_down_"+entry.product.productId.toString()+"'><span class='glyphicon glyphicon-minus'></span>" +
+        "</button></span>" +
+        "<input id='picker_input_"+entry.product.productId.toString()+"' type='text' class='form-control text-center'  min='1'>" +
+        "<span class='input-group-btn data-up'>" +
+        "<button class='btn btn-default' data-dir='up' id='picker_up_"+entry.product.productId.toString()+"'>" +
+        "<span class='glyphicon glyphicon-plus'></span></button></span></div>"+
         "</td>" +
         "<td class='cart_card_right' style='line-height: 30px !important;height:30px !important;'>" +
         "<button type='button' class='btn_remove' data-key='"+entry.product.productId.toString()+"' " +
@@ -252,22 +259,39 @@ function addProductToDom(entry:common.CartEntry):void{
         "<p class='cart_card_total_price' id='cart_card_total_price_"+entry.product.productId.toString()+"'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
 
-    // enable quantity picker
+    // set amount in the picker
     $("#cartEntries_container").append(card);
-    (<any>$(".selectpicker")).selectpicker();
-    var picker = $("#picker_"+entry.product.productId.toString());
-    for(var i=1;i<201;i++){
-        picker.append("<option>"+i+"</option><option data-divider='true'></option>");
-    }
-    picker.val(<any>entry.amount);
-    (<any>$(".selectpicker")).selectpicker('refresh');
+    var picker_input = $("#picker_input_"+entry.product.productId.toString());
+    picker_input.val(<any>entry.amount);
 
+    // add listeners for the picker
     var cartEntry_total_price = $("#cart_card_total_price_"+entry.product.productId.toString());
-    // save changes
-    picker.change(function(event){
+    picker_input.change(function(event){
         entry.amount = $(this).val();
         updateCartEntry(entry, cartEntry_total_price);
     });
+
+    var picker_up = $("#picker_up_"+entry.product.productId.toString());
+    picker_up.click(function(){
+        var old:string = picker_input.val();
+        var newAmount:number = parseFloat(old)+1;
+        picker_input.val(newAmount.toString());
+        picker_input.trigger("change");
+        picker_up.blur();
+    });
+
+    var picker_down = $("#picker_down_"+entry.product.productId.toString());
+    picker_down.click(function(){
+        var old:string = picker_input.val();
+        var newAmount:number = parseFloat(old)-1;
+        if(newAmount < 0 ){
+            newAmount = 0;
+        }
+        picker_input.val(newAmount.toString());
+        picker_input.trigger("change");
+        picker_down.blur();
+    });
+
 }
 
 // save quantity changes that have been made to the CartEntry
