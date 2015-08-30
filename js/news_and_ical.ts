@@ -47,7 +47,8 @@ function addNews(news):void {
 
     for (var i = 0; i < news.length; i++) {
         var image:string = news[i].linkToPreviewImage || "img/news_nopicture.png";
-        $("#news_container").append("<div class='card' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
+        $("#news_container").append("<div " +
+            "class='card' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
             news[i].descriptionShort +"'>" +
             "<div class=\"card-image\" style=\"background-image:url('" + image + "');\"/>" +
             "<h2>" + news[i].title + "</h2>" +
@@ -58,7 +59,6 @@ function addNews(news):void {
     // add vertical touch scrolling
     vertScroll = new IScroll("#wrapperNews",{
         probeType: 3,
-        scrollbars: true,
         mouseWheel: true,
         interactiveScrollbars: true
     });
@@ -77,9 +77,6 @@ function addNews(news):void {
 
         var card = $(this);
 
-        // set max-height off dialog
-        $("#newsDialogInner").css("max-height", getMaxHeightDialog());
-
         // disable scroll in the background
         disableScroll();
 
@@ -93,19 +90,15 @@ function addNews(news):void {
         $("#dialogImage").attr("src", image);
 
         // show dialog
-        $("#openNewsDialog").addClass("newsDialog-active");
+        (<any>$('#newsModal')).modal('show');
 
 
     });
 
     // close dialog
     $("#closeNewsDialog").click(function(event){
-        // close dialog
-        $("#openNewsDialog").removeClass("newsDialog-active");
-
         // allow scrolling again
         $('body').css('overflow', 'auto').off('touchmove');
-
     });
 
     // hide loader
@@ -180,7 +173,6 @@ function addICals(icals):void{
     horScroll = new IScroll("#wrapperICal",{
         scrollX: true,
         probeType: 3,
-        scrollbars: true,
         interactiveScrollbars: true
     });
 
@@ -198,9 +190,6 @@ function addICals(icals):void{
         }
 
         var ical = $(this);
-
-        // set max-height off dialog
-        $("#iCalDialogInner").css("max-height", getMaxHeightDialog());
 
         // disable scroll in the background
         disableScroll();
@@ -261,20 +250,15 @@ function addICals(icals):void{
             compact: true,
             echoUrl: 'iCalEcho.php'}, iCal_event));
 
-
         // show dialog
-        $("#openICalDialog").addClass("iCalDialog-active");
+        (<any>$('#icalModal')).modal('show');
 
     });
 
     // close dialog
     $("#closeICalDialog").click(function(event){
-        // close dialog
-        $("#openICalDialog").removeClass("iCalDialog-active");
-
         // allow scrolling again
         $('body').css('overflow', 'auto').off('touchmove');
-
     });
 
     // hide loader
@@ -351,15 +335,6 @@ function disableScroll():void{
     $('body').css('overflow', 'hidden').on('touchmove', function(event) {
         event.preventDefault();
     });
-}
-
-// get maximum height of a dialog
-function getMaxHeightDialog():number{
-    var marginTop:any = $("#iCalDialogInner").css("margin-top").replace("px", "");
-    var marginBottom:any = $("#iCalDialogInner").css("margin-bottom").replace("px", "");
-    var maxHeight:number = $(window).height() - marginTop - marginBottom;
-
-    return maxHeight;
 }
 
 // find links in the description and convert them to real links
