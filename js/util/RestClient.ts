@@ -4,10 +4,11 @@
 class RestClient{
 
 	private _url:string;
+	private _authentication:string;
 
 	constructor(){
 		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
-
+		this._authentication = "";
 	}
 	
 	// CORS request
@@ -47,19 +48,25 @@ class RestClient{
 
 	// Create the XHR object
 	createCORSRequest(method:string,url:string):XMLHttpRequest{
-	  	  var xhr:XMLHttpRequest = new XMLHttpRequest();
-		  if ("withCredentials" in xhr) {
-		    // XHR for Chrome/Firefox/Opera/Safari.
-		    xhr.open(method, url, true);
-		  } else if (typeof XDomainRequest != "undefined") {
-		    // XDomainRequest for IE
-		    xhr = <any>new XDomainRequest();
-		    xhr.open(method, url);
-		  } else {
-		    // CORS not supported.
-		    xhr = null;
-		  }
-		  return xhr;
+		var xhr:XMLHttpRequest = new XMLHttpRequest();
+		if ("withCredentials" in xhr) {
+			// XHR for Chrome/Firefox/Opera/Safari.
+			xhr.open(method, url, true);
+		} else if (typeof XDomainRequest != "undefined") {
+			// XDomainRequest for IE
+			xhr = <any>new XDomainRequest();
+			xhr.open(method, url);
+		} else {
+			// CORS not supported.
+			xhr = null;
+		}
+
+		// check if authentication is provided
+		if (this._authentication.length > 0) {
+			xhr.setRequestHeader("Authorization", "Basic " + this._authentication);
+		}
+
+		return xhr;
 	}
 
 	public postRequest(message:Object, path:string, callback: (s: string) => any, param?:string):void {
@@ -81,6 +88,7 @@ class RestClient{
 			alert('An error occured while loading the content.');
 			return null;
 		};
+
 		xhr.send(message);
 	}
 
@@ -109,9 +117,10 @@ class RestClient{
 			return null;
 		};
 
-
-
 		xhr.send();
+	}
 
+	public addAuthentication(aUsername : string, aPassword : string) {
+		this._authentication = btoa(aUsername + ":" + aPassword);
 	}
 }

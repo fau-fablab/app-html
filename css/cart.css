@@ -1,23 +1,27 @@
 /** CSS class for the cart page **/
 
 /*--------- Cart ---------*/
+
+
+
 #cart_footer {
-    width: 100%;
-    background-color: #384f54;
-    bottom: 0;
+    width: 80%;
+    /*background-color: #384f54;*/
+    bottom: 10px;
     position: fixed;
-    padding: 3px;
+    /*padding: 3px;
     font-size: 13px;
-    color: white;
+    color: white;*/
 }
 
 #cart_checkout_btn{
     float: right;
+    /*
     border-radius: 17px !important;
     border: 1px solid;
     font-size: 13px;
     font-weight: bold;
-    margin: 2px;
+    margin: 2px;*/
 }
 
 #cart_total_price{
@@ -34,7 +38,7 @@
 }
 
 .cart_table{
-    background-color: white;
+    /*background-color: white;*/
 }
 
 #cart_container{

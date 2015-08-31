@@ -28,4 +28,8 @@ class ProductApi {
     public findAllNames(callback: (value: any) => any):void {
         this._restClient.requestGET("/products/names",callback);
     }
+
+    public getAutocompletions(callback: (value: any) => any):void{
+        this._restClient.requestGET("/products/autocompletions",callback);
+    }
 }
