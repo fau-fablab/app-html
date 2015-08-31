@@ -5,14 +5,16 @@
 </div>
 
 
-<footer id="cart_footer">
+<div  id="cart_footer">
     <div id="cart_total_price">
         Gesamtsumme:
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-default" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">Zur Kasse</button>
-</footer>
+    <button type="button" class="btn btn-success" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">Zur Kasse</button>
+</div>
+
+
 
 <!-- hidden dialog
      gets visible when checkout buttons is clicked -->
@@ -21,10 +23,12 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
+
             <div class="modal-header">
                 <a id="closeCheckoutDialog" data-dismiss="modal" title="Close" class="close">&times;</a>
                 <h3>Checkout</h3>
             </div>
+
             <div class="modal-body">
                 <h4> Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4>
                 <form class="form-horizontal">
@@ -43,13 +47,14 @@
                 <h5 id="qrCodeStatus"></h5>
                 <p id="qrCodeInfo"></p>
             </div>
+
             <div class="modal-footer">
                 <button id="cart_cancelCheckout" class="btn btn-danger" type="button" >Vorgang abbrechen!</button>
                 <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok</button>
                 <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok</button>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
 
