@@ -12,42 +12,35 @@
 }
 
 /*--------- news ---------*/
-.card{
-
+.row-news{
+    border: 1px solid;
     overflow: hidden;
-    height: 80px;
-    margin: 8px;
-    border:1px solid #AAA;
-    border-bottom:3px solid #BBB;
     cursor: pointer;
+}
+
+
+.card{
+    max-height: 100px;
 }
 
 .card h2{
     margin: 0px;
     padding: 10px 15px 0px 0px;
     font-size: 16px;
+    font-weight: bolder;
 }
 
 .card p{
     margin: 0px;
-    padding: 10px 15px 0px 0px;
+    padding: 0px 15px 0px 0px;
     font-size: 13px;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.card-image {
-    width: 74px;
-    height: 74px;
-    padding: 0px;
-    margin: 1px 15px 2px 1px;
-    background-repeat: no-repeat;
-    position: relative;
-    overflow: hidden;
-    background-size: cover;
-    text-align: center;
-    float: left;
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /*--------- news onclick dialog ---------*/
@@ -163,7 +156,6 @@ dl{
     /*position: absolute;*/
     position: relative;
     overflow:hidden;
-    top:20px;
     width: 100%;
     bottom: 0px;
 }
@@ -206,4 +198,24 @@ dl{
 
 #qrCodeInfo{
     font-style: italic;
+}
+
+@media (max-width: 360px){
+    .card p{
+        display: none;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 480px){
+
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .row-news{
+        height: 195px;
+    }
 }

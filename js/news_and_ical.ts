@@ -45,15 +45,25 @@ function addNews(news):void {
         vertScroll.destroy();
     }
 
+    var newsString:string = "";
     for (var i = 0; i < news.length; i++) {
         var image:string = news[i].linkToPreviewImage || "img/news_nopicture.png";
-        $("#news_container").append("<div " +
-            "class='card' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
+        /*$("#news_container").append("<div " +
+            "class='card col-xs-3' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
             news[i].descriptionShort +"'>" +
             "<div class=\"card-image\" style=\"background-image:url('" + image + "');\"/>" +
             "<h2>" + news[i].title + "</h2>" +
-            "<p>" + news[i].descriptionShort + "</p></div>");
+            "<p>" + news[i].descriptionShort + "</p></div>");*/
+        newsString += "<div class='col-xs-12 col-sm-6'><div class='row row-news'" + "data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
+        news[i].descriptionShort +"'><div class='col-xs-4 col-sm-4'>" +
+            "<img class='img-thumbnail' src='"+image+"' /></div>" +
+            "<div class='col-xs-8 col-sm-8 card'>" +
+            "<h2>" + news[i].title + "</h2>" +
+            "<p >" + news[i].descriptionShort + "</p></div></div></div>";
     }
+    $("#news_container").append(newsString);
+    (<any>$(".card")).dotdotdot();
+
 
 
     // add vertical touch scrolling
@@ -69,7 +79,7 @@ function addNews(news):void {
 
 
     // show news dialog click function
-    $(".card").click(function(event){
+    $(".row-news").click(function(event){
         // return if it is a drag and not a click
         if (vertScroll.moved) {
             return false;
