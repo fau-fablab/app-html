@@ -1,9 +1,12 @@
 /** CSS class for the cart page **/
 
 /*--------- Cart ---------*/
+
+
+
 #cart_footer {
     width: 100%;
-    background-color: #384f54;
+    /*background-color: #384f54;*/
     bottom: 0;
     position: fixed;
     padding: 3px;
@@ -34,7 +37,7 @@
 }
 
 .cart_table{
-    background-color: white;
+    /*background-color: white;*/
 }
 
 #cart_container{
