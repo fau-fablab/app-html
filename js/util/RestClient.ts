@@ -7,7 +7,7 @@ class RestClient{
 	private _authentication:string;
 
 	constructor(){
-		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		this._url = "https://ec2-52-28-163-255.eu-central-1.compute.amazonaws.com:4433";
 		this._authentication = "";
 	}
 	
