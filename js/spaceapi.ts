@@ -48,15 +48,15 @@ class SpaceApi {
         var seconds : number = Math.floor(Date.now() / 1000 - this.time);
 
         if (seconds <= 60)
-            return seconds + " s";
+            return seconds + "s";
 
         var minutes : number = Math.floor(seconds / 60);
         if (minutes <= 60)
-            return minutes + " m";
+            return minutes + "m";
 
         var hours : number = Math.floor(minutes / 60);
         minutes = minutes - (hours * 60);
 
-        return hours + " h " + minutes + " m";
+        return hours + "h " + minutes + "m";
     }
 }
