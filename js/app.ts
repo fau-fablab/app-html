@@ -1,8 +1,10 @@
 /// <reference path="spaceapi.ts" />
+/// <reference path="authentication.ts" />
 /// <reference path="common/rest/ProductApi.ts"/>
 
 
 var spaceapi:SpaceApi = null;
+var auth:Authentication = null;
 var lasturl: string = "";
 
 function updateDoorState(state : SpaceApi) {
@@ -44,10 +46,12 @@ $(document).ready(function () {
         lasturl=currentHash;
         loadPage(currentHash);
     }
+
+    // initialize authentication
+    auth = new Authentication();
+    updateAuthentication(auth);
+
 });
-
-
-
 
 function loadPage(url):void{
     console.log("loadPage: " + window.location.hash);
@@ -83,7 +87,20 @@ function showHashValue(){
     console.log("CurrentHash: " + window.location.hash);
 }
 
+function updateAuthentication(auth : Authentication) {
+    var loginButton = $("#loginButton");
 
-
-
-
+    if (auth.isAuthenticated()) {
+        loginButton.text("SIGNED IN AS " + auth.username + " Logout");
+        loginButton.click(function () {
+            auth.logout();
+            updateAuthentication(auth)
+        });
+    }
+    else {
+        loginButton.text("Login");
+        loginButton.click(function () {
+            auth.login("inventory", "secret", updateAuthentication);
+        })
+    }
+}
