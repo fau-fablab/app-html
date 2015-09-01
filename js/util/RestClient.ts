@@ -63,7 +63,7 @@ class RestClient{
 
 		// check if authentication is provided
 		if (this._authentication.length > 0) {
-			xhr.setRequestHeader("Authorization", "Basic " + this._authentication);
+			xhr.setRequestHeader("Authorization", this._authentication);
 		}
 
 		return xhr;
@@ -121,6 +121,14 @@ class RestClient{
 	}
 
 	public addAuthentication(aUsername : string, aPassword : string) {
-		this._authentication = btoa(aUsername + ":" + aPassword);
+		this._authentication = "Basic " + btoa(aUsername + ":" + aPassword);
+	}
+
+	public clearAuthentication () {
+		this._authentication = "";
+	}
+
+	public getEndointUrl() {
+		return this._url;
 	}
 }

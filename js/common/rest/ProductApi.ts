@@ -32,4 +32,8 @@ class ProductApi {
     public getAutocompletions(callback: (value: any) => any):void{
         this._restClient.requestGET("/products/autocompletions",callback);
     }
+
+    public getLinkToProductMap() : string {
+        return this._restClient.getEndointUrl() + "/productMap/productMap.html";
+    }
 }
