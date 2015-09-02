@@ -51,6 +51,16 @@ $(document).ready(function () {
     auth = new Authentication();
     updateAuthentication(auth);
 
+    // register callbacks for login and cancel button in login dialog
+    $("#loginDialogSubmit").click(function () {
+        var user = $("#loginName").val();
+        var password = $("#loginPassword").val();
+
+        auth.login(user, password, updateAuthentication);
+    });
+    $("#loginDialogCancel").click(function () {
+        $("#loginDialog").hide();
+    });
 });
 
 function loadPage(url):void{
@@ -89,18 +99,28 @@ function showHashValue(){
 
 function updateAuthentication(auth : Authentication) {
     var loginButton = $("#loginButton");
+    var link = $(document.createElement('a'));
+    link.attr("class", "nav_link2");
 
+    // user os logged in
     if (auth.isAuthenticated()) {
-        loginButton.text("SIGNED IN AS " + auth.username + " Logout");
-        loginButton.click(function () {
+        loginButton.text("SIGNED IN AS " + auth.getUser().username + " ");
+
+        link.text("Logout");
+        link.click(function () {
             auth.logout();
-            updateAuthentication(auth)
+            updateAuthentication(auth);
+        });
+        $('#loginDialog').hide();
+    }
+    // user is not logged in
+    else {
+        loginButton.text("");
+
+        link.text("Login");
+        link.click(function () {
+            $('#loginDialog').show();
         });
     }
-    else {
-        loginButton.text("Login");
-        loginButton.click(function () {
-            auth.login("inventory", "secret", updateAuthentication);
-        })
-    }
+    link.appendTo(loginButton);
 }
