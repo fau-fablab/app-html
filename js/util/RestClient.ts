@@ -7,7 +7,7 @@ class RestClient{
 	private _authentication:string;
 
 	constructor(){
-		this._url = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433";
+		this._url = "https://ec2-52-28-163-255.eu-central-1.compute.amazonaws.com:4433";
 		this._authentication = "";
 	}
 	
@@ -63,7 +63,7 @@ class RestClient{
 
 		// check if authentication is provided
 		if (this._authentication.length > 0) {
-			xhr.setRequestHeader("Authorization", "Basic " + this._authentication);
+			xhr.setRequestHeader("Authorization", this._authentication);
 		}
 
 		return xhr;
@@ -121,6 +121,14 @@ class RestClient{
 	}
 
 	public addAuthentication(aUsername : string, aPassword : string) {
-		this._authentication = btoa(aUsername + ":" + aPassword);
+		this._authentication = "Basic " + btoa(aUsername + ":" + aPassword);
+	}
+
+	public clearAuthentication () {
+		this._authentication = "";
+	}
+
+	public getEndointUrl() {
+		return this._url;
 	}
 }

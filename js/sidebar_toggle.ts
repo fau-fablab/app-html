@@ -55,13 +55,13 @@ function checkURL(hash):void{
 
     // hash value changed
     if(hash != lasturl){
-        lasturl=hash;	
-        loadPage(hash);
+        lasturl=hash;
+        sidebarLoadPage(hash);
     }
 }
 
 // load page
-function loadPage(url):void{
+function sidebarLoadPage(url):void{
     // remove hashtag from URL
     url=url.replace('#','');
 

@@ -4,3 +4,9 @@
 
 # ignore idea files
 .idea*
+
+# ignore certifacte files
+*.pem
+
+# ignore log files
+*.log

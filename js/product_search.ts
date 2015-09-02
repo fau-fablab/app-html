@@ -181,7 +181,7 @@ function prepareDialogFunktions() {
         var preparedLocationString = currentProduct.locationForProductMap;
         //preparedLocationString = preparedLocationString.replace(" / ", "/" );
         //preparedLocationString = preparedLocationString.replace(" ","_");
-        var newlocationURL = "https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html" + "?id=" + preparedLocationString;
+        var newlocationURL = productApi.getLinkToProductMap() + "?id=" + preparedLocationString;
         modalProductMapLink.attr("href", newlocationURL);
 
     });

@@ -56,12 +56,11 @@
                 <span class="icon-bar"></span>
             </button>
             <div>
-                <img class="navbar-brand" src="img/fablab_logo.png"/>
-
+                <img id="doorStateIcon" class="navbar-brand" src="img/fablab_logo.png"/>
             </div>
         </div>
 
-        <p class="navbar-text navbar-left">seit 4,5 h</p>
+        <p id="doorState" class="navbar-text navbar-left"></p>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
@@ -73,7 +72,7 @@
                 <li><a href="#about" class="nav_link2"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Signed in as <a>StefJohPhil</a> </p>
+                <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span id="loginButton">Login</a></span></p>
             </ul>
         </div>
     </div>
@@ -83,3 +82,39 @@
 
 <!-- Overlay when sidebar is opened -->
 <div class="overlay"></div>
+
+<!-- Modal Login Dialog -->
+<div class="modal" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <fieldset>
+                <form class="form-horizontal">
+                    <div class="modal-header">
+                        <div class="col-md-9 col-xs-9">
+                            <h4 class="modal-title">Login</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="loginName" class="col-lg-4">Username</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="loginName" id="loginName" class="text ui-widget-content ui-corner-all">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="loginPassword" class="col-lg-4">Passwort</label>
+                                    <div class="col-lg-8">
+                                        <input type="password" name="loginPassword" id="loginPassword" class="text ui-widget-content ui-corner-all">
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="loginDialogSubmit" type="button" class="btn btn-success" data-dismiss="modal">Login</button>
+                        <button id="loginDialogCancel" type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</div>

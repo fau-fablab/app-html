@@ -12,8 +12,8 @@ RUN if [ ! -f "/usr/bin/node" ]; then ln -s /usr/bin/nodejs /usr/bin/node; fi
 # copy all files to docker image
 COPY docker/runApache.sh runApache.sh
 COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY docker/cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
-COPY docker/key.pem /etc/ssl/private/ssl-cert-snakeoil.key
+COPY docker/fablab_html_cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
+COPY docker/fablab_html_key.pem /etc/ssl/private/ssl-cert-snakeoil.key
 
 COPY ./ /var/www/html
 
@@ -26,16 +26,18 @@ RUN a2enmod ssl
 RUN a2enmod rewrite
 
 # compile type script files
-RUN tsc --target es5 /var/www/html/js/*.ts
+RUN tsc --target es5 /var/www/html/js/*.ts /var/www/html/js/common/rest/*.ts /var/www/html/js/common/model/*.ts
 
 #delete some files
-RUN rm -rvf /var/www/html/index.html
-RUN rm -rvf /var/www/html/docker
-RUN rm -rvf /var/www/html/Dockdefile
-RUN rm -rvf /var/www/html/.git
-RUN rm -rvf /var/www/html/js/*.ts
+RUN rm -rvf /var/www/html/index.html \
+    /var/www/html/docker \
+    /var/www/html/Dockerfile \
+    /var/www/html/.git \
+    /var/www/html/npm-debug.log
+
+RUN find /var/www/html/ -name "*.ts" -exec rm -rvf {} +
 
 EXPOSE 80 443
 
-# execute .start.sh and the start bash -- it works!
+# run apache server
 CMD ["/runApache.sh"]
