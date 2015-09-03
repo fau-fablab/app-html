@@ -192,9 +192,8 @@
 /*--------- heading of a page ---------*/
 #h1_div{
     width: 100%;
-    position: fixed;
+    position: relative;
     background-color: #384f54;
-    top: 50px;
     padding-left: 9px;
     z-index: 10;
     border: 1px solid #545353;

@@ -13,4 +13,23 @@ body, html{
     margin: 0px;
 }
 
+/*--------- heading of a page ---------*/
+#h1_div{
+    width: 100%;
+    position: relative;
+    background-color: #384f54;
+    padding-left: 9px;
+    z-index: 10;
+    border: 1px solid #545353;
+}
+
+#h1_title{
+    color: white;
+    font-size: 14px;
+    margin: 1px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
 
