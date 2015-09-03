@@ -58,9 +58,6 @@ $(document).ready(function () {
 
         auth.login(user, password, updateAuthentication);
     });
-    $("#loginDialogCancel").click(function () {
-        $("#loginDialog").hide();
-    });
 });
 
 function loadPage(url):void{
@@ -111,16 +108,14 @@ function updateAuthentication(auth : Authentication) {
             auth.logout();
             updateAuthentication(auth);
         });
-        $('#loginDialog').hide();
     }
     // user is not logged in
     else {
         loginButton.text("");
 
+        link.attr("data-toggle", "modal");
+        link.attr("data-target", "#loginDialog");
         link.text("Login");
-        link.click(function () {
-            $('#loginDialog').show();
-        });
     }
     link.appendTo(loginButton);
 }

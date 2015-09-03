@@ -46,7 +46,7 @@
 <body>
 
 <nav class="navbar navbar-default">
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -60,19 +60,19 @@
             </div>
         </div>
 
-        <p id="doorState" class="navbar-text navbar-left"></p>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
+                <li><span id="doorState" class="navbar-text navbar-left"></span></li>
                 <li><a href="#news" class="nav_link2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> News</a></li>
                 <li><a href="#search" class="nav_link2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Produktsuche</a></li>
-                <li><a class="nav_link2" href="#cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"><span id="cart_button_quantity" class="badge"></span></span> Warenkorb</a></li>
+                <li><a href="#cart" class="nav_link2"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"><span id="cart_button_quantity" class="badge"></span></span> Warenkorb</a></li>
                 <li><a href="#contact" class="nav_link2"> <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Kontakt</a></li>
                 <li><a href="#about" class="nav_link2"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
-                <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span id="loginButton">Login</a></span></p>
+                <li class="navbar-text"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span id="loginButton">Login</span></li>
             </ul>
         </div>
     </div>
@@ -84,37 +84,35 @@
 <div class="overlay"></div>
 
 <!-- Modal Login Dialog -->
-<div class="modal" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="loginDialogLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <fieldset>
-                <form class="form-horizontal">
-                    <div class="modal-header">
-                        <div class="col-md-9 col-xs-9">
-                            <h4 class="modal-title">Login</h4>
+            <div class="modal-header">
+                <h4 class="modal-title" id="loginDialogLabel">Login</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="loginName" class="col-lg-2 control-label">Username</label>
+                            <div class="col-lg-10">
+                                <input type="text" name="loginName" id="loginName" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="loginName" class="col-lg-4">Username</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" name="loginName" id="loginName" class="text ui-widget-content ui-corner-all">
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="loginPassword" class="col-lg-4">Passwort</label>
-                                    <div class="col-lg-8">
-                                        <input type="password" name="loginPassword" id="loginPassword" class="text ui-widget-content ui-corner-all">
-                                    </div>
-                                </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="loginDialogSubmit" type="button" class="btn btn-success" data-dismiss="modal">Login</button>
-                        <button id="loginDialogCancel" type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    </div>
-                </form>
-            </fieldset>
+                        <div class="form-group">
+                            <label for="loginPassword" class="col-lg-2 control-label">Passwort</label>
+                            <div class="col-lg-10">
+                                <input type="password" name="loginPassword" id="loginPassword" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button id="loginDialogSubmit" type="button" class="btn btn-primary" data-dismiss="modal">Login</button>
+                <button id="loginDialogCancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
