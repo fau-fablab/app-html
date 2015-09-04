@@ -58,7 +58,7 @@ function addNews(news):void {
         news[i].descriptionShort +"'><div class='col-xs-4 col-sm-4 nopadding'>" +
             "<a href='"+image+"' data-lightbox='news_img_"+image+pubDate+"' data-title='"+news[i].title+"'>" +
             "<img class='img-responsive' src='"+image+"'></a></div>" +
-            "<div class='col-xs-8 col-sm-8 card nopadding vcenter'>" +
+            "<div class='col-xs-8 col-sm-8 card nopadding'>" +
             "<h5>"+pubDate+"</h5>"+
             "<h2>" + news[i].title + "</h2>" +
             "</div></div>" +
