@@ -24,12 +24,14 @@ class RestClient{
 		  // return json response and handle response in the specific callback function
 		  xhr.onload = function() {
               var response:string;
+
               if(method == "POST"){
                   response = xhr.responseText;
               }else{
                   response = JSON.parse(xhr.responseText);
               }
-              callback(response);
+
+			  callback(response);
 		  };
 
 		  xhr.onerror = function() {
@@ -69,51 +71,89 @@ class RestClient{
 		return xhr;
 	}
 
-	public postRequest(message:Object, path:string, callback: (s: string) => any, param?:string):void {
-		var urlPath:string = this._url + path;
+	public postRequest(
+		message : Object,
+		path : string,
+		callback : (s: string) => any, param?:string,
+		callbackError? : (errorCode : number, errorMessage : any) => any) : void {
 
-		var xhr:XMLHttpRequest = this.createCORSRequest("POST", urlPath);
+		var urlPath : string = this._url + path;
+		var xhr : XMLHttpRequest = this.createCORSRequest("POST", urlPath);
+
 		if (!xhr) {
-			alert('CORS not supported');
+			if (callbackError) {
+				callbackError(0, 'CORS not supported');
+			} else {
+				alert('CORS not supported');
+			}
+
 			return null;
 		}
 
 		// return json response and handle response in the specific callback function
 		xhr.onload = function () {
-			var response:string = JSON.parse(xhr.responseText);
+
+			if (xhr.status != 200) {
+				if (callbackError(xhr.status, xhr.statusText));
+				return;
+			}
+
+			var response : string = JSON.parse(xhr.responseText);
+
 			callback(response);
 		};
 
-		xhr.onerror = function () {
-			alert('An error occured while loading the content.');
+		xhr.onerror = function() {
+			if (callbackError) {
+
+			} else {
+				alert('An error occurred while loading the content.');
+			}
+
 			return null;
 		};
 
 		xhr.send(message);
 	}
 
-	public requestGET(aPath:string,callback: (value: any) => any):void{
-		var urlPath:string = this._url + aPath;
-		var method = "GET";
-		var xhr:XMLHttpRequest = this.createCORSRequest(method, urlPath);
+	public requestGET(
+		aPath : string ,
+		callback : (value: any) => any,
+		callbackError? : (errorCode : number, errorMessage : any) => any) : void{
+
+		var urlPath : string = this._url + aPath;
+		var xhr : XMLHttpRequest = this.createCORSRequest("GET", urlPath);
+
 		if (!xhr) {
-			alert('CORS not supported');
+			if (callbackError) {
+				callbackError(0, 'CORS not supported');
+			} else {
+				alert('CORS not supported');
+			}
+
 			return null;
 		}
 
 		// return json response and handle response in the specific callback function
 		xhr.onload = function() {
-			var response:string;
-			if(method == "POST"){
-				response = xhr.responseText;
-			}else{
-				response = JSON.parse(xhr.responseText);
+
+			if (xhr.status != 200) {
+				if (callbackError(xhr.status, xhr.statusText));
+				return;
 			}
+
+			var response : string = JSON.parse(xhr.responseText);
+
 			callback(response);
 		};
 
 		xhr.onerror = function() {
-			alert('An error occured while loading the content.');
+			if (callbackError) {
+				callbackError(0, 'An error occurred while loading the content.');
+			} else {
+				alert('An error occurred while loading the content.');
+			}
+
 			return null;
 		};
 
