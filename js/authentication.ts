@@ -29,14 +29,18 @@ class Authentication {
 
     authenticate () {
         if (this.user.username.length <= 0 || this.user.password.length <= 0) {
-            alert("Username and password is required for authentication.");
+            alert("Bitte Username und Passwort eingeben.");
             return;
         }
 
         var auth : Authentication = this;
         var c : RestClient = new RestClient();
         c.addAuthentication(this.user.username, this.user.password);
-        c.request("GET", "/user/", function(user) {auth.callbackLogin(user);});
+        c.requestGET(
+            "/user/",
+            function(user) {auth.callbackLogin(user);},
+            function (errorCode : number, errorMessage : string){auth.callbackError(errorCode, errorMessage)}
+        );
     }
 
     callbackLogin(user) {
@@ -46,6 +50,15 @@ class Authentication {
 
         if (this.loginCallbackExt)
             this.loginCallbackExt(this);
+    }
+
+    callbackError(errorCode : number, errorMessage : string) {
+        if (errorCode == 401) {
+            alert("Username und/oder Passwort sind falsch.");
+        }
+        else {
+            alert("Fehler beim login.");
+        }
     }
 
     isAuthenticated() : boolean {
