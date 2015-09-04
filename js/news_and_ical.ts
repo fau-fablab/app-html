@@ -53,16 +53,16 @@ function addNews(news):void {
         var pubYear:string = pubDate.substr(0,4);
         pubDate = pubDay+"."+pubMonth+"."+pubYear;
 
-        newsString += "<div class='col-xs-12 col-sm-6 box-shad brdr'><div class='row row-news'" +
+        newsString += "<div class='col-xs-12 col-sm-6 brdr'><div class='row row-news '" +
             "data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
-        news[i].descriptionShort +"'><div class='col-xs-4 col-sm-4 nopadding'>" +
+        news[i].descriptionShort +"'><div class='col-xs-3 col-sm-3 nopadding'>" +
             "<a href='"+image+"' data-lightbox='news_img_"+image+pubDate+"' data-title='"+news[i].title+"'>" +
             "<img class='img-responsive' src='"+image+"'></a></div>" +
-            "<div class='col-xs-8 col-sm-8 card nopadding'>" +
+            "<div class='col-xs-9 col-sm-9 card nopadding'>" +
             "<h5>"+pubDate+"</h5>"+
             "<h2>" + news[i].title + "</h2>" +
             "</div></div>" +
-            "<div class='row'><div class='col-xs-12 col-sm-12'><p class='trunc'>" + news[i].descriptionShort +
+            "<div class='row'><div class='col-xs-12 col-sm-12 '><p class='trunc'>" + news[i].descriptionShort +
             " </p></div></div>" +
             "</div>";
     }
@@ -76,7 +76,7 @@ function addNews(news):void {
     });
 
     truncatedTexts.on('click','.read-more', function (event) {
-        (<any>$(this)).parent().trunk8('revert').append(" <span class='read-less'>&nbsp;&laquo;weniger&nbsp;</span>");
+        (<any>$(this)).parent().trunk8('revert').append(" <span class='read-less'>&nbsp;&laquo;&nbsp;</span>");
         //(<any>$(this)).parent().trunk8('revert');
         //(<any>$(this)).parent().html("XXX");
         return false;
