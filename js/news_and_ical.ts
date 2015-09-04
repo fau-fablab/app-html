@@ -20,7 +20,6 @@ $('#loadMoreNewsLoader').show();
 // touch scrolling for iCals and news
 var vertScroll:any, horScroll:any;
 
-
 // get news
 client.request("GET","/news?offset=0&limit="+LOADLIMIT, addNews);
 
@@ -48,23 +47,45 @@ function addNews(news):void {
     var newsString:string = "";
     for (var i = 0; i < news.length; i++) {
         var image:string = news[i].linkToPreviewImage || "img/news_nopicture.png";
-        /*$("#news_container").append("<div " +
-            "class='card col-xs-3' data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
-            news[i].descriptionShort +"'>" +
-            "<div class=\"card-image\" style=\"background-image:url('" + image + "');\"/>" +
+        var pubDate:string = news[i].pubDate.substr(0,10);
+        var pubDay:string = pubDate.substr(8);
+        var pubMonth:string = pubDate.substr(5,2);
+        var pubYear:string = pubDate.substr(0,4);
+        pubDate = pubDay+"."+pubMonth+"."+pubYear;
+
+        newsString += "<div class='col-xs-12 col-sm-6 box-shad brdr'><div class='row row-news'" +
+            "data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
+        news[i].descriptionShort +"'><div class='col-xs-4 col-sm-4 nopadding'>" +
+            "<a href='"+image+"' data-lightbox='news_img_"+image+pubDate+"' data-title='"+news[i].title+"'>" +
+            "<img class='img-responsive' src='"+image+"'></a></div>" +
+            "<div class='col-xs-8 col-sm-8 card nopadding vcenter'>" +
+            "<h5>"+pubDate+"</h5>"+
             "<h2>" + news[i].title + "</h2>" +
-            "<p>" + news[i].descriptionShort + "</p></div>");*/
-        newsString += "<div class='col-xs-12 col-sm-6'><div class='row row-news'" + "data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
-        news[i].descriptionShort +"'><div class='col-xs-4 col-sm-4'>" +
-            "<img class='img-thumbnail' src='"+image+"' /></div>" +
-            "<div class='col-xs-8 col-sm-8 card'>" +
-            "<h2>" + news[i].title + "</h2>" +
-            "<p >" + news[i].descriptionShort + "</p></div></div></div>";
+            "</div></div>" +
+            "<div class='row'><div class='col-xs-12 col-sm-12'><p class='trunc'>" + news[i].descriptionShort +
+            " </p></div></div>" +
+            "</div>";
     }
     $("#news_container").append(newsString);
-    (<any>$(".card")).dotdotdot();
 
+    // truncate text
+    var truncatedTexts:any = $('.trunc');
+    truncatedTexts.trunk8({
+        lines: 3,
+        fill: "&hellip;<span class='read-more'>&nbsp;mehr&raquo;&nbsp;</span>"
+    });
 
+    truncatedTexts.on('click','.read-more', function (event) {
+        (<any>$(this)).parent().trunk8('revert').append(" <span class='read-less'>&nbsp;&laquo;weniger&nbsp;</span>");
+        //(<any>$(this)).parent().trunk8('revert');
+        //(<any>$(this)).parent().html("XXX");
+        return false;
+    });
+
+    truncatedTexts.on('click','.read-less', function (event) {
+        (<any>$(this)).parent().trunk8();
+        return false;
+    });
 
     // add vertical touch scrolling
     vertScroll = new IScroll("#wrapperNews",{
@@ -78,7 +99,7 @@ function addNews(news):void {
     vertScroll.scrollTo(pos[0],pos[1]);
 
 
-    // show news dialog click function
+    /*// show news dialog click function
     $(".row-news").click(function(event){
         // return if it is a drag and not a click
         if (vertScroll.moved) {
@@ -109,7 +130,7 @@ function addNews(news):void {
     $("#closeNewsDialog").click(function(event){
         // allow scrolling again
         $('body').css('overflow', 'auto').off('touchmove');
-    });
+    });*/
 
     // hide loader
     $('div#loadMoreNewsLoader').hide();
@@ -118,6 +139,8 @@ function addNews(news):void {
     searchingNews = false;
 
 }
+
+
 
 // add iCals to ical_container
 function addICals(icals):void{

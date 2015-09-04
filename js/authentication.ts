@@ -1,5 +1,6 @@
 /// <reference path="util/RestClient.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
+/// <reference path="common/model/User.ts"/>
 
 class Authentication {
     private user : common.User = new common.User();

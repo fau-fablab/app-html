@@ -10,7 +10,7 @@ $(document).ready(function () {
 	    changeSidebar();
     });
 
-    //check if the URL has a reference to a page and load it 
+    //check if the URL has a reference to a page and load it
     checkURL(null);
 
     // recognize navigation link clicks
@@ -29,7 +29,7 @@ $(document).ready(function () {
     });
 
     //check for a change in the URL every 250 ms to detect if the history buttons have been used
-    setInterval("checkURL()",250);
+    //setInterval("checkURL()",250);
 
     // click listener for cart icon
     $("#cart_button").click(function(){
@@ -112,7 +112,7 @@ function sidebarLoadPage(url):void{
 // change status of sidebar to opened/closed
 function changeSidebar(){
 
-    // show active site <-> link 
+    // show active site <-> link
     var nav_links:any = $("a.nav_link");
     nav_links.removeClass("active");
 

@@ -64,7 +64,30 @@ function loadPage(url):void{
     console.log("loadPage: " + window.location.hash);
     // remove hashtag from URL
     var newUrl = url.replace('#','');
+
     // URL as h1 title for page
+    var title:string = newUrl.toUpperCase();
+
+    switch(title){
+        case "NEWS":
+            break;
+        case "SEARCH":
+            title = "PRODUKTSUCHE";
+            break;
+        case "CART":
+            title = "WARENKORB";
+            break;
+        case "ABOUT":
+            title = "ÜBER UNS";
+            break;
+        case "CONTACT":
+            title = "KONTAKT";
+            break;
+        default:
+            title = "NO TITLE DEFINED compare app.ts";
+            break;
+    }
+
 
     // create full URL
     var fullURL:string = newUrl + ".html";
@@ -78,6 +101,7 @@ function loadPage(url):void{
         pageContent = data;
         $("#content").fadeOut("fast", function(){
             $("#content").html(pageContent).fadeIn("fast");
+            $("#h1_title").text(title);
         });
     });
 }

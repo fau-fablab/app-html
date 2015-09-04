@@ -13,30 +13,58 @@
 
 /*--------- news ---------*/
 .row-news{
-    border: 1px solid;
     overflow: hidden;
     cursor: pointer;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
 }
 
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 
+.box-shad {
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+}
+.brdr {
+    border: 1px solid #ededed;
+}
+
+.read-less{
+    display: none;
+}
 .card{
     max-height: 100px;
 }
 
-.card h2{
-    margin: 0px;
-    padding: 10px 15px 0px 0px;
-    font-size: 16px;
-    font-weight: bolder;
+.card h5{
+    float: right;
+    margin: 0px 0px 5px 0px;
+    font-size: 10px;
+    color: gray;
+
 }
 
-.card p{
-    margin: 0px;
-    padding: 0px 15px 0px 0px;
+.card h2{
+    margin: 0px 10px 10px 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    padding-left: 5px;
+}
+
+.trunc{
+    margin: 0px 25px 10px 25px;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 0px;
 }
+
 
 .nopadding {
     padding: 0 !important;
@@ -201,8 +229,12 @@ dl{
 }
 
 @media (max-width: 360px){
-    .card p{
-        display: none;
+    .card h2{
+        font-size: 20px;
+    }
+
+    .trunc{
+        line-height: 22px;
     }
 }
 
