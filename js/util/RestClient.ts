@@ -1,5 +1,5 @@
 ﻿// typescript import to create XDomainRequests
-/// <reference path="../lib.d.ts" />
+/// <reference path="../libraries/lib.d.ts" />
 // General REST class
 class RestClient{
 

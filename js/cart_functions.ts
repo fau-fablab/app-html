@@ -1,6 +1,6 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="libraries/jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
-/// <reference path="iscroll.d.ts" />
+/// <reference path="libraries/iscroll.d.ts" />
 /// <reference path="checkout.ts"/>
 
 //always show quantity in header

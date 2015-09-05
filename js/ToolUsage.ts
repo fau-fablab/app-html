@@ -1,4 +1,4 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="libraries/jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/ToolUsage.ts" />

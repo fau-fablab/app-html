@@ -1,8 +1,8 @@
 /// <reference path="common/rest/ProductApi.ts"/>
 /// <reference path="common/model/Category.ts" />
 /// <reference path="common/model/Product.ts" />
-/// <reference path="jquery.d.ts" />
-/// <reference path="iscroll.d.ts" />
+/// <reference path="libraries/jquery.d.ts" />
+/// <reference path="libraries/iscroll.d.ts" />
 /// <reference path="cart_functions.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
