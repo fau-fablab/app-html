@@ -57,7 +57,7 @@ function addNews(news):void {
             "data-image='"+ image +"' data-title='"+ news[i].title +"' data-descriptionShort='"+
         news[i].descriptionShort +"'><div class='col-xs-3 col-sm-3 nopadding'>" +
             "<a href='"+image+"' data-lightbox='news_img_"+image+pubDate+"' data-title='"+news[i].title+"'>" +
-            "<img class='img-responsive' src='"+image+"'></a></div>" +
+            "<img class='news-img' src='"+image+"'></a></div>" +
             "<div class='col-xs-9 col-sm-9 card nopadding'>" +
             "<h5>"+pubDate+"</h5>"+
             "<h2>" + news[i].title + "</h2>" +
