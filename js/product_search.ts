@@ -4,12 +4,14 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="iscroll.d.ts" />
 /// <reference path="cart_functions.ts"/>
+/// <reference path="util/Formatter.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 var autoComplitionArray:Array<string> = new Array<string>();
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
+var formatter: Formatter = new Formatter();
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -91,10 +93,6 @@ function showProducts(records:any):void {
 
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
-        // return if it is a drag and not a click
-        if (vertScroll.moved) {
-            return false;
-        }
 
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
@@ -117,7 +115,8 @@ function prepareDialogFunktions() {
         modalProductIdLabel.text(currentProduct.productId + "");
         modalProductNameLabel.text(currentProduct.name);
         modalProductDescriptionLabel.text(currentProduct.description);
-        modalProductPriceLabel.text(currentProduct.price + " \u20AC");
+        var formattetPrice = formatter.formatNumberToPrice(currentProduct.price);
+        modalProductPriceLabel.text(formattetPrice + " \u20AC");
         modalProductUnitLabel.text(currentProduct.unit);
         modalProductLocationLabel.text(currentProduct.locationString);
         modalProductCategoryLabel.text(currentProduct.categoryString);
@@ -141,7 +140,7 @@ function createTableRows(productArray:Array<common.Product>) {
             " <td id='productId' '>" + product.productId + "</td>" +
             " <td id='productName'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
             " <td id='productLocation'>" + product.locationString + "</td>" +
-            " <td id='productPrice'><div>" + product.price + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
+            " <td id='productPrice'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
             "</tr>");
     }
     prepareDialogFunktions();
@@ -278,7 +277,9 @@ $("#modal-number-down").click(function(){
         var newValue: any = count;
         $("#modal-number").val(newValue);
         var newPrice: number = product.price * newValue;
-        $("#modal-productprice").text(product.price+ " \u20AC" + " ("+ newPrice + " \u20AC" +")");
+        var formatedPrice = formatter.formatNumberToPrice(product.price);
+        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
     }
 });
 
@@ -295,7 +296,9 @@ $("#modal-number-up").click(function(){
         console.log("Produkt-Price: " + product.price);
         console.log("Count: " + newValue);
         var newPrice: number = product.price * newValue;
-        $("#modal-productprice").text(product.price+ " \u20AC" + " ("+ newPrice + " \u20AC" +")");
+        var formatedPrice = formatter.formatNumberToPrice(product.price);
+        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
     }
 });
 
