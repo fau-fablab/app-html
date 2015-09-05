@@ -1,6 +1,6 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="libraries/jquery.d.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
-/// <reference path="iscroll.d.ts" />
+/// <reference path="libraries/iscroll.d.ts" />
 /// <reference path="checkout.ts"/>
 
 //always show quantity in header
@@ -69,11 +69,7 @@ function showAllCartEntries() {
     adaptQuantityInHeader();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#cart_container",{
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
+    vertScroll = new IScroll("#cart_container");
     setTimeout(function () {
         vertScroll.refresh();
     }, 200);

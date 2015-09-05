@@ -15,8 +15,6 @@ COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/fablab_html_cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
 COPY docker/fablab_html_key.pem /etc/ssl/private/ssl-cert-snakeoil.key
 
-COPY ./ /var/www/html
-
 # fix exec permissions
 RUN chmod 755 /runApache.sh
 
@@ -25,7 +23,8 @@ RUN a2ensite default-ssl
 RUN a2enmod ssl
 RUN a2enmod rewrite
 
-# compile type script files
+# copy compile type script files
+COPY ./ /var/www/html
 RUN tsc --target es5 /var/www/html/js/*.ts /var/www/html/js/common/rest/*.ts /var/www/html/js/common/model/*.ts
 
 #delete some files

@@ -1,4 +1,4 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="libraries/jquery.d.ts" />
 /// <reference path="common/model/CartServer.ts"/>
 /// <reference path="common/model/PlatformType.ts"/>
 /// <reference path="util/RestClient.ts"/>
