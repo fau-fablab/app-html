@@ -27,7 +27,6 @@ function triggerDoorStateUpdate() {
 
 $(document).ready(function () {
     console.log("Document was loaded: " + window.location.hash);
-
     // initialize space api / door state
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
@@ -36,6 +35,9 @@ $(document).ready(function () {
     var currentHash = window.location.hash;
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
+
+
+
     //setInterval("reloadPage()",250);
     if(currentHash == "" || currentHash == null || currentHash == "#close"){
         currentHash = "#news";
@@ -61,7 +63,6 @@ $(document).ready(function () {
 });
 
 function loadPage(url):void{
-    console.log("loadPage: " + window.location.hash);
     // remove hashtag from URL
     var newUrl = url.replace('#','');
 
@@ -115,11 +116,11 @@ function reloadPage(){
     var currentHash2 = window.location.hash;
     console.log("CurrentHash: " + currentHash2);
     loadPage(currentAttribute);
+    $('.navbar-toggle').click() //bootstrap 3.x by Richard
+
 }
 
-function showHashValue(){
-    console.log("CurrentHash: " + window.location.hash);
-}
+
 
 function updateAuthentication(auth : Authentication) {
     var loginButton = $("#loginButton");
