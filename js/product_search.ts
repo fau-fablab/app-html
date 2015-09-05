@@ -11,7 +11,7 @@ var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
 // scrollelement
-var vertScroll;
+
 // prevent loading further products when they are already loading
 var searchingProducts:boolean = false;
 // which search was used?
@@ -19,36 +19,23 @@ var findAllSearch:string = "false";
 
 $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
-
     var productApi: ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions)
-
-
-
-
-
-    
 });
 
 function callbackAutoCompletions(records){
-
     autoComplitionArray = records;
     var datalist = $("#product_options");
-
     for(var index = 0; index < autoComplitionArray.length;index++){
         datalist.append("<option value='" + autoComplitionArray[index] +"'></option>");
     }
-
 }
-
 
 document.onkeydown = function(event) {
     if(event.keyCode == 13){
         search();
     }
 }
-
-
 
 function search():void {
     cleanTable();
@@ -61,7 +48,7 @@ function search():void {
         productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
     else if (isNumber(researchCriteria)) {
-
+        console.log("War number");
         productApi.findById(researchCriteria,showProduct);
     }
     else {
@@ -72,7 +59,9 @@ function search():void {
 }
 
 function showProduct(record:any):void {
+    console.log("In showProduct");
     cleanTable();
+    currentProcutList.length = 0;
     var recordArray = [];
     recordArray.push(record);
     showProducts(recordArray);
@@ -84,16 +73,7 @@ function showSearchResults(records:any):void{
     showProducts(records);
 }
 
-
 function showProducts(records:any):void {
-    // remember scroll position
-    var pos:number[] = [0,0];
-    if(vertScroll){
-        pos[0] = vertScroll.x;
-        pos[1] = vertScroll.y;
-        vertScroll.destroy();
-    }
-
     if (records.length == 0) {
         showEmptyResultText();
     }
@@ -104,45 +84,10 @@ function showProducts(records:any):void {
     createTableRows(currentProcutList);
     prepareDialogFunktions();
     $('#loadMoreProductsLoader').hide();
-
     // add vertical touch scrolling
-    vertScroll = new IScroll("#search_results_container",{
-        probeType: 3,
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
-    setTimeout(function () {
-        vertScroll.refresh();
-    }, 200);
-
     // check scroll position to load dynamically more Products
-    vertScroll.on("scroll", loadMoreProducts);
-    vertScroll.refresh();
-    vertScroll.scrollTo(pos[0],pos[1]);
     // Products loaded -> new iCals can be loaded while scrolling
     searchingProducts = false;
-}
-
-// load more products when scrolling
-function loadMoreProducts():void{
-    if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
-        if (!searchingProducts) {
-            searchingProducts = true;
-            // show loader gif
-            $('#loadMoreProductsLoader').show();
-            // number of products that are already loaded
-            var count:number = $("#search_results tr").length-1;
-
-            // send request
-            // which search was used?
-            if(findAllSearch == "true"){
-                productApi.findAll(LOADLIMIT,count,showProducts);
-            }else{
-                productApi.findByName(findAllSearch,LOADLIMIT,count,showProducts);
-            }
-        }
-    }
 }
 
 function prepareDialogFunktions() {
@@ -183,7 +128,6 @@ function prepareDialogFunktions() {
         //preparedLocationString = preparedLocationString.replace(" ","_");
         var newlocationURL = productApi.getLinkToProductMap() + "?id=" + preparedLocationString;
         modalProductMapLink.attr("href", newlocationURL);
-
     });
 }
 
@@ -223,6 +167,7 @@ function isNumber(value:String):boolean {
 }
 
 function cleanTable():void {
+    console.log("In cleanTable");
     $("#search_results").empty();
     createTableHeader();
 }
@@ -239,11 +184,8 @@ function hideEmptyResultText():void {
 function sortById() {
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
-
     newArrayAscendingOrder = currentProcutList;
-
     var tempProduct:common.Product = null;
-
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
@@ -260,11 +202,8 @@ function sortByName() {
     newArrayAscendingOrder: Array<common.Product>();
     var newArrayAscendingOrder = new Array<common.Product>();
     //var newArrayDescendingOrder = new Array<common.Product>();
-
     newArrayAscendingOrder = currentProcutList;
-
     var tempProduct:common.Product = null;
-
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
@@ -284,7 +223,6 @@ function sortByLocation() {
 
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
-
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
@@ -299,12 +237,9 @@ function sortByLocation() {
 
 function sortByPrice() {
     var newArrayAscendingOrder = new Array<common.Product>();
-    //var newArrayDescendingOrder = new Array<common.Product>();
-
+    //var newArrayDescendingOrder = new Array<common.Product>()
     newArrayAscendingOrder = currentProcutList;
-
     var tempProduct:common.Product = null;
-
     for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
         for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
             if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
