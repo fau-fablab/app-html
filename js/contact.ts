@@ -1,8 +1,8 @@
-/// <reference path="libraries/jquery.d.ts" />
+/// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/Product.ts" />
-/// <reference path="libraries/lib.d.ts" />
+/// <reference path="lib.d.ts" />
 // General REST class
 
 var toolArray: Array<common.FabTool>;

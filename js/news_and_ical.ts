@@ -1,7 +1,7 @@
 /// <reference path="util/RestClient.ts"/>
-/// <reference path="libraries/jquery.d.ts" />
-/// <reference path="libraries/iscroll.d.ts" />
-/// <reference path="libraries/lib.d.ts" />
+/// <reference path="jquery.d.ts" />
+/// <reference path="iscroll.d.ts" />
+/// <reference path="lib.d.ts" />
 
 // prevent loading news/icals when they are already loading
 var searchingNews:boolean = false;

@@ -1,5 +1,5 @@
 /// <reference path="util/RestClient.ts" />
-/// <reference path="libraries/jquery.d.ts" />
+/// <reference path="jquery.d.ts" />
 
 enum DoorState {invalid, open, close}
 

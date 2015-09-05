@@ -1,4 +1,4 @@
-﻿/// <reference path="libraries/jquery.d.ts" />
+﻿/// <reference path="jquery.d.ts" />
 
 $(document).ready(function () {
     var hamburger = $("#menu-toggle");

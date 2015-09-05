@@ -1,5 +1,5 @@
-/// <reference path="libraries/iscroll.d.ts" />
-/// <reference path="libraries/jquery.d.ts" />
+/// <reference path="iscroll.d.ts" />
+/// <reference path="jquery.d.ts" />
 $(document).ready(function () {
     // add vertical touch scrolling
 
