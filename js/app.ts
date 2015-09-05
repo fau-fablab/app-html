@@ -33,7 +33,7 @@ $(document).ready(function () {
     $("#doorState").click(triggerDoorStateUpdate);
 
 
-    var currentHash = "";
+    var currentHash = window.location.hash;
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
     //setInterval("reloadPage()",250);
@@ -82,6 +82,9 @@ function loadPage(url):void{
             break;
         case "CONTACT":
             title = "KONTAKT";
+            break;
+        case "TOOLUSAGE":
+            title = "RESERVIERUNG";
             break;
         default:
             title = "NO TITLE DEFINED compare app.ts";

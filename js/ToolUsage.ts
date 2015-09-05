@@ -11,7 +11,6 @@ class Reservation {
 
     constructor () {
         this.client = new RestClient();
-
         this.updateToolList();
     }
 
@@ -34,12 +33,25 @@ class Reservation {
     }
 
     getUsageList( machineId : number ) {
+        if (machineId < 0) {
+            this.usageListCallback(-1, null);
+            return;
+        }
+
         var r : Reservation = this;
         this.client.requestGET("/toolUsage/" + machineId + "/", function(result){r.usageListCallback(machineId, result)});
     }
 
     usageListCallback(machineId : number, results : common.ToolUsage) {
+
         var table = $('#machineUsageTable');
+        table.find("tbody").empty();
+
+        if (machineId < 0) {
+            this.disableAddEntry(true);
+            return;
+        }
+
         var i : number = 0;
         for (var r in results) {
 
@@ -59,17 +71,59 @@ class Reservation {
             tr.appendTo(table);
             i++;
         }
+
+        this.disableAddEntry(false);
     }
 
     loadTable() {
-        var machineId = $("#machineSelector").val();
+        var machineId : number = $("#machineSelector").val();
         if (machineId != -1)
             this.getUsageList(machineId);
+        else
+            this.usageListCallback(-1, null);
+    }
+
+    addEntry() {
+        var usage : common.ToolUsage = new common.ToolUsage();
+
+        var inputUser = $("#addEntryUser");
+        var inputDuration = $("#addEntryDuration");
+
+        if (inputUser.val().length == 0 || inputDuration.val().length == 0)
+            return;
+
+        usage.toolId = $("#machineSelector").val();
+        usage.user = inputUser.val();
+        usage.duration = parseInt(inputDuration.val());
+
+        this.submitNewEntry(usage);
+    }
+
+    submitNewEntry(usage : common.ToolUsage) {
+
+        var r : Reservation = this;
+        this.client.request("PUT", "/toolUsage/" + usage.toolId + "/", function(results){r.callbackSubmitNewEntry(results);}, JSON.stringify(usage));
+    }
+
+    callbackSubmitNewEntry(result) {
+        this.loadTable();
+    }
+
+    disableAddEntry(flag : boolean) {
+        $("#addEntryUser").prop("disabled", flag);
+        $("#addEntryDuration").prop("disabled", flag);
+        $("#addEntrySubmit").prop("disabled", flag);
     }
 }
 
 
 $(document).ready(function () {
     reservation = new Reservation();
-    $("#machineSelector").change(function(){ reservation.loadTable(); })
+    reservation.disableAddEntry(true);
+
+    // load list of usage items on change
+    $("#machineSelector").change(function(){ reservation.loadTable(); });
+
+    // register callback to add new entries
+    $("#addEntrySubmit").click(function(){ reservation.addEntry(); });
 });
