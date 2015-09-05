@@ -106,12 +106,7 @@ function showProducts(records:any):void {
     $('#loadMoreProductsLoader').hide();
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#search_results_container",{
-        probeType: 3,
-        scrollbars: true,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
+    vertScroll = new IScroll("#search_results_container");
     setTimeout(function () {
         vertScroll.refresh();
     }, 200);

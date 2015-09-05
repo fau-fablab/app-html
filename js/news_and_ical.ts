@@ -88,11 +88,7 @@ function addNews(news):void {
     });
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#wrapperNews",{
-        probeType: 3,
-        mouseWheel: true,
-        interactiveScrollbars: true
-    });
+    vertScroll = new IScroll("#wrapperNews");
     // check scroll position to load dynamically more news
     vertScroll.on("scroll", loadMoreNews);
     vertScroll.refresh();
@@ -203,11 +199,7 @@ function addICals(icals):void{
 
 
     // add horizontal touch scrolling
-    horScroll = new IScroll("#wrapperICal",{
-        scrollX: true,
-        probeType: 3,
-        interactiveScrollbars: true
-    });
+    horScroll = new IScroll("#wrapperICal");
 
     // check scroll position to load dynamically more icals
     horScroll.on("scroll", loadMoreICals);
