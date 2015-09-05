@@ -23,11 +23,11 @@ class RestClient{
 		  
 		  // return json response and handle response in the specific callback function
 		  xhr.onload = function() {
-              var response:string;
+              var response : string;
 
-              if(method == "POST"){
+              if (method == "POST") {
                   response = xhr.responseText;
-              }else{
+              } else if (xhr.responseText.length > 0) {
                   response = JSON.parse(xhr.responseText);
               }
 
