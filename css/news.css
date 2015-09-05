@@ -67,25 +67,6 @@
     margin: 0 !important;
 }
 
-/*--------- news onclick dialog ---------*/
-#dialogImage{
-    max-height: 220px;
-    max-width: 100%;
-    margin: 5px 0px 5px 0px;
-}
-
-#dialogDescriptionShort{
-    text-align: left;
-    font-size: 14px;
-}
-
-#dialogTitle{
-    margin: 0px 0px 5px 0px ;
-    padding: 0px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
 /*--------- iCals ---------*/
 #ical_container{
     width: 2850px;
