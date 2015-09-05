@@ -3,6 +3,7 @@
 
     <table id="machineUsageTable" class="table table-striped">
         <caption>
+            <label for="machineSelector" class="control-label">Maschine</label>
             <select class="form-control" id="machineSelector">
                 <option value="-1">--- Bitte Maschine auswählen ---</option>
             </select>
@@ -17,8 +18,23 @@
         <tbody>
 
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="addEntryUser" type="text" class="form-control" placeholder="Username"/>
+                </td>
+                <td>
+                    <div class="form-inline">
+                    <input id="addEntryDuration" type="text" class="form-control" placeholder="Dauer"/>
+                    <button id="addEntrySubmit" type="button" class="btn btn-primary">Eintragen</button>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
 </div>
 
+<script type="text/javascript" src="js/common/model/ToolUsage.js"></script>
 <script type="text/javascript" src="js/ToolUsage.js"></script>
