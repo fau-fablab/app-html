@@ -1,5 +1,7 @@
 ﻿// typescript import to create XDomainRequests
 /// <reference path="../lib.d.ts" />
+/// <reference path="../authentication.ts" />
+/// <reference path="../common/model/User.ts" />
 // General REST class
 class RestClient{
 
@@ -158,6 +160,19 @@ class RestClient{
 		};
 
 		xhr.send();
+	}
+	public checkAuthentication () {
+		var user : common.User = Authentication.getUserInfo();
+		if (user) {
+			this.addAuthentication(user.username, user.password);
+		}
+		else {
+			this.clearAuthentication();
+		}
+	}
+
+	public hasAuthentication () : boolean {
+		return this._authentication.length > 0;
 	}
 
 	public addAuthentication(aUsername : string, aPassword : string) {
