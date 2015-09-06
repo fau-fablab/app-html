@@ -16,10 +16,10 @@ class Reservation {
 
     updateToolList() {
         var r : Reservation = this;
-        this.client.requestGET("/drupal/tools", function(result) { r.toolListCallback(result)});
+        this.client.requestGET("/drupal/tools", function(result) { r.updateToolListCallback(result)});
     }
 
-    toolListCallback(list) {
+    updateToolListCallback(list) {
         this.toolArray = list;
         var select = $('#machineSelector');
 
@@ -42,7 +42,7 @@ class Reservation {
         this.client.requestGET("/toolUsage/" + machineId + "/", function(result){r.usageListCallback(machineId, result)});
     }
 
-    usageListCallback(machineId : number, results : common.ToolUsage) {
+    usageListCallback(machineId : number, results : Array<common.ToolUsage>) {
 
         var table = $('#machineUsageTable');
         table.find("tbody").empty();
@@ -65,8 +65,16 @@ class Reservation {
             td_user.appendTo(tr);
 
             var td_duration = $(document.createElement('td'));
-            td_duration.text(results[i].duration);
+            td_duration.text(results[i].duration.toString());
             td_duration.appendTo(tr);
+
+            var td_delete = $(document.createElement('td'));
+            var deleteIcon = $(document.createElement('span'));
+            deleteIcon.attr("class", "glyphicon glyphicon-remove");
+            deleteIcon.attr("aria-hidden", "true");
+            deleteIcon.attr("onClick", "reservation.deleteEntry(" + results[i].id + ");")
+            deleteIcon.appendTo(td_delete);
+            td_delete.appendTo(tr);
 
             tr.appendTo(table);
             i++;
@@ -75,8 +83,12 @@ class Reservation {
         this.disableAddEntry(false);
     }
 
+    getSelectedMachineId() : number {
+        return $("#machineSelector").val();
+    }
+
     loadTable() {
-        var machineId : number = $("#machineSelector").val();
+        var machineId : number = this.getSelectedMachineId();
         if (machineId != -1)
             this.getUsageList(machineId);
         else
@@ -92,7 +104,7 @@ class Reservation {
         if (inputUser.val().length == 0 || inputDuration.val().length == 0)
             return;
 
-        usage.toolId = $("#machineSelector").val();
+        usage.toolId = this.getSelectedMachineId();
         usage.user = inputUser.val();
         usage.duration = parseInt(inputDuration.val());
 
@@ -106,6 +118,19 @@ class Reservation {
     }
 
     callbackSubmitNewEntry(result) {
+        this.loadTable();
+    }
+
+    deleteEntry(id : number) {
+        var r : Reservation = this;
+        this.client.request(
+            "DELETE",
+            "/toolUsage/" + this.getSelectedMachineId() + "/" + id + "/",
+            function(results){r.deleteEntryCallback(results);}
+        );
+    }
+
+    deleteEntryCallback(result) {
         this.loadTable();
     }
 
