@@ -168,6 +168,7 @@ class Reservation {
 
     disableAddEntry(flag : boolean) {
         $("#addEntryUser").prop("disabled", flag);
+        $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
         $("#addEntrySubmit").prop("disabled", flag);
     }
