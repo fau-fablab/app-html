@@ -77,8 +77,6 @@ function addNews(news):void {
 
     truncatedTexts.on('click','.read-more', function (event) {
         (<any>$(this)).parent().trunk8('revert').append(" <span class='read-less'>&nbsp;&laquo;&nbsp;</span>");
-        //(<any>$(this)).parent().trunk8('revert');
-        //(<any>$(this)).parent().html("XXX");
         return false;
     });
 
