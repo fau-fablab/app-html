@@ -31,7 +31,7 @@ $(document).ready(function () {
     $("#doorState").click(triggerDoorStateUpdate);
 
 
-    var currentHash = "";
+    var currentHash = window.location.hash;
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
 
