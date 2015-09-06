@@ -116,7 +116,17 @@ function reloadPage(){
     var currentHash2 = window.location.hash;
     console.log("CurrentHash: " + currentHash2);
     loadPage(currentAttribute);
-    $('.navbar-toggle').click() //bootstrap 3.x by Richard
+
+    var listElement = $(this).parent();
+    var listGroupElement = listElement.parent();
+
+    var allListElements = listGroupElement.children();
+    allListElements.removeClass("active")
+    // make menue aktiv
+
+    listElement.addClass("active");
+    // close navbar when clicked
+    $('.navbar-toggle').click()
 
 }
 
