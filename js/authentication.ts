@@ -9,7 +9,7 @@ class Authentication {
     private static localStorageLogin : string = "login";
 
     constructor () {
-        this.importUser(JSON.parse(localStorage.getItem(Authentication.localStorageLogin)));
+        this.importUser(Authentication.getUserInfo());
     }
 
     login (username : string, password : string, cb : (auth : Authentication) => any) {
@@ -44,6 +44,7 @@ class Authentication {
     }
 
     callbackLogin(user) {
+        this.user = new common.User();
         this.user.fromRecord(user);
         this._isAuthenticated = true;
         localStorage.setItem(Authentication.localStorageLogin, JSON.stringify(user));
@@ -53,6 +54,8 @@ class Authentication {
     }
 
     callbackError(errorCode : number, errorMessage : string) {
+        this._isAuthenticated = false;
+
         if (errorCode == 401) {
             alert("Username und/oder Passwort sind falsch.");
         }
@@ -69,13 +72,22 @@ class Authentication {
         return this.user;
     }
 
-    importUser(user) {
-        if (user == null) {
-            return;
+    importUser(user : common.User) {
+        if (user && user.password.length > 0 && user.username.length > 0) {
+            this.user = user;
+            this._isAuthenticated = true;
+        } else {
+            this._isAuthenticated = false;
         }
+    }
 
-        this.user = new common.User();
-        this.user.fromRecord(user);
-        this._isAuthenticated = true;
+    static getUserInfo() : common.User {
+        var user : common.User = new common.User();
+        var result : boolean = user.fromRecord(JSON.parse(localStorage.getItem(Authentication.localStorageLogin)));
+
+        if (result)
+            return user;
+        else
+            return null;
     }
 }

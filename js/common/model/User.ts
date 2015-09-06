@@ -1,17 +1,16 @@
 module common{
 
     export enum Roles {
-        User,
-        Admin,
-        Iventory
+        USER,
+        ADMIN,
+        INVENTORY
     }
 
     export class User {
 
         private _username : string;
         private _password : string;
-        private _roles : Roles[] = [];
-
+        private _roles : Array<Roles> = [];
 
         public get username():string {
             return this._username;
@@ -43,20 +42,36 @@ module common{
             this._roles = [];
         }
 
-        public fromRecord(record) {
+        public fromRecord(record) : boolean {
+            if (record == null)
+                return false;
+
             this._username = record.username;
             this._password = record.password;
 
             for (var newRole in record.roles) {
 
-                var r : Roles = Roles[<string>newRole];
-                if (!this.roles.indexOf(r))
+                var r : Roles = record.roles[newRole];
+
+                if (this.roles.indexOf(r) < 0)
                     this.roles.push(r);
             }
+
+            return true;
         }
 
-        public hasRole(role : Roles) : boolean {
-            return !!this._roles.indexOf(role);
+        public hasRole(role) : boolean {
+
+            for (var i in this._roles){
+                var r1 : Roles = this._roles[i];
+                var r2 : string = Roles[r1];
+
+
+                if (r1 == role || r2 == role)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

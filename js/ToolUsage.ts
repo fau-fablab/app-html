@@ -1,16 +1,21 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
+/// <reference path="authentication.ts" />
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/ToolUsage.ts" />
+/// <reference path="common/model/User.ts" />
 
 var reservation : Reservation = null;
 
 class Reservation {
     toolArray : Array<common.FabTool>;
     client : RestClient = null;
+    static secretTokenKey = "ReservationToken";
+    static ownIdList = "ReservationIdList";
 
     constructor () {
         this.client = new RestClient();
+        this.client.checkAuthentication();
         this.updateToolList();
     }
 
@@ -52,6 +57,7 @@ class Reservation {
             return;
         }
 
+        var user : common.User = Authentication.getUserInfo();
         var i : number = 0;
         for (var r in results) {
 
@@ -64,16 +70,28 @@ class Reservation {
             td_user.text(results[i].user);
             td_user.appendTo(tr);
 
+            var td_proj = $(document.createElement('td'));
+            td_proj.text(results[i].project);
+            td_proj.appendTo(tr);
+
             var td_duration = $(document.createElement('td'));
             td_duration.text(results[i].duration.toString());
             td_duration.appendTo(tr);
 
             var td_delete = $(document.createElement('td'));
-            var deleteIcon = $(document.createElement('span'));
-            deleteIcon.attr("class", "glyphicon glyphicon-remove");
-            deleteIcon.attr("aria-hidden", "true");
-            deleteIcon.attr("onClick", "reservation.deleteEntry(" + results[i].id + ");")
-            deleteIcon.appendTo(td_delete);
+
+            if (user && (
+                    user.hasRole(common.Roles.ADMIN) ||
+                    user.username == results[r].user) ||
+                this.isOwnId(results[r].id)
+            ) {
+                var deleteIcon = $(document.createElement('span'));
+
+                deleteIcon.attr("class", "glyphicon glyphicon-remove");
+                deleteIcon.attr("aria-hidden", "true");
+                deleteIcon.attr("onClick", "reservation.deleteEntry(" + results[i].id + ");");
+                deleteIcon.appendTo(td_delete);
+            }
             td_delete.appendTo(tr);
 
             tr.appendTo(table);
@@ -81,6 +99,11 @@ class Reservation {
         }
 
         this.disableAddEntry(false);
+        if (user) {
+            var inputUser = $("#addEntryUser");
+            inputUser.prop("disabled", true);
+            inputUser.val(user.username);
+        }
     }
 
     getSelectedMachineId() : number {
@@ -99,6 +122,7 @@ class Reservation {
         var usage : common.ToolUsage = new common.ToolUsage();
 
         var inputUser = $("#addEntryUser");
+        var inputProj = $("#addEntryProject");
         var inputDuration = $("#addEntryDuration");
 
         if (inputUser.val().length == 0 || inputDuration.val().length == 0)
@@ -106,6 +130,7 @@ class Reservation {
 
         usage.toolId = this.getSelectedMachineId();
         usage.user = inputUser.val();
+        usage.project = inputProj.val();
         usage.duration = parseInt(inputDuration.val());
 
         this.submitNewEntry(usage);
@@ -114,10 +139,17 @@ class Reservation {
     submitNewEntry(usage : common.ToolUsage) {
 
         var r : Reservation = this;
-        this.client.request("PUT", "/toolUsage/" + usage.toolId + "/", function(results){r.callbackSubmitNewEntry(results);}, JSON.stringify(usage));
+        this.client.request("PUT", "/toolUsage/" + usage.toolId + "/" + this.getToken(), function(results){r.callbackSubmitNewEntry(results);}, JSON.stringify(usage));
     }
 
     callbackSubmitNewEntry(result) {
+        if (result == null)
+            return;
+
+        if (this.getToken().length > 0){
+            this.addOwnId(result.id)
+        }
+
         this.loadTable();
     }
 
@@ -125,7 +157,7 @@ class Reservation {
         var r : Reservation = this;
         this.client.request(
             "DELETE",
-            "/toolUsage/" + this.getSelectedMachineId() + "/" + id + "/",
+            "/toolUsage/" + this.getSelectedMachineId() + "/" + id + "/" + this.getToken(),
             function(results){r.deleteEntryCallback(results);}
         );
     }
@@ -136,8 +168,45 @@ class Reservation {
 
     disableAddEntry(flag : boolean) {
         $("#addEntryUser").prop("disabled", flag);
+        $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
         $("#addEntrySubmit").prop("disabled", flag);
+    }
+
+    private getToken() : string {
+        var tokenAddon : string = "";
+        if (!this.client.hasAuthentication()) {
+            var token : string = localStorage.getItem(Reservation.secretTokenKey);
+            if (token == null) {
+                var d = new Date().getTime();
+                token = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = (d + Math.random()*16)%16 | 0;
+                    d = Math.floor(d/16);
+                    return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+                });
+                localStorage.setItem(Reservation.secretTokenKey, token);
+            }
+            tokenAddon = "?token=" + token;
+        }
+        return tokenAddon;
+    }
+
+    private addOwnId(id : number) {
+        var idList : Array<number> = JSON.parse(localStorage.getItem(Reservation.ownIdList));
+        if (idList == null) {
+            idList = new Array<number>();
+        }
+        idList.push(id);
+        localStorage.setItem(Reservation.ownIdList, JSON.stringify(idList));
+    }
+
+    private isOwnId(id : number) : boolean {
+        var idList : Array<number> = localStorage.getItem(Reservation.ownIdList);
+        if (idList == null) {
+            return false;
+        }
+
+        return idList.indexOf(id) >= 0;
     }
 }
 

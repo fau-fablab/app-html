@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container jumbotron">
 
     <div id="seach_container">
 
@@ -14,7 +14,7 @@
                         </div>
                         <input onkeyup="if(event.keyCode == 13){search();};"
                                placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
-                               id="inputSuche" list="product_options" />
+                               id="inputSuche" list="product_options"/>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
         <!--<input id="empty_text"/>-->
         <table id="search_results" class="table table-hover table-condensed">
         </table>
-        <div id="loadMoreProductsLoader"><img src="img/ajax-loader.gif" /></div>
+        <div id="loadMoreProductsLoader"><img src="img/ajax-loader.gif"/></div>
     </div>
 
     <div>
@@ -43,32 +43,34 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                        <div class="col-md-9 col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7">
                             <h4 class="modal-title" id="myModalLabel"></h4>
                         </div>
-
-                        <div class="input-group number-spinner col-md-3 col-xs-3">
+                        <div class="col-xs-5 col-md-5">
+                            <div class="input-group number-spinner ">
                             <span class="input-group-btn data-dwn">
                                 <button class="btn btn-default btn-default" data-dir="dwn" id="modal-number-down">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
-                            <input id="modal-number" type="text" class="form-control text-center" value="1" min="0"
-                                   max="1000">
+                                <input id="modal-number" type="text" class="form-control text-center" value="1" min="0"
+                                       max="1000">
                             <span class="input-group-btn data-up">
                                 <button class="btn btn-default btn-default" data-dir="up" id="modal-number-up">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
+                            </div>
                         </div>
-
+                    </div>
 
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
-                                <label for="modal-productid" class="col-lg-4">Produkt ID</label>
+                                <label for="modal-productid" class="col-lg-4"><strong>Produkt ID</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productid"></label>
@@ -76,7 +78,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="modal-productname" class="col-lg-4">Name</label>
+                                <label for="modal-productname" class="col-lg-4"><strong>Name</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productname"></label>
@@ -85,7 +87,8 @@
 
 
                             <div class="form-group">
-                                <label for="modal-productdescription" class="col-lg-4">Beschreibung</label>
+                                <label for="modal-productdescription"
+                                       class="col-lg-4"><strong>Beschreibung</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productdescription"></label>
@@ -93,7 +96,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="modal-productprice" class="col-lg-4">Preis</label>
+                                <label for="modal-productprice" class="col-lg-4"><strong>Preis</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productprice"></label>
@@ -102,7 +105,7 @@
 
 
                             <div class="form-group">
-                                <label for="modal-productunit" class="col-lg-4">Einheit</label>
+                                <label for="modal-productunit" class="col-lg-4"><strong>Einheit</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productunit"></label>
@@ -110,7 +113,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="modal-productlocation" class="col-lg-4">Standort</label>
+                                <label for="modal-productlocation" class="col-lg-4"><strong>Standort</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productlocation"></label>
@@ -118,7 +121,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="modal-productCategory" class="col-lg-4">Kategorie</label>
+                                <label for="modal-productCategory" class="col-lg-4"><strong>Kategorie</strong></label>
 
                                 <div class="col-lg-8">
                                     <label id="modal-productCategory"></label>
@@ -139,8 +142,12 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="modal-productAddToCart" type="button" class="btn btn-success" data-dismiss="modal">In den Warenkorb</button>
-                    <button type="button" onclick="clearNumberPicker()" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button id="modal-productAddToCart" type="button" class="btn btn-success" data-dismiss="modal">In
+                        den Warenkorb
+                    </button>
+                    <button type="button" onclick="clearNumberPicker()" class="btn btn-danger" data-dismiss="modal">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -148,6 +155,6 @@
 
 </div>
 
-<!-- loads cart functions and product search script --> 
+<!-- loads cart functions and product search script -->
 <script src="js/product_search.js"></script>
 

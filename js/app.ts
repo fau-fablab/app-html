@@ -26,7 +26,6 @@ function triggerDoorStateUpdate() {
 }
 
 $(document).ready(function () {
-    console.log("Document was loaded: " + window.location.hash);
     // initialize space api / door state
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
@@ -116,7 +115,17 @@ function reloadPage(){
     var currentHash2 = window.location.hash;
     console.log("CurrentHash: " + currentHash2);
     loadPage(currentAttribute);
-    $('.navbar-toggle').click() //bootstrap 3.x by Richard
+
+    var listElement = $(this).parent();
+    var listGroupElement = listElement.parent();
+
+    var allListElements = listGroupElement.children();
+    allListElements.removeClass("active")
+    // make menue aktiv
+
+    listElement.addClass("active");
+    // close navbar when clicked
+    $('.navbar-toggle').click()
 
 }
 
