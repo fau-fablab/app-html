@@ -26,13 +26,12 @@ function triggerDoorStateUpdate() {
 }
 
 $(document).ready(function () {
-    console.log("Document was loaded: " + window.location.hash);
     // initialize space api / door state
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 
 
-    var currentHash = window.location.hash;
+    var currentHash = "";
     var nav_links:any = $("a.nav_link2");
     nav_links.click(reloadPage);
 
