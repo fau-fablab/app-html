@@ -2,9 +2,11 @@
 /// <reference path="common/model/Category.ts" />
 /// <reference path="common/model/Product.ts" />
 /// <reference path="jquery.d.ts" />
-/// <reference path="iscroll.d.ts" />
 /// <reference path="cart_functions.ts"/>
 /// <reference path="util/Formatter.ts"/>
+/// <reference path="elements/ProductCounter.ts"/>
+/// <reference path="elements/ProductDialog.ts"/>
+/// <reference path="util/Utils.ts"/>
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 var autoComplitionArray:Array<string> = new Array<string>();
@@ -12,6 +14,8 @@ var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
 var formatter: Formatter = new Formatter();
+var productCounter: ProductCounter;
+var utils: Utils = new Utils();
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -46,10 +50,9 @@ function search():void {
 
     if (researchCriteria == "") {
         findAllSearch = "true";
-
         productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
-    else if (isNumber(researchCriteria)) {
+    else if (utils.isNumber(researchCriteria)) {
         console.log("War number");
         productApi.findById(researchCriteria,showProduct);
     }
@@ -98,34 +101,10 @@ function prepareDialogFunktions() {
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
+        productCounter = new ProductCounter(currentProduct.uomObject.rounding);
+        selectedProduct = currentProduct;
+        var productDialog = new ProductDialog(currentProduct);
 
-        var modalHeaderName = $("#myModalLabel");
-        var modalProductIdLabel = $("#modal-productid");
-        var modalProductNameLabel = $("#modal-productname");
-        var modalProductDescriptionLabel = $("#modal-productdescription");
-        var modalProductPriceLabel = $("#modal-productprice");
-        var modalProductUnitLabel = $("#modal-productunit");
-        var modalProductLocationLabel = $("#modal-productlocation");
-        var modalProductCategoryLabel = $("#modal-productCategory");
-        var modalProductMapLink = $("#modal-productMap");
-        var modalProductAddToCart = $("#modal-productAddToCart");
-
-        modalProductAddToCart.attr("data-product", JSON.stringify(currentProduct));
-        modalHeaderName.text(currentProduct.name);
-        modalProductIdLabel.text(currentProduct.productId + "");
-        modalProductNameLabel.text(currentProduct.name);
-        modalProductDescriptionLabel.text(currentProduct.description);
-        var formattetPrice = formatter.formatNumberToPrice(currentProduct.price);
-        modalProductPriceLabel.text(formattetPrice + " \u20AC");
-        modalProductUnitLabel.text(currentProduct.unit);
-        modalProductLocationLabel.text(currentProduct.locationString);
-        modalProductCategoryLabel.text(currentProduct.categoryString);
-
-        var preparedLocationString = currentProduct.locationForProductMap;
-        //preparedLocationString = preparedLocationString.replace(" / ", "/" );
-        //preparedLocationString = preparedLocationString.replace(" ","_");
-        var newlocationURL = productApi.getLinkToProductMap() + "?id=" + preparedLocationString;
-        modalProductMapLink.attr("href", newlocationURL);
     });
 }
 
@@ -155,14 +134,6 @@ function createTableHeader() {
         "</tr>");
 }
 
-function isNumber(value:String):boolean {
-    for (var index = 0; index < value.length; index++) {
-        if (value[index].search(/[0-9]/) == -1) {
-            return false;
-        }
-    }
-    return true;
-}
 
 function cleanTable():void {
     console.log("In cleanTable");
@@ -266,7 +237,10 @@ $("#modal-productAddToCart").click(function(){
     }, 200);
 });
 
+var selectedProduct: common.Product;
+
 $("#modal-number-down").click(function(){
+
     var dialogProductPrice = $("#modal-productprice").text();
     var dialogProductID = $("#modal-productid").text();
     var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
