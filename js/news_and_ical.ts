@@ -241,7 +241,7 @@ function addICals(icals):void{
             description = "";
         }
 
-        $("#iCalInfos").html("Uhrzeit: " + time + "<br/>Datum: " + date + location + description);
+        $("#iCalInfos").html("Uhrzeit: " + time + "<br/>Datum: " + date + location + convertToLinks(description));
 
 
         // add information to calendar event
