@@ -114,7 +114,6 @@ dl{
     width: 100%;
     /*position: absolute;*/
     position: relative;
-    top: 0px;
 }
 
 .ical{
@@ -288,6 +287,11 @@ dl{
 
     dd{
         display: block;
+        float: none;
+    }
+
+    dl{
+        margin: 0px;
     }
 
 }
@@ -311,6 +315,11 @@ dl{
     dd{
         display: block;
         padding:10px;
+        float: none;
+    }
+
+    dl{
+        margin: 0px;
     }
 }
 
@@ -324,5 +333,10 @@ dl{
 
     dd{
         display: block;
+        float: none;
+    }
+
+    dl{
+        margin: 0px;
     }
 }
