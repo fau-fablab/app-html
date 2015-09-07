@@ -114,8 +114,8 @@ function addICals(icals):void{
     // remember scroll position
     var pos:number[] = [0,0];
     if(horScroll){
-        pos[0] = vertScroll.x;
-        pos[1] = vertScroll.y;
+        pos[0] = horScroll.x;
+        pos[1] = horScroll.y;
         horScroll.destroy();
     }
 
@@ -163,7 +163,12 @@ function addICals(icals):void{
 
 
     // add horizontal touch scrolling
-    horScroll = new IScroll("#wrapperICal");
+    horScroll = new IScroll("#wrapperICal",{
+        scrollX: true,
+        probeType: 3,
+        scrollbars: true,
+        interactiveScrollbars: true
+    });
 
     // check scroll position to load dynamically more icals
     horScroll.on("scroll", loadMoreICals);
