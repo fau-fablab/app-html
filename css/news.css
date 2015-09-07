@@ -80,6 +80,9 @@
 }
 
 /*--------- iCals ---------*/
+.iScrollHorizontalScrollbar{
+    z-index: 0 !important;
+}
 #ical_container{
     width: 2850px;
     height: 120px;
