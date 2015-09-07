@@ -92,40 +92,6 @@ function addNews(news):void {
     vertScroll.refresh();
     vertScroll.scrollTo(pos[0],pos[1]);
 
-
-    /*// show news dialog click function
-    $(".row-news").click(function(event){
-        // return if it is a drag and not a click
-        if (vertScroll.moved) {
-            return false;
-        }
-
-        var card = $(this);
-
-        // disable scroll in the background
-        disableScroll();
-
-        var image:string = card.attr("data-image");
-        var title:string = card.attr("data-title");
-        var descriptionShort:string = convertToLinks(card.attr("data-descriptionShort"));
-
-        // set content
-        $("#dialogTitle").text(title);
-        $("#dialogDescriptionShort").html(descriptionShort);
-        $("#dialogImage").attr("src", image);
-
-        // show dialog
-        (<any>$('#newsModal')).modal('show');
-
-
-    });
-
-    // close dialog
-    $("#closeNewsDialog").click(function(event){
-        // allow scrolling again
-        $('body').css('overflow', 'auto').off('touchmove');
-    });*/
-
     // hide loader
     $('div#loadMoreNewsLoader').hide();
 
