@@ -272,6 +272,31 @@ $("#modal-number-up").click(function(){
     }
 });
 
+$("#modal-number").change(function(){
+
+    var modalNumberLabel = $("#modal-number");
+    var numberValue: any = modalNumberLabel.val();
+
+    if( numberValue <= 0){
+        modalNumberLabel.val("1");
+    }
+
+    var util: Utils = new Utils();
+    if(!(util.isNumber(numberValue))){
+        modalNumberLabel.val("1");
+    }
+
+    var dialogProductID = $("#modal-productid").text();
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var newPrice: number = product.price * numberValue;
+
+
+    var formatedPrice = formatter.formatNumberToPrice(product.price);
+    var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+    $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+
+});
+
 function getProductByID(procutList:Array<common.Product>,id:number):common.Product{
     for(var index = 0; index<procutList.length;index++){
         if(procutList[index].productId == id){

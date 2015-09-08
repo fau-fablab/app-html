@@ -27,8 +27,6 @@ class ProductDialog {
     private modalProductCounterValue = $("#modal-number");
 
 
-
-
     constructor(aProduct:common.Product) {
         this._currentProduct = aProduct;
         console.log("Create ProductDialog with Product " + this._currentProduct.name);
