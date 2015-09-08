@@ -11,6 +11,5 @@
     
 </div>
 
-    
-<!-- (empty) footer with </body> and </html> -->
+<!-- (empty) footer with </body> and </html> and one lightbox library-->
 <?php require_once("includes/footer.html"); ?>
