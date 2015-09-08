@@ -104,7 +104,6 @@ function prepareDialogFunktions() {
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
         productCounter = new ProductCounter(currentProduct.uomObject.rounding);
-        selectedProduct = currentProduct;
         productDialog = new ProductDialog(currentProduct);
 
     });
@@ -239,44 +238,8 @@ $("#modal-productAddToCart").click(function(){
     }, 200);
 });
 
-var selectedProduct: common.Product;
 
-$("#modal-number-down").click(function(){
 
-    var dialogProductPrice = $("#modal-productprice").text();
-    var dialogProductID = $("#modal-productid").text();
-    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue: any = $("#modal-number").val();
-    var count: number = parseInt(numberValue);
-    count--;
-    if(count >= 0){
-        var newValue: any = count;
-        $("#modal-number").val(newValue);
-        var newPrice: number = product.price * newValue;
-        var formatedPrice = formatter.formatNumberToPrice(product.price);
-        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
-    }
-});
-
-$("#modal-number-up").click(function(){
-    var dialogProductPrice = $("#modal-productprice").text();
-    var dialogProductID = $("#modal-productid").text();
-    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue: any = $("#modal-number").val();
-    var count: number = parseInt(numberValue);
-    count++;
-    if(count < 1000){
-        var newValue: number = count;
-        $("#modal-number").val(newValue+"");
-        console.log("Produkt-Price: " + product.price);
-        console.log("Count: " + newValue);
-        var newPrice: number = product.price * newValue;
-        var formatedPrice = formatter.formatNumberToPrice(product.price);
-        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
-    }
-});
 
 function getProductByID(procutList:Array<common.Product>,id:number):common.Product{
     for(var index = 0; index<procutList.length;index++){
