@@ -15,14 +15,14 @@ class ProductCounter {
     }
 
 
-    public incrementValue():void {
-        this._currentValue = this._currentValue + (1 * this._multiplier);
+    public incrementValue(aCurrentValue: number):void {
+        this._currentValue = aCurrentValue + (1 * this._multiplier);
     }
 
-    public declineValue():void {
+    public declineValue(aCurrentValue: number):void {
         console.log("declineValue currentValue: " + this._currentValue);
-        var tempValue = this._currentValue;
-        this._currentValue = this._currentValue - (1 * this._multiplier);
+        var tempValue = aCurrentValue;
+        this._currentValue = aCurrentValue - (1 * this._multiplier);
         console.log("declineValue newValue: " + this._currentValue);
         if(this._currentValue <= 0){
             this._currentValue = tempValue;

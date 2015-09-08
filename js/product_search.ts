@@ -53,7 +53,6 @@ function search():void {
         productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
     else if (utils.isNumber(researchCriteria)) {
-        console.log("War number");
         productApi.findById(researchCriteria,showProduct);
     }
     else {
@@ -98,7 +97,6 @@ function showProducts(records:any):void {
 var productDialog: ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
-        console.log("klicke");
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
@@ -137,7 +135,6 @@ function createTableHeader() {
 
 
 function cleanTable():void {
-    console.log("In cleanTable");
     $("#search_results").empty();
     createTableHeader();
 }
@@ -238,8 +235,42 @@ $("#modal-productAddToCart").click(function(){
     }, 200);
 });
 
+var selectedProduct: common.Product;
 
+$("#modal-number-down").click(function(){
 
+    var dialogProductPrice = $("#modal-productprice").text();
+    var dialogProductID = $("#modal-productid").text();
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count--;
+    if(count >= 0){
+        var newValue: any = count;
+        $("#modal-number").val(newValue);
+        var newPrice: number = product.price * newValue;
+        var formatedPrice = formatter.formatNumberToPrice(product.price);
+        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+    }
+});
+
+$("#modal-number-up").click(function(){
+    var dialogProductPrice = $("#modal-productprice").text();
+    var dialogProductID = $("#modal-productid").text();
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
+    count++;
+    if(count < 1000){
+        var newValue: number = count;
+        $("#modal-number").val(newValue+"");
+        var newPrice: number = product.price * newValue;
+        var formatedPrice = formatter.formatNumberToPrice(product.price);
+        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+    }
+});
 
 function getProductByID(procutList:Array<common.Product>,id:number):common.Product{
     for(var index = 0; index<procutList.length;index++){
