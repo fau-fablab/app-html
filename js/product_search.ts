@@ -94,16 +94,18 @@ function showProducts(records:any):void {
     searchingProducts = false;
 }
 
+
+var productDialog: ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
-
+        console.log("klicke");
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
         productCounter = new ProductCounter(currentProduct.uomObject.rounding);
         selectedProduct = currentProduct;
-        var productDialog = new ProductDialog(currentProduct);
+        productDialog = new ProductDialog(currentProduct);
 
     });
 }
@@ -289,5 +291,4 @@ function getProductByID(procutList:Array<common.Product>,id:number):common.Produ
 function clearNumberPicker(){
     $("#modal-number").val("1");
 }
-
 
