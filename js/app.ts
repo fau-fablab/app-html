@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 
     var currentHash = window.location.hash;
-    var nav_links:any = $("a.nav_link2");
+    var nav_links:any = $("a.nav_link");
     nav_links.click(reloadPage);
 
 
@@ -46,6 +46,7 @@ $(document).ready(function () {
     if(currentHash != lasturl){
         lasturl=currentHash;
         loadPage(currentHash);
+        setMenueActive(currentHash);
     }
 
     // initialize authentication
@@ -105,6 +106,7 @@ function loadPage(url):void{
         $("#content").fadeOut("fast", function(){
             $("#content").html(pageContent).fadeIn("fast");
             $("#h1_title").text(title);
+            setMenueActive(url);
         });
     });
 }
@@ -112,21 +114,20 @@ function loadPage(url):void{
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
     console.log("ReloadPage: " + window.location.hash);
-    var currentHash2 = window.location.hash;
-    console.log("CurrentHash: " + currentHash2);
+    var currentHash = window.location.hash;
+    console.log("CurrentHash: " + currentHash);
     loadPage(currentAttribute);
 
-    var listElement = $(this).parent();
-    var listGroupElement = listElement.parent();
-
-    var allListElements = listGroupElement.children();
-    allListElements.removeClass("active")
-    // make menue aktiv
-
-    listElement.addClass("active");
     // close navbar when clicked
     $('.navbar-toggle').click()
 
+}
+
+// set menue item active
+function setMenueActive(hashId:string):void{
+    var nav_links:any = $("ul.nav li");
+    nav_links.removeClass("active");
+    $(hashId).addClass("active");
 }
 
 
