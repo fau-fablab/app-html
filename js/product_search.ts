@@ -10,12 +10,12 @@
 
 var currentProcutList:Array<common.Product> = new Array<common.Product>();
 var autoComplitionArray:Array<string> = new Array<string>();
-var LOADLIMIT: number = 10;
+var LOADLIMIT:number = 10;
 var OFFSET:number = 0;
-var productApi: ProductApi = new ProductApi();
-var formatter: Formatter = new Formatter();
-var productCounter: ProductCounter;
-var utils: Utils = new Utils();
+var productApi:ProductApi = new ProductApi();
+var formatter:Formatter = new Formatter();
+var productCounter:ProductCounter;
+var utils:Utils = new Utils();
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -25,20 +25,45 @@ var findAllSearch:string = "false";
 
 $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
-    var productApi: ProductApi = new ProductApi();
+    var productApi:ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions)
 });
 
-function callbackAutoCompletions(records){
+function callbackAutoCompletions(records) {
     autoComplitionArray = records;
     var datalist = $("#product_options");
-    for(var index = 0; index < autoComplitionArray.length;index++){
-        datalist.append("<option value='" + autoComplitionArray[index] +"'></option>");
+
+    /*
+     datalist.select(sayHello);
+     datalist.click(sayHello);
+     datalist.focusout(sayHello);
+     datalist.focus(sayHello);
+
+     */
+    for (var index = 0; index < autoComplitionArray.length; index++) {
+        datalist.append("<option class='dataOption' value='" + autoComplitionArray[index] + "'></option>");
     }
 }
+/*
+ $("#dataOption").select(sayHello);
 
-document.onkeydown = function(event) {
-    if(event.keyCode == 13){
+ $("#dataOption").click(sayHello);
+
+ $("#dataOption").focus(sayHello);
+
+ $("#dataOption").dblclick(sayHello);
+
+ $("#dataOption").focusout(sayHello);
+
+
+ function sayHello(){
+ console.log("asdfasdfasdf");
+ }
+
+ */
+
+document.onkeydown = function (event) {
+    if (event.keyCode == 13) {
         search();
     }
 }
@@ -50,15 +75,15 @@ function search():void {
 
     if (researchCriteria == "") {
         findAllSearch = "true";
-        productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
+        productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
     }
-    else if (utils.isNumber(researchCriteria)) {
-        productApi.findById(researchCriteria,showProduct);
+    else if (utils.isInteger(researchCriteria)) {
+        productApi.findById(researchCriteria, showProduct);
     }
     else {
         findAllSearch = researchCriteria;
 
-        productApi.findByName(researchCriteria,LOADLIMIT,OFFSET,showSearchResults);
+        productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
     }
 }
 
@@ -70,7 +95,7 @@ function showProduct(record:any):void {
     showProducts(recordArray);
 }
 
-function showSearchResults(records:any):void{
+function showSearchResults(records:any):void {
     cleanTable();
     currentProcutList.length = 0;
     showProducts(records);
@@ -94,7 +119,7 @@ function showProducts(records:any):void {
 }
 
 
-var productDialog: ProductDialog;
+var productDialog:ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
         var currentElement = $(this);
@@ -221,85 +246,89 @@ function sortByPrice() {
 }
 
 // add product to cart button from product search
-$("#modal-productAddToCart").click(function(){
+$("#modal-productAddToCart").click(function () {
 
     var btn = $(this);
     var product:any = JSON.parse(btn.attr("data-product"));
-    var numberValue: any = $("#modal-number").val();
-    var count: number = parseInt(numberValue);
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
     product.__proto__ = common.Product.prototype;
-    addProduct(new common.CartEntry(product,count));
+    addProduct(new common.CartEntry(product, count));
     // let it bounce
     setTimeout(function () {
-        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
+        (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
     }, 200);
 });
 
-var selectedProduct: common.Product;
+var selectedProduct:common.Product;
 
-$("#modal-number-down").click(function(){
+$("#modal-number-down").click(function () {
 
     var dialogProductPrice = $("#modal-productprice").text();
     var dialogProductID = $("#modal-productid").text();
-    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue: any = $("#modal-number").val();
-    var count: number = parseInt(numberValue);
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
     count--;
-    if(count >= 0){
-        var newValue: any = count;
+    if (count >= 0) {
+        var newValue:any = count;
         $("#modal-number").val(newValue);
-        var newPrice: number = product.price * newValue;
+        var newPrice:number = product.price * newValue;
         var formatedPrice = formatter.formatNumberToPrice(product.price);
         var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
     }
 });
 
-$("#modal-number-up").click(function(){
+$("#modal-number-up").click(function () {
     var dialogProductPrice = $("#modal-productprice").text();
     var dialogProductID = $("#modal-productid").text();
-    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue: any = $("#modal-number").val();
-    var count: number = parseInt(numberValue);
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
     count++;
-    if(count < 1000){
-        var newValue: number = count;
-        $("#modal-number").val(newValue+"");
-        var newPrice: number = product.price * newValue;
+    if (count < 1000) {
+        var newValue:number = count;
+        $("#modal-number").val(newValue + "");
+        var newPrice:number = product.price * newValue;
         var formatedPrice = formatter.formatNumberToPrice(product.price);
         var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
     }
 });
 
-$("#modal-number").change(function(){
+$("#modal-number").change(function () {
 
     var modalNumberLabel = $("#modal-number");
-    var numberValue: any = modalNumberLabel.val();
+    var numberValue:any = modalNumberLabel.val();
 
-    if( numberValue <= 0){
-        modalNumberLabel.val("1");
-    }
-
-    var util: Utils = new Utils();
-    if(!(util.isNumber(numberValue))){
-        modalNumberLabel.val("1");
-    }
-
+    var util:Utils = new Utils();
     var dialogProductID = $("#modal-productid").text();
-    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var newPrice: number = product.price * numberValue;
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
 
+    numberValue = util.replaceAllCommaToDots(numberValue);
+    if(!(util.isPositivNumber(numberValue))){
+        modalNumberLabel.val("1");
+        numberValue = 1;
+    }
+
+    if(!(util.isValidRoundingValue(numberValue,product.uomObject.rounding))){
+        modalNumberLabel.val("1");
+        numberValue = 1;
+    }
+
+
+    var newPrice:number = product.price * numberValue;
 
     var formatedPrice = formatter.formatNumberToPrice(product.price);
     var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-    $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
+    $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
 
 });
 
-function getProductByID(procutList:Array<common.Product>,id:number):common.Product{
-    for(var index = 0; index<procutList.length;index++){
-        if(procutList[index].productId == id){
+function getProductByID(procutList:Array<common.Product>, id:number):common.Product {
+    for (var index = 0; index < procutList.length; index++) {
+        if (procutList[index].productId == id) {
             return procutList[index];
         }
     }
@@ -307,7 +336,11 @@ function getProductByID(procutList:Array<common.Product>,id:number):common.Produ
     return null;
 }
 
-function clearNumberPicker(){
+function clearNumberPicker() {
     $("#modal-number").val("1");
 }
+
+
+
+
 

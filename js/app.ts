@@ -1,7 +1,7 @@
 /// <reference path="spaceapi.ts" />
 /// <reference path="authentication.ts" />
 /// <reference path="common/rest/ProductApi.ts"/>
-
+/// <reference path="util/Utils.ts"/>
 
 var spaceapi:SpaceApi = null;
 var auth:Authentication = null;
