@@ -38,7 +38,7 @@ $(document).ready(function () {
 
 
     //setInterval("reloadPage()",250);
-    if(currentHash == "" || currentHash == null || currentHash == "#close"){
+    if(currentHash == "" || currentHash == null){
         currentHash = "#news";
         window.location.hash = currentHash;
     }
