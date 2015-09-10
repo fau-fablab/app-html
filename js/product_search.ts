@@ -141,246 +141,220 @@ function prepareDialogFunktions() {
 function createTableRows(productArray:Array<common.Product>) {
     cleanTable();
 
-    console.log("Bin hier");
-    var resultContainer = $("#search_results");
-    //resultContainer.append("<tr><td>Hallo</td></tr>");
 
-    var template:any = document.querySelector('#productrow');
-    var tdArray = template.content.querySelectorAll("td");
-    tdArray[0].textContent = "1235646565";
-    tdArray[1].textContent = "Stuff";
-
-    var clone2 = document.importNode(template.content, true);
-    tdArray[0].appendChild(clone2);
-
-
-/*
     for (var index = 0; index < productArray.length; index++) {
         console.log("Eine weitere Reihe");
         var product = productArray[index];
         var categoryName:string = product.categoryObject.name;
         var uomName:string = product.uomObject.name;
-
-        //var productRowElement = tempElement.clone();
-        //resultContainer.append(productRowElement);
-
-        //var productIdElement = productRowElement.children(".template_productid");
-        //var productNameElement = productRowElement.children(".template_productname").children(".template_productname_name");
-        //var productCategoryNameElement = productRowElement.children(".template_productname").children(".template_productname_category");
-
-
-        resultContainer.append("<tr><td>Hallo</td></tr>");
-
-    }
-        /*
         var productRow = $("")
 
-         $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
-         " <td id='productId' '>" + product.productId + "</td>" +
-         " <td id='productName'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
-         " <td id='productLocation'>" + product.locationString + "</td>" +
-         " <td id='productPrice'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
-         "</tr>");
-         }
-         */
-
-        prepareDialogFunktions();
-    }
-
-    function createTableHeader() {
-       /* $("#search_results").append("<tr> " +
-            " <th onclick='sortById()'>" + "Id" + "</th>" +
-            " <th onclick='sortByName()'>" + "Name" + "</th>" +
-            " <th onclick='sortByLocation()'>" + "Lagerort" + "</th>" +
-            " <th onclick='sortByPrice()'>" + "Preis" + "</th>" +
+        $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
+            " <td id='productId' '>" + product.productId + "</td>" +
+            " <td id='productName'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
+            " <td id='productLocation'>" + product.locationString + "</td>" +
+            " <td id='productPrice'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
             "</tr>");
-            */
     }
 
 
-    function cleanTable():void {
-        $("#search_results").empty();
-        createTableHeader();
-    }
+    prepareDialogFunktions();
+}
 
-    function showEmptyResultText():void {
-        var headline = $("#empty_text").show();
-        headline.text("Keine Treffer!");
-    }
+function createTableHeader() {
+    $("#search_results").append("<tr> " +
+        " <th onclick='sortById()'>" + "Id" + "</th>" +
+        " <th onclick='sortByName()'>" + "Name" + "</th>" +
+        " <th onclick='sortByLocation()'>" + "Lagerort" + "</th>" +
+        " <th onclick='sortByPrice()'>" + "Preis" + "</th>" +
+        "</tr>");
 
-    function hideEmptyResultText():void {
-        $("#empty_text").hide();
-    }
+}
 
-    function sortById() {
-        var newArrayAscendingOrder = [];
-        //var newArrayDescendingOrder = new Array<common.Product>();
-        newArrayAscendingOrder = currentProcutList;
-        var tempProduct:common.Product = null;
-        for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-            for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-                if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
-                    tempProduct = newArrayAscendingOrder[innerIndex];
-                    newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
-                    newArrayAscendingOrder[innerIndex + 1] = tempProduct;
-                }
+
+function cleanTable():void {
+    $("#search_results").empty();
+    createTableHeader();
+}
+
+function showEmptyResultText():void {
+    var headline = $("#empty_text").show();
+    headline.text("Keine Treffer!");
+}
+
+function hideEmptyResultText():void {
+    $("#empty_text").hide();
+}
+
+function sortById() {
+    var newArrayAscendingOrder = [];
+    //var newArrayDescendingOrder = new Array<common.Product>();
+    newArrayAscendingOrder = currentProcutList;
+    var tempProduct:common.Product = null;
+    for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+            if (newArrayAscendingOrder[innerIndex].productId > newArrayAscendingOrder[innerIndex + 1].productId) {
+                tempProduct = newArrayAscendingOrder[innerIndex];
+                newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
+                newArrayAscendingOrder[innerIndex + 1] = tempProduct;
             }
         }
-        createTableRows(newArrayAscendingOrder);
     }
+    createTableRows(newArrayAscendingOrder);
+}
 
-    function sortByName() {
-        Array<common.Product>();
-        var newArrayAscendingOrder = [];
-        //var newArrayDescendingOrder = new Array<common.Product>();
-        newArrayAscendingOrder = currentProcutList;
-        var tempProduct:common.Product = null;
-        for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-            for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-                if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
-                    tempProduct = newArrayAscendingOrder[innerIndex];
-                    newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
-                    newArrayAscendingOrder[innerIndex + 1] = tempProduct;
-                }
+function sortByName() {
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
+    //var newArrayDescendingOrder = new Array<common.Product>();
+    newArrayAscendingOrder = currentProcutList;
+    var tempProduct:common.Product = null;
+    for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+            if ((newArrayAscendingOrder[innerIndex].name[0]) > (newArrayAscendingOrder[innerIndex + 1].name[0])) {
+                tempProduct = newArrayAscendingOrder[innerIndex];
+                newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
+                newArrayAscendingOrder[innerIndex + 1] = tempProduct;
             }
         }
-        createTableRows(newArrayAscendingOrder);
     }
+    createTableRows(newArrayAscendingOrder);
+}
 
-    function sortByLocation() {
-        Array<common.Product>();
-        var newArrayAscendingOrder = [];
-        //var newArrayDescendingOrder = new Array<common.Product>();
+function sortByLocation() {
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
+    //var newArrayDescendingOrder = new Array<common.Product>();
 
-        newArrayAscendingOrder = currentProcutList;
-        var tempProduct:common.Product = null;
-        for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-            for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-                if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
-                    tempProduct = newArrayAscendingOrder[innerIndex];
-                    newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
-                    newArrayAscendingOrder[innerIndex + 1] = tempProduct;
-                }
+    newArrayAscendingOrder = currentProcutList;
+    var tempProduct:common.Product = null;
+    for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+            if ((newArrayAscendingOrder[innerIndex].locationString[0]) > (newArrayAscendingOrder[innerIndex + 1].locationString[0])) {
+                tempProduct = newArrayAscendingOrder[innerIndex];
+                newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
+                newArrayAscendingOrder[innerIndex + 1] = tempProduct;
             }
         }
-        createTableRows(newArrayAscendingOrder);
     }
+    createTableRows(newArrayAscendingOrder);
+}
 
-    function sortByPrice() {
-        var newArrayAscendingOrder = [];
-        //var newArrayDescendingOrder = new Array<common.Product>()
-        newArrayAscendingOrder = currentProcutList;
-        var tempProduct:common.Product = null;
-        for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
-            for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
-                if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
-                    tempProduct = newArrayAscendingOrder[innerIndex];
-                    newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
-                    newArrayAscendingOrder[innerIndex + 1] = tempProduct;
-                }
+function sortByPrice() {
+    var newArrayAscendingOrder = [];
+    //var newArrayDescendingOrder = new Array<common.Product>()
+    newArrayAscendingOrder = currentProcutList;
+    var tempProduct:common.Product = null;
+    for (var index = 0; index < newArrayAscendingOrder.length - 1; index++) {
+        for (var innerIndex = 0; innerIndex < newArrayAscendingOrder.length - 1; innerIndex++) {
+            if ((newArrayAscendingOrder[innerIndex].price * 1000) > (newArrayAscendingOrder[innerIndex + 1].price * 1000)) {
+                tempProduct = newArrayAscendingOrder[innerIndex];
+                newArrayAscendingOrder[innerIndex] = newArrayAscendingOrder[innerIndex + 1];
+                newArrayAscendingOrder[innerIndex + 1] = tempProduct;
             }
         }
-        createTableRows(newArrayAscendingOrder);
-
     }
+    createTableRows(newArrayAscendingOrder);
+
+}
 
 // add product to cart button from product search
-    $("#modal-productAddToCart").click(function () {
+$("#modal-productAddToCart").click(function () {
 
-        var btn = $(this);
-        var product:any = JSON.parse(btn.attr("data-product"));
-        var numberValue:any = $("#modal-number").val();
-        var count:number = parseInt(numberValue);
-        product.__proto__ = common.Product.prototype;
-        addProduct(new common.CartEntry(product, count));
-        // let it bounce
-        setTimeout(function () {
-            (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
-        }, 200);
-    });
+    var btn = $(this);
+    var product:any = JSON.parse(btn.attr("data-product"));
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
+    product.__proto__ = common.Product.prototype;
+    addProduct(new common.CartEntry(product, count));
+    // let it bounce
+    setTimeout(function () {
+        (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
+    }, 200);
+});
 
-    var selectedProduct:common.Product;
+var selectedProduct:common.Product;
 
-    $("#modal-number-down").click(function () {
+$("#modal-number-down").click(function () {
 
-        var dialogProductPrice = $("#modal-productprice").text();
-        var dialogProductID = $("#modal-productid").text();
-        var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-        var numberValue:any = $("#modal-number").val();
-        var count:number = parseInt(numberValue);
-        count--;
-        if (count >= 0) {
-            var newValue:any = count;
-            $("#modal-number").val(newValue);
-            var newPrice:number = product.price * newValue;
-            var formatedPrice = formatter.formatNumberToPrice(product.price);
-            var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-            $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
-        }
-    });
-
-    $("#modal-number-up").click(function () {
-        var dialogProductPrice = $("#modal-productprice").text();
-        var dialogProductID = $("#modal-productid").text();
-        var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-        var numberValue:any = $("#modal-number").val();
-        var count:number = parseInt(numberValue);
-        count++;
-        if (count < 1000) {
-            var newValue:number = count;
-            $("#modal-number").val(newValue + "");
-            var newPrice:number = product.price * newValue;
-            var formatedPrice = formatter.formatNumberToPrice(product.price);
-            var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-            $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
-        }
-    });
-
-    $("#modal-number").change(function () {
-
-        var modalNumberLabel = $("#modal-number");
-        var numberValue:any = modalNumberLabel.val();
-
-        var util:Utils = new Utils();
-        var dialogProductID = $("#modal-productid").text();
-        var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-
-        numberValue = util.replaceAllCommaToDots(numberValue);
-        if (!(util.isPositivNumber(numberValue))) {
-            modalNumberLabel.val("1");
-            numberValue = 1;
-        }
-
-        if (!(util.isValidRoundingValue(numberValue, product.uomObject.rounding))) {
-            modalNumberLabel.val("1");
-            numberValue = 1;
-        }
-
-        var dialogProductID = $("#modal-productid").text();
-        var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-        var newPrice:number = product.price * numberValue;
-
-        var newPrice:number = product.price * numberValue;
-
+    var dialogProductPrice = $("#modal-productprice").text();
+    var dialogProductID = $("#modal-productid").text();
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
+    count--;
+    if (count >= 0) {
+        var newValue:any = count;
+        $("#modal-number").val(newValue);
+        var newPrice:number = product.price * newValue;
         var formatedPrice = formatter.formatNumberToPrice(product.price);
         var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
         $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
+    }
+});
 
-    });
+$("#modal-number-up").click(function () {
+    var dialogProductPrice = $("#modal-productprice").text();
+    var dialogProductID = $("#modal-productid").text();
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue:any = $("#modal-number").val();
+    var count:number = parseInt(numberValue);
+    count++;
+    if (count < 1000) {
+        var newValue:number = count;
+        $("#modal-number").val(newValue + "");
+        var newPrice:number = product.price * newValue;
+        var formatedPrice = formatter.formatNumberToPrice(product.price);
+        var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
+    }
+});
 
-    function getProductByID(procutList:Array<common.Product>, id:number):common.Product {
-        for (var index = 0; index < procutList.length; index++) {
-            if (procutList[index].productId == id) {
-                return procutList[index];
-            }
+$("#modal-number").change(function () {
+
+    var modalNumberLabel = $("#modal-number");
+    var numberValue:any = modalNumberLabel.val();
+
+    var util:Utils = new Utils();
+    var dialogProductID = $("#modal-productid").text();
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+
+    numberValue = util.replaceAllCommaToDots(numberValue);
+    if (!(util.isPositivNumber(numberValue))) {
+        modalNumberLabel.val("1");
+        numberValue = 1;
+    }
+
+    if (!(util.isValidRoundingValue(numberValue, product.uomObject.rounding))) {
+        modalNumberLabel.val("1");
+        numberValue = 1;
+    }
+
+    var dialogProductID = $("#modal-productid").text();
+    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var newPrice:number = product.price * numberValue;
+
+    var newPrice:number = product.price * numberValue;
+
+    var formatedPrice = formatter.formatNumberToPrice(product.price);
+    var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
+    $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
+
+});
+
+function getProductByID(procutList:Array<common.Product>, id:number):common.Product {
+    for (var index = 0; index < procutList.length; index++) {
+        if (procutList[index].productId == id) {
+            return procutList[index];
         }
-        // not possible
-        return null;
     }
+    // not possible
+    return null;
+}
 
-    function clearNumberPicker() {
-        $("#modal-number").val("1");
-    }
+function clearNumberPicker() {
+    $("#modal-number").val("1");
+}
 
 
 
