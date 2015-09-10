@@ -165,18 +165,30 @@ dl{
 
 /*--------- iScroll vertical ---------*/
 #wrapperNews{
-    /*position: absolute;*/
-    position: relative;
     overflow:hidden;
     width: 100%;
-    bottom: 0px;
+    height:100%;
+}
+
+#contentWrapper{
+    overflow:hidden;
+}
+
+#content{
+    overflow: hidden;
 }
 
 #news_container{
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+/*#news_container{
     position: relative;
     overflow: hidden;
     -webkit-transform: translate3d(0, 0, 0);
-}
+}*/
 
 
 #basicICal ul {
