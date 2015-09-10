@@ -44,15 +44,15 @@ function showResponseFeedbackMessage(){
 }
 
 function todoSectionChanged(){
-    console.log("todoSectionChanged")
+    console.log("todoSectionChanged");
     var selectedValue = $('#whattodo_select').find(":selected").val();
     console.log(selectedValue);
     if(selectedValue != 0){
-        console.log("show form")
+        console.log("show form");
         $('#contact-form').show();
     }
     if(selectedValue == 0){
-        console.log("hide form")
+        console.log("hide form");
         $('#contact-form').hide();
     }
 

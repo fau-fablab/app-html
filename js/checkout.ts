@@ -5,7 +5,6 @@
 /// <reference path="cart_functions.ts"/>
 
 $(document).ready(function () {
-    console.log("OMG");
     // initialise and set tooltip
     $("#cart_tooltip").prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
         "und klicke hier auf den \"Zur Kasse\"-Button. Nun kannst du den QR Code scannen und bequem im FABLAB bezahlen.");
@@ -47,13 +46,11 @@ function checkout(){
         var stat:common.CartStatus = common.CartStatus.PENDING;
         var cartStatusString:string = common.CartStatus[stat];
         cartServer.cartStatus = cartStatusString;
-        //var platformType:common.PlatformType = common.PlatformType.HTML;
         // TODO: Fix platform type problem for HTML
-        var platformType:common.PlatformType = common.PlatformType.ANDROID;
-        var platformType_string:string = common.PlatformType[platformType];
+        var platformType_string:string = common.PlatformType[common.PlatformType.ANDROID];
         cartServer.cartPlatformType = platformType_string;
         cartServer.cartPushToken = "HTML";
-        var cartEntriesServer:Array<common.CartEntryServer> = new Array<common.CartEntryServer>();
+        var cartEntriesServer:Array<common.CartEntryServer> = [];
         var cart:string[] = getCart();
         for(var i= 0; i<cart.length; i++){
             var key:string = cart[i];
@@ -70,7 +67,7 @@ function checkout(){
             // remove cyclic references
             if(key == 'cart') {
                 //return nothing;
-                return;
+
             } else {
                 return val;
             }
@@ -118,7 +115,7 @@ function checkoutPaidSuccesfully(){
     $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
     $("#cart_paidCheckout").click(function(){
         $("#closeCheckoutDialog").trigger("click");
-    })
+    });
     $("#cart_paidCheckout").show();
 }
 
@@ -144,7 +141,7 @@ function cartCreationCallback(callback):void{
         cancelCheck.click(function(){
             //cancel checkout
             cancelCheckout();
-        })
+        });
         cancelCheck.show();
     }else{
         // error

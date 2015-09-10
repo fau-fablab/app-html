@@ -194,7 +194,7 @@ class Reservation {
     private addOwnId(id : number) {
         var idList : Array<number> = JSON.parse(localStorage.getItem(Reservation.ownIdList));
         if (idList == null) {
-            idList = new Array<number>();
+            idList = [];
         }
         idList.push(id);
         localStorage.setItem(Reservation.ownIdList, JSON.stringify(idList));

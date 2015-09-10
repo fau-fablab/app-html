@@ -8,8 +8,8 @@
 /// <reference path="elements/ProductDialog.ts"/>
 /// <reference path="util/Utils.ts"/>
 
-var currentProcutList:Array<common.Product> = new Array<common.Product>();
-var autoComplitionArray:Array<string> = new Array<string>();
+var currentProcutList:Array<common.Product> = [];
+var autoComplitionArray:Array<string> = [];
 var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
 var productApi: ProductApi = new ProductApi();
@@ -46,7 +46,7 @@ document.onkeydown = function(event) {
     if(event.keyCode == 13){
         search();
     }
-}
+};
 
 function search():void {
     cleanTable();
@@ -154,7 +154,7 @@ function hideEmptyResultText():void {
 }
 
 function sortById() {
-    var newArrayAscendingOrder = new Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
@@ -171,8 +171,8 @@ function sortById() {
 }
 
 function sortByName() {
-    newArrayAscendingOrder: Array<common.Product>();
-    var newArrayAscendingOrder = new Array<common.Product>();
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
@@ -189,8 +189,8 @@ function sortByName() {
 }
 
 function sortByLocation() {
-    newArrayAscendingOrder: Array<common.Product>();
-    var newArrayAscendingOrder = new Array<common.Product>();
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
 
     newArrayAscendingOrder = currentProcutList;
@@ -208,7 +208,7 @@ function sortByLocation() {
 }
 
 function sortByPrice() {
-    var newArrayAscendingOrder = new Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>()
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;

@@ -4,10 +4,10 @@
 #search_results_container{
     position: absolute;
     top: 60px;
-    left: 0px;
+    left: 0;
     width: 100%;
     overflow: hidden;
-    bottom: 0px;
+    bottom: 0;
 }
 
 #search_results{

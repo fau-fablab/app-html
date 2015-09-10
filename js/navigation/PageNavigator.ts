@@ -1,7 +1,7 @@
 
 class PageNavigator{
 
-    private static _defaultHashString: string = "#news"
+    private static _defaultHashString: string = "#news";
     private _content: HTMLDivElement;
     private _lastHashString: string;
 
@@ -19,10 +19,8 @@ class PageNavigator{
     }
 
     public isPageChanged(newHashString: string):boolean{
-        if(newHashString == this._lastHashString){
-            return false;
-        }
-        return true;
+        return newHashString != this._lastHashString;
+
     }
 
     public showState():void{

@@ -46,7 +46,7 @@ function showAllCartEntries() {
 
     // add products to dom
     var str:string = "";
-    var entries:Array<common.CartEntry> = new Array<common.CartEntry>();
+    var entries:Array<common.CartEntry> = [];
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
