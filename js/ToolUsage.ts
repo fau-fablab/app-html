@@ -78,7 +78,8 @@ class Reservation {
             td_proj.appendTo(tr);
 
             var td_duration = $(document.createElement('td'));
-            td_duration.text(results[i].duration.toString());
+            var durationString = results[i].duration.toString();
+            td_duration.text(durationString);
             td_duration.appendTo(tr);
 
             var td_delete = $(document.createElement('td'));
@@ -134,6 +135,10 @@ class Reservation {
 
         if(parseInt(inputDuration.val()) > this.maxUsageTime){
             $("#errorMessageDurationTime").show();
+            return;
+        }
+
+        if(parseInt(inputDuration.val()) == 0){
             return;
         }
 
