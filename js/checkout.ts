@@ -4,6 +4,14 @@
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="cart_functions.ts"/>
 
+$(document).ready(function () {
+    console.log("OMG");
+    // initialise and set tooltip
+    $("#cart_tooltip").prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
+        "und klicke hier auf den \"Zur Kasse\"-Button. Nun kannst du den QR Code scannen und bequem im FABLAB bezahlen.");
+    (<any>$("#cart_tooltip")).tooltip({placement: 'top'});
+});
+
 // cart being used right now
 var sentCartCode:string;
 

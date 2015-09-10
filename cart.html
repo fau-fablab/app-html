@@ -11,7 +11,10 @@
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-success" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">Zur Kasse</button>
+     <span id="cart_tooltip" class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+      aria-hidden="true"></span>
+    <button type="button" class="btn btn-success" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">
+        Zur Kasse</button>
 </div>
 
 
@@ -60,7 +63,7 @@
 
 <!-- show entries and include checkout functions -->
 <script type="text/javascript" src="js/checkout.js"></script>
-<script>
+<script type="text/javascript">
     // show all cart entries that are in the current cart
     showAllCartEntries();
 </script>

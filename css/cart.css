@@ -6,6 +6,10 @@
     float: right;
 }
 
+#cart_tooltip{
+    float: right;
+}
+
 #cart_total_price{
     float:  left;
     padding: 0;

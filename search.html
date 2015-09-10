@@ -1,12 +1,11 @@
 <div class="container jumbotron">
-
     <div id="seach_container">
 
         <form class="form-horizontal">
             <div class="form-group has-feedback">
                 <div class="col-sm-12">
 
-                    <div class="input-group">
+                    <div class="input-group" style="float:left;">
                         <div class="input-group-btn">
                             <button onclick="search()" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -15,7 +14,12 @@
                         <input onkeyup="if(event.keyCode == 13){search();};"
                                placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
                                id="inputSuche" list="product_options"/>
+                        <span class="input-group-addon">
+                            <span id="search_tooltip" class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+                               aria-hidden="true"></span>
+                        </span>
                     </div>
+
                 </div>
             </div>
         </form>

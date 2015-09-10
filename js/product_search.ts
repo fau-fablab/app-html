@@ -26,7 +26,12 @@ var findAllSearch:string = "false";
 $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
     var productApi: ProductApi = new ProductApi();
-    productApi.getAutocompletions(callbackAutoCompletions)
+    productApi.getAutocompletions(callbackAutoCompletions);
+
+    // set and initialise tooltip
+    // TODO: Tooltip schreiben
+    $("#search_tooltip").prop("title", "Das hier ist die Suche!");
+    (<any>$("#search_tooltip")).tooltip({ placement: 'bottom'});
 });
 
 function callbackAutoCompletions(records){

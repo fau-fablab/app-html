@@ -220,4 +220,11 @@ $(document).ready(function () {
 
     // register callback to add new entries
     $("#addEntrySubmit").click(function(){ reservation.addEntry(); });
+
+    // set and initialise tooltip
+    $("#toolUsage_tooltip").prop("title", "Wähle eine Maschine aus dem Dropdown Menü aus, " +
+        "fülle anschließend die drei gegebenen Felder entsprechend aus und trage dich per Klick in die Warteliste ein. " +
+        "Du sieht anschließend die aktuelle Warteschlange und deine Position. Wenn du doch nicht mehr warten willst oder keine Zeit mehr hast," +
+        " trage dich bitte wieder aus indem du auf das kleine X in deiner Zeile klickst.");
+    (<any>$("#toolUsage_tooltip")).tooltip({ placement: 'right'});
 });
