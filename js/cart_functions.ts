@@ -59,7 +59,7 @@ function showAllCartEntries() {
         entries.push(product);
     }
     console.log(str);
-*/
+
 
 
     for (var i = 0; i < cart.length; i++) {

@@ -75,7 +75,7 @@ function search():void {
         findAllSearch = "true";
         productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
-    else if (utils.isNumber(researchCriteria)) {
+    else if (utils.isInteger(researchCriteria)) {
         productApi.findById(researchCriteria,showProduct);
     }
     else {
