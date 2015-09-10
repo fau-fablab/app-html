@@ -1,19 +1,64 @@
-<div class="jumbotron" id="cart_container">
+<div class="jumbotron row" id="cart_container">
+    <!--
+            <ul id="cartEntries_container">
+                <div id="template-cart-entry-id" class="template-cart-entry" hidden>
+                    <h4 class="template-cart-header">Hallo</h4>
+                    <p  class="template-cart-subheader" class="cart_cartEntry_text">Hallo 2</p>
+                    <div class="row">
+                        <div class="col-md-11 col-xs-11">
+                            <h4 class="template-cart-header">Hallo</h4>
+                            <p  class="template-cart-subheader" class="cart_cartEntry_text">Hallo 2</p>
+                        </div>
+
+                        <div class="col-md-1 col-xs-1">
+                            <button type="button" class="btn_remove" >
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11 col-xs-11">
+                            <div class='input-group number-spinner col-md-4 col-xs-5'>
+                            <span class='input-group-btn data-dwn'>
+                                <button class="btn btn-default">
+                                    <span class='glyphicon glyphicon-minus'></span>
+                                </button>
+                            </span>
+                                <input type="text" value="1" class='form-control text-center' min="1">
+                            <span class='input-group-btn data-up'>
+                                <button class='btn btn-default' data-dir='up'>
+                                    <span class='glyphicon glyphicon-plus'></span>
+                                </button>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-xs-1">
+                            <p class="cart_card_total_price">0.40 €</p>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+     -->
+
         <table id="cart_scroller" class="table table-condensed cart_table">
-            <tbody id="cartEntries_container"></tbody>
+            <tbody id="cartEntries_container">
+
+            </tbody>
         </table>
+
 </div>
 
 
-<div  id="cart_footer">
+<div id="cart_footer">
     <div id="cart_total_price">
         Gesamtsumme:
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-success" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">Zur Kasse</button>
+    <button type="button" class="btn btn-success" id="cart_checkout_btn" data-toggle="modal"
+            data-target="#checkoutModal">Zur Kasse
+    </button>
 </div>
-
 
 
 <!-- hidden dialog
@@ -26,16 +71,18 @@
 
             <div class="modal-header">
                 <a id="closeCheckoutDialog" data-dismiss="modal" title="Close" class="close">&times;</a>
+
                 <h3>Checkout</h3>
             </div>
 
             <div class="modal-body">
                 <h4> Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4>
+
                 <form class="form-horizontal">
                     <div class="form-group has-feedback">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-" >
+                                <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-">
                               <span class="input-group-btn">
                                 <button id="submitQRCode" class="btn btn-default" type="button">Absenden!</button>
                               </span>
@@ -43,15 +90,19 @@
                         </div>
                     </div>
                 </form>
-                <div id="cartSentLoader" ><img src="img/ajax-loader.gif" /></div><br/>
+                <div id="cartSentLoader"><img src="img/ajax-loader.gif"/></div>
+                <br/>
                 <h5 id="qrCodeStatus"></h5>
+
                 <p id="qrCodeInfo"></p>
             </div>
 
             <div class="modal-footer">
-                <button id="cart_cancelCheckout" class="btn btn-danger" type="button" >Vorgang abbrechen!</button>
-                <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok</button>
-                <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok</button>
+                <button id="cart_cancelCheckout" class="btn btn-danger" type="button">Vorgang abbrechen!</button>
+                <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok
+                </button>
+                <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok
+                </button>
             </div>
 
         </div>

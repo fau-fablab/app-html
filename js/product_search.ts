@@ -24,6 +24,24 @@ var searchingProducts:boolean = false;
 var findAllSearch:string = "false";
 
 $(document).ready(function () {
+
+    var element = $(".template");
+    var container = $(".container-temp");
+
+    var newElement01 = element.clone();
+    var newElement02 = element.clone();
+    var newElement03 = element.clone();
+    var newElement04 = element.clone();
+
+    newElement01.show();
+    var h1Element = newElement01.children(".template-header");
+
+    h1Element.text("asdf");
+    container.append(newElement01);
+    container.append(newElement02);
+    container.append(newElement03);
+    container.append(newElement04);
+
     $('#loadMoreProductsLoader').hide();
     var productApi:ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions)
@@ -33,34 +51,10 @@ function callbackAutoCompletions(records) {
     autoComplitionArray = records;
     var datalist = $("#product_options");
 
-    /*
-     datalist.select(sayHello);
-     datalist.click(sayHello);
-     datalist.focusout(sayHello);
-     datalist.focus(sayHello);
-
-     */
     for (var index = 0; index < autoComplitionArray.length; index++) {
         datalist.append("<option class='dataOption' value='" + autoComplitionArray[index] + "'></option>");
     }
 }
-/*
- $("#dataOption").select(sayHello);
-
- $("#dataOption").click(sayHello);
-
- $("#dataOption").focus(sayHello);
-
- $("#dataOption").dblclick(sayHello);
-
- $("#dataOption").focusout(sayHello);
-
-
- function sayHello(){
- console.log("asdfasdfasdf");
- }
-
- */
 
 document.onkeydown = function (event) {
     if (event.keyCode == 13) {

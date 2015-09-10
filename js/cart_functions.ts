@@ -47,6 +47,25 @@ function showAllCartEntries() {
     // add products to dom
     var str:string = "";
     var entries:Array<common.CartEntry> = new Array<common.CartEntry>();
+
+
+   /*
+
+    for (var i = 0; i < cart.length; i++) {
+        var key:string = cart[i];
+        var product:any = JSON.parse(localStorage[key]);
+        product.__proto__ = common.CartEntry.prototype;
+        product.product.__proto__ = common.Product.prototype;
+
+        var newRow = createProductForDom(product);
+
+        $("#cartEntries_container").append(newRow);
+        entries.push(product);
+    }
+    console.log(str);
+*/
+
+
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
         var product:any = JSON.parse(localStorage[key]);
@@ -55,7 +74,9 @@ function showAllCartEntries() {
         str += createProductForDom(product);
         entries.push(product);
     }
+    console.log(str);
     $("#cartEntries_container").append(str);
+
 
     // set listeners
     for(var j=0;j<entries.length;j++){
@@ -90,6 +111,9 @@ function showAllCartEntries() {
         $("#openCheckoutDialog").removeClass("checkoutDialog-active");
     });
 }
+
+
+
 
 // adapt quantity for shopping cart icon in the header
 function adaptQuantityInHeader():void{
@@ -150,14 +174,35 @@ function setCartEntryListeners(entry:common.CartEntry){
 
 
 // creates a cart entry for the dom and returns the string
-function createProductForDom(entry:common.CartEntry):string{
+function createProductForDom(entry:common.CartEntry){
+    /*
     // add product to DOM
+    console.log("Produce Element");
+    var random = Math.random();
+    var containerElement = $(".template-cart-entry").clone();
+    containerElement.show();
+
+
+
+    var elementHeader = containerElement.children(".template-cart-header");
+    elementHeader.text("Johannes" + random);
+    var elementSubHeader = containerElement.children(".template-cart-subheader");
+    elementSubHeader.text("SubJohannes");
+
+    //elementHeader.attr('id',"cart-header-" + random);
+    //elementHeader.text("asdf");
+
+
+    console.log(entry.product.name);
+    console.log(entry.product.price.toFixed(2) + " € pro " + entry.product.unit);
+*/
+
     var cartEntry_total:string = (entry.product.price*entry.amount).toFixed(2);
     var card:string = "<tr>" +
         "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
-        "<div class='input-group number-spinner col-md-3 col-xs-3'><span class='input-group-btn data-dwn'><button class='btn btn-default'" +
+        "<div class='input-group number-spinner col-md-3 col-xs-6'><span class='input-group-btn data-dwn'><button class='btn btn-default'" +
         " data-dir='dwn' id='picker_down_"+entry.product.productId.toString()+"'><span class='glyphicon glyphicon-minus'></span>" +
         "</button></span>" +
         "<input id='picker_input_"+entry.product.productId.toString()+"' type='text' value='"+<any>entry.amount+
