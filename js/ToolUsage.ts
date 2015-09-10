@@ -8,12 +8,14 @@
 var reservation : Reservation = null;
 
 class Reservation {
+    maxUsageTime: number = 300;
     toolArray : Array<common.FabTool>;
     client : RestClient = null;
     static secretTokenKey = "ReservationToken";
     static ownIdList = "ReservationIdList";
 
     constructor () {
+        $("#errorMessageDurationTime").hide();
         this.client = new RestClient();
         this.client.checkAuthentication();
         this.updateToolList();
@@ -48,9 +50,10 @@ class Reservation {
     }
 
     usageListCallback(machineId : number, results : Array<common.ToolUsage>) {
-
+        $("#errorMessageDurationTime").hide();
         var table = $('#machineUsageTable');
         table.find("tbody").empty();
+
 
         if (machineId < 0) {
             this.disableAddEntry(true);
@@ -125,12 +128,19 @@ class Reservation {
         var inputProj = $("#addEntryProject");
         var inputDuration = $("#addEntryDuration");
 
-        if (inputUser.val().length == 0 || inputDuration.val().length == 0)
+        if (inputUser.val().length == 0 || inputDuration.val().length == 0){
             return;
+        }
+
+        if(parseInt(inputDuration.val()) > this.maxUsageTime){
+            $("#errorMessageDurationTime").show();
+            return;
+        }
 
         usage.toolId = this.getSelectedMachineId();
         usage.user = inputUser.val();
         usage.project = inputProj.val();
+
         usage.duration = parseInt(inputDuration.val());
 
         this.submitNewEntry(usage);
