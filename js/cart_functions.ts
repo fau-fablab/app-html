@@ -30,6 +30,7 @@ function getTotalPrice():number{
 
 // show all cart entries when cart is loaded
 function showAllCartEntries() {
+    console.log("invoke cartEntry");
     if (!browserLocalStorageSupport()) {
         return;
     }
@@ -47,20 +48,6 @@ function showAllCartEntries() {
     // add products to dom
     var str:string = "";
     var entries:Array<common.CartEntry> = [];
-    for (var i = 0; i < cart.length; i++) {
-        var key:string = cart[i];
-        var product:any = JSON.parse(localStorage[key]);
-        product.__proto__ = common.CartEntry.prototype;
-        product.product.__proto__ = common.Product.prototype;
-
-        var newRow = createProductForDom(product);
-
-        $("#cartEntries_container").append(newRow);
-        entries.push(product);
-    }
-    console.log(str);
-
-
 
     for (var i = 0; i < cart.length; i++) {
         var key:string = cart[i];
