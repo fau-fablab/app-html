@@ -8,14 +8,14 @@
 /// <reference path="elements/ProductDialog.ts"/>
 /// <reference path="util/Utils.ts"/>
 
-var currentProcutList:Array<common.Product> = new Array<common.Product>();
-var autoComplitionArray:Array<string> = new Array<string>();
-var LOADLIMIT:number = 10;
+var currentProcutList:Array<common.Product> = [];
+var autoComplitionArray:Array<string> = [];
+var LOADLIMIT: number = 10;
 var OFFSET:number = 0;
-var productApi:ProductApi = new ProductApi();
-var formatter:Formatter = new Formatter();
-var productCounter:ProductCounter;
-var utils:Utils = new Utils();
+var productApi: ProductApi = new ProductApi();
+var formatter: Formatter = new Formatter();
+var productCounter: ProductCounter;
+var utils: Utils = new Utils();
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -43,24 +43,28 @@ $(document).ready(function () {
     container.append(newElement04);
 
     $('#loadMoreProductsLoader').hide();
-    var productApi:ProductApi = new ProductApi();
-    productApi.getAutocompletions(callbackAutoCompletions)
+    var productApi: ProductApi = new ProductApi();
+    productApi.getAutocompletions(callbackAutoCompletions);
+
+    // set and initialise tooltip
+    // TODO: Tooltip schreiben
+    $("#search_tooltip").prop("title", "Das hier ist die Suche!");
+    (<any>$("#search_tooltip")).tooltip({ placement: 'bottom'});
 });
 
-function callbackAutoCompletions(records) {
+function callbackAutoCompletions(records){
     autoComplitionArray = records;
     var datalist = $("#product_options");
-
-    for (var index = 0; index < autoComplitionArray.length; index++) {
-        datalist.append("<option class='dataOption' value='" + autoComplitionArray[index] + "'></option>");
+    for(var index = 0; index < autoComplitionArray.length;index++){
+        datalist.append("<option value='" + autoComplitionArray[index] +"'></option>");
     }
 }
 
-document.onkeydown = function (event) {
-    if (event.keyCode == 13) {
+document.onkeydown = function(event) {
+    if(event.keyCode == 13){
         search();
     }
-}
+};
 
 function search():void {
     cleanTable();
@@ -69,15 +73,15 @@ function search():void {
 
     if (researchCriteria == "") {
         findAllSearch = "true";
-        productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
+        productApi.findAll(LOADLIMIT,OFFSET,showSearchResults);
     }
-    else if (utils.isInteger(researchCriteria)) {
-        productApi.findById(researchCriteria, showProduct);
+    else if (utils.isNumber(researchCriteria)) {
+        productApi.findById(researchCriteria,showProduct);
     }
     else {
         findAllSearch = researchCriteria;
 
-        productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
+        productApi.findByName(researchCriteria,LOADLIMIT,OFFSET,showSearchResults);
     }
 }
 
@@ -89,7 +93,7 @@ function showProduct(record:any):void {
     showProducts(recordArray);
 }
 
-function showSearchResults(records:any):void {
+function showSearchResults(records:any):void{
     cleanTable();
     currentProcutList.length = 0;
     showProducts(records);
@@ -113,7 +117,7 @@ function showProducts(records:any):void {
 }
 
 
-var productDialog:ProductDialog;
+var productDialog: ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function (event) {
         var currentElement = $(this);
@@ -168,7 +172,7 @@ function hideEmptyResultText():void {
 }
 
 function sortById() {
-    var newArrayAscendingOrder = new Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
@@ -185,8 +189,8 @@ function sortById() {
 }
 
 function sortByName() {
-    newArrayAscendingOrder: Array<common.Product>();
-    var newArrayAscendingOrder = new Array<common.Product>();
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
@@ -203,8 +207,8 @@ function sortByName() {
 }
 
 function sortByLocation() {
-    newArrayAscendingOrder: Array<common.Product>();
-    var newArrayAscendingOrder = new Array<common.Product>();
+    Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>();
 
     newArrayAscendingOrder = currentProcutList;
@@ -222,7 +226,7 @@ function sortByLocation() {
 }
 
 function sortByPrice() {
-    var newArrayAscendingOrder = new Array<common.Product>();
+    var newArrayAscendingOrder = [];
     //var newArrayDescendingOrder = new Array<common.Product>()
     newArrayAscendingOrder = currentProcutList;
     var tempProduct:common.Product = null;
@@ -240,51 +244,51 @@ function sortByPrice() {
 }
 
 // add product to cart button from product search
-$("#modal-productAddToCart").click(function () {
+$("#modal-productAddToCart").click(function(){
 
     var btn = $(this);
     var product:any = JSON.parse(btn.attr("data-product"));
-    var numberValue:any = $("#modal-number").val();
-    var count:number = parseInt(numberValue);
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
     product.__proto__ = common.Product.prototype;
-    addProduct(new common.CartEntry(product, count));
+    addProduct(new common.CartEntry(product,count));
     // let it bounce
     setTimeout(function () {
-        (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
+        (<any>$("#cart_button_quantity")).effect("bounce", { times:3 }, 300);
     }, 200);
 });
 
-var selectedProduct:common.Product;
+var selectedProduct: common.Product;
 
-$("#modal-number-down").click(function () {
+$("#modal-number-down").click(function(){
 
     var dialogProductPrice = $("#modal-productprice").text();
     var dialogProductID = $("#modal-productid").text();
-    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue:any = $("#modal-number").val();
-    var count:number = parseInt(numberValue);
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
     count--;
-    if (count >= 0) {
-        var newValue:any = count;
+    if(count >= 0){
+        var newValue: any = count;
         $("#modal-number").val(newValue);
-        var newPrice:number = product.price * newValue;
+        var newPrice: number = product.price * newValue;
         var formatedPrice = formatter.formatNumberToPrice(product.price);
         var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
-        $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
+        $("#modal-productprice").text(formatedPrice + " \u20AC" + " ("+ formatedNewPrice + " \u20AC" +")");
     }
 });
 
-$("#modal-number-up").click(function () {
+$("#modal-number-up").click(function(){
     var dialogProductPrice = $("#modal-productprice").text();
     var dialogProductID = $("#modal-productid").text();
-    var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var numberValue:any = $("#modal-number").val();
-    var count:number = parseInt(numberValue);
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var numberValue: any = $("#modal-number").val();
+    var count: number = parseInt(numberValue);
     count++;
-    if (count < 1000) {
-        var newValue:number = count;
-        $("#modal-number").val(newValue + "");
-        var newPrice:number = product.price * newValue;
+    if(count < 1000){
+        var newValue: number = count;
+        $("#modal-number").val(newValue+"");
+        var newPrice: number = product.price * newValue;
         var formatedPrice = formatter.formatNumberToPrice(product.price);
         var formatedNewPrice = formatter.formatNumberToPrice(newPrice);
         $("#modal-productprice").text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
@@ -311,6 +315,9 @@ $("#modal-number").change(function () {
         numberValue = 1;
     }
 
+    var dialogProductID = $("#modal-productid").text();
+    var product: common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
+    var newPrice: number = product.price * numberValue;
 
     var newPrice:number = product.price * numberValue;
 

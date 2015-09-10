@@ -55,10 +55,12 @@
         <p id="cart_total_price_text">
         </p>
     </div>
-    <button type="button" class="btn btn-success" id="cart_checkout_btn" data-toggle="modal"
-            data-target="#checkoutModal">Zur Kasse
-    </button>
+     <span id="cart_tooltip" class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+      aria-hidden="true"></span>
+    <button type="button" class="btn btn-success" id="cart_checkout_btn"  data-toggle="modal" data-target="#checkoutModal">
+        Zur Kasse</button>
 </div>
+
 
 
 <!-- hidden dialog
@@ -71,18 +73,16 @@
 
             <div class="modal-header">
                 <a id="closeCheckoutDialog" data-dismiss="modal" title="Close" class="close">&times;</a>
-
                 <h3>Checkout</h3>
             </div>
 
             <div class="modal-body">
                 <h4> Bitte den QR Code eingeben, der an der Kasse angezeigt wird. </h4>
-
                 <form class="form-horizontal">
                     <div class="form-group has-feedback">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-">
+                                <input id="qrCodeInput" type="text" class="form-control" placeholder="-QR Code-" >
                               <span class="input-group-btn">
                                 <button id="submitQRCode" class="btn btn-default" type="button">Absenden!</button>
                               </span>
@@ -90,19 +90,15 @@
                         </div>
                     </div>
                 </form>
-                <div id="cartSentLoader"><img src="img/ajax-loader.gif"/></div>
-                <br/>
+                <div id="cartSentLoader" ><img src="img/ajax-loader.gif" /></div><br/>
                 <h5 id="qrCodeStatus"></h5>
-
                 <p id="qrCodeInfo"></p>
             </div>
 
             <div class="modal-footer">
-                <button id="cart_cancelCheckout" class="btn btn-danger" type="button">Vorgang abbrechen!</button>
-                <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok
-                </button>
-                <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok
-                </button>
+                <button id="cart_cancelCheckout" class="btn btn-danger" type="button" >Vorgang abbrechen!</button>
+                <button id="cart_cancelledCheckout" class="btn btn btn-info" type="button" data-dismiss="modal">Ok</button>
+                <button id="cart_paidCheckout" class="btn btn btn-success" type="button" data-dismiss="modal">Ok</button>
             </div>
 
         </div>
@@ -111,7 +107,7 @@
 
 <!-- show entries and include checkout functions -->
 <script type="text/javascript" src="js/checkout.js"></script>
-<script>
+<script type="text/javascript">
     // show all cart entries that are in the current cart
     showAllCartEntries();
 </script>

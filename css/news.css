@@ -80,19 +80,6 @@
 }
 
 /*--------- iCals ---------*/
-.iScrollHorizontalScrollbar{
-    z-index: 0 !important;
-}
-#ical_container{
-    width: 2850px;
-    height: 120px;
-    padding: 8px;
-    margin: 0px;
-    -webkit-transform: translate3d(0, 0, 0);
-    z-index: 0;
-    float:left;
-}
-
 dt {
     font-weight: bolder;
     float:left;
@@ -103,15 +90,8 @@ dt {
 
 dd {
     display:none;
-    /*background:#E0E0E0;*/
     float:left;
     width:100%;
-    /*-webkit-box-shadow:0 1px 1px rgba(0,0,0,.7);
-    -moz-box-shadow:0 1px 1px rgba(0,0,0,.7);
-    -ms-box-shadow:0 1px 1px rgba(0,0,0,.7);
-    -o-box-shadow:0 1px 1px rgba(0,0,0,.7);
-    box-shadow:0 1px 1px rgba(0,0,0,.7);
-    -webkit-border-radius:0 0 3px 3px;*/
 }
 
 dl{
@@ -157,28 +137,6 @@ dl{
     text-align: left;
 }
 
-/*--------- iScroll horizontal ---------*/
-#wrapperICal{
-    height: 120px;
-    overflow: hidden;
-}
-
-/*--------- iScroll vertical ---------*/
-#wrapperNews{
-    /*position: absolute;*/
-    position: relative;
-    overflow:hidden;
-    width: 100%;
-    bottom: 0px;
-}
-
-#news_container{
-    position: relative;
-    overflow: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-}
-
-
 #basicICal ul {
     float: left;
     margin:0px;
@@ -189,6 +147,27 @@ dl{
 #basicICal li {
     margin: 0px 5px;
 }
+
+
+/*--------- iScroll horizontal ---------*/
+#wrapperICal{
+    height: 120px;
+    overflow: hidden;
+}
+.iScrollHorizontalScrollbar{
+    z-index: 0 !important;
+}
+#ical_container{
+    width: 2850px;
+    height: 120px;
+    padding: 8px;
+    margin: 0px;
+    -webkit-transform: translate3d(0, 0, 0);
+    z-index: 0;
+    float:left;
+}
+
+
 
 #cart_cancelledCheckout{
     display: none;
@@ -218,7 +197,6 @@ dl{
         padding: 0px !important;
     }
 }
-
 
 
 @media (min-width: 361px) and (max-width: 480px){

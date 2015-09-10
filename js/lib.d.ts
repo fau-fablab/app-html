@@ -219,7 +219,7 @@ declare var Object: {
       * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
       */
     keys(o: any): string[];
-}
+};
 
 /**
   * Creates a new function.
@@ -263,7 +263,7 @@ declare var Function: {
     new (...args: string[]): Function;
     (...args: string[]): Function;
     prototype: Function;
-}
+};
 
 interface IArguments {
     [index: number]: any;
@@ -432,7 +432,7 @@ declare var String: {
     (value?: any): string;
     prototype: String;
     fromCharCode(...codes: number[]): string;
-}
+};
 
 interface Boolean {
 }
@@ -440,7 +440,7 @@ declare var Boolean: {
     new (value?: any): Boolean;
     (value?: any): boolean;
     prototype: Boolean;
-}
+};
 
 interface Number {
     /**
@@ -497,7 +497,7 @@ declare var Number: {
       * JavaScript displays POSITIVE_INFINITY values as infinity. 
       */
     POSITIVE_INFINITY: number;
-}
+};
 
 interface Math {
     /** The mathematical constant e. This is Euler's number, the base of natural logarithms. */
@@ -788,7 +788,7 @@ declare var Date: {
       */
     UTC(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): number;
     now(): number;
-}
+};
 
 interface RegExpExecArray {
     [index: number]: string;
@@ -868,7 +868,7 @@ declare var RegExp: {
     $8: string;
     $9: string;
     lastMatch: string;
-}
+};
 
 interface Error {
     name: string;
@@ -878,7 +878,7 @@ declare var Error: {
     new (message?: string): Error;
     (message?: string): Error;
     prototype: Error;
-}
+};
 
 interface EvalError extends Error {
 }
@@ -886,7 +886,7 @@ declare var EvalError: {
     new (message?: string): EvalError;
     (message?: string): EvalError;
     prototype: EvalError;
-}
+};
 
 interface RangeError extends Error {
 }
@@ -894,7 +894,7 @@ declare var RangeError: {
     new (message?: string): RangeError;
     (message?: string): RangeError;
     prototype: RangeError;
-}
+};
 
 interface ReferenceError extends Error {
 }
@@ -902,7 +902,7 @@ declare var ReferenceError: {
     new (message?: string): ReferenceError;
     (message?: string): ReferenceError;
     prototype: ReferenceError;
-}
+};
 
 interface SyntaxError extends Error {
 }
@@ -910,7 +910,7 @@ declare var SyntaxError: {
     new (message?: string): SyntaxError;
     (message?: string): SyntaxError;
     prototype: SyntaxError;
-}
+};
 
 interface TypeError extends Error {
 }
@@ -918,7 +918,7 @@ declare var TypeError: {
     new (message?: string): TypeError;
     (message?: string): TypeError;
     prototype: TypeError;
-}
+};
 
 interface URIError extends Error {
 }
@@ -926,7 +926,7 @@ declare var URIError: {
     new (message?: string): URIError;
     (message?: string): URIError;
     prototype: URIError;
-}
+};
 
 interface JSON {
     /**
@@ -1140,7 +1140,7 @@ declare var Array: {
     <T>(...items: T[]): T[];
     isArray(arg: any): boolean;
     prototype: Array<any>;
-}
+};
 
 
 /////////////////////////////
@@ -1163,7 +1163,7 @@ interface ArrayBuffer {
 declare var ArrayBuffer: {
     prototype: ArrayBuffer;
     new (byteLength: number): ArrayBuffer;
-}
+};
 
 interface ArrayBufferView {
     buffer: ArrayBuffer;
@@ -1228,7 +1228,7 @@ declare var Int8Array: {
     new (array: number[]): Int8Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Int8Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 8-bit unsigned integer values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1286,7 +1286,7 @@ declare var Uint8Array: {
     new (array: number[]): Uint8Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Uint8Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 16-bit integer values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1344,7 +1344,7 @@ declare var Int16Array: {
     new (array: number[]): Int16Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Int16Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 16-bit unsigned integer values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1402,7 +1402,7 @@ declare var Uint16Array: {
     new (array: number[]): Uint16Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Uint16Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 32-bit integer values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1460,7 +1460,7 @@ declare var Int32Array: {
     new (array: number[]): Int32Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Int32Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 32-bit unsigned integer values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1518,7 +1518,7 @@ declare var Uint32Array: {
     new (array: number[]): Uint32Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Uint32Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 32-bit float values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1576,7 +1576,7 @@ declare var Float32Array: {
     new (array: number[]): Float32Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Float32Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * A typed array of 64-bit float values. The contents are initialized to 0. If the requested number of bytes could not be allocated an exception is raised.
@@ -1634,7 +1634,7 @@ declare var Float64Array: {
     new (array: number[]): Float64Array;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): Float64Array;
     BYTES_PER_ELEMENT: number;
-}
+};
 
 /**
   * You can use a DataView object to read and write the different kinds of binary data to any location in the ArrayBuffer. 
@@ -1753,7 +1753,7 @@ interface DataView extends ArrayBufferView {
 declare var DataView: {
     prototype: DataView;
     new (buffer: ArrayBuffer, byteOffset?: number, length?: number): DataView;
-}
+};
 
 /////////////////////////////
 /// IE11 ECMAScript Extensions
@@ -1770,7 +1770,7 @@ interface Map<K, V> {
 }
 declare var Map: {
     new <K, V>(): Map<K, V>;
-}
+};
 
 interface WeakMap<K, V> {
     clear(): void;
@@ -1781,7 +1781,7 @@ interface WeakMap<K, V> {
 }
 declare var WeakMap: {
     new <K, V>(): WeakMap<K, V>;
-}
+};
 
 interface Set<T> {
     add(value: T): Set<T>;
@@ -1793,7 +1793,7 @@ interface Set<T> {
 }
 declare var Set: {
     new <T>(): Set<T>;
-}
+};
 
 declare module Intl {
 
@@ -1827,7 +1827,7 @@ declare module Intl {
         (locale?: string, options?: CollatorOptions): Collator;
         supportedLocalesOf(locales: string[], options?: CollatorOptions): string[];
         supportedLocalesOf(locale: string, options?: CollatorOptions): string[];
-    }
+    };
 
     interface NumberFormatOptions {
         localeMatcher?: string;
@@ -1862,7 +1862,7 @@ declare module Intl {
         (locale?: string, options?: NumberFormatOptions): Collator;
         supportedLocalesOf(locales: string[], options?: NumberFormatOptions): string[];
         supportedLocalesOf(locale: string, options?: NumberFormatOptions): string[];
-    }
+    };
 
     interface DateTimeFormatOptions {
         localeMatcher?: string;
@@ -2068,7 +2068,7 @@ interface HTMLTableElement extends HTMLElement, MSDataBindingTableExtensions, MS
 declare var HTMLTableElement: {
     prototype: HTMLTableElement;
     new (): HTMLTableElement;
-}
+};
 
 interface TreeWalker {
     whatToShow: number;
@@ -2087,7 +2087,7 @@ interface TreeWalker {
 declare var TreeWalker: {
     prototype: TreeWalker;
     new (): TreeWalker;
-}
+};
 
 interface GetSVGDocument {
     getSVGDocument(): Document;
@@ -2102,7 +2102,7 @@ interface SVGPathSegCurvetoQuadraticRel extends SVGPathSeg {
 declare var SVGPathSegCurvetoQuadraticRel: {
     prototype: SVGPathSegCurvetoQuadraticRel;
     new (): SVGPathSegCurvetoQuadraticRel;
-}
+};
 
 interface Performance {
     navigation: PerformanceNavigation;
@@ -2123,7 +2123,7 @@ interface Performance {
 declare var Performance: {
     prototype: Performance;
     new (): Performance;
-}
+};
 
 interface MSDataBindingTableExtensions {
     dataPageSize: number;
@@ -2142,7 +2142,7 @@ interface CompositionEvent extends UIEvent {
 declare var CompositionEvent: {
     prototype: CompositionEvent;
     new (): CompositionEvent;
-}
+};
 
 interface WindowTimers {
     clearTimeout(handle: number): void;
@@ -2177,7 +2177,7 @@ declare var SVGMarkerElement: {
     SVG_MARKERUNITS_STROKEWIDTH: number;
     SVG_MARKER_ORIENT_AUTO: number;
     SVG_MARKERUNITS_USERSPACEONUSE: number;
-}
+};
 
 interface CSSStyleDeclaration {
     backgroundAttachment: string;
@@ -2342,14 +2342,14 @@ interface CSSStyleDeclaration {
 declare var CSSStyleDeclaration: {
     prototype: CSSStyleDeclaration;
     new (): CSSStyleDeclaration;
-}
+};
 
 interface SVGGElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
 }
 declare var SVGGElement: {
     prototype: SVGGElement;
     new (): SVGGElement;
-}
+};
 
 interface MSStyleCSSProperties extends MSCSSProperties {
     pixelWidth: number;
@@ -2373,14 +2373,14 @@ interface MSStyleCSSProperties extends MSCSSProperties {
 declare var MSStyleCSSProperties: {
     prototype: MSStyleCSSProperties;
     new (): MSStyleCSSProperties;
-}
+};
 
 interface Navigator extends NavigatorID, NavigatorOnLine, NavigatorContentUtils, MSNavigatorExtensions, NavigatorGeolocation, MSNavigatorDoNotTrack, NavigatorStorageUtils {
 }
 declare var Navigator: {
     prototype: Navigator;
     new (): Navigator;
-}
+};
 
 interface SVGPathSegCurvetoCubicSmoothAbs extends SVGPathSeg {
     y: number;
@@ -2391,7 +2391,7 @@ interface SVGPathSegCurvetoCubicSmoothAbs extends SVGPathSeg {
 declare var SVGPathSegCurvetoCubicSmoothAbs: {
     prototype: SVGPathSegCurvetoCubicSmoothAbs;
     new (): SVGPathSegCurvetoCubicSmoothAbs;
-}
+};
 
 interface SVGZoomEvent extends UIEvent {
     zoomRectScreen: SVGRect;
@@ -2403,7 +2403,7 @@ interface SVGZoomEvent extends UIEvent {
 declare var SVGZoomEvent: {
     prototype: SVGZoomEvent;
     new (): SVGZoomEvent;
-}
+};
 
 interface NodeSelector {
     querySelectorAll(selectors: string): NodeList;
@@ -2415,7 +2415,7 @@ interface HTMLTableDataCellElement extends HTMLTableCellElement {
 declare var HTMLTableDataCellElement: {
     prototype: HTMLTableDataCellElement;
     new (): HTMLTableDataCellElement;
-}
+};
 
 interface HTMLBaseElement extends HTMLElement {
     /**
@@ -2430,7 +2430,7 @@ interface HTMLBaseElement extends HTMLElement {
 declare var HTMLBaseElement: {
     prototype: HTMLBaseElement;
     new (): HTMLBaseElement;
-}
+};
 
 interface ClientRect {
     left: number;
@@ -2443,7 +2443,7 @@ interface ClientRect {
 declare var ClientRect: {
     prototype: ClientRect;
     new (): ClientRect;
-}
+};
 
 interface PositionErrorCallback {
     (error: PositionError): void;
@@ -2458,7 +2458,7 @@ interface DOMImplementation {
 declare var DOMImplementation: {
     prototype: DOMImplementation;
     new (): DOMImplementation;
-}
+};
 
 interface SVGUnitTypes {
     SVG_UNIT_TYPE_UNKNOWN: number;
@@ -2471,7 +2471,7 @@ declare var SVGUnitTypes: {
     SVG_UNIT_TYPE_UNKNOWN: number;
     SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: number;
     SVG_UNIT_TYPE_USERSPACEONUSE: number;
-}
+};
 
 interface Element extends Node, NodeSelector, ElementTraversal {
     scrollTop: number;
@@ -2609,7 +2609,7 @@ interface Element extends Node, NodeSelector, ElementTraversal {
 declare var Element: {
     prototype: Element;
     new (): Element;
-}
+};
 
 interface HTMLNextIdElement extends HTMLElement {
     n: string;
@@ -2617,7 +2617,7 @@ interface HTMLNextIdElement extends HTMLElement {
 declare var HTMLNextIdElement: {
     prototype: HTMLNextIdElement;
     new (): HTMLNextIdElement;
-}
+};
 
 interface SVGPathSegMovetoRel extends SVGPathSeg {
     y: number;
@@ -2626,7 +2626,7 @@ interface SVGPathSegMovetoRel extends SVGPathSeg {
 declare var SVGPathSegMovetoRel: {
     prototype: SVGPathSegMovetoRel;
     new (): SVGPathSegMovetoRel;
-}
+};
 
 interface SVGLineElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     y1: SVGAnimatedLength;
@@ -2637,7 +2637,7 @@ interface SVGLineElement extends SVGElement, SVGStylable, SVGTransformable, SVGL
 declare var SVGLineElement: {
     prototype: SVGLineElement;
     new (): SVGLineElement;
-}
+};
 
 interface HTMLParagraphElement extends HTMLElement, DOML2DeprecatedTextFlowControl {
     /**
@@ -2648,7 +2648,7 @@ interface HTMLParagraphElement extends HTMLElement, DOML2DeprecatedTextFlowContr
 declare var HTMLParagraphElement: {
     prototype: HTMLParagraphElement;
     new (): HTMLParagraphElement;
-}
+};
 
 interface HTMLAreasCollection extends HTMLCollection {
     /**
@@ -2663,14 +2663,14 @@ interface HTMLAreasCollection extends HTMLCollection {
 declare var HTMLAreasCollection: {
     prototype: HTMLAreasCollection;
     new (): HTMLAreasCollection;
-}
+};
 
 interface SVGDescElement extends SVGElement, SVGStylable, SVGLangSpace {
 }
 declare var SVGDescElement: {
     prototype: SVGDescElement;
     new (): SVGDescElement;
-}
+};
 
 interface Node extends EventTarget {
     nodeType: number;
@@ -2743,7 +2743,7 @@ declare var Node: {
     NOTATION_NODE: number;
     DOCUMENT_POSITION_FOLLOWING: number;
     DOCUMENT_POSITION_PRECEDING: number;
-}
+};
 
 interface SVGPathSegCurvetoQuadraticSmoothRel extends SVGPathSeg {
     y: number;
@@ -2752,7 +2752,7 @@ interface SVGPathSegCurvetoQuadraticSmoothRel extends SVGPathSeg {
 declare var SVGPathSegCurvetoQuadraticSmoothRel: {
     prototype: SVGPathSegCurvetoQuadraticSmoothRel;
     new (): SVGPathSegCurvetoQuadraticSmoothRel;
-}
+};
 
 interface DOML2DeprecatedListSpaceReduction {
     compact: boolean;
@@ -2763,7 +2763,7 @@ interface MSScriptHost {
 declare var MSScriptHost: {
     prototype: MSScriptHost;
     new (): MSScriptHost;
-}
+};
 
 interface SVGClipPathElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     clipPathUnits: SVGAnimatedEnumeration;
@@ -2771,7 +2771,7 @@ interface SVGClipPathElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGT
 declare var SVGClipPathElement: {
     prototype: SVGClipPathElement;
     new (): SVGClipPathElement;
-}
+};
 
 interface MouseEvent extends UIEvent {
     toElement: Element;
@@ -2802,7 +2802,7 @@ interface MouseEvent extends UIEvent {
 declare var MouseEvent: {
     prototype: MouseEvent;
     new (): MouseEvent;
-}
+};
 
 interface RangeException {
     code: number;
@@ -2816,7 +2816,7 @@ declare var RangeException: {
     new (): RangeException;
     INVALID_NODE_TYPE_ERR: number;
     BAD_BOUNDARYPOINTS_ERR: number;
-}
+};
 
 interface SVGTextPositioningElement extends SVGTextContentElement {
     y: SVGAnimatedLengthList;
@@ -2828,7 +2828,7 @@ interface SVGTextPositioningElement extends SVGTextContentElement {
 declare var SVGTextPositioningElement: {
     prototype: SVGTextPositioningElement;
     new (): SVGTextPositioningElement;
-}
+};
 
 interface HTMLAppletElement extends HTMLElement, DOML2DeprecatedMarginStyle, DOML2DeprecatedBorderStyle, DOML2DeprecatedAlignmentStyle, MSDataBindingExtensions, MSDataBindingRecordSetExtensions {
     width: number;
@@ -2899,7 +2899,7 @@ interface HTMLAppletElement extends HTMLElement, DOML2DeprecatedMarginStyle, DOM
 declare var HTMLAppletElement: {
     prototype: HTMLAppletElement;
     new (): HTMLAppletElement;
-}
+};
 
 interface TextMetrics {
     width: number;
@@ -2907,7 +2907,7 @@ interface TextMetrics {
 declare var TextMetrics: {
     prototype: TextMetrics;
     new (): TextMetrics;
-}
+};
 
 interface DocumentEvent {
     createEvent(eventInterface: string): Event;
@@ -2922,7 +2922,7 @@ interface HTMLOListElement extends HTMLElement, DOML2DeprecatedListSpaceReductio
 declare var HTMLOListElement: {
     prototype: HTMLOListElement;
     new (): HTMLOListElement;
-}
+};
 
 interface SVGPathSegLinetoVerticalRel extends SVGPathSeg {
     y: number;
@@ -2930,7 +2930,7 @@ interface SVGPathSegLinetoVerticalRel extends SVGPathSeg {
 declare var SVGPathSegLinetoVerticalRel: {
     prototype: SVGPathSegLinetoVerticalRel;
     new (): SVGPathSegLinetoVerticalRel;
-}
+};
 
 interface SVGAnimatedString {
     animVal: string;
@@ -2939,14 +2939,14 @@ interface SVGAnimatedString {
 declare var SVGAnimatedString: {
     prototype: SVGAnimatedString;
     new (): SVGAnimatedString;
-}
+};
 
 interface CDATASection extends Text {
 }
 declare var CDATASection: {
     prototype: CDATASection;
     new (): CDATASection;
-}
+};
 
 interface StyleMedia {
     type: string;
@@ -2955,7 +2955,7 @@ interface StyleMedia {
 declare var StyleMedia: {
     prototype: StyleMedia;
     new (): StyleMedia;
-}
+};
 
 interface HTMLSelectElement extends HTMLElement, MSHTMLCollectionExtensions, MSDataBindingExtensions {
     options: HTMLSelectElement;
@@ -3018,7 +3018,7 @@ interface HTMLSelectElement extends HTMLElement, MSHTMLCollectionExtensions, MSD
 declare var HTMLSelectElement: {
     prototype: HTMLSelectElement;
     new (): HTMLSelectElement;
-}
+};
 
 interface TextRange {
     boundingLeft: number;
@@ -3062,7 +3062,7 @@ interface TextRange {
 declare var TextRange: {
     prototype: TextRange;
     new (): TextRange;
-}
+};
 
 interface SVGTests {
     requiredFeatures: SVGStringList;
@@ -3084,7 +3084,7 @@ interface HTMLBlockElement extends HTMLElement, DOML2DeprecatedTextFlowControl {
 declare var HTMLBlockElement: {
     prototype: HTMLBlockElement;
     new (): HTMLBlockElement;
-}
+};
 
 interface CSSStyleSheet extends StyleSheet {
     owningElement: Element;
@@ -3110,7 +3110,7 @@ interface CSSStyleSheet extends StyleSheet {
 declare var CSSStyleSheet: {
     prototype: CSSStyleSheet;
     new (): CSSStyleSheet;
-}
+};
 
 interface MSSelection {
     type: string;
@@ -3123,7 +3123,7 @@ interface MSSelection {
 declare var MSSelection: {
     prototype: MSSelection;
     new (): MSSelection;
-}
+};
 
 interface HTMLMetaElement extends HTMLElement {
     /**
@@ -3154,7 +3154,7 @@ interface HTMLMetaElement extends HTMLElement {
 declare var HTMLMetaElement: {
     prototype: HTMLMetaElement;
     new (): HTMLMetaElement;
-}
+};
 
 interface SVGPatternElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGLangSpace, SVGTests, SVGFitToViewBox, SVGExternalResourcesRequired, SVGURIReference {
     patternUnits: SVGAnimatedEnumeration;
@@ -3168,7 +3168,7 @@ interface SVGPatternElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGLa
 declare var SVGPatternElement: {
     prototype: SVGPatternElement;
     new (): SVGPatternElement;
-}
+};
 
 interface SVGAnimatedAngle {
     animVal: SVGAngle;
@@ -3177,7 +3177,7 @@ interface SVGAnimatedAngle {
 declare var SVGAnimatedAngle: {
     prototype: SVGAnimatedAngle;
     new (): SVGAnimatedAngle;
-}
+};
 
 interface Selection {
     isCollapsed: boolean;
@@ -3200,7 +3200,7 @@ interface Selection {
 declare var Selection: {
     prototype: Selection;
     new (): Selection;
-}
+};
 
 interface SVGScriptElement extends SVGElement, SVGExternalResourcesRequired, SVGURIReference {
     type: string;
@@ -3208,7 +3208,7 @@ interface SVGScriptElement extends SVGElement, SVGExternalResourcesRequired, SVG
 declare var SVGScriptElement: {
     prototype: SVGScriptElement;
     new (): SVGScriptElement;
-}
+};
 
 interface HTMLDDElement extends HTMLElement {
     /**
@@ -3219,7 +3219,7 @@ interface HTMLDDElement extends HTMLElement {
 declare var HTMLDDElement: {
     prototype: HTMLDDElement;
     new (): HTMLDDElement;
-}
+};
 
 interface MSDataBindingRecordSetReadonlyExtensions {
     recordset: Object;
@@ -3234,7 +3234,7 @@ interface CSSStyleRule extends CSSRule {
 declare var CSSStyleRule: {
     prototype: CSSStyleRule;
     new (): CSSStyleRule;
-}
+};
 
 interface NodeIterator {
     whatToShow: number;
@@ -3248,7 +3248,7 @@ interface NodeIterator {
 declare var NodeIterator: {
     prototype: NodeIterator;
     new (): NodeIterator;
-}
+};
 
 interface SVGViewElement extends SVGElement, SVGZoomAndPan, SVGFitToViewBox, SVGExternalResourcesRequired {
     viewTarget: SVGStringList;
@@ -3256,7 +3256,7 @@ interface SVGViewElement extends SVGElement, SVGZoomAndPan, SVGFitToViewBox, SVG
 declare var SVGViewElement: {
     prototype: SVGViewElement;
     new (): SVGViewElement;
-}
+};
 
 interface HTMLLinkElement extends HTMLElement, LinkStyle {
     /**
@@ -3295,7 +3295,7 @@ interface HTMLLinkElement extends HTMLElement, LinkStyle {
 declare var HTMLLinkElement: {
     prototype: HTMLLinkElement;
     new (): HTMLLinkElement;
-}
+};
 
 interface SVGLocatable {
     farthestViewportElement: SVGElement;
@@ -3315,14 +3315,14 @@ interface HTMLFontElement extends HTMLElement, DOML2DeprecatedColorProperty, DOM
 declare var HTMLFontElement: {
     prototype: HTMLFontElement;
     new (): HTMLFontElement;
-}
+};
 
 interface SVGTitleElement extends SVGElement, SVGStylable, SVGLangSpace {
 }
 declare var SVGTitleElement: {
     prototype: SVGTitleElement;
     new (): SVGTitleElement;
-}
+};
 
 interface ControlRangeCollection {
     length: number;
@@ -3344,7 +3344,7 @@ interface ControlRangeCollection {
 declare var ControlRangeCollection: {
     prototype: ControlRangeCollection;
     new (): ControlRangeCollection;
-}
+};
 
 interface MSNamespaceInfo extends MSEventAttachmentTarget {
     urn: string;
@@ -3356,7 +3356,7 @@ interface MSNamespaceInfo extends MSEventAttachmentTarget {
 declare var MSNamespaceInfo: {
     prototype: MSNamespaceInfo;
     new (): MSNamespaceInfo;
-}
+};
 
 interface WindowSessionStorage {
     sessionStorage: Storage;
@@ -3369,7 +3369,7 @@ interface SVGAnimatedTransformList {
 declare var SVGAnimatedTransformList: {
     prototype: SVGAnimatedTransformList;
     new (): SVGAnimatedTransformList;
-}
+};
 
 interface HTMLTableCaptionElement extends HTMLElement {
     /**
@@ -3384,7 +3384,7 @@ interface HTMLTableCaptionElement extends HTMLElement {
 declare var HTMLTableCaptionElement: {
     prototype: HTMLTableCaptionElement;
     new (): HTMLTableCaptionElement;
-}
+};
 
 interface HTMLOptionElement extends HTMLElement, MSDataBindingExtensions {
     /**
@@ -3420,7 +3420,7 @@ interface HTMLOptionElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLOptionElement: {
     prototype: HTMLOptionElement;
     new (): HTMLOptionElement;
-}
+};
 
 interface HTMLMapElement extends HTMLElement {
     /**
@@ -3435,7 +3435,7 @@ interface HTMLMapElement extends HTMLElement {
 declare var HTMLMapElement: {
     prototype: HTMLMapElement;
     new (): HTMLMapElement;
-}
+};
 
 interface HTMLMenuElement extends HTMLElement, DOML2DeprecatedListSpaceReduction {
     type: string;
@@ -3443,7 +3443,7 @@ interface HTMLMenuElement extends HTMLElement, DOML2DeprecatedListSpaceReduction
 declare var HTMLMenuElement: {
     prototype: HTMLMenuElement;
     new (): HTMLMenuElement;
-}
+};
 
 interface MouseWheelEvent extends MouseEvent {
     wheelDelta: number;
@@ -3452,7 +3452,7 @@ interface MouseWheelEvent extends MouseEvent {
 declare var MouseWheelEvent: {
     prototype: MouseWheelEvent;
     new (): MouseWheelEvent;
-}
+};
 
 interface SVGFitToViewBox {
     viewBox: SVGAnimatedRect;
@@ -3472,7 +3472,7 @@ interface SVGPointList {
 declare var SVGPointList: {
     prototype: SVGPointList;
     new (): SVGPointList;
-}
+};
 
 interface SVGAnimatedLengthList {
     animVal: SVGLengthList;
@@ -3481,7 +3481,7 @@ interface SVGAnimatedLengthList {
 declare var SVGAnimatedLengthList: {
     prototype: SVGAnimatedLengthList;
     new (): SVGAnimatedLengthList;
-}
+};
 
 interface Window extends EventTarget, MSEventAttachmentTarget, WindowLocalStorage, MSWindowExtensions, WindowSessionStorage, WindowTimers {
     ondragend: (ev: DragEvent) => any;
@@ -3589,7 +3589,7 @@ interface Window extends EventTarget, MSEventAttachmentTarget, WindowLocalStorag
 declare var Window: {
     prototype: Window;
     new (): Window;
-}
+};
 
 interface SVGAnimatedPreserveAspectRatio {
     animVal: SVGPreserveAspectRatio;
@@ -3598,7 +3598,7 @@ interface SVGAnimatedPreserveAspectRatio {
 declare var SVGAnimatedPreserveAspectRatio: {
     prototype: SVGAnimatedPreserveAspectRatio;
     new (): SVGAnimatedPreserveAspectRatio;
-}
+};
 
 interface MSSiteModeEvent extends Event {
     buttonID: number;
@@ -3607,7 +3607,7 @@ interface MSSiteModeEvent extends Event {
 declare var MSSiteModeEvent: {
     prototype: MSSiteModeEvent;
     new (): MSSiteModeEvent;
-}
+};
 
 interface DOML2DeprecatedTextFlowControl {
     clear: string;
@@ -3621,7 +3621,7 @@ interface StyleSheetPageList {
 declare var StyleSheetPageList: {
     prototype: StyleSheetPageList;
     new (): StyleSheetPageList;
-}
+};
 
 interface MSCSSProperties extends CSSStyleDeclaration {
     scrollbarShadowColor: string;
@@ -3661,7 +3661,7 @@ interface MSCSSProperties extends CSSStyleDeclaration {
 declare var MSCSSProperties: {
     prototype: MSCSSProperties;
     new (): MSCSSProperties;
-}
+};
 
 interface HTMLCollection extends MSHTMLCollectionExtensions {
     /**
@@ -3681,7 +3681,7 @@ interface HTMLCollection extends MSHTMLCollectionExtensions {
 declare var HTMLCollection: {
     prototype: HTMLCollection;
     new (): HTMLCollection;
-}
+};
 
 interface SVGExternalResourcesRequired {
     externalResourcesRequired: SVGAnimatedBoolean;
@@ -3757,7 +3757,7 @@ interface HTMLImageElement extends HTMLElement, MSImageResourceExtensions, MSDat
 declare var HTMLImageElement: {
     prototype: HTMLImageElement;
     new (): HTMLImageElement;
-}
+};
 
 interface HTMLAreaElement extends HTMLElement {
     /**
@@ -3820,7 +3820,7 @@ interface HTMLAreaElement extends HTMLElement {
 declare var HTMLAreaElement: {
     prototype: HTMLAreaElement;
     new (): HTMLAreaElement;
-}
+};
 
 interface EventTarget {
     addEventListener(type: string, listener: EventListener, useCapture?: boolean): void;
@@ -3849,7 +3849,7 @@ declare var SVGAngle: {
     SVG_ANGLETYPE_UNSPECIFIED: number;
     SVG_ANGLETYPE_DEG: number;
     SVG_ANGLETYPE_GRAD: number;
-}
+};
 
 interface HTMLButtonElement extends HTMLElement, MSDataBindingExtensions {
     /** 
@@ -3877,7 +3877,7 @@ interface HTMLButtonElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLButtonElement: {
     prototype: HTMLButtonElement;
     new (): HTMLButtonElement;
-}
+};
 
 interface HTMLSourceElement extends HTMLElement {
     /**
@@ -3896,7 +3896,7 @@ interface HTMLSourceElement extends HTMLElement {
 declare var HTMLSourceElement: {
     prototype: HTMLSourceElement;
     new (): HTMLSourceElement;
-}
+};
 
 interface CanvasGradient {
     addColorStop(offset: number, color: string): void;
@@ -3904,7 +3904,7 @@ interface CanvasGradient {
 declare var CanvasGradient: {
     prototype: CanvasGradient;
     new (): CanvasGradient;
-}
+};
 
 interface KeyboardEvent extends UIEvent {
     location: number;
@@ -3937,7 +3937,7 @@ declare var KeyboardEvent: {
     DOM_KEY_LOCATION_NUMPAD: number;
     DOM_KEY_LOCATION_JOYSTICK: number;
     DOM_KEY_LOCATION_MOBILE: number;
-}
+};
 
 interface Document extends Node, NodeSelector, MSEventAttachmentTarget, DocumentEvent, MSResourceMetadata, MSNodeExtensions {
     /**
@@ -5913,7 +5913,7 @@ interface Document extends Node, NodeSelector, MSEventAttachmentTarget, Document
 declare var Document: {
     prototype: Document;
     new (): Document;
-}
+};
 
 interface MessageEvent extends Event {
     source: Window;
@@ -5924,7 +5924,7 @@ interface MessageEvent extends Event {
 declare var MessageEvent: {
     prototype: MessageEvent;
     new (): MessageEvent;
-}
+};
 
 interface SVGElement extends Element {
     onmouseover: (ev: MouseEvent) => any;
@@ -5945,7 +5945,7 @@ interface SVGElement extends Element {
 declare var SVGElement: {
     prototype: SVGElement;
     new (): SVGElement;
-}
+};
 
 interface HTMLScriptElement extends HTMLElement {
     /**
@@ -5980,7 +5980,7 @@ interface HTMLScriptElement extends HTMLElement {
 declare var HTMLScriptElement: {
     prototype: HTMLScriptElement;
     new (): HTMLScriptElement;
-}
+};
 
 interface HTMLTableRowElement extends HTMLElement, HTMLTableAlignment, DOML2DeprecatedBackgroundColorStyle {
     /**
@@ -6029,7 +6029,7 @@ interface HTMLTableRowElement extends HTMLElement, HTMLTableAlignment, DOML2Depr
 declare var HTMLTableRowElement: {
     prototype: HTMLTableRowElement;
     new (): HTMLTableRowElement;
-}
+};
 
 interface CanvasRenderingContext2D {
     miterLimit: number;
@@ -6090,7 +6090,7 @@ interface CanvasRenderingContext2D {
 declare var CanvasRenderingContext2D: {
     prototype: CanvasRenderingContext2D;
     new (): CanvasRenderingContext2D;
-}
+};
 
 interface MSCSSRuleList {
     length: number;
@@ -6100,7 +6100,7 @@ interface MSCSSRuleList {
 declare var MSCSSRuleList: {
     prototype: MSCSSRuleList;
     new (): MSCSSRuleList;
-}
+};
 
 interface SVGPathSegLinetoHorizontalAbs extends SVGPathSeg {
     x: number;
@@ -6108,7 +6108,7 @@ interface SVGPathSegLinetoHorizontalAbs extends SVGPathSeg {
 declare var SVGPathSegLinetoHorizontalAbs: {
     prototype: SVGPathSegLinetoHorizontalAbs;
     new (): SVGPathSegLinetoHorizontalAbs;
-}
+};
 
 interface SVGPathSegArcAbs extends SVGPathSeg {
     y: number;
@@ -6122,7 +6122,7 @@ interface SVGPathSegArcAbs extends SVGPathSeg {
 declare var SVGPathSegArcAbs: {
     prototype: SVGPathSegArcAbs;
     new (): SVGPathSegArcAbs;
-}
+};
 
 interface SVGTransformList {
     numberOfItems: number;
@@ -6139,7 +6139,7 @@ interface SVGTransformList {
 declare var SVGTransformList: {
     prototype: SVGTransformList;
     new (): SVGTransformList;
-}
+};
 
 interface HTMLHtmlElement extends HTMLElement {
     /**
@@ -6150,14 +6150,14 @@ interface HTMLHtmlElement extends HTMLElement {
 declare var HTMLHtmlElement: {
     prototype: HTMLHtmlElement;
     new (): HTMLHtmlElement;
-}
+};
 
 interface SVGPathSegClosePath extends SVGPathSeg {
 }
 declare var SVGPathSegClosePath: {
     prototype: SVGPathSegClosePath;
     new (): SVGPathSegClosePath;
-}
+};
 
 interface HTMLFrameElement extends HTMLElement, GetSVGDocument, MSDataBindingExtensions {
     /**
@@ -6232,7 +6232,7 @@ interface HTMLFrameElement extends HTMLElement, GetSVGDocument, MSDataBindingExt
 declare var HTMLFrameElement: {
     prototype: HTMLFrameElement;
     new (): HTMLFrameElement;
-}
+};
 
 interface SVGAnimatedLength {
     animVal: SVGLength;
@@ -6241,7 +6241,7 @@ interface SVGAnimatedLength {
 declare var SVGAnimatedLength: {
     prototype: SVGAnimatedLength;
     new (): SVGAnimatedLength;
-}
+};
 
 interface SVGAnimatedPoints {
     points: SVGPointList;
@@ -6253,7 +6253,7 @@ interface SVGDefsElement extends SVGElement, SVGStylable, SVGTransformable, SVGL
 declare var SVGDefsElement: {
     prototype: SVGDefsElement;
     new (): SVGDefsElement;
-}
+};
 
 interface HTMLQuoteElement extends HTMLElement {
     /**
@@ -6268,7 +6268,7 @@ interface HTMLQuoteElement extends HTMLElement {
 declare var HTMLQuoteElement: {
     prototype: HTMLQuoteElement;
     new (): HTMLQuoteElement;
-}
+};
 
 interface CSSMediaRule extends CSSRule {
     media: MediaList;
@@ -6279,7 +6279,7 @@ interface CSSMediaRule extends CSSRule {
 declare var CSSMediaRule: {
     prototype: CSSMediaRule;
     new (): CSSMediaRule;
-}
+};
 
 interface WindowModal {
     dialogArguments: any;
@@ -6318,7 +6318,7 @@ declare var XMLHttpRequest: {
     UNSENT: number;
     OPENED: number;
     HEADERS_RECEIVED: number;
-}
+};
 
 interface HTMLTableHeaderCellElement extends HTMLTableCellElement {
     /**
@@ -6329,14 +6329,14 @@ interface HTMLTableHeaderCellElement extends HTMLTableCellElement {
 declare var HTMLTableHeaderCellElement: {
     prototype: HTMLTableHeaderCellElement;
     new (): HTMLTableHeaderCellElement;
-}
+};
 
 interface HTMLDListElement extends HTMLElement, DOML2DeprecatedListSpaceReduction {
 }
 declare var HTMLDListElement: {
     prototype: HTMLDListElement;
     new (): HTMLDListElement;
-}
+};
 
 interface MSDataBindingExtensions {
     dataSrc: string;
@@ -6350,7 +6350,7 @@ interface SVGPathSegLinetoHorizontalRel extends SVGPathSeg {
 declare var SVGPathSegLinetoHorizontalRel: {
     prototype: SVGPathSegLinetoHorizontalRel;
     new (): SVGPathSegLinetoHorizontalRel;
-}
+};
 
 interface SVGEllipseElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     ry: SVGAnimatedLength;
@@ -6361,7 +6361,7 @@ interface SVGEllipseElement extends SVGElement, SVGStylable, SVGTransformable, S
 declare var SVGEllipseElement: {
     prototype: SVGEllipseElement;
     new (): SVGEllipseElement;
-}
+};
 
 interface SVGAElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired, SVGURIReference {
     target: SVGAnimatedString;
@@ -6369,7 +6369,7 @@ interface SVGAElement extends SVGElement, SVGStylable, SVGTransformable, SVGLang
 declare var SVGAElement: {
     prototype: SVGAElement;
     new (): SVGAElement;
-}
+};
 
 interface SVGStylable {
     className: SVGAnimatedString;
@@ -6427,7 +6427,7 @@ interface HTMLFrameSetElement extends HTMLElement {
 declare var HTMLFrameSetElement: {
     prototype: HTMLFrameSetElement;
     new (): HTMLFrameSetElement;
-}
+};
 
 interface Screen {
     width: number;
@@ -6449,7 +6449,7 @@ interface Screen {
 declare var Screen: {
     prototype: Screen;
     new (): Screen;
-}
+};
 
 interface Coordinates {
     altitudeAccuracy: number;
@@ -6463,7 +6463,7 @@ interface Coordinates {
 declare var Coordinates: {
     prototype: Coordinates;
     new (): Coordinates;
-}
+};
 
 interface NavigatorGeolocation {
     geolocation: Geolocation;
@@ -6491,7 +6491,7 @@ interface DataTransfer {
 declare var DataTransfer: {
     prototype: DataTransfer;
     new (): DataTransfer;
-}
+};
 
 interface FocusEvent extends UIEvent {
     relatedTarget: EventTarget;
@@ -6500,7 +6500,7 @@ interface FocusEvent extends UIEvent {
 declare var FocusEvent: {
     prototype: FocusEvent;
     new (): FocusEvent;
-}
+};
 
 interface Range {
     startOffset: number;
@@ -6541,7 +6541,7 @@ declare var Range: {
     START_TO_START: number;
     START_TO_END: number;
     END_TO_START: number;
-}
+};
 
 interface SVGPoint {
     y: number;
@@ -6551,7 +6551,7 @@ interface SVGPoint {
 declare var SVGPoint: {
     prototype: SVGPoint;
     new (): SVGPoint;
-}
+};
 
 interface MSPluginsCollection {
     length: number;
@@ -6560,7 +6560,7 @@ interface MSPluginsCollection {
 declare var MSPluginsCollection: {
     prototype: MSPluginsCollection;
     new (): MSPluginsCollection;
-}
+};
 
 interface SVGAnimatedNumberList {
     animVal: SVGNumberList;
@@ -6569,7 +6569,7 @@ interface SVGAnimatedNumberList {
 declare var SVGAnimatedNumberList: {
     prototype: SVGAnimatedNumberList;
     new (): SVGAnimatedNumberList;
-}
+};
 
 interface SVGSVGElement extends SVGElement, SVGStylable, SVGZoomAndPan, DocumentEvent, SVGLangSpace, SVGLocatable, SVGTests, SVGFitToViewBox, SVGExternalResourcesRequired {
     width: SVGAnimatedLength;
@@ -6618,7 +6618,7 @@ interface SVGSVGElement extends SVGElement, SVGStylable, SVGZoomAndPan, Document
 declare var SVGSVGElement: {
     prototype: SVGSVGElement;
     new (): SVGSVGElement;
-}
+};
 
 interface HTMLLabelElement extends HTMLElement, MSDataBindingExtensions {
     /**
@@ -6633,7 +6633,7 @@ interface HTMLLabelElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLLabelElement: {
     prototype: HTMLLabelElement;
     new (): HTMLLabelElement;
-}
+};
 
 interface MSResourceMetadata {
     protocol: string;
@@ -6658,14 +6658,14 @@ interface HTMLLegendElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLLegendElement: {
     prototype: HTMLLegendElement;
     new (): HTMLLegendElement;
-}
+};
 
 interface HTMLDirectoryElement extends HTMLElement, DOML2DeprecatedListSpaceReduction, DOML2DeprecatedListNumberingAndBulletStyle {
 }
 declare var HTMLDirectoryElement: {
     prototype: HTMLDirectoryElement;
     new (): HTMLDirectoryElement;
-}
+};
 
 interface SVGAnimatedInteger {
     animVal: number;
@@ -6674,21 +6674,21 @@ interface SVGAnimatedInteger {
 declare var SVGAnimatedInteger: {
     prototype: SVGAnimatedInteger;
     new (): SVGAnimatedInteger;
-}
+};
 
 interface SVGTextElement extends SVGTextPositioningElement, SVGTransformable {
 }
 declare var SVGTextElement: {
     prototype: SVGTextElement;
     new (): SVGTextElement;
-}
+};
 
 interface SVGTSpanElement extends SVGTextPositioningElement {
 }
 declare var SVGTSpanElement: {
     prototype: SVGTSpanElement;
     new (): SVGTSpanElement;
-}
+};
 
 interface HTMLLIElement extends HTMLElement, DOML2DeprecatedListNumberingAndBulletStyle {
     /**
@@ -6699,7 +6699,7 @@ interface HTMLLIElement extends HTMLElement, DOML2DeprecatedListNumberingAndBull
 declare var HTMLLIElement: {
     prototype: HTMLLIElement;
     new (): HTMLLIElement;
-}
+};
 
 interface SVGPathSegLinetoVerticalAbs extends SVGPathSeg {
     y: number;
@@ -6707,7 +6707,7 @@ interface SVGPathSegLinetoVerticalAbs extends SVGPathSeg {
 declare var SVGPathSegLinetoVerticalAbs: {
     prototype: SVGPathSegLinetoVerticalAbs;
     new (): SVGPathSegLinetoVerticalAbs;
-}
+};
 
 interface MSStorageExtensions {
     remainingSpace: number;
@@ -6721,7 +6721,7 @@ interface SVGStyleElement extends SVGElement, SVGLangSpace {
 declare var SVGStyleElement: {
     prototype: SVGStyleElement;
     new (): SVGStyleElement;
-}
+};
 
 interface MSCurrentStyleCSSProperties extends MSCSSProperties {
     blockDirection: string;
@@ -6734,7 +6734,7 @@ interface MSCurrentStyleCSSProperties extends MSCSSProperties {
 declare var MSCurrentStyleCSSProperties: {
     prototype: MSCurrentStyleCSSProperties;
     new (): MSCurrentStyleCSSProperties;
-}
+};
 
 interface MSHTMLCollectionExtensions {
     urns(urn: any): Object;
@@ -6754,7 +6754,7 @@ interface Storage extends MSStorageExtensions {
 declare var Storage: {
     prototype: Storage;
     new (): Storage;
-}
+};
 
 interface HTMLIFrameElement extends HTMLElement, GetSVGDocument, MSDataBindingExtensions {
     /**
@@ -6837,7 +6837,7 @@ interface HTMLIFrameElement extends HTMLElement, GetSVGDocument, MSDataBindingEx
 declare var HTMLIFrameElement: {
     prototype: HTMLIFrameElement;
     new (): HTMLIFrameElement;
-}
+};
 
 interface TextRangeCollection {
     length: number;
@@ -6847,7 +6847,7 @@ interface TextRangeCollection {
 declare var TextRangeCollection: {
     prototype: TextRangeCollection;
     new (): TextRangeCollection;
-}
+};
 
 interface HTMLBodyElement extends HTMLElement, DOML2DeprecatedBackgroundStyle, DOML2DeprecatedBackgroundColorStyle {
     scroll: string;
@@ -6880,7 +6880,7 @@ interface HTMLBodyElement extends HTMLElement, DOML2DeprecatedBackgroundStyle, D
 declare var HTMLBodyElement: {
     prototype: HTMLBodyElement;
     new (): HTMLBodyElement;
-}
+};
 
 interface DocumentType extends Node {
     name: string;
@@ -6893,7 +6893,7 @@ interface DocumentType extends Node {
 declare var DocumentType: {
     prototype: DocumentType;
     new (): DocumentType;
-}
+};
 
 interface SVGRadialGradientElement extends SVGGradientElement {
     cx: SVGAnimatedLength;
@@ -6905,7 +6905,7 @@ interface SVGRadialGradientElement extends SVGGradientElement {
 declare var SVGRadialGradientElement: {
     prototype: SVGRadialGradientElement;
     new (): SVGRadialGradientElement;
-}
+};
 
 interface MutationEvent extends Event {
     newValue: string;
@@ -6924,7 +6924,7 @@ declare var MutationEvent: {
     MODIFICATION: number;
     REMOVAL: number;
     ADDITION: number;
-}
+};
 
 interface DragEvent extends MouseEvent {
     dataTransfer: DataTransfer;
@@ -6933,7 +6933,7 @@ interface DragEvent extends MouseEvent {
 declare var DragEvent: {
     prototype: DragEvent;
     new (): DragEvent;
-}
+};
 
 interface HTMLTableSectionElement extends HTMLElement, HTMLTableAlignment, DOML2DeprecatedBackgroundColorStyle {
     /**
@@ -6964,7 +6964,7 @@ interface HTMLTableSectionElement extends HTMLElement, HTMLTableAlignment, DOML2
 declare var HTMLTableSectionElement: {
     prototype: HTMLTableSectionElement;
     new (): HTMLTableSectionElement;
-}
+};
 
 interface DOML2DeprecatedListNumberingAndBulletStyle {
     type: string;
@@ -7088,7 +7088,7 @@ interface HTMLInputElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLInputElement: {
     prototype: HTMLInputElement;
     new (): HTMLInputElement;
-}
+};
 
 interface HTMLAnchorElement extends HTMLElement, MSDataBindingExtensions {
     /**
@@ -7169,7 +7169,7 @@ interface HTMLAnchorElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLAnchorElement: {
     prototype: HTMLAnchorElement;
     new (): HTMLAnchorElement;
-}
+};
 
 interface HTMLParamElement extends HTMLElement {
     /**
@@ -7192,7 +7192,7 @@ interface HTMLParamElement extends HTMLElement {
 declare var HTMLParamElement: {
     prototype: HTMLParamElement;
     new (): HTMLParamElement;
-}
+};
 
 interface SVGImageElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired, SVGURIReference {
     y: SVGAnimatedLength;
@@ -7204,7 +7204,7 @@ interface SVGImageElement extends SVGElement, SVGStylable, SVGTransformable, SVG
 declare var SVGImageElement: {
     prototype: SVGImageElement;
     new (): SVGImageElement;
-}
+};
 
 interface SVGAnimatedNumber {
     animVal: number;
@@ -7213,7 +7213,7 @@ interface SVGAnimatedNumber {
 declare var SVGAnimatedNumber: {
     prototype: SVGAnimatedNumber;
     new (): SVGAnimatedNumber;
-}
+};
 
 interface PerformanceTiming {
     redirectStart: number;
@@ -7242,7 +7242,7 @@ interface PerformanceTiming {
 declare var PerformanceTiming: {
     prototype: PerformanceTiming;
     new (): PerformanceTiming;
-}
+};
 
 interface HTMLPreElement extends HTMLElement, DOML2DeprecatedTextFlowControl {
     /**
@@ -7257,7 +7257,7 @@ interface HTMLPreElement extends HTMLElement, DOML2DeprecatedTextFlowControl {
 declare var HTMLPreElement: {
     prototype: HTMLPreElement;
     new (): HTMLPreElement;
-}
+};
 
 interface EventException {
     code: number;
@@ -7271,7 +7271,7 @@ declare var EventException: {
     new (): EventException;
     DISPATCH_REQUEST_ERR: number;
     UNSPECIFIED_EVENT_TYPE_ERR: number;
-}
+};
 
 interface MSNavigatorDoNotTrack {
     msDoNotTrack: string;
@@ -7290,7 +7290,7 @@ interface SVGMetadataElement extends SVGElement {
 declare var SVGMetadataElement: {
     prototype: SVGMetadataElement;
     new (): SVGMetadataElement;
-}
+};
 
 interface SVGPathSegArcRel extends SVGPathSeg {
     y: number;
@@ -7304,7 +7304,7 @@ interface SVGPathSegArcRel extends SVGPathSeg {
 declare var SVGPathSegArcRel: {
     prototype: SVGPathSegArcRel;
     new (): SVGPathSegArcRel;
-}
+};
 
 interface SVGPathSegMovetoAbs extends SVGPathSeg {
     y: number;
@@ -7313,7 +7313,7 @@ interface SVGPathSegMovetoAbs extends SVGPathSeg {
 declare var SVGPathSegMovetoAbs: {
     prototype: SVGPathSegMovetoAbs;
     new (): SVGPathSegMovetoAbs;
-}
+};
 
 interface SVGStringList {
     numberOfItems: number;
@@ -7328,7 +7328,7 @@ interface SVGStringList {
 declare var SVGStringList: {
     prototype: SVGStringList;
     new (): SVGStringList;
-}
+};
 
 interface XDomainRequest {
     timeout: number;
@@ -7346,7 +7346,7 @@ interface XDomainRequest {
 declare var XDomainRequest: {
     prototype: XDomainRequest;
     new (): XDomainRequest;
-}
+};
 
 interface DOML2DeprecatedBackgroundColorStyle {
     bgColor: any;
@@ -7393,14 +7393,14 @@ declare var SVGLength: {
     SVG_LENGTHTYPE_PX: number;
     SVG_LENGTHTYPE_UNKNOWN: number;
     SVG_LENGTHTYPE_EXS: number;
-}
+};
 
 interface SVGPolygonElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGAnimatedPoints, SVGTests, SVGExternalResourcesRequired {
 }
 declare var SVGPolygonElement: {
     prototype: SVGPolygonElement;
     new (): SVGPolygonElement;
-}
+};
 
 interface HTMLPhraseElement extends HTMLElement {
     /**
@@ -7415,7 +7415,7 @@ interface HTMLPhraseElement extends HTMLElement {
 declare var HTMLPhraseElement: {
     prototype: HTMLPhraseElement;
     new (): HTMLPhraseElement;
-}
+};
 
 interface NavigatorStorageUtils {
 }
@@ -7431,7 +7431,7 @@ interface SVGPathSegCurvetoCubicRel extends SVGPathSeg {
 declare var SVGPathSegCurvetoCubicRel: {
     prototype: SVGPathSegCurvetoCubicRel;
     new (): SVGPathSegCurvetoCubicRel;
-}
+};
 
 interface MSEventObj extends Event {
     nextPage: string;
@@ -7485,7 +7485,7 @@ interface MSEventObj extends Event {
 declare var MSEventObj: {
     prototype: MSEventObj;
     new (): MSEventObj;
-}
+};
 
 interface SVGTextContentElement extends SVGElement, SVGStylable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     textLength: SVGAnimatedLength;
@@ -7509,7 +7509,7 @@ declare var SVGTextContentElement: {
     LENGTHADJUST_SPACING: number;
     LENGTHADJUST_SPACINGANDGLYPHS: number;
     LENGTHADJUST_UNKNOWN: number;
-}
+};
 
 interface DOML2DeprecatedColorProperty {
     color: string;
@@ -7540,7 +7540,7 @@ interface HTMLCanvasElement extends HTMLElement {
 declare var HTMLCanvasElement: {
     prototype: HTMLCanvasElement;
     new (): HTMLCanvasElement;
-}
+};
 
 interface Location {
     hash: string;
@@ -7559,7 +7559,7 @@ interface Location {
 declare var Location: {
     prototype: Location;
     new (): Location;
-}
+};
 
 interface HTMLTitleElement extends HTMLElement {
     /**
@@ -7570,7 +7570,7 @@ interface HTMLTitleElement extends HTMLElement {
 declare var HTMLTitleElement: {
     prototype: HTMLTitleElement;
     new (): HTMLTitleElement;
-}
+};
 
 interface HTMLStyleElement extends HTMLElement, LinkStyle {
     /**
@@ -7585,7 +7585,7 @@ interface HTMLStyleElement extends HTMLElement, LinkStyle {
 declare var HTMLStyleElement: {
     prototype: HTMLStyleElement;
     new (): HTMLStyleElement;
-}
+};
 
 interface PerformanceEntry {
     name: string;
@@ -7596,7 +7596,7 @@ interface PerformanceEntry {
 declare var PerformanceEntry: {
     prototype: PerformanceEntry;
     new (): PerformanceEntry;
-}
+};
 
 interface SVGTransform {
     type: number;
@@ -7626,7 +7626,7 @@ declare var SVGTransform: {
     SVG_TRANSFORM_MATRIX: number;
     SVG_TRANSFORM_ROTATE: number;
     SVG_TRANSFORM_SKEWY: number;
-}
+};
 
 interface UIEvent extends Event {
     detail: number;
@@ -7636,7 +7636,7 @@ interface UIEvent extends Event {
 declare var UIEvent: {
     prototype: UIEvent;
     new (): UIEvent;
-}
+};
 
 interface SVGURIReference {
     href: SVGAnimatedString;
@@ -7689,7 +7689,7 @@ declare var SVGPathSeg: {
     PATHSEG_ARC_ABS: number;
     PATHSEG_MOVETO_ABS: number;
     PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL: number;
-}
+};
 
 interface WheelEvent extends MouseEvent {
     deltaZ: number;
@@ -7707,7 +7707,7 @@ declare var WheelEvent: {
     DOM_DELTA_PIXEL: number;
     DOM_DELTA_LINE: number;
     DOM_DELTA_PAGE: number;
-}
+};
 
 interface MSEventAttachmentTarget {
     attachEvent(event: string, listener: EventListener): boolean;
@@ -7720,7 +7720,7 @@ interface SVGNumber {
 declare var SVGNumber: {
     prototype: SVGNumber;
     new (): SVGNumber;
-}
+};
 
 interface SVGPathElement extends SVGElement, SVGStylable, SVGAnimatedPathData, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     getPathSegAtLength(distance: number): number;
@@ -7749,7 +7749,7 @@ interface SVGPathElement extends SVGElement, SVGStylable, SVGAnimatedPathData, S
 declare var SVGPathElement: {
     prototype: SVGPathElement;
     new (): SVGPathElement;
-}
+};
 
 interface MSCompatibleInfo {
     version: string;
@@ -7758,7 +7758,7 @@ interface MSCompatibleInfo {
 declare var MSCompatibleInfo: {
     prototype: MSCompatibleInfo;
     new (): MSCompatibleInfo;
-}
+};
 
 interface Text extends CharacterData, MSNodeExtensions {
     wholeText: string;
@@ -7768,7 +7768,7 @@ interface Text extends CharacterData, MSNodeExtensions {
 declare var Text: {
     prototype: Text;
     new (): Text;
-}
+};
 
 interface SVGAnimatedRect {
     animVal: SVGRect;
@@ -7777,7 +7777,7 @@ interface SVGAnimatedRect {
 declare var SVGAnimatedRect: {
     prototype: SVGAnimatedRect;
     new (): SVGAnimatedRect;
-}
+};
 
 interface CSSNamespaceRule extends CSSRule {
     namespaceURI: string;
@@ -7786,7 +7786,7 @@ interface CSSNamespaceRule extends CSSRule {
 declare var CSSNamespaceRule: {
     prototype: CSSNamespaceRule;
     new (): CSSNamespaceRule;
-}
+};
 
 interface SVGPathSegList {
     numberOfItems: number;
@@ -7801,21 +7801,21 @@ interface SVGPathSegList {
 declare var SVGPathSegList: {
     prototype: SVGPathSegList;
     new (): SVGPathSegList;
-}
+};
 
 interface HTMLUnknownElement extends HTMLElement, MSDataBindingRecordSetReadonlyExtensions {
 }
 declare var HTMLUnknownElement: {
     prototype: HTMLUnknownElement;
     new (): HTMLUnknownElement;
-}
+};
 
 interface HTMLAudioElement extends HTMLMediaElement {
 }
 declare var HTMLAudioElement: {
     prototype: HTMLAudioElement;
     new (): HTMLAudioElement;
-}
+};
 
 interface MSImageResourceExtensions {
     dynsrc: string;
@@ -7839,7 +7839,7 @@ declare var PositionError: {
     POSITION_UNAVAILABLE: number;
     PERMISSION_DENIED: number;
     TIMEOUT: number;
-}
+};
 
 interface HTMLTableCellElement extends HTMLElement, HTMLTableAlignment, DOML2DeprecatedBackgroundStyle, DOML2DeprecatedBackgroundColorStyle {
     /**
@@ -7902,7 +7902,7 @@ interface HTMLTableCellElement extends HTMLElement, HTMLTableAlignment, DOML2Dep
 declare var HTMLTableCellElement: {
     prototype: HTMLTableCellElement;
     new (): HTMLTableCellElement;
-}
+};
 
 interface SVGElementInstance extends EventTarget {
     previousSibling: SVGElementInstance;
@@ -7917,7 +7917,7 @@ interface SVGElementInstance extends EventTarget {
 declare var SVGElementInstance: {
     prototype: SVGElementInstance;
     new (): SVGElementInstance;
-}
+};
 
 interface MSNamespaceInfoCollection {
     length: number;
@@ -7928,7 +7928,7 @@ interface MSNamespaceInfoCollection {
 declare var MSNamespaceInfoCollection: {
     prototype: MSNamespaceInfoCollection;
     new (): MSNamespaceInfoCollection;
-}
+};
 
 interface SVGCircleElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     cx: SVGAnimatedLength;
@@ -7938,7 +7938,7 @@ interface SVGCircleElement extends SVGElement, SVGStylable, SVGTransformable, SV
 declare var SVGCircleElement: {
     prototype: SVGCircleElement;
     new (): SVGCircleElement;
-}
+};
 
 interface StyleSheetList {
     length: number;
@@ -7948,7 +7948,7 @@ interface StyleSheetList {
 declare var StyleSheetList: {
     prototype: StyleSheetList;
     new (): StyleSheetList;
-}
+};
 
 interface CSSImportRule extends CSSRule {
     styleSheet: CSSStyleSheet;
@@ -7958,7 +7958,7 @@ interface CSSImportRule extends CSSRule {
 declare var CSSImportRule: {
     prototype: CSSImportRule;
     new (): CSSImportRule;
-}
+};
 
 interface CustomEvent extends Event {
     detail: any;
@@ -7967,7 +7967,7 @@ interface CustomEvent extends Event {
 declare var CustomEvent: {
     prototype: CustomEvent;
     new (): CustomEvent;
-}
+};
 
 interface HTMLBaseFontElement extends HTMLElement, DOML2DeprecatedColorProperty {
     /**
@@ -7982,7 +7982,7 @@ interface HTMLBaseFontElement extends HTMLElement, DOML2DeprecatedColorProperty 
 declare var HTMLBaseFontElement: {
     prototype: HTMLBaseFontElement;
     new (): HTMLBaseFontElement;
-}
+};
 
 interface HTMLTextAreaElement extends HTMLElement, MSDataBindingExtensions {
     /**
@@ -8051,7 +8051,7 @@ interface HTMLTextAreaElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLTextAreaElement: {
     prototype: HTMLTextAreaElement;
     new (): HTMLTextAreaElement;
-}
+};
 
 interface Geolocation {
     clearWatch(watchId: number): void;
@@ -8061,7 +8061,7 @@ interface Geolocation {
 declare var Geolocation: {
     prototype: Geolocation;
     new (): Geolocation;
-}
+};
 
 interface DOML2DeprecatedMarginStyle {
     vspace: number;
@@ -8100,7 +8100,7 @@ interface HTMLMarqueeElement extends HTMLElement, MSDataBindingExtensions, DOML2
 declare var HTMLMarqueeElement: {
     prototype: HTMLMarqueeElement;
     new (): HTMLMarqueeElement;
-}
+};
 
 interface SVGRect {
     y: number;
@@ -8111,7 +8111,7 @@ interface SVGRect {
 declare var SVGRect: {
     prototype: SVGRect;
     new (): SVGRect;
-}
+};
 
 interface MSNodeExtensions {
     swapNode(otherNode: Node): Node;
@@ -8128,7 +8128,7 @@ interface History {
 declare var History: {
     prototype: History;
     new (): History;
-}
+};
 
 interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
     y: number;
@@ -8141,7 +8141,7 @@ interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 declare var SVGPathSegCurvetoCubicAbs: {
     prototype: SVGPathSegCurvetoCubicAbs;
     new (): SVGPathSegCurvetoCubicAbs;
-}
+};
 
 interface SVGPathSegCurvetoQuadraticAbs extends SVGPathSeg {
     y: number;
@@ -8152,7 +8152,7 @@ interface SVGPathSegCurvetoQuadraticAbs extends SVGPathSeg {
 declare var SVGPathSegCurvetoQuadraticAbs: {
     prototype: SVGPathSegCurvetoQuadraticAbs;
     new (): SVGPathSegCurvetoQuadraticAbs;
-}
+};
 
 interface TimeRanges {
     length: number;
@@ -8162,7 +8162,7 @@ interface TimeRanges {
 declare var TimeRanges: {
     prototype: TimeRanges;
     new (): TimeRanges;
-}
+};
 
 interface CSSRule {
     cssText: string;
@@ -8189,7 +8189,7 @@ declare var CSSRule: {
     UNKNOWN_RULE: number;
     FONT_FACE_RULE: number;
     CHARSET_RULE: number;
-}
+};
 
 interface SVGPathSegLinetoAbs extends SVGPathSeg {
     y: number;
@@ -8198,7 +8198,7 @@ interface SVGPathSegLinetoAbs extends SVGPathSeg {
 declare var SVGPathSegLinetoAbs: {
     prototype: SVGPathSegLinetoAbs;
     new (): SVGPathSegLinetoAbs;
-}
+};
 
 interface HTMLModElement extends HTMLElement {
     /**
@@ -8213,7 +8213,7 @@ interface HTMLModElement extends HTMLElement {
 declare var HTMLModElement: {
     prototype: HTMLModElement;
     new (): HTMLModElement;
-}
+};
 
 interface SVGMatrix {
     e: number;
@@ -8237,7 +8237,7 @@ interface SVGMatrix {
 declare var SVGMatrix: {
     prototype: SVGMatrix;
     new (): SVGMatrix;
-}
+};
 
 interface MSPopupWindow {
     document: Document;
@@ -8248,7 +8248,7 @@ interface MSPopupWindow {
 declare var MSPopupWindow: {
     prototype: MSPopupWindow;
     new (): MSPopupWindow;
-}
+};
 
 interface BeforeUnloadEvent extends Event {
     returnValue: string;
@@ -8256,7 +8256,7 @@ interface BeforeUnloadEvent extends Event {
 declare var BeforeUnloadEvent: {
     prototype: BeforeUnloadEvent;
     new (): BeforeUnloadEvent;
-}
+};
 
 interface SVGUseElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired, SVGURIReference {
     y: SVGAnimatedLength;
@@ -8269,7 +8269,7 @@ interface SVGUseElement extends SVGElement, SVGStylable, SVGTransformable, SVGLa
 declare var SVGUseElement: {
     prototype: SVGUseElement;
     new (): SVGUseElement;
-}
+};
 
 interface Event {
     timeStamp: number;
@@ -8297,7 +8297,7 @@ declare var Event: {
     CAPTURING_PHASE: number;
     AT_TARGET: number;
     BUBBLING_PHASE: number;
-}
+};
 
 interface ImageData {
     width: number;
@@ -8307,7 +8307,7 @@ interface ImageData {
 declare var ImageData: {
     prototype: ImageData;
     new (): ImageData;
-}
+};
 
 interface HTMLTableColElement extends HTMLElement, HTMLTableAlignment {
     /**
@@ -8326,7 +8326,7 @@ interface HTMLTableColElement extends HTMLElement, HTMLTableAlignment {
 declare var HTMLTableColElement: {
     prototype: HTMLTableColElement;
     new (): HTMLTableColElement;
-}
+};
 
 interface SVGException {
     code: number;
@@ -8342,7 +8342,7 @@ declare var SVGException: {
     SVG_MATRIX_NOT_INVERTABLE: number;
     SVG_WRONG_TYPE_ERR: number;
     SVG_INVALID_VALUE_ERR: number;
-}
+};
 
 interface SVGLinearGradientElement extends SVGGradientElement {
     y1: SVGAnimatedLength;
@@ -8353,7 +8353,7 @@ interface SVGLinearGradientElement extends SVGGradientElement {
 declare var SVGLinearGradientElement: {
     prototype: SVGLinearGradientElement;
     new (): SVGLinearGradientElement;
-}
+};
 
 interface HTMLTableAlignment {
     /**
@@ -8377,7 +8377,7 @@ interface SVGAnimatedEnumeration {
 declare var SVGAnimatedEnumeration: {
     prototype: SVGAnimatedEnumeration;
     new (): SVGAnimatedEnumeration;
-}
+};
 
 interface DOML2DeprecatedSizeProperty {
     size: number;
@@ -8388,7 +8388,7 @@ interface HTMLUListElement extends HTMLElement, DOML2DeprecatedListSpaceReductio
 declare var HTMLUListElement: {
     prototype: HTMLUListElement;
     new (): HTMLUListElement;
-}
+};
 
 interface SVGRectElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     y: SVGAnimatedLength;
@@ -8401,7 +8401,7 @@ interface SVGRectElement extends SVGElement, SVGStylable, SVGTransformable, SVGL
 declare var SVGRectElement: {
     prototype: SVGRectElement;
     new (): SVGRectElement;
-}
+};
 
 interface ErrorEventHandler {
     (event: Event, source: string, fileno: number, columnNumber: number): void;
@@ -8421,7 +8421,7 @@ interface HTMLDivElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLDivElement: {
     prototype: HTMLDivElement;
     new (): HTMLDivElement;
-}
+};
 
 interface DOML2DeprecatedBorderStyle {
     border: string;
@@ -8441,7 +8441,7 @@ interface NamedNodeMap {
 declare var NamedNodeMap: {
     prototype: NamedNodeMap;
     new (): NamedNodeMap;
-}
+};
 
 interface MediaList {
     length: number;
@@ -8455,7 +8455,7 @@ interface MediaList {
 declare var MediaList: {
     prototype: MediaList;
     new (): MediaList;
-}
+};
 
 interface SVGPathSegCurvetoQuadraticSmoothAbs extends SVGPathSeg {
     y: number;
@@ -8464,7 +8464,7 @@ interface SVGPathSegCurvetoQuadraticSmoothAbs extends SVGPathSeg {
 declare var SVGPathSegCurvetoQuadraticSmoothAbs: {
     prototype: SVGPathSegCurvetoQuadraticSmoothAbs;
     new (): SVGPathSegCurvetoQuadraticSmoothAbs;
-}
+};
 
 interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
     y: number;
@@ -8475,7 +8475,7 @@ interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 declare var SVGPathSegCurvetoCubicSmoothRel: {
     prototype: SVGPathSegCurvetoCubicSmoothRel;
     new (): SVGPathSegCurvetoCubicSmoothRel;
-}
+};
 
 interface SVGLengthList {
     numberOfItems: number;
@@ -8490,7 +8490,7 @@ interface SVGLengthList {
 declare var SVGLengthList: {
     prototype: SVGLengthList;
     new (): SVGLengthList;
-}
+};
 
 interface ProcessingInstruction extends Node {
     target: string;
@@ -8499,7 +8499,7 @@ interface ProcessingInstruction extends Node {
 declare var ProcessingInstruction: {
     prototype: ProcessingInstruction;
     new (): ProcessingInstruction;
-}
+};
 
 interface MSWindowExtensions {
     status: string;
@@ -8539,7 +8539,7 @@ interface MSBehaviorUrnsCollection {
 declare var MSBehaviorUrnsCollection: {
     prototype: MSBehaviorUrnsCollection;
     new (): MSBehaviorUrnsCollection;
-}
+};
 
 interface CSSFontFaceRule extends CSSRule {
     style: CSSStyleDeclaration;
@@ -8547,7 +8547,7 @@ interface CSSFontFaceRule extends CSSRule {
 declare var CSSFontFaceRule: {
     prototype: CSSFontFaceRule;
     new (): CSSFontFaceRule;
-}
+};
 
 interface DOML2DeprecatedBackgroundStyle {
     background: string;
@@ -8582,21 +8582,21 @@ declare var TextEvent: {
     DOM_INPUT_METHOD_HANDWRITING: number;
     DOM_INPUT_METHOD_OPTION: number;
     DOM_INPUT_METHOD_MULTIMODAL: number;
-}
+};
 
 interface DocumentFragment extends Node, NodeSelector, MSEventAttachmentTarget, MSNodeExtensions {
 }
 declare var DocumentFragment: {
     prototype: DocumentFragment;
     new (): DocumentFragment;
-}
+};
 
 interface SVGPolylineElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGAnimatedPoints, SVGTests, SVGExternalResourcesRequired {
 }
 declare var SVGPolylineElement: {
     prototype: SVGPolylineElement;
     new (): SVGPolylineElement;
-}
+};
 
 interface SVGAnimatedPathData {
     pathSegList: SVGPathSegList;
@@ -8609,7 +8609,7 @@ interface Position {
 declare var Position: {
     prototype: Position;
     new (): Position;
-}
+};
 
 interface BookmarkCollection {
     length: number;
@@ -8619,14 +8619,14 @@ interface BookmarkCollection {
 declare var BookmarkCollection: {
     prototype: BookmarkCollection;
     new (): BookmarkCollection;
-}
+};
 
 interface PerformanceMark extends PerformanceEntry {
 }
 declare var PerformanceMark: {
     prototype: PerformanceMark;
     new (): PerformanceMark;
-}
+};
 
 interface CSSPageRule extends CSSRule {
     pseudoClass: string;
@@ -8637,7 +8637,7 @@ interface CSSPageRule extends CSSRule {
 declare var CSSPageRule: {
     prototype: CSSPageRule;
     new (): CSSPageRule;
-}
+};
 
 interface HTMLBRElement extends HTMLElement {
     /**
@@ -8648,7 +8648,7 @@ interface HTMLBRElement extends HTMLElement {
 declare var HTMLBRElement: {
     prototype: HTMLBRElement;
     new (): HTMLBRElement;
-}
+};
 
 interface MSNavigatorExtensions {
     userLanguage: string;
@@ -8670,7 +8670,7 @@ interface HTMLSpanElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLSpanElement: {
     prototype: HTMLSpanElement;
     new (): HTMLSpanElement;
-}
+};
 
 interface HTMLHeadElement extends HTMLElement {
     profile: string;
@@ -8678,7 +8678,7 @@ interface HTMLHeadElement extends HTMLElement {
 declare var HTMLHeadElement: {
     prototype: HTMLHeadElement;
     new (): HTMLHeadElement;
-}
+};
 
 interface HTMLHeadingElement extends HTMLElement, DOML2DeprecatedTextFlowControl {
     /**
@@ -8689,7 +8689,7 @@ interface HTMLHeadingElement extends HTMLElement, DOML2DeprecatedTextFlowControl
 declare var HTMLHeadingElement: {
     prototype: HTMLHeadingElement;
     new (): HTMLHeadingElement;
-}
+};
 
 interface HTMLFormElement extends HTMLElement, MSHTMLCollectionExtensions {
     /**
@@ -8751,7 +8751,7 @@ interface HTMLFormElement extends HTMLElement, MSHTMLCollectionExtensions {
 declare var HTMLFormElement: {
     prototype: HTMLFormElement;
     new (): HTMLFormElement;
-}
+};
 
 interface SVGZoomAndPan {
     zoomAndPan: number;
@@ -8765,7 +8765,7 @@ declare var SVGZoomAndPan: {
     SVG_ZOOMANDPAN_MAGNIFY: number;
     SVG_ZOOMANDPAN_UNKNOWN: number;
     SVG_ZOOMANDPAN_DISABLE: number;
-}
+};
 
 interface HTMLMediaElement extends HTMLElement {
     /**
@@ -8895,7 +8895,7 @@ declare var HTMLMediaElement: {
     NETWORK_LOADING: number;
     NETWORK_IDLE: number;
     HAVE_FUTURE_DATA: number;
-}
+};
 
 interface ElementCSSInlineStyle {
     runtimeStyle: MSStyleCSSProperties;
@@ -8910,7 +8910,7 @@ interface DOMParser {
 declare var DOMParser: {
     prototype: DOMParser;
     new (): DOMParser;
-}
+};
 
 interface MSMimeTypesCollection {
     length: number;
@@ -8918,7 +8918,7 @@ interface MSMimeTypesCollection {
 declare var MSMimeTypesCollection: {
     prototype: MSMimeTypesCollection;
     new (): MSMimeTypesCollection;
-}
+};
 
 interface StyleSheet {
     disabled: boolean;
@@ -8932,7 +8932,7 @@ interface StyleSheet {
 declare var StyleSheet: {
     prototype: StyleSheet;
     new (): StyleSheet;
-}
+};
 
 interface SVGTextPathElement extends SVGTextContentElement, SVGURIReference {
     startOffset: SVGAnimatedLength;
@@ -8954,7 +8954,7 @@ declare var SVGTextPathElement: {
     TEXTPATH_SPACINGTYPE_UNKNOWN: number;
     TEXTPATH_METHODTYPE_UNKNOWN: number;
     TEXTPATH_METHODTYPE_ALIGN: number;
-}
+};
 
 interface HTMLDTElement extends HTMLElement {
     /**
@@ -8965,7 +8965,7 @@ interface HTMLDTElement extends HTMLElement {
 declare var HTMLDTElement: {
     prototype: HTMLDTElement;
     new (): HTMLDTElement;
-}
+};
 
 interface NodeList {
     length: number;
@@ -8975,7 +8975,7 @@ interface NodeList {
 declare var NodeList: {
     prototype: NodeList;
     new (): NodeList;
-}
+};
 
 interface NodeListOf<TNode extends Node> extends NodeList {
     length: number;
@@ -8989,14 +8989,14 @@ interface XMLSerializer {
 declare var XMLSerializer: {
     prototype: XMLSerializer;
     new (): XMLSerializer;
-}
+};
 
 interface PerformanceMeasure extends PerformanceEntry {
 }
 declare var PerformanceMeasure: {
     prototype: PerformanceMeasure;
     new (): PerformanceMeasure;
-}
+};
 
 interface SVGGradientElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGExternalResourcesRequired, SVGURIReference {
     spreadMethod: SVGAnimatedEnumeration;
@@ -9014,7 +9014,7 @@ declare var SVGGradientElement: {
     SVG_SPREADMETHOD_PAD: number;
     SVG_SPREADMETHOD_UNKNOWN: number;
     SVG_SPREADMETHOD_REPEAT: number;
-}
+};
 
 interface NodeFilter {
     acceptNode(n: Node): number;
@@ -9054,7 +9054,7 @@ declare var NodeFilter: {
     FILTER_SKIP: number;
     SHOW_ATTRIBUTE: number;
     SHOW_DOCUMENT_FRAGMENT: number;
-}
+};
 
 interface SVGNumberList {
     numberOfItems: number;
@@ -9069,7 +9069,7 @@ interface SVGNumberList {
 declare var SVGNumberList: {
     prototype: SVGNumberList;
     new (): SVGNumberList;
-}
+};
 
 interface MediaError {
     code: number;
@@ -9085,7 +9085,7 @@ declare var MediaError: {
     MEDIA_ERR_NETWORK: number;
     MEDIA_ERR_SRC_NOT_SUPPORTED: number;
     MEDIA_ERR_DECODE: number;
-}
+};
 
 interface HTMLFieldSetElement extends HTMLElement {
     /**
@@ -9100,7 +9100,7 @@ interface HTMLFieldSetElement extends HTMLElement {
 declare var HTMLFieldSetElement: {
     prototype: HTMLFieldSetElement;
     new (): HTMLFieldSetElement;
-}
+};
 
 interface HTMLBGSoundElement extends HTMLElement {
     /**
@@ -9123,7 +9123,7 @@ interface HTMLBGSoundElement extends HTMLElement {
 declare var HTMLBGSoundElement: {
     prototype: HTMLBGSoundElement;
     new (): HTMLBGSoundElement;
-}
+};
 
 interface HTMLElement extends Element, ElementCSSInlineStyle, MSEventAttachmentTarget, MSNodeExtensions {
     onmouseleave: (ev: MouseEvent) => any;
@@ -9284,7 +9284,7 @@ interface HTMLElement extends Element, ElementCSSInlineStyle, MSEventAttachmentT
 declare var HTMLElement: {
     prototype: HTMLElement;
     new (): HTMLElement;
-}
+};
 
 interface Comment extends CharacterData {
     text: string;
@@ -9292,7 +9292,7 @@ interface Comment extends CharacterData {
 declare var Comment: {
     prototype: Comment;
     new (): Comment;
-}
+};
 
 interface PerformanceResourceTiming extends PerformanceEntry {
     redirectStart: number;
@@ -9310,14 +9310,14 @@ interface PerformanceResourceTiming extends PerformanceEntry {
 declare var PerformanceResourceTiming: {
     prototype: PerformanceResourceTiming;
     new (): PerformanceResourceTiming;
-}
+};
 
 interface CanvasPattern {
 }
 declare var CanvasPattern: {
     prototype: CanvasPattern;
     new (): CanvasPattern;
-}
+};
 
 interface HTMLHRElement extends HTMLElement, DOML2DeprecatedColorProperty, DOML2DeprecatedSizeProperty {
     /**
@@ -9336,7 +9336,7 @@ interface HTMLHRElement extends HTMLElement, DOML2DeprecatedColorProperty, DOML2
 declare var HTMLHRElement: {
     prototype: HTMLHRElement;
     new (): HTMLHRElement;
-}
+};
 
 interface HTMLObjectElement extends HTMLElement, GetSVGDocument, DOML2DeprecatedMarginStyle, DOML2DeprecatedBorderStyle, DOML2DeprecatedAlignmentStyle, MSDataBindingExtensions, MSDataBindingRecordSetExtensions {
     /**
@@ -9416,7 +9416,7 @@ interface HTMLObjectElement extends HTMLElement, GetSVGDocument, DOML2Deprecated
 declare var HTMLObjectElement: {
     prototype: HTMLObjectElement;
     new (): HTMLObjectElement;
-}
+};
 
 interface HTMLEmbedElement extends HTMLElement, GetSVGDocument {
     /**
@@ -9451,7 +9451,7 @@ interface HTMLEmbedElement extends HTMLElement, GetSVGDocument {
 declare var HTMLEmbedElement: {
     prototype: HTMLEmbedElement;
     new (): HTMLEmbedElement;
-}
+};
 
 interface StorageEvent extends Event {
     oldValue: any;
@@ -9464,7 +9464,7 @@ interface StorageEvent extends Event {
 declare var StorageEvent: {
     prototype: StorageEvent;
     new (): StorageEvent;
-}
+};
 
 interface CharacterData extends Node {
     length: number;
@@ -9478,7 +9478,7 @@ interface CharacterData extends Node {
 declare var CharacterData: {
     prototype: CharacterData;
     new (): CharacterData;
-}
+};
 
 interface HTMLOptGroupElement extends HTMLElement, MSDataBindingExtensions {
     /**
@@ -9513,7 +9513,7 @@ interface HTMLOptGroupElement extends HTMLElement, MSDataBindingExtensions {
 declare var HTMLOptGroupElement: {
     prototype: HTMLOptGroupElement;
     new (): HTMLOptGroupElement;
-}
+};
 
 interface HTMLIsIndexElement extends HTMLElement {
     /**
@@ -9529,7 +9529,7 @@ interface HTMLIsIndexElement extends HTMLElement {
 declare var HTMLIsIndexElement: {
     prototype: HTMLIsIndexElement;
     new (): HTMLIsIndexElement;
-}
+};
 
 interface SVGPathSegLinetoRel extends SVGPathSeg {
     y: number;
@@ -9538,7 +9538,7 @@ interface SVGPathSegLinetoRel extends SVGPathSeg {
 declare var SVGPathSegLinetoRel: {
     prototype: SVGPathSegLinetoRel;
     new (): SVGPathSegLinetoRel;
-}
+};
 
 interface DOMException {
     code: number;
@@ -9596,7 +9596,7 @@ declare var DOMException: {
     NOT_SUPPORTED_ERR: number;
     INVALID_ACCESS_ERR: number;
     INUSE_ATTRIBUTE_ERR: number;
-}
+};
 
 interface SVGAnimatedBoolean {
     animVal: boolean;
@@ -9605,7 +9605,7 @@ interface SVGAnimatedBoolean {
 declare var SVGAnimatedBoolean: {
     prototype: SVGAnimatedBoolean;
     new (): SVGAnimatedBoolean;
-}
+};
 
 interface MSCompatibleInfoCollection {
     length: number;
@@ -9614,14 +9614,14 @@ interface MSCompatibleInfoCollection {
 declare var MSCompatibleInfoCollection: {
     prototype: MSCompatibleInfoCollection;
     new (): MSCompatibleInfoCollection;
-}
+};
 
 interface SVGSwitchElement extends SVGElement, SVGStylable, SVGTransformable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
 }
 declare var SVGSwitchElement: {
     prototype: SVGSwitchElement;
     new (): SVGSwitchElement;
-}
+};
 
 interface SVGPreserveAspectRatio {
     align: number;
@@ -9658,7 +9658,7 @@ declare var SVGPreserveAspectRatio: {
     SVG_PRESERVEASPECTRATIO_XMIDYMIN: number;
     SVG_MEETORSLICE_SLICE: number;
     SVG_PRESERVEASPECTRATIO_UNKNOWN: number;
-}
+};
 
 interface Attr extends Node {
     expando: boolean;
@@ -9670,7 +9670,7 @@ interface Attr extends Node {
 declare var Attr: {
     prototype: Attr;
     new (): Attr;
-}
+};
 
 interface PerformanceNavigation {
     redirectCount: number;
@@ -9688,7 +9688,7 @@ declare var PerformanceNavigation: {
     TYPE_RESERVED: number;
     TYPE_BACK_FORWARD: number;
     TYPE_NAVIGATE: number;
-}
+};
 
 interface SVGStopElement extends SVGElement, SVGStylable {
     offset: SVGAnimatedNumber;
@@ -9696,7 +9696,7 @@ interface SVGStopElement extends SVGElement, SVGStylable {
 declare var SVGStopElement: {
     prototype: SVGStopElement;
     new (): SVGStopElement;
-}
+};
 
 interface PositionCallback {
     (position: Position): void;
@@ -9707,7 +9707,7 @@ interface SVGSymbolElement extends SVGElement, SVGStylable, SVGLangSpace, SVGFit
 declare var SVGSymbolElement: {
     prototype: SVGSymbolElement;
     new (): SVGSymbolElement;
-}
+};
 
 interface SVGElementInstanceList {
     length: number;
@@ -9716,7 +9716,7 @@ interface SVGElementInstanceList {
 declare var SVGElementInstanceList: {
     prototype: SVGElementInstanceList;
     new (): SVGElementInstanceList;
-}
+};
 
 interface CSSRuleList {
     length: number;
@@ -9726,7 +9726,7 @@ interface CSSRuleList {
 declare var CSSRuleList: {
     prototype: CSSRuleList;
     new (): CSSRuleList;
-}
+};
 
 interface MSDataBindingRecordSetExtensions {
     recordset: Object;
@@ -9763,7 +9763,7 @@ interface HTMLVideoElement extends HTMLMediaElement {
 declare var HTMLVideoElement: {
     prototype: HTMLVideoElement;
     new (): HTMLVideoElement;
-}
+};
 
 interface ClientRectList {
     length: number;
@@ -9773,7 +9773,7 @@ interface ClientRectList {
 declare var ClientRectList: {
     prototype: ClientRectList;
     new (): ClientRectList;
-}
+};
 
 interface SVGMaskElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
     y: SVGAnimatedLength;
@@ -9786,14 +9786,14 @@ interface SVGMaskElement extends SVGElement, SVGUnitTypes, SVGStylable, SVGLangS
 declare var SVGMaskElement: {
     prototype: SVGMaskElement;
     new (): SVGMaskElement;
-}
+};
 
 interface External {
 }
 declare var External: {
     prototype: External;
     new (): External;
-}
+};
 
 declare var Audio: { new (src?: string): HTMLAudioElement; };
 declare var Option: { new (text?: string, value?: string, defaultSelected?: boolean, selected?: boolean): HTMLOptionElement; };
@@ -9984,7 +9984,7 @@ declare var MSGestureEvent: {
     MSGESTURE_FLAG_CANCEL: number;
     MSGESTURE_FLAG_INERTIA: number;
     MSGESTURE_FLAG_NONE: number;
-}
+};
 
 interface HTMLAnchorElement {
     /**
@@ -10135,7 +10135,7 @@ interface MSGesture {
 declare var MSGesture: {
     prototype: MSGesture;
     new (): MSGesture;
-}
+};
 
 interface TextTrackCue extends EventTarget {
     onenter: (ev: Event) => any;
@@ -10151,7 +10151,7 @@ interface TextTrackCue extends EventTarget {
 declare var TextTrackCue: {
     prototype: TextTrackCue;
     new (): TextTrackCue;
-}
+};
 
 interface MSStreamReader extends MSBaseReader {
     error: DOMError;
@@ -10163,7 +10163,7 @@ interface MSStreamReader extends MSBaseReader {
 declare var MSStreamReader: {
     prototype: MSStreamReader;
     new (): MSStreamReader;
-}
+};
 
 interface DOMTokenList {
     length: number;
@@ -10209,7 +10209,7 @@ declare var SVGFEBlendElement: {
     SVG_FEBLEND_MODE_NORMAL: number;
     SVG_FEBLEND_MODE_SCREEN: number;
     SVG_FEBLEND_MODE_LIGHTEN: number;
-}
+};
 
 interface WindowTimers extends WindowTimersExtension {
 }
@@ -10339,7 +10339,7 @@ interface MessageChannel {
 declare var MessageChannel: {
     prototype: MessageChannel;
     new (): MessageChannel;
-}
+};
 
 interface SVGFEMergeElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 }
@@ -10403,7 +10403,7 @@ declare var WebSocket: {
     CLOSING: number;
     CONNECTING: number;
     CLOSED: number;
-}
+};
 
 interface SVGFEPointLightElement extends SVGElement {
     y: SVGAnimatedNumber;
@@ -10645,7 +10645,7 @@ declare var SVGFEMorphologyElement: {
     SVG_MORPHOLOGY_OPERATOR_UNKNOWN: number;
     SVG_MORPHOLOGY_OPERATOR_ERODE: number;
     SVG_MORPHOLOGY_OPERATOR_DILATE: number;
-}
+};
 
 interface HTMLSelectElement {
     /**
@@ -10718,7 +10718,7 @@ declare var SVGFEDisplacementMapElement: {
     SVG_CHANNEL_G: number;
     SVG_CHANNEL_UNKNOWN: number;
     SVG_CHANNEL_A: number;
-}
+};
 
 interface AnimationEvent extends Event {
     animationName: string;
@@ -10748,7 +10748,7 @@ declare var SVGComponentTransferFunctionElement: {
     SVG_FECOMPONENTTRANSFER_TYPE_GAMMA: number;
     SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE: number;
     SVG_FECOMPONENTTRANSFER_TYPE_LINEAR: number;
-}
+};
 
 interface MSRangeCollection {
     length: number;
@@ -10825,7 +10825,7 @@ declare var SVGFEConvolveMatrixElement: {
     SVG_EDGEMODE_DUPLICATE: number;
     SVG_EDGEMODE_UNKNOWN: number;
     SVG_EDGEMODE_NONE: number;
-}
+};
 
 interface TextTrackCueList {
     length: number;
@@ -10891,7 +10891,7 @@ declare var SVGFETurbulenceElement: {
     SVG_TURBULENCE_TYPE_TURBULENCE: number;
     SVG_TURBULENCE_TYPE_FRACTALNOISE: number;
     SVG_STITCHTYPE_STITCH: number;
-}
+};
 
 interface TextTrackList {
     length: number;
@@ -10918,7 +10918,7 @@ declare var SVGFEColorMatrixElement: {
     SVG_FECOLORMATRIX_TYPE_MATRIX: number;
     SVG_FECOLORMATRIX_TYPE_HUEROTATE: number;
     SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA: number;
-}
+};
 
 interface Console {
     info(message?: any, ...optionalParams: any[]): void;
@@ -11190,7 +11190,7 @@ declare var TextTrack: {
     NONE: number;
     HIDDEN: number;
     DISABLED: number;
-}
+};
 
 interface MediaQueryListListener {
     (mql: MediaQueryList): void;
@@ -11222,7 +11222,7 @@ interface FileReader extends MSBaseReader {
 declare var FileReader: {
     prototype: FileReader;
     new (): FileReader;
-}
+};
 
 interface BlobPropertyBag {
     type?: string;
@@ -11239,7 +11239,7 @@ interface Blob {
 declare var Blob: {
     prototype: Blob;
     new (blobParts?: any[], options?: BlobPropertyBag): Blob;
-}
+};
 
 interface ApplicationCache extends EventTarget {
     status: number;
@@ -11268,7 +11268,7 @@ declare var ApplicationCache: {
     DOWNLOADING: number;
     IDLE: number;
     OBSOLETE: number;
-}
+};
 
 interface FrameRequestCallback {
     (time: number): void;
@@ -11342,7 +11342,7 @@ interface MSBlobBuilder {
 declare var MSBlobBuilder: {
     prototype: MSBlobBuilder;
     new (): MSBlobBuilder;
-}
+};
 
 interface HTMLElement {
     onmscontentzoom: (ev: any) => any;
@@ -11420,7 +11420,7 @@ declare var MSPointerEvent: {
     MSPOINTER_TYPE_PEN: number;
     MSPOINTER_TYPE_MOUSE: number;
     MSPOINTER_TYPE_TOUCH: number;
-}
+};
 
 interface DOMException {
     name: string;
@@ -11446,7 +11446,7 @@ declare var MSManipulationEvent: {
     MS_MANIPULATION_STATE_STOPPED: number;
     MS_MANIPULATION_STATE_ACTIVE: number;
     MS_MANIPULATION_STATE_INERTIA: number;
-}
+};
 
 interface FormData {
     append(name: any, value: any, blobName?: string): void;
@@ -11454,7 +11454,7 @@ interface FormData {
 declare var FormData: {
     prototype: FormData;
     new (form?: HTMLFormElement): FormData;
-}
+};
 
 interface HTMLDataListElement extends HTMLElement {
     options: HTMLCollection;
@@ -11492,7 +11492,7 @@ declare var SVGFECompositeElement: {
     SVG_FECOMPOSITE_OPERATOR_UNKNOWN: number;
     SVG_FECOMPOSITE_OPERATOR_IN: number;
     SVG_FECOMPOSITE_OPERATOR_ATOP: number;
-}
+};
 
 interface ValidityState {
     customError: boolean;
@@ -11592,7 +11592,7 @@ interface MSCSSMatrix {
 declare var MSCSSMatrix: {
     prototype: MSCSSMatrix;
     new (text?: string): MSCSSMatrix;
-}
+};
 
 interface Worker extends AbstractWorker {
     onmessage: (ev: any) => any;
@@ -11602,7 +11602,7 @@ interface Worker extends AbstractWorker {
 declare var Worker: {
     prototype: Worker;
     new (stringUrl: string): Worker;
-}
+};
 
 interface HTMLIFrameElement {
     sandbox: DOMSettableTokenList;
@@ -11953,7 +11953,7 @@ interface MSMediaKeys {
 declare var MSMediaKeys: {
     prototype: MSMediaKeys;
     new (): MSMediaKeys;
-}
+};
 
 interface MSMediaKeyMessageEvent extends Event {
     destinationURL: string;
@@ -12065,7 +12065,7 @@ declare var MSMediaKeyError: {
     MS_MEDIA_KEYERR_DOMAIN: number;
     MS_MEDIA_KEYERR_UNKNOWN: number;
     MS_MEDIA_KEYERR_CLIENT: number;
-}
+};
 
 interface Plugin {
     length: number;
@@ -12105,7 +12105,7 @@ interface MediaSource extends EventTarget {
 declare var MediaSource: {
     prototype: MediaSource;
     new (): MediaSource;
-}
+};
 
 interface MediaError {
     MS_MEDIA_ERR_ENCRYPTED: number;
@@ -12175,7 +12175,7 @@ interface MutationObserver {
 declare var MutationObserver: {
     prototype: MutationObserver;
     new (): MutationObserver;
-}
+};
 
 interface AudioTrackList {
     onremovetrack: (ev: PluginArray) => any;
@@ -12244,7 +12244,7 @@ declare var MSWebViewAsyncOperation: {
     COMPLETED: number;
     TYPE_CAPTURE_PREVIEW_TO_RANDOM_ACCESS_STREAM: number;
     STARTED: number;
-}
+};
 
 interface ScriptNotifyEvent extends Event {
     value: string;
@@ -12446,7 +12446,7 @@ interface WebGLContextEvent extends Event {
 declare var WebGLContextEvent: {
     prototype: WebGLContextEvent;
     new (): WebGLContextEvent;
-}
+};
 
 interface WebGLRenderbuffer extends WebGLObject {
 }
@@ -12471,7 +12471,7 @@ declare var WEBGL_compressed_texture_s3tc: {
     COMPRESSED_RGBA_S3TC_DXT5_EXT: number;
     COMPRESSED_RGBA_S3TC_DXT3_EXT: number;
     COMPRESSED_RGB_S3TC_DXT1_EXT: number;
-}
+};
 
 interface WebGLContextAttributes {
     alpha: boolean;
@@ -13240,7 +13240,7 @@ declare var WebGLRenderingContext: {
     BLEND_SRC_RGB: number;
     LOW_FLOAT: number;
     VERSION: number;
-}
+};
 
 interface WebGLProgram extends WebGLObject {
 }
@@ -13250,7 +13250,7 @@ interface OES_standard_derivatives {
 }
 declare var OES_standard_derivatives: {
     FRAGMENT_SHADER_DERIVATIVE_HINT_OES: number;
-}
+};
 
 interface WebGLFramebuffer extends WebGLObject {
 }
@@ -13280,7 +13280,7 @@ interface EXT_texture_filter_anisotropic {
 declare var EXT_texture_filter_anisotropic: {
     TEXTURE_MAX_ANISOTROPY_EXT: number;
     MAX_TEXTURE_MAX_ANISOTROPY_EXT: number;
-}
+};
 
 
 /////////////////////////////
@@ -14955,5 +14955,5 @@ declare var WScript: {
     Arguments: { length: number; Item(n: number): string; };
     ScriptFullName: string;
     Quit(exitCode?: number): number;
-}
+};
 

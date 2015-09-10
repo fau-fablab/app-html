@@ -7,7 +7,7 @@ class ProductCounter {
     constructor(aMultiplier:number) {
         this._currentValue = 1;
         if (aMultiplier == null) {
-            this._multiplier == 1;
+            this._multiplier = 1;
         }
         else {
             this._multiplier = aMultiplier;
@@ -16,13 +16,13 @@ class ProductCounter {
 
 
     public incrementValue(aCurrentValue: number):void {
-        this._currentValue = aCurrentValue + (1 * this._multiplier);
+        this._currentValue = aCurrentValue + (this._multiplier);
     }
 
     public declineValue(aCurrentValue: number):void {
         console.log("declineValue currentValue: " + this._currentValue);
         var tempValue = aCurrentValue;
-        this._currentValue = aCurrentValue - (1 * this._multiplier);
+        this._currentValue = aCurrentValue - (this._multiplier);
         console.log("declineValue newValue: " + this._currentValue);
         if(this._currentValue <= 0){
             this._currentValue = tempValue;

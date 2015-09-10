@@ -18,7 +18,7 @@ $('#loadMoreNewsLoader').show();
 
 
 // touch scrolling for iCals and news
-var vertScroll:any, horScroll:any;
+var horScroll:any;
 
 // get news
 client.request("GET","/news?offset=0&limit="+LOADLIMIT, addNews);
@@ -37,12 +37,7 @@ function addNews(news):void {
     }
 
     // remember scroll position
-    var pos:number[] = [0,0];
-    if(vertScroll){
-        pos[0] = vertScroll.x;
-        pos[1] = vertScroll.y;
-        vertScroll.destroy();
-    }
+    var pos:number = $(window).scrollTop();
 
     var newsString:string = "";
     for (var i = 0; i < news.length; i++) {
@@ -86,11 +81,23 @@ function addNews(news):void {
     });
 
     // add vertical touch scrolling
-    vertScroll = new IScroll("#wrapperNews");
-    // check scroll position to load dynamically more news
-    vertScroll.on("scroll", loadMoreNews);
-    vertScroll.refresh();
-    vertScroll.scrollTo(pos[0],pos[1]);
+    $(window).scroll(function(){
+        var diff = $(document).height() - $(window).height();
+        if($(this).scrollTop() - diff >= -10){
+            if (!searchingNews) {
+                searchingNews = true;
+                // show loader gif
+                $('#loadMoreNewsLoader').show();
+                // number of news that are already loaded
+                var count:number = $("div.row-news").length;
+                // send request
+                client.request("GET", "/news?offset=" + count + "&limit=" + LOADLIMIT, addNews);
+            }
+        }
+    });
+
+    // scroll to old positon
+    $(window).scrollTop(pos);
 
     // hide loader
     $('div#loadMoreNewsLoader').hide();
@@ -99,6 +106,7 @@ function addNews(news):void {
     searchingNews = false;
 
 }
+
 
 
 
@@ -345,22 +353,6 @@ function convertToLinks(text):string {
 
     //returns the text result
     return replacedText;
-}
-
-
-// load more news when scrolling
-function loadMoreNews():void{
-    if( Math.abs(vertScroll.maxScrollY) - Math.abs(vertScroll.y) <= 10) {
-        if (!searchingNews) {
-            searchingNews = true;
-            // show loader gif
-            $('#loadMoreNewsLoader').show();
-            // number of news that are already loaded
-            var count:number = $("#news_container div").length;
-            // send request
-            client.request("GET", "/news?offset=" + count + "&limit=" + LOADLIMIT, addNews);
-        }
-    }
 }
 
 // load more iCals when scrolling
