@@ -7,7 +7,8 @@ $(document).ready(function () {
     // initialise and set tooltip
     var tooltip:any =  $("#cart_tooltip");
     tooltip.prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
-        "und klicke hier auf den \"Zur Kasse\"-Button. Nun kannst du den QR Code scannen und bequem im FABLAB bezahlen.");
+        "und klicke hier auf den \"Zur Kasse\"-Button. Nun musst du den QR Code abtippen, auf \"Absende\" klicken " +
+        "und anschließend bequem im FABLAB bezahlen.");
     tooltip.tooltip({placement: 'top'});
 });
 
