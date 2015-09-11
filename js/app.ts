@@ -130,8 +130,6 @@ function setMenueActive(hashId:string):void{
     $(hashId).addClass("active");
 }
 
-
-
 function updateAuthentication(auth : Authentication) {
     var loginButton = $("#loginButton");
     var link = $(document.createElement('a'));
