@@ -11,6 +11,7 @@ $( document ).ready(function() {
         bounceShoppingCartIcon();
 });
 
+
 // scrollelement
 var vertScroll;
 
@@ -36,13 +37,14 @@ function showAllCartEntries() {
     }
 
     var cart:string[] = getCart();
+    var checkout_btn:any = $("#cart_checkout_btn");
 
     // show info msg when cart is empty
     if(cart.length == 0){
         disableCart();
     }else{
         // enable checkout
-        $("#cart_checkout_btn").prop("disabled", false);
+        checkout_btn.prop("disabled", false);
     }
 
     // add products to dom
@@ -79,18 +81,18 @@ function showAllCartEntries() {
     }, 200);
 
     // click function for a removed cart entry
-    $(".btn_remove").click(function(event){
+    $(".btn_remove").click(function(){
         var cartEntry = $(this);
         removeProduct(cartEntry);
     });
 
     // checkout button click function
-    $("#cart_checkout_btn").click(function(event){
+    checkout_btn.click(function(){
         checkout();
     });
 
     // close checkout dialog
-    $("#closeCheckoutDialog").click(function(event){
+    $("#closeCheckoutDialog").click(function(){
         $("#openCheckoutDialog").removeClass("checkoutDialog-active");
     });
 }
@@ -101,7 +103,6 @@ function adaptQuantityInHeader():void{
     var cart:string[] = getCart();
     var cart_quantity = $("#cart_button_quantity");
     if (cart.length != 0) {
-        var cart_quantity = $("#cart_button_quantity");
         var quantity:number = 0;
         for (var i = 0; i < cart.length; i++) {
             var key:string = cart[i];
@@ -123,7 +124,7 @@ function setCartEntryListeners(entry:common.CartEntry){
     var picker_input = $("#picker_input_"+entry.product.productId.toString());
     // add listeners for the picker
     var cartEntry_total_price = $("#cart_card_total_price_"+entry.product.productId.toString());
-    picker_input.change(function(event){
+    picker_input.change(function(){
         entry.amount = $(this).val();
         updateCartEntry(entry, cartEntry_total_price);
     });
@@ -155,30 +156,9 @@ function setCartEntryListeners(entry:common.CartEntry){
 
 // creates a cart entry for the dom and returns the string
 function createProductForDom(entry:common.CartEntry){
-    /*
-    // add product to DOM
-    console.log("Produce Element");
-    var random = Math.random();
-    var containerElement = $(".template-cart-entry").clone();
-    containerElement.show();
-
-
-
-    var elementHeader = containerElement.children(".template-cart-header");
-    elementHeader.text("Johannes" + random);
-    var elementSubHeader = containerElement.children(".template-cart-subheader");
-    elementSubHeader.text("SubJohannes");
-
-    //elementHeader.attr('id',"cart-header-" + random);
-    //elementHeader.text("asdf");
-
-
-    console.log(entry.product.name);
-    console.log(entry.product.price.toFixed(2) + " € pro " + entry.product.unit);
-*/
 
     var cartEntry_total:string = (entry.product.price*entry.amount).toFixed(2);
-    var card:string = "<tr>" +
+    return "<tr>" +
         "<td style='line-height: 30px !important;height:30px !important;'>" +
         "<h4>" + entry.product.name + "</h4>"+
         "<p class='cart_cartEntry_text'>" + entry.product.price.toFixed(2) + " € pro " + entry.product.unit +"</p>" +
@@ -198,8 +178,6 @@ function createProductForDom(entry:common.CartEntry){
         "</button>" +
         "<p class='cart_card_total_price' id='cart_card_total_price_"+entry.product.productId.toString()+"'>" + (entry.product.price*entry.amount).toFixed(2) + " €" + "</p>"+
         "</td></tr>";
-
-    return card;
 }
 
 // save quantity changes that have been made to the CartEntry
