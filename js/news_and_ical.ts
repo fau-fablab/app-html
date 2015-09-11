@@ -142,9 +142,9 @@ function addICals(icals):void{
             "<h2>" + title + "</h2>"+
             "<hr class='ical_line'>" +
             "<img src='img/ic_nav_news.png'>" +
-            "<p>" + date + "<br/>" +
-            time +"<br/>"+
-            location + "</p>" +
+            "<p class='preview_info preview_info_first'>" + date + "</p>" +
+            "<p class='preview_info'>" + time +"</p>"+
+            "<p class='preview_info'>" +location + "</p>" +
             "</span>");
 
         // color the background of iCal according to event type

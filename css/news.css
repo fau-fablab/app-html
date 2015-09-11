@@ -129,14 +129,6 @@ dl{
     margin: 8px 5px 5px 5px;
 }
 
-.ical p{
-    padding: 0px;
-    margin: 5px 5px 5px 0px;
-    font-size: 11px;
-    color: white;
-    text-align: left;
-}
-
 #basicICal ul {
     float: left;
     margin:0px;
@@ -148,6 +140,19 @@ dl{
     margin: 0px 5px;
 }
 
+.preview_info{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-size: 11px;
+    color: white;
+    text-align: left;
+}
+
+.preview_info_first{
+    padding-top: 7px;
+}
 
 /*--------- iScroll horizontal ---------*/
 #wrapperICal{
