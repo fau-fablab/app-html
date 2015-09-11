@@ -25,10 +25,8 @@ class Utils {
 
     public isValidRoundingValue(aValue: number, aRounding:number): boolean{
         console.log("Mod: " + aValue % aRounding);
-        if((aValue % aRounding) == 0){
-            return true;
-        }
-        return false;
+        return (aValue % aRounding) == 0;
+
     }
 
     public replaceAllCommaToDots(aValue: string):string{
