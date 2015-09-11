@@ -28,6 +28,8 @@
     width: 100%;
     overflow: hidden;
     bottom: 47px;
+    top: 0px;
+    left: 0px;
 }
 
 #cart_scroller{

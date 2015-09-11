@@ -29,11 +29,10 @@ client.request("GET","/ical?offset=0&limit="+LOADLIMIT, addICals);
 
 // callback function to add news to the news_container
 function addNews(news):void {
-    var newsLoader:any = $('div#loadMoreNewsLoader');
     // all news loaded -> prevent further requests
     if(news.errorMessage){
         // hide loader
-        newsLoader.hide();
+        $('div#loadMoreNewsLoader').hide();
         return;
     }
 
@@ -88,7 +87,7 @@ function addNews(news):void {
             if (!searchingNews) {
                 searchingNews = true;
                 // show loader gif
-                newsLoader.show();
+                $('#loadMoreNewsLoader').show();
                 // number of news that are already loaded
                 var count:number = $("div.row-news").length;
                 // send request
@@ -101,7 +100,7 @@ function addNews(news):void {
     $(window).scrollTop(pos);
 
     // hide loader
-    newsLoader.hide();
+    $('div#loadMoreNewsLoader').hide();
 
     // news loaded -> new news can be loaded while scrolling
     searchingNews = false;
@@ -110,11 +109,10 @@ function addNews(news):void {
 
 // add iCals to ical_container
 function addICals(icals):void{
-    var iCalsLoader:any = $('div#loadMoreICalsLoader');
     // all iCals loaded -> prevent further requests
     if(icals.errorMessage){
         // hide loader
-        iCalsLoader.hide();
+        $('div#loadMoreICalsLoader').hide();
         return;
     }
 
@@ -126,8 +124,7 @@ function addICals(icals):void{
         horScroll.destroy();
     }
 
-    var icalContainer_span:any =$("#ical_container span");
-    var alreadyLoadedICals:number = icalContainer_span.length;
+    var alreadyLoadedICals:number = $("#ical_container span").length;
     for (var i = alreadyLoadedICals; i < icals.length + alreadyLoadedICals; i++) {
         // get parsed ical Event
         var ical:string[] = parseICalEvent(icals[i - alreadyLoadedICals]);
@@ -162,10 +159,11 @@ function addICals(icals):void{
     }
 
     // adapt width of horizontal scroll area to #icals
-    var iCalsWidth:number = alreadyLoadedICals * (parseInt(icalContainer_span.css("width").replace("px", "")) +
-        parseInt(icalContainer_span.css("margin-right").replace("px", "")) +
-        parseInt(icalContainer_span.css("margin-left").replace("px", "")));
-    icalContainer_span.css("width", (iCalsWidth+16)+"px");
+    var count:number = $("#ical_container span").length;
+    var iCalsWidth:number = count * (parseInt($("#ical_container span").css("width").replace("px", "")) +
+        parseInt($("#ical_container span").css("margin-right").replace("px", "")) +
+        parseInt($("#ical_container span").css("margin-left").replace("px", "")));
+    $("#ical_container").css("width", (iCalsWidth+16)+"px");
 
 
 
@@ -261,7 +259,7 @@ function addICals(icals):void{
     });
 
     // hide loader
-    iCalsLoader.hide();
+    $('div#loadMoreICalsLoader').hide();
 
     // iCals loaded -> new iCals can be loaded while scrolling
     searchingICals = false;
