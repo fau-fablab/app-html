@@ -1,1 +1,6 @@
 /** CSS class for the contact page **/
+@media (max-width: 767px) {
+    .contact_container{
+        padding: 18px;
+    }
+}
