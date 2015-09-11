@@ -237,7 +237,7 @@ function addICals(icals):void{
             adaptedTimeEnd.substr(4,2)+"Z";
         var d_end:Date = new Date(adaptedDateEnd);
 
-        var iCal_event = {start: d_start,
+        var iCal_event:any = {start: d_start,
             end: d_end,
             title: ical.attr("data-title"),
             description: ical.attr("data-description"),
