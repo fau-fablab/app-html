@@ -25,7 +25,18 @@ $( document ).ready(function() {
 
     // add click listener for print button
     print_btn.click(function(){
-        (<any>$("#inventory_print_container")).printElement();
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var date_string:string = day + "." + month + "." + year;
+        (<any>$("#inventory_print_container")).printElement({
+            pageTitle:'Inventory - ' + date_string,
+            overrideElementCSS:[
+                { href:'css/inventory.css',media:'print'},
+                { href:'css/bootstrap.min.css',media:'print'}
+            ]
+        });
     })
 });
 
@@ -55,10 +66,22 @@ function callbackInventory(response):void{
         $("#inventory_reload").prop("disabled", false);
     }else{
         // show items
-        var html:string = "";
+        var html:string = "<div class='row row-inventory-head'>" + "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+
+            "Name" + "</div>" +
+            "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>" + "ID" + "</div>" +
+            "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>" + "Anzahl" + "</div>" +
+            "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>" + "Benutzer" + "</div>" +
+            "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'>" + "Hinzugefügt" + "</div>" +
+            "</div>";
         for(var i=0;i<response.length;i++){
-            var entry:string;
-            // make table
+            var entry:string = "";
+            entry = "<div class='row row-inventory'>" +
+                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" + response[i].productName + "</div>" +
+                "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>" + response[i].productId + "</div>" +
+                "<div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>" + response[i].amount + "</div>" +
+                "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>" + response[i].userName + "</div>" +
+                "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'>" + response[i].updated_at + "</div>" +
+                "</div>";
             html += entry;
         }
 

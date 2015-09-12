@@ -1,5 +1,43 @@
 /** CSS class for the intenvory page **/
 
+.row-inventory{
+    border: 1px solid;
+    background-color: white;
+}
+
+.row-inventory-head{
+    font-weight: bold;
+}
+
+.row-inventory + .row-inventory {
+    border-top:0 ;
+}
+
+.inventory_productName{
+    float:left;
+    width: 30%;
+}
+
+.inventory_productId{
+    float:left;
+    width: 10%;
+}
+
+.inventory_amount{
+    float:left;
+    width: 10%;
+}
+
+.inventory_userName{
+    float:left;
+    width: 25%;
+}
+
+.inventory_updatet_at{
+    float: left;
+    width: 25%;
+}
+
 #inventory_reload{
     float: right;
 }
