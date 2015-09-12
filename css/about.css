@@ -12,6 +12,12 @@ h1 > img{
     margin: 0px 5px 0px 5px;
 }
 
+@media(min-width: 768px){
+    .about_container{
+        margin-top: 35px;
+    }
+}
+
 @media (max-width: 767px) {
     .about_container{
         padding: 18px;

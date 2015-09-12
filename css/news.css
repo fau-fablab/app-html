@@ -331,3 +331,9 @@ dl{
         margin: 0px;
     }
 }
+
+@media(min-width: 768px){
+    .news_container{
+        margin-top: 5px;
+    }
+}

@@ -1,19 +1,7 @@
 /** CSS class for the search page**/
 
-/*--------- Product search ---------*/
-#search_results_container{
-    width: 100%;
-    overflow: hidden;
-}
-
-#search_results{
-    position: relative;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-/*--------- loading gif ---------*/
-#loadMoreProductsLoader{
-    display:none;
-    text-align: center;
+@media(min-width: 768px){
+    .search_container{
+        margin-top: 35px;
+    }
 }

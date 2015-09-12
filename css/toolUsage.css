@@ -1,5 +1,11 @@
 /** CSS class for the toolUsage page **/
 
+@media(min-width: 768px){
+    .toolUsage_container{
+        margin-top: 35px;
+    }
+}
+
 @media (max-width: 767px) {
     .toolUsage_container{
         padding: 18px;
