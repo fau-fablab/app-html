@@ -129,17 +129,9 @@ dl{
     margin: 8px 5px 5px 5px;
 }
 
-.ical p{
-    padding: 0px;
-    margin: 5px 5px 5px 0px;
-    font-size: 11px;
-    color: white;
-    text-align: left;
-}
-
 #basicICal ul {
     float: left;
-    margin:0px;
+    margin:0px 0px 2px -5px;
     padding: 0px;
     background-color: transparent;
     border: none;
@@ -148,6 +140,23 @@ dl{
     margin: 0px 5px;
 }
 
+.preview_info{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-size: 11px;
+    color: white;
+    text-align: left;
+}
+
+.preview_info_first{
+    padding-top: 7px;
+}
+
+#iCalTitle{
+    padding-top:5px;
+}
 
 /*--------- iScroll horizontal ---------*/
 #wrapperICal{
@@ -320,5 +329,11 @@ dl{
 
     dl{
         margin: 0px;
+    }
+}
+
+@media(min-width: 768px){
+    .news_container{
+        margin-top: 5px;
     }
 }

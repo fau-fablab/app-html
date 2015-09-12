@@ -25,11 +25,11 @@
 
 #cart_container{
     position: relative;
-    top: 0px;
-    left: 0px;
     width: 100%;
     overflow: hidden;
     bottom: 47px;
+    top: 0px;
+    left: 0px;
 }
 
 #cart_scroller{
@@ -99,4 +99,9 @@ h4{
     text-align: center;
 }
 
+@media(min-width: 768px){
+    #cart_container{
+        margin-top: 35px;
+    }
+}
 

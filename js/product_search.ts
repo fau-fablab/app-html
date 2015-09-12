@@ -56,8 +56,9 @@ $(document).ready(function () {
 
     // set and initialise tooltip
     // TODO: Tooltip schreiben
-    $("#search_tooltip").prop("title", "Das hier ist die Suche!");
-    (<any>$("#search_tooltip")).tooltip({placement: 'bottom'});
+    var tooltip:any = $("#search_tooltip");
+    tooltip.prop("title", "Das hier ist die Suche!");
+    tooltip.tooltip({ placement: 'bottom' });
 });
 
 function callbackAutoCompletions(records) {
@@ -127,7 +128,7 @@ function showProducts(records:any):void {
 
 var productDialog:ProductDialog;
 function prepareDialogFunktions() {
-    $(".product_row").click(function (event) {
+    $(".product_row").click(function () {
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
@@ -147,7 +148,7 @@ function createTableRows(productArray:Array<common.Product>) {
         var product = productArray[index];
         var categoryName:string = product.categoryObject.name;
         var uomName:string = product.uomObject.name;
-        var productRow = $("")
+        var productRow = $("");
 
         $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
             " <td id='productId' '>" + product.productId + "</td>" +
@@ -316,7 +317,8 @@ $("#modal-number").change(function () {
     var numberValue:any = modalNumberLabel.val();
 
     var util:Utils = new Utils();
-    var dialogProductID = $("#modal-productid").text();
+    var modal_productId:any = $("#modal-productid");
+    var dialogProductID = modal_productId.text();
     var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
 
     numberValue = util.replaceAllCommaToDots(numberValue);
@@ -330,10 +332,8 @@ $("#modal-number").change(function () {
         numberValue = 1;
     }
 
-    var dialogProductID = $("#modal-productid").text();
+    var dialogProductID = modal_productId.text();
     var product:common.Product = getProductByID(currentProcutList, parseInt(dialogProductID));
-    var newPrice:number = product.price * numberValue;
-
     var newPrice:number = product.price * numberValue;
 
     var formatedPrice = formatter.formatNumberToPrice(product.price);

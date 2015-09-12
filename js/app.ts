@@ -87,6 +87,9 @@ function loadPage(url):void{
         case "TOOLUSAGE":
             title = "RESERVIERUNG";
             break;
+        case "INVENTORY":
+            title = "Inventurübersicht";
+            break;
         default:
             title = "NO TITLE DEFINED compare app.ts";
             break;
@@ -129,8 +132,6 @@ function setMenueActive(hashId:string):void{
     nav_links.removeClass("active");
     $(hashId).addClass("active");
 }
-
-
 
 function updateAuthentication(auth : Authentication) {
     var loginButton = $("#loginButton");

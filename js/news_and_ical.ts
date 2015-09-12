@@ -70,12 +70,12 @@ function addNews(news):void {
         fill: "&hellip;<span class='read-more'>&nbsp;mehr&raquo;&nbsp;</span>"
     });
 
-    truncatedTexts.on('click','.read-more', function (event) {
+    truncatedTexts.on('click','.read-more', function () {
         (<any>$(this)).parent().trunk8('revert').append(" <span class='read-less'>&nbsp;&laquo;&nbsp;</span>");
         return false;
     });
 
-    truncatedTexts.on('click','.read-less', function (event) {
+    truncatedTexts.on('click','.read-less', function () {
         (<any>$(this)).parent().trunk8();
         return false;
     });
@@ -106,9 +106,6 @@ function addNews(news):void {
     searchingNews = false;
 
 }
-
-
-
 
 // add iCals to ical_container
 function addICals(icals):void{
@@ -145,9 +142,9 @@ function addICals(icals):void{
             "<h2>" + title + "</h2>"+
             "<hr class='ical_line'>" +
             "<img src='img/ic_nav_news.png'>" +
-            "<p>" + date + "<br/>" +
-            time +"<br/>"+
-            location + "</p>" +
+            "<p class='preview_info preview_info_first'>" + date + "</p>" +
+            "<p class='preview_info'>" + time +"</p>"+
+            "<p class='preview_info'>" +location + "</p>" +
             "</span>");
 
         // color the background of iCal according to event type
@@ -207,15 +204,13 @@ function addICals(icals):void{
         $("#iCalTitle").text(title);
 
         if(!(location == null || location == "" || location == "null")){
-            var temp:string = location;
-            location = "</br>Wo: " + temp;
+            location = "</br>Wo: " + location;
         }else{
             location = "";
         }
 
         if(!(description == null || description == "" || description == "null")){
-            var temp:string = description;
-            description = "</br></br>" + temp;
+            description = "</br></br>" + description;
         }else{
             description = "";
         }
@@ -242,7 +237,7 @@ function addICals(icals):void{
             adaptedTimeEnd.substr(4,2)+"Z";
         var d_end:Date = new Date(adaptedDateEnd);
 
-        var iCal_event = {start: d_start,
+        var iCal_event:any = {start: d_start,
             end: d_end,
             title: ical.attr("data-title"),
             description: ical.attr("data-description"),

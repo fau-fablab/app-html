@@ -1,0 +1,32 @@
+/** CSS class for the intenvory page **/
+
+#inventory_reload{
+    float: right;
+}
+
+#inventoryLoader{
+    margin-top: 30px;
+    display: none;
+}
+
+#inventory_print{
+    float: right;
+    margin-left: 2px;
+}
+
+#inventory_empty{
+    margin-top: 30px;
+    display: none;
+}
+
+@media(min-width: 768px){
+    .inventory_container{
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 767px) {
+    .inventory_container{
+        padding: 18px;
+    }
+}

@@ -3,12 +3,13 @@
 /// <reference path="common/model/PlatformType.ts"/>
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="cart_functions.ts"/>
-
 $(document).ready(function () {
     // initialise and set tooltip
-    $("#cart_tooltip").prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
-        "und klicke hier auf den \"Zur Kasse\"-Button. Nun kannst du den QR Code scannen und bequem im FABLAB bezahlen.");
-    (<any>$("#cart_tooltip")).tooltip({placement: 'top'});
+    var tooltip:any =  $("#cart_tooltip");
+    tooltip.prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
+        "und klicke hier auf den \"Zur Kasse\"-Button. Nun musst du den QR Code abtippen, auf \"Absende\" klicken " +
+        "und anschließend bequem im FABLAB bezahlen.");
+    tooltip.tooltip({placement: 'top'});
 });
 
 // cart being used right now
@@ -27,28 +28,28 @@ function checkout(){
     $("#submitQRCode").click(function(){
         $("#cart_cancelledCheckout").hide();
         var val:any = $("#qrCodeInput").val();
+        var qrCodeInfo:any = $("#qrCodeInfo");
+        var qrCodeStatus:any = $("#qrCodeStatus");
         if(isNaN(Number(val))){
-            $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
-            $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
-            $("#qrCodeStatus").html("Falscher QR Code");
-            $("#qrCodeInfo").html("Überprüfe den QR Code!<br/>Er besteht aus negativen oder positiven Zahl.");
+            qrCodeStatus.toggleClass("cart_checkoutError", true);
+            qrCodeStatus.toggleClass("cart_checkoutSuccess", false);
+            qrCodeStatus.html("Falscher QR Code");
+            qrCodeInfo.html("Überprüfe den QR Code!<br/>Er besteht aus negativen oder positiven Zahl.");
             return;
         }
 
         // remove old information
-        $("#qrCodeInfo").html("");
-        $("#qrCodeStatus").html("");
+        qrCodeInfo.html("");
+        qrCodeStatus.html("");
 
         // create new Cart
         var cartServer:common.CartServer = new common.CartServer();
         sentCartCode = val;
         cartServer.cartCartCode = sentCartCode;
         var stat:common.CartStatus = common.CartStatus.PENDING;
-        var cartStatusString:string = common.CartStatus[stat];
-        cartServer.cartStatus = cartStatusString;
+        cartServer.cartStatus = common.CartStatus[stat];
         // TODO: Fix platform type problem for HTML
-        var platformType_string:string = common.PlatformType[common.PlatformType.ANDROID];
-        cartServer.cartPlatformType = platformType_string;
+        cartServer.cartPlatformType = common.PlatformType[common.PlatformType.ANDROID];
         cartServer.cartPushToken = "HTML";
         var cartEntriesServer:Array<common.CartEntryServer> = [];
         var cart:string[] = getCart();
@@ -89,10 +90,11 @@ function checkoutCancelledSuccesfully(){
     $("#qrCodeInfo").html("Der Bezahlvorgang wurde abgebrochen...");
     $("#qrCodeStatus").html("Abgebrochen!");
     $("#closeCheckoutDialog").show();
-    $("#cart_cancelledCheckout").click(function(){
+    var cancelCheckout:any = $("#cart_cancelledCheckout");
+    cancelCheckout.click(function(){
         $("#closeCheckoutDialog").trigger("click");
     });
-    $("#cart_cancelledCheckout").show();
+    cancelCheckout.show();
 }
 
 // cart is paid and checkout is successfully performed
@@ -109,20 +111,24 @@ function checkoutPaidSuccesfully(){
     resetCheckoutDialog();
     $("#submitQRCode").prop("disabled", true);
     $("#qrCodeInput").prop("disabled", true);
-    $("#qrCodeStatus").toggleClass("cart_checkoutError", false);
-    $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", true);
-    $("#qrCodeStatus").html("Bestellung abgeschlossen");
+    var qrCodeStatus:any = $("#qrCodeStatus");
+    qrCodeStatus.toggleClass("cart_checkoutError", false);
+    qrCodeStatus.toggleClass("cart_checkoutSuccess", true);
+    qrCodeStatus.html("Bestellung abgeschlossen");
     $("#qrCodeInfo").html("Dein Bezahlvorgang war erfolgreich!");
-    $("#cart_paidCheckout").click(function(){
+    var paidCheckout:any = $("#cart_paidCheckout");
+    paidCheckout.click(function(){
         $("#closeCheckoutDialog").trigger("click");
     });
-    $("#cart_paidCheckout").show();
+    paidCheckout.show();
 }
 
 /** Callbacks from REST Calls **/
 
 // callback of sent cart
 function cartCreationCallback(callback):void{
+    var qrCodeStatus:any = $("#qrCodeStatus");
+    var qrCodeInfo:any = $("#qrCodeInfo");
     if(callback == "" || callback == undefined){
         // succesfully sent -> start polling
         startPollingFromServer();
@@ -132,10 +138,10 @@ function cartCreationCallback(callback):void{
         $("#closeCheckoutDialog").hide();
         // show info msg and loader
         $("#cartSentLoader").show();
-        $("#qrCodeStatus").toggleClass("cart_checkoutError", false);
-        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
-        $("#qrCodeStatus").html("Warenkorb erfolgreich an Kasse gesendet!");
-        $("#qrCodeInfo").html("Bitte Bezahlvorgang abschließen!");
+        qrCodeStatus.toggleClass("cart_checkoutError", false);
+        qrCodeStatus.toggleClass("cart_checkoutSuccess", false);
+        qrCodeStatus.html("Warenkorb erfolgreich an Kasse gesendet!");
+        qrCodeInfo.html("Bitte Bezahlvorgang abschließen!");
         // show cancel button
         var cancelCheck = $("#cart_cancelCheckout");
         cancelCheck.click(function(){
@@ -145,10 +151,10 @@ function cartCreationCallback(callback):void{
         cancelCheck.show();
     }else{
         // error
-        $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
-        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
-        $("#qrCodeStatus").html("Falscher QR Code");
-        $("#qrCodeInfo").html("Überprüfe den QR Code!<br/>Generiere dir an der Kasse einen neuen, " +
+        qrCodeStatus.toggleClass("cart_checkoutError", true);
+        qrCodeStatus.toggleClass("cart_checkoutSuccess", false);
+        qrCodeStatus.html("Falscher QR Code");
+        qrCodeInfo.html("Überprüfe den QR Code!<br/>Generiere dir an der Kasse einen neuen, " +
             "falls dieser Fehler wiederholt, trotz korrekter Eingabe, auftritt.");
     }
 }
@@ -158,9 +164,10 @@ function callbackCheckoutCancelled(response){
     resetCheckoutDialog();
     callbackPolling(null);
     if(response != "true"){
-        $("#qrCodeStatus").toggleClass("cart_checkoutError", true);
-        $("#qrCodeStatus").toggleClass("cart_checkoutSuccess", false);
-        $("#qrCodeStatus").html("Fehler!");
+        var qrCodeStatus:any = $("#qrCodeStatus");
+        qrCodeStatus.toggleClass("cart_checkoutError", true);
+        qrCodeStatus.toggleClass("cart_checkoutSuccess", false);
+        qrCodeStatus.html("Fehler!");
         $("#qrCodeInfo").html("Warenkorb ist nicht mehr gültig oder wurde schon abgebrochen!");
     }
 }
@@ -195,14 +202,15 @@ function callbackPolling(response){
 function resetCheckoutDialog(){
     $("#closeCheckoutDialog").show();
     $("#submitQRCode").prop("disabled", false);
-    $("#qrCodeInput").prop("disabled", false);
+    var qrCodeInput:any = $("#qrCodeInput");
+    qrCodeInput.prop("disabled", false);
     $("#cartSentLoader").hide();
     $("#cart_cancelCheckout").hide();
     $("#cart_cancelledCheckout").hide();
     $("#cart_paidCheckout").hide();
     $("#qrCodeStatus").html("");
     $("#qrCodeInfo").html("");
-    $("#qrCodeInput").val("");
+    qrCodeInput.val("");
 }
 
 // start polling from server

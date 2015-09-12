@@ -1,0 +1,23 @@
+/** CSS class for the toolUsage page **/
+
+@media(min-width: 768px){
+    .toolUsage_container{
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 767px) {
+    .toolUsage_container{
+        padding: 18px;
+    }
+
+    #addEntrySubmit{
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 991px){
+    #addEntrySubmit{
+        margin-top: 10px;
+    }
+}

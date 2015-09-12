@@ -1,1 +1,13 @@
 /** CSS class for the contact page **/
+
+@media(min-width: 768px){
+    .contact_container{
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 767px) {
+    .contact_container{
+        padding: 18px;
+    }
+}
