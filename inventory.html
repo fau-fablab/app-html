@@ -1,0 +1,24 @@
+<div class="jumbotron inventory_container">
+
+
+    <button id="inventory_print" data-toggle="tooltip" type='button' class='btn btn-warning btn-sm'>
+        <span  class='glyphicon glyphicon-print'></span>
+    </button>
+    <button id="inventory_reload" data-toggle="tooltip" type="button" class="btn btn-info btn-sm ">
+        <span  class='glyphicon glyphicon-refresh'></span>
+    </button>
+
+    <div id="inventory_print_container">
+        <h3 id="inventory_h3">Hinzugefügte Produkte:</h3>
+
+        <div id="inventoryLoader"><img src="img/ajax-loader.gif"/></div>
+        <div id="inventory_empty"><i>Aktuell befinden sich keine Gegenstände in der Liste.</i></div>
+
+        <div id="inventory_list">
+
+        </div>
+    </div>
+</div>
+
+<!-- load inventory list -->
+<script src="js/inventory.js"></script>

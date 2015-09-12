@@ -87,6 +87,9 @@ function loadPage(url):void{
         case "TOOLUSAGE":
             title = "RESERVIERUNG";
             break;
+        case "INVENTORY":
+            title = "Inventurübersicht";
+            break;
         default:
             title = "NO TITLE DEFINED compare app.ts";
             break;
