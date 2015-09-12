@@ -2,18 +2,14 @@
 
 /*--------- Product search ---------*/
 #search_results_container{
-    position: absolute;
-    top: 60px;
-    left: 0;
     width: 100%;
     overflow: hidden;
-    bottom: 0;
 }
 
 #search_results{
-
     position: relative;
     overflow: hidden;
+    max-width: 100%;
 }
 
 /*--------- loading gif ---------*/
