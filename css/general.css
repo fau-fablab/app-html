@@ -14,7 +14,15 @@
     color: white;
     font-size: 14px;
     margin: 1px;
+    text-align: left;
 }
+
+@media(min-width: 768px){
+    #h1_div{
+        display: none;
+    }
+}
+
 
 /*--------- remove margins --------*/
 
