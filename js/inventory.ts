@@ -58,7 +58,6 @@ $( document ).ready(function() {
     var delete_btn:any = $("#inventory_modal_delete");
     delete_btn.click(function (){
         // TODO: DELETE entries
-        console.log("Inventory: delete entries");
         (<any>$('#inventory_modal')).modal("hide");
     });
 });
@@ -87,7 +86,7 @@ function callbackInventory(response):void{
         // no items -> show info and enable refresh button
         $("#inventory_empty").show();
         $("#inventory_reload").prop("disabled", false);
-        //$("#inventory_delete").prop("disabled", true);
+        $("#inventory_delete").prop("disabled", true);
     }else{
         // show items
         var html:string = "<div class='row row-inventory-head'>" + "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+
