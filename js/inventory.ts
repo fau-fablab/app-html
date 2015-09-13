@@ -1,6 +1,7 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/User.ts"/>
+/// <reference path="util/Base64.ts" />
 
 // Rest Client
 var client:RestClient = new RestClient();
@@ -58,9 +59,20 @@ $( document ).ready(function() {
     var delete_btn:any = $("#inventory_modal_delete");
     delete_btn.click(function (){
         // TODO: DELETE entries
+        var credentials:string = user.username + ":" + user.password;
+        var encoder:Base64 = new Base64();
+        var base64:string = encoder.encode64(credentials);
+        // send request
+        console.log(base64);
+        client.request("DELETE","/inventory", callbackDeletion, base64);
         (<any>$('#inventory_modal')).modal("hide");
     });
 });
+
+// callback of delete request
+function callbackDeletion(response){
+    alert(response);
+}
 
 // send inventory get request to server
 function getInventory():void{
@@ -86,7 +98,7 @@ function callbackInventory(response):void{
         // no items -> show info and enable refresh button
         $("#inventory_empty").show();
         $("#inventory_reload").prop("disabled", false);
-        $("#inventory_delete").prop("disabled", true);
+        //$("#inventory_delete").prop("disabled", true);
     }else{
         // show items
         var html:string = "<div class='row row-inventory-head'>" + "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+
