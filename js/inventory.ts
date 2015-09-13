@@ -1,7 +1,6 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/User.ts"/>
-/// <reference path="util/Base64.ts" />
 
 // Rest Client
 var client:RestClient = new RestClient();
@@ -58,20 +57,16 @@ $( document ).ready(function() {
     // add click listener for delete button in modal
     var delete_btn:any = $("#inventory_modal_delete");
     delete_btn.click(function (){
-        // TODO: DELETE entries
         var credentials:string = user.username + ":" + user.password;
-        var encoder:Base64 = new Base64();
-        var base64:string = encoder.encode64(credentials);
         // send request
-        console.log(base64);
-        client.request("DELETE","/inventory", callbackDeletion, base64);
+        client.request("DELETE","/inventory", callbackDeletion, credentials);
         (<any>$('#inventory_modal')).modal("hide");
     });
 });
 
 // callback of delete request
 function callbackDeletion(response){
-    alert(response);
+    console.log("Inventory deletion succesfull: " + response);
 }
 
 // send inventory get request to server
