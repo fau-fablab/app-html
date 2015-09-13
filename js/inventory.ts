@@ -24,11 +24,16 @@ $( document ).ready(function() {
     reload_btn.prop("title", "Liste aktualisieren");
     reload_btn.tooltip({ placement: 'top' });
 
+    var delete_tooltip:any = $("#inventory_delete_tooltip");
+    delete_tooltip.prop("title", "Liste löschen");
+    delete_tooltip.tooltip({ placement: 'top' });
+
     // get list
     getInventory();
 
     // add click listener for refresh button
     reload_btn.click(function(){
+        reload_btn.blur();
         getInventory();
     });
 
@@ -46,7 +51,16 @@ $( document ).ready(function() {
                 { href:'css/bootstrap.min.css',media:'print'}
             ]
         });
-    })
+        print_btn.blur();
+    });
+
+    // add click listener for delete button in modal
+    var delete_btn:any = $("#inventory_modal_delete");
+    delete_btn.click(function (){
+        // TODO: DELETE entries
+        console.log("Inventory: delete entries");
+        (<any>$('#inventory_modal')).modal("hide");
+    });
 });
 
 // send inventory get request to server
@@ -73,6 +87,7 @@ function callbackInventory(response):void{
         // no items -> show info and enable refresh button
         $("#inventory_empty").show();
         $("#inventory_reload").prop("disabled", false);
+        //$("#inventory_delete").prop("disabled", true);
     }else{
         // show items
         var html:string = "<div class='row row-inventory-head'>" + "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+
@@ -95,5 +110,7 @@ function callbackInventory(response):void{
         }
 
         $("#inventory_list").append(html);
+
+        $("#inventory_delete").prop("disabled", false);
     }
 }

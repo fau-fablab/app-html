@@ -52,6 +52,11 @@
     margin-left: 2px;
 }
 
+#inventory_delete_tooltip{
+    float: right;
+    margin-left: 2px;
+}
+
 #inventory_empty{
     margin-top: 30px;
     display: none;

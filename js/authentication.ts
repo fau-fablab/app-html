@@ -27,6 +27,9 @@ class Authentication {
         this._isAuthenticated = false;
         this.loginCallbackExt = null;
         $("#inventory").hide();
+        if(window.location.hash == "#inventory"){
+            window.location.hash = "#news";
+        }
     }
 
     authenticate () {
