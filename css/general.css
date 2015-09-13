@@ -29,3 +29,8 @@
 .navbar{
     margin-bottom: 0 !important;
 }
+
+/*-------- disable inventory --------*/
+#inventory{
+    display: none;
+}

@@ -1,11 +1,20 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
+/// <reference path="common/model/User.ts"/>
 
 // Rest Client
 var client:RestClient = new RestClient();
 
 // load inventory list
 $( document ).ready(function() {
+
+    // get user info and return to news  if no admin
+    var user:common.User = Authentication.getUserInfo();
+    if(!(user && (user.hasRole(common.Roles.ADMIN) || user.hasRole(common.Roles.INVENTORY)))){
+        window.location.hash = "#news";
+        return;
+    }
+
     // show tooltips
     var print_btn:any = $("#inventory_print");
     print_btn.prop("title", "Liste drucken");

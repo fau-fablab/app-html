@@ -155,7 +155,10 @@ function updateAuthentication(auth : Authentication) {
     // user os logged in
     if (auth.isAuthenticated()) {
         loginButton.text("SIGNED IN AS " + auth.getUser().username + " ");
-
+        // show inventory if user == admin/inventory
+        if(auth.getUser() && (auth.getUser().hasRole(common.Roles.ADMIN) || auth.getUser().hasRole(common.Roles.INVENTORY))){
+            $("#inventory").show();
+        }
         link.text("Logout");
         link.click(function () {
             auth.logout();
