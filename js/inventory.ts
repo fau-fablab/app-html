@@ -67,6 +67,9 @@ $( document ).ready(function() {
 // callback of delete request
 function callbackDeletion(response){
     console.log("Inventory deletion succesfull: " + response);
+    // empty dom
+    $("#inventory_empty").show();
+    $("#inventory_list").empty();
 }
 
 // send inventory get request to server
@@ -86,6 +89,9 @@ function getInventory():void{
 
 // callback from inventory request
 function callbackInventory(response):void{
+    // empty old entries for the case of refresh
+    $("#inventory_list").empty();
+
     // hide loader
     $("#inventoryLoader").hide();
 
