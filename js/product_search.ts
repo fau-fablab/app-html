@@ -264,7 +264,7 @@ $("#modal-productAddToCart").click(function () {
     var btn = $(this);
     var product:any = JSON.parse(btn.attr("data-product"));
     var numberValue:any = $("#modal-number").val();
-    var count:number = parseInt(numberValue);
+    var count:number = numberValue;
     product.__proto__ = common.Product.prototype;
     addProduct(new common.CartEntry(product, count));
     // let it bounce

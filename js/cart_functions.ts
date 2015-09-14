@@ -2,6 +2,7 @@
 /// <reference path="common/model/CartEntry.ts"/>
 /// <reference path="iscroll.d.ts" />
 /// <reference path="checkout.ts"/>
+/// <reference path="util/Utils.ts"/>
 
 //always show quantity in header
 $( document ).ready(function() {
@@ -56,6 +57,7 @@ function showAllCartEntries() {
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.CartEntry.prototype;
         product.product.__proto__ = common.Product.prototype;
+        product.product.uomObject.__proto__ = common.Uom.prototype;
         str += createProductForDom(product);
         entries.push(product);
     }
@@ -125,7 +127,19 @@ function setCartEntryListeners(entry:common.CartEntry){
     // add listeners for the picker
     var cartEntry_total_price = $("#cart_card_total_price_"+entry.product.productId.toString());
     picker_input.change(function(){
-        entry.amount = $(this).val();
+        var util:Utils = new Utils();
+        var numberValue:string = util.replaceAllCommaToDots($(this).val());
+        var val:number = parseFloat(numberValue);
+        console.log(numberValue + " " + val + " " + entry.product.uomObject.rounding);
+        if (!(util.isPositivNumber(numberValue))) {
+            val = 1;
+            $(this).val("1");
+        }
+        if (!(util.isValidRoundingValue(val, entry.product.uomObject.rounding))) {
+            val = 1;
+            $(this).val("1");
+        }
+        entry.amount = val;
         updateCartEntry(entry, cartEntry_total_price);
     });
 
