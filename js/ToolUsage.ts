@@ -4,10 +4,12 @@
 /// <reference path="common/model/FabTool.ts" />
 /// <reference path="common/model/ToolUsage.ts" />
 /// <reference path="common/model/User.ts" />
+/// <reference path="util/Utils.ts" />
 
 var reservation : Reservation = null;
 
 class Reservation {
+    _util : Utils = new Utils();
     maxUsageTime: number = 300;
     toolArray : Array<common.FabTool>;
     client : RestClient = null;
@@ -21,12 +23,12 @@ class Reservation {
         this.updateToolList();
     }
 
-    updateToolList() {
+    public updateToolList() {
         var r : Reservation = this;
         this.client.requestGET("/drupal/tools", function(result) { r.updateToolListCallback(result)});
     }
 
-    updateToolListCallback(list) {
+    public updateToolListCallback(list) {
         this.toolArray = list;
         var select = $('#machineSelector');
 
@@ -39,7 +41,7 @@ class Reservation {
         select.prop("selectedIndex", 0);
     }
 
-    getUsageList( machineId : number ) {
+    public getUsageList( machineId : number ) {
         if (machineId < 0) {
             this.usageListCallback(-1, null);
             return;
@@ -49,7 +51,7 @@ class Reservation {
         this.client.requestGET("/toolUsage/" + machineId + "/", function(result){r.usageListCallback(machineId, result)});
     }
 
-    usageListCallback(machineId : number, results : Array<common.ToolUsage>) {
+    public usageListCallback(machineId : number, results : Array<common.ToolUsage>) {
         $("#errorMessageDurationTime").hide();
         var table = $('#machineUsageTable');
         table.find("tbody").empty();
@@ -77,10 +79,20 @@ class Reservation {
             td_proj.text(results[i].project);
             td_proj.appendTo(tr);
 
+
+
             var td_duration = $(document.createElement('td'));
-            var durationString = results[i].duration.toString();
-            td_duration.text(durationString);
+            var duration = results[i].duration;
+            var durationString = this._util.convertToHoursAndMinuteString(duration);
+            var creationTimeInMilli = results[i].creationTime;
+            var finishTime = creationTimeInMilli + duration * 60000; // duration -> minutes to millisec.
+            var finishDate = new Date(finishTime);
+            var timeString = finishDate.toLocaleTimeString();
+
+            td_duration.text(durationString + " (" +  timeString + " Uhr)");
             td_duration.appendTo(tr);
+
+
 
             var td_delete = $(document.createElement('td'));
 
@@ -110,11 +122,11 @@ class Reservation {
         }
     }
 
-    getSelectedMachineId() : number {
+    public getSelectedMachineId() : number {
         return $("#machineSelector").val();
     }
 
-    loadTable() {
+    public loadTable() {
         var machineId : number = this.getSelectedMachineId();
         if (machineId != -1)
             this.getUsageList(machineId);
@@ -122,7 +134,7 @@ class Reservation {
             this.usageListCallback(-1, null);
     }
 
-    addEntry() {
+    public addEntry() {
         var usage : common.ToolUsage = new common.ToolUsage();
 
         var inputUser = $("#addEntryUser");
@@ -151,13 +163,13 @@ class Reservation {
         this.submitNewEntry(usage);
     }
 
-    submitNewEntry(usage : common.ToolUsage) {
+    public submitNewEntry(usage : common.ToolUsage) {
 
         var r : Reservation = this;
         this.client.request("PUT", "/toolUsage/" + usage.toolId + "/" + this.getToken(), function(results){r.callbackSubmitNewEntry(results);}, JSON.stringify(usage));
     }
 
-    callbackSubmitNewEntry(result) {
+    public callbackSubmitNewEntry(result) {
         if (result == null)
             return;
 
@@ -168,7 +180,7 @@ class Reservation {
         this.loadTable();
     }
 
-    deleteEntry(id : number) {
+    public deleteEntry(id : number) {
         var r : Reservation = this;
         this.client.request(
             "DELETE",
@@ -177,11 +189,11 @@ class Reservation {
         );
     }
 
-    deleteEntryCallback(result) {
+    public deleteEntryCallback(result) {
         this.loadTable();
     }
 
-    disableAddEntry(flag : boolean) {
+    public disableAddEntry(flag : boolean) {
         $("#addEntryUser").prop("disabled", flag);
         $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
