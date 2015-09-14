@@ -1,4 +1,11 @@
 /** CSS class for the search page**/
+#search_loader_container{
+    text-align: center;
+    margin-top: 10px;
+}
+#loadDataLoader{
+    display: none;
+}
 
 @media(min-width: 768px){
     .search_container{

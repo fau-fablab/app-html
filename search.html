@@ -7,7 +7,7 @@
 
                     <div class="input-group" style="float:left;">
                         <div class="input-group-btn">
-                            <button onclick="search()" type="button" class="btn btn-default">
+                            <button id="search_btn" onclick="search()" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </button>
                         </div>
@@ -20,6 +20,9 @@
                         </span>
                     </div>
 
+                </div>
+                <div class="col-sm-12" id="search_loader_container">
+                     <div id="loadDataLoader"><img src="img/ajax-loader.gif"/></div>
                 </div>
             </div>
         </form>

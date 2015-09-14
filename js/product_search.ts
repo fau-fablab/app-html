@@ -50,6 +50,11 @@ $(document).ready(function () {
     //container.append(newElement03);
     //container.append(newElement04);
 
+    // disable input til list is loaded
+    $("#inputSuche").prop( "disabled", true );
+    $("#search_btn").prop( "disabled", true );
+    $("#loadDataLoader").show();
+
     $('#loadMoreProductsLoader').hide();
     var productApi:ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions);
@@ -70,12 +75,17 @@ $(document).ready(function () {
     });
 });
 
-function callbackAutoCompletions(records) {
+function callbackAutoCompletions(records):void {
     autoComplitionArray = records;
     var datalist = $("#product_options");
     for (var index = 0; index < autoComplitionArray.length; index++) {
         datalist.append("<option value='" + autoComplitionArray[index] + "'></option>");
     }
+
+    // enable search
+    $("#inputSuche").prop( "disabled", false );
+    $("#search_btn").prop( "disabled", false );
+    $("#loadDataLoader").hide();
 }
 
 document.onkeydown = function (event) {
