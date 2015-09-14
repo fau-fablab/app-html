@@ -1,4 +1,5 @@
 /// <reference path="common/rest/ProductApi.ts"/>
+/// <reference path="common/rest/CategoryApi.ts"/>
 /// <reference path="common/model/Category.ts" />
 /// <reference path="common/model/Product.ts" />
 /// <reference path="jquery.d.ts" />
@@ -13,6 +14,7 @@ var autoComplitionArray:Array<string> = [];
 var LOADLIMIT:number = 10;
 var OFFSET:number = 0;
 var productApi:ProductApi = new ProductApi();
+var categoryApi:CategoryApi = new CategoryApi();
 var formatter:Formatter = new Formatter();
 var productCounter:ProductCounter;
 var utils:Utils = new Utils();
@@ -31,12 +33,16 @@ document.onkeydown = function (event) {
 
 $(document).ready(function () {
 
+
     // disable input til list is loaded
-    $("#inputSuche").prop( "disabled", true );
-    $("#search_btn").prop( "disabled", true );
+    $("#inputSuche").prop("disabled", true);
+    $("#search_btn").prop("disabled", true);
     $("#loadDataLoader").show();
 
     $('#loadMoreProductsLoader').hide();
+    var selectElement = $('#category_options');
+    categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
+
     var productApi:ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions);
 
@@ -44,17 +50,23 @@ $(document).ready(function () {
     var tooltip:any = $("#search_tooltip");
     tooltip.prop("title", "Gib dein gewünschtes Produkt ein und drücke auf Suchen. Wenn du alle Produkte finden willst, " +
         "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
-    tooltip.tooltip({ placement: 'bottom' });
+    tooltip.tooltip({placement: 'bottom'});
 
     // add change listener for data list to start search when option is selected
-    $("#inputSuche").on("input",function(){
-        console.log($(this).val());
+    $("#inputSuche").on("input", function () {
         var found:boolean = (<any>$).inArray($(this).val(), autoComplitionArray) > -1;
-        if(found){
+        if (found) {
             search();
         }
     });
 });
+function callbackCategoryAutoCompletions(records):void{
+    var selectedElement = $('#category_options');
+    for(var index = 0; index < records.length;index++){
+        selectedElement.append("<option>"+records[index]+"</option>");
+    }
+    selectedElement.prop("selectedIndex", 0);
+}
 
 function callbackAutoCompletions(records):void {
     autoComplitionArray = records;
@@ -63,36 +75,52 @@ function callbackAutoCompletions(records):void {
         datalist.append("<option value='" + autoComplitionArray[index] + "'></option>");
     }
     // enable search
-    $("#inputSuche").prop( "disabled", false );
-    $("#search_btn").prop( "disabled", false );
+    $("#inputSuche").prop("disabled", false);
+    $("#search_btn").prop("disabled", false);
     $("#loadDataLoader").hide();
 }
 
 function search():void {
     cleanTable();
+    var errorLabel = $("#errorMessageSearch");
+    errorLabel.hide();
     var researchCriteria:any = $('#inputSuche').val();
-    $('#loadMoreProductsLoader').show();
+    var selectedElement = $('#category_options');
+    var selectedValue = selectedElement.find(":selected").val();
 
-
-    var checkedValue =  $(document).find('input:radio').attr('checked', true);
-    console.log(checkedValue);
-    console.log($("#searchRadios1").data("value"));
-    console.log($("#searchRadios2").data("value"));
-    console.log($("#searchRadios3").data("value"));
-    console.log($("#searchRadios4").data("value"));
-
-    if (researchCriteria == "") {
-        findAllSearch = "true";
-        productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
+    var checkedValue = $('#wellform input:radio:checked').val();
+    switch (checkedValue) {
+        case "byName":
+            productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
+            $('#loadMoreProductsLoader').show();
+            break;
+        case "allProducts":
+            productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
+            $('#loadMoreProductsLoader').show();
+            break;
+        case "byId":
+            if(researchCriteria.length > 0) {
+                if (utils.isInteger(researchCriteria)) {
+                    productApi.findById(researchCriteria, showProduct);
+                    $('#loadMoreProductsLoader').show();
+                }
+                else{
+                    showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 008 oder 1342)");
+                }
+            }else{
+                showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 008 oder 1342)");
+            }
+            break;
+        case "byCategory":
+            productApi.findByCategory(selectedValue,0,0,showSearchResults);
+            $('#loadMoreProductsLoader').show();
+            break;
     }
-    else if (utils.isInteger(researchCriteria)) {
-        productApi.findById(researchCriteria, showProduct);
-    }
-    else {
-        findAllSearch = researchCriteria;
-
-        productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
-    }
+}
+function showErrorMessage(aValue: string){
+    var errorLabel = $("#errorMessageSearch");
+    errorLabel.text(aValue);
+    errorLabel.show();
 }
 
 function showProduct(record:any):void {
@@ -168,7 +196,6 @@ function createTableHeader() {
         " <th onclick='sortByLocation()'>" + "Lagerort" + "</th>" +
         " <th onclick='sortByPrice()'>" + "Preis" + "</th>" +
         "</tr>");
-
 }
 
 
@@ -277,7 +304,6 @@ $("#modal-productAddToCart").click(function () {
         (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
     }, 200);
 });
-
 
 
 $("#modal-number-down").click(function () {

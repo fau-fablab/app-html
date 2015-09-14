@@ -11,31 +11,31 @@
             </div>
 
             <div class="collapse" id="collapseExample">
-                <div class="well">
+                <div id="wellform" class="well">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="searchRadios1" value="option1">
+                                    <input type="radio" name="optionsRadios" id="searchRadios1" value="byName" checked>
                                     Suche Produkt nach dem Namen
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="searchRadios2" value="option2">
-                                    Suche Produkt nach der ID
+                                    <input type="radio" name="optionsRadios" id="searchRadios2" value="allProducts">
+                                    Alle Produkte
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="searchRadios3" value="option3">
-                                    Suche Produkte nach Kategorie
+                                    <input type="radio" name="optionsRadios" id="searchRadios3" value="byId">
+                                    Suche nach ID
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="searchRadios4" value="option3">
-                                    Alle Produkte und Kategorien anzeigen
+                                    <input type="radio" name="optionsRadios" id="searchRadios4" value="byCategory">
+                                    Suche Produkte nach Kategorien
                                 </label>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                 </div>
 
             </div>
-
+            <span id="errorMessageSearch" class="label label-danger" hidden></span>
 
             <div id="search_loader_container">
                 <div id="loadDataLoader"><img src="img/ajax-loader.gif"/></div>
