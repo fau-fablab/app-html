@@ -55,9 +55,9 @@ $(document).ready(function () {
     productApi.getAutocompletions(callbackAutoCompletions);
 
     // set and initialise tooltip
-    // TODO: Tooltip schreiben
     var tooltip:any = $("#search_tooltip");
-    tooltip.prop("title", "Das hier ist die Suche!");
+    tooltip.prop("title", "Gib dein gewünschtes Produkt ein und drücke auf Suchen. Wenn du alle Produkte finden willst, " +
+        "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
     tooltip.tooltip({ placement: 'bottom' });
 });
 
@@ -141,7 +141,6 @@ function prepareDialogFunktions() {
 
 function createTableRows(productArray:Array<common.Product>) {
     cleanTable();
-
 
     for (var index = 0; index < productArray.length; index++) {
         console.log("Eine weitere Reihe");
