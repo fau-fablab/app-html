@@ -59,6 +59,15 @@ $(document).ready(function () {
     tooltip.prop("title", "Gib dein gewünschtes Produkt ein und drücke auf Suchen. Wenn du alle Produkte finden willst, " +
         "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
     tooltip.tooltip({ placement: 'bottom' });
+
+    // add change listener for data list to start search when option is selected
+    $("#inputSuche").on("input",function(){
+        console.log($(this).val());
+        var found:boolean = (<any>$).inArray($(this).val(), autoComplitionArray) > -1;
+        if(found){
+            search();
+        }
+    });
 });
 
 function callbackAutoCompletions(records) {
