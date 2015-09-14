@@ -33,7 +33,14 @@ class Utils {
        return aValue.replace(/,/g,".");
     }
 
-
+    public convertToHoursAndMinuteString(aValue: number){
+        var hours = Math.floor(aValue/60);
+        var minutes = aValue - (hours * 60);
+        if(hours == 0){
+            return minutes + " m";
+        }
+        return hours + " h " + minutes + " m"
+    }
 
 
 
