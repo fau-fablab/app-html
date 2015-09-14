@@ -25,31 +25,6 @@ var findAllSearch:string = "false";
 
 $(document).ready(function () {
 
-    var element = $(".template");
-    var container = $("#container-temp");
-
-    var newElement01 = element.clone();
-    var newElement02 = element.clone();
-    var newElement03 = element.clone();
-    var newElement04 = element.clone();
-
-    newElement01.show();
-    var h1Element = newElement01.children(".template-header");
-    h1Element.text("asdf");
-
-    newElement02.show();
-    var h1Element = newElement02.children(".template-header");
-    h1Element.text("Hallo Johannes");
-
-    newElement03.show();
-    var h1Element = newElement03.children(".template-header");
-    h1Element.text("Hallo Mark");
-
-    //container.append(newElement01);
-    //container.append(newElement02);
-    //container.append(newElement03);
-    //container.append(newElement04);
-
     // disable input til list is loaded
     $("#inputSuche").prop( "disabled", true );
     $("#search_btn").prop( "disabled", true );
@@ -162,7 +137,6 @@ function createTableRows(productArray:Array<common.Product>) {
     cleanTable();
 
     for (var index = 0; index < productArray.length; index++) {
-        console.log("Eine weitere Reihe");
         var product = productArray[index];
         var categoryName:string = product.categoryObject.name;
         var uomName:string = product.uomObject.name;
