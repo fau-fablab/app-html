@@ -1,169 +1,240 @@
 <div class="container jumbotron search_container">
     <div id="search_container">
 
-        <form class="form-horizontal">
-            <div class="form-group has-feedback">
-                <div class="col-sm-12">
 
-                    <div class="input-group" style="float:left;">
-                        <div class="input-group-btn">
-                            <button id="search_btn" onclick="search()" type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            </button>
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+                   aria-controls="collapseExample">Erweiterte Suche</a>
+            </div>
+
+            <div class="collapse" id="collapseExample">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="searchRadios1" value="option1">
+                                    Suche Produkt nach dem Namen
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="searchRadios2" value="option2">
+                                    Suche Produkt nach der ID
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="searchRadios3" value="option3">
+                                    Suche Produkte nach Kategorie
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="searchRadios4" value="option3">
+                                    Alle Produkte und Kategorien anzeigen
+                                </label>
+                            </div>
                         </div>
-                        <input onkeyup="if(event.keyCode == 13){search();}"
-                               placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
-                               id="inputSuche" list="product_options"/>
+                        <div class="col-xs-12" style="margin-top: 20px">
+                            <select id="category_options" class="form-control">
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button id="search_btn" onclick="search()" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <input onkeyup="if(event.keyCode == 13){search();}"
+                           placeholder="Hier bitte den Suchbegriff ..." type="text" class="form-control"
+                           id="inputSuche" list="product_options"/>
                         <span class="input-group-addon">
                             <span id="search_tooltip" class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
                                   aria-hidden="true"></span>
                         </span>
-                    </div>
+                </div>
 
-                </div>
-                <div class="col-sm-12" id="search_loader_container">
-                     <div id="loadDataLoader"><img src="img/ajax-loader.gif"/></div>
-                </div>
             </div>
+
+
+            <div id="search_loader_container">
+                <div id="loadDataLoader"><img src="img/ajax-loader.gif"/></div>
+            </div>
+
         </form>
     </div>
 
-    <datalist id="product_options">
-    </datalist>
+
+</div>
 
 
-    <div id="search_results_container">
-        <!--<input id="empty_text"/>-->
-        <table id="search_results" class="table table-hover table-condensed">
-
-        </table>
-        <div id="loadMoreProductsLoader"><img src="img/ajax-loader.gif"/></div>
-    </div>
-
-    <div>
-        <ul id="second_search_result">
-
-        </ul>
-    </div>
+<datalist id="product_options">
+</datalist>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-7">
-                            <h4 class="modal-title" id="myModalLabel"></h4>
-                        </div>
-                        <div class="col-xs-5 col-md-5">
-                            <div class="input-group number-spinner ">
+<div id="search_results_container">
+    <!--<input id="empty_text"/>-->
+    <table id="search_results" class="table table-hover table-condensed">
+
+    </table>
+    <div id="loadMoreProductsLoader"><img src="img/ajax-loader.gif"/></div>
+</div>
+
+<div>
+    <ul id="second_search_result">
+
+    </ul>
+</div>
+
+
+<!-- Modal Produkt-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-12 col-md-7">
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="col-xs-5 col-md-5">
+                        <div class="input-group number-spinner ">
                             <span class="input-group-btn data-dwn">
                                 <button class="btn btn-default btn-default" data-dir="dwn" id="modal-number-down">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
-                                <input id="modal-number" type="text" class="form-control text-center" value="1" min="0"
-                                       max="1000">
+                            <input id="modal-number" type="text" class="form-control text-center" value="1" min="0"
+                                   max="1000">
                             <span class="input-group-btn data-up">
                                 <button class="btn btn-default btn-default" data-dir="up" id="modal-number-up">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
-                            </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="modal-productid" class="col-lg-4"><strong>Produkt ID</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productid"></label>
-                                </div>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="modal-productid" class="col-lg-4"><strong>Produkt ID</strong></label>
+
+                            <div class="col-lg-8">
+                                <label id="modal-productid"></label>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="modal-productname" class="col-lg-4"><strong>Name</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productname" class="col-lg-4"><strong>Name</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productname"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productname"></label>
                             </div>
+                        </div>
 
 
-                            <div class="form-group">
-                                <label for="modal-productdescription"
-                                       class="col-lg-4"><strong>Beschreibung</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productdescription"
+                                   class="col-lg-4"><strong>Beschreibung</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productdescription"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productdescription"></label>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="modal-productprice" class="col-lg-4"><strong>Preis</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productprice" class="col-lg-4"><strong>Preis</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productprice"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productprice"></label>
                             </div>
+                        </div>
 
 
-                            <div class="form-group">
-                                <label for="modal-productunit" class="col-lg-4"><strong>Einheit</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productunit" class="col-lg-4"><strong>Einheit</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productunit"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productunit"></label>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="modal-productlocation" class="col-lg-4"><strong>Standort</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productlocation" class="col-lg-4"><strong>Standort</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productlocation"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productlocation"></label>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="modal-productCategory" class="col-lg-4"><strong>Kategorie</strong></label>
+                        <div class="form-group">
+                            <label for="modal-productCategory" class="col-lg-4"><strong>Kategorie</strong></label>
 
-                                <div class="col-lg-8">
-                                    <label id="modal-productCategory"></label>
-                                </div>
+                            <div class="col-lg-8">
+                                <label id="modal-productCategory"></label>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="modal-productMap" class="col-lg-4"></label>
+                        <div class="form-group">
+                            <label for="modal-productMap" class="col-lg-4"></label>
 
-                                <div class="col-lg-8">
-                                    <a id="modal-productMap"
-                                       href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html"
-                                       target="_blank">Zur
-                                        Produktmap</a>
-                                </div>
+                            <div class="col-lg-8">
+                                <a id="modal-productMap"
+                                   href="https://ec2-52-28-16-59.eu-central-1.compute.amazonaws.com:4433/productMap/productMap.html"
+                                   target="_blank">Zur
+                                    Produktmap</a>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button id="modal-productAddToCart" type="button" class="btn btn-success" data-dismiss="modal">In
-                        den Warenkorb
-                    </button>
-                    <button type="button" onclick="clearNumberPicker()" class="btn btn-danger" data-dismiss="modal">
-                        Close
-                    </button>
-                </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-productAddToCart" type="button" class="btn btn-success" data-dismiss="modal">In
+                    den Warenkorb
+                </button>
+                <button type="button" onclick="clearNumberPicker()" class="btn btn-danger" data-dismiss="modal">
+                    Close
+                </button>
             </div>
         </div>
     </div>
-
 </div>
 
+<!-- Modal Suche -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="searchModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- loads cart functions and product search script -->
 <script src="js/product_search.js"></script>
 

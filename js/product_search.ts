@@ -23,6 +23,12 @@ var searchingProducts:boolean = false;
 // which search was used?
 var findAllSearch:string = "false";
 
+document.onkeydown = function (event) {
+    if (event.keyCode == 13) {
+        search();
+    }
+};
+
 $(document).ready(function () {
 
     // disable input til list is loaded
@@ -56,23 +62,24 @@ function callbackAutoCompletions(records):void {
     for (var index = 0; index < autoComplitionArray.length; index++) {
         datalist.append("<option value='" + autoComplitionArray[index] + "'></option>");
     }
-
     // enable search
     $("#inputSuche").prop( "disabled", false );
     $("#search_btn").prop( "disabled", false );
     $("#loadDataLoader").hide();
 }
 
-document.onkeydown = function (event) {
-    if (event.keyCode == 13) {
-        search();
-    }
-};
-
 function search():void {
     cleanTable();
     var researchCriteria:any = $('#inputSuche').val();
     $('#loadMoreProductsLoader').show();
+
+
+    var checkedValue =  $(document).find('input:radio').attr('checked', true);
+    console.log(checkedValue);
+    console.log($("#searchRadios1").data("value"));
+    console.log($("#searchRadios2").data("value"));
+    console.log($("#searchRadios3").data("value"));
+    console.log($("#searchRadios4").data("value"));
 
     if (researchCriteria == "") {
         findAllSearch = "true";
@@ -259,14 +266,19 @@ $("#modal-productAddToCart").click(function () {
     var numberValue:any = $("#modal-number").val();
     var count:number = numberValue;
     product.__proto__ = common.Product.prototype;
+    var cartButtonQuantity = $("#cart_button_quantity");
+    cartButtonQuantity.hide();
+
     addProduct(new common.CartEntry(product, count));
     // let it bounce
+
+    cartButtonQuantity.show();
     setTimeout(function () {
         (<any>$("#cart_button_quantity")).effect("bounce", {times: 3}, 300);
     }, 200);
 });
 
-var selectedProduct:common.Product;
+
 
 $("#modal-number-down").click(function () {
 
