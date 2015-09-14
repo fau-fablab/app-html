@@ -167,6 +167,7 @@ class Reservation {
         usage.duration = parseInt(inputDuration.val());
 
         this.submitNewEntry(usage);
+        this.cleanFieldsEntry();
     }
 
     public submitNewEntry(usage:common.ToolUsage) {
@@ -201,6 +202,12 @@ class Reservation {
 
     public deleteEntryCallback(result) {
         this.loadTable();
+    }
+
+    public cleanFieldsEntry(){
+        $("#addEntryUser").val("");
+        $("#addEntryProject").val("");
+        $("#addEntryDuration").val("");
     }
 
     public disableAddEntry(flag:boolean) {
