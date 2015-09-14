@@ -22,6 +22,9 @@ and limitations under the License.
 declare var NaN: number;
 declare var Infinity: number;
 
+declare function escape(s:string):any;
+declare function unescape(s:string):any;
+
 /**
   * Evaluates JavaScript code and executes it. 
   * @param x A String value that contains valid JavaScript code.

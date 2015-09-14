@@ -2,6 +2,7 @@
 /// <reference path="authentication.ts" />
 /// <reference path="common/rest/ProductApi.ts"/>
 /// <reference path="util/Utils.ts"/>
+/// <reference path="jquery.d.ts" />
 
 var spaceapi:SpaceApi = null;
 var auth:Authentication = null;
@@ -37,7 +38,7 @@ $(document).ready(function () {
 
 
 
-    //setInterval("reloadPage()",250);
+    setInterval("reloadPage()",250);
     if(currentHash == "" || currentHash == null){
         currentHash = "#news";
         window.location.hash = currentHash;
@@ -46,7 +47,6 @@ $(document).ready(function () {
     if(currentHash != lasturl){
         lasturl=currentHash;
         loadPage(currentHash);
-        setMenueActive(currentHash);
     }
 
     // initialize authentication
@@ -63,6 +63,7 @@ $(document).ready(function () {
 });
 
 function loadPage(url):void{
+    console.log(url);
     // remove hashtag from URL
     var newUrl = url.replace('#','');
 
@@ -92,6 +93,7 @@ function loadPage(url):void{
             break;
         default:
             title = "NO TITLE DEFINED compare app.ts";
+
             break;
     }
 
@@ -101,9 +103,9 @@ function loadPage(url):void{
 
     // page content
     var pageContent:string;
-    console.log("FullURL: " + fullURL);
+
     // load site content
-    $.get(fullURL, function(data){
+    (<any>$).get(fullURL, function(data){
         lasturl = url;
         pageContent = data;
         $("#content").fadeOut("fast", function(){
@@ -111,15 +113,27 @@ function loadPage(url):void{
             $("#h1_title").text(title);
             setMenueActive(url);
         });
+    }).fail(function() {
+        // hashtag does not exist -> load news
+        window.location.hash = "#news";
+        loadPage("#news");
     });
 }
 
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
-    console.log("ReloadPage: " + window.location.hash);
+
     var currentHash = window.location.hash;
-    console.log("CurrentHash: " + currentHash);
-    loadPage(currentAttribute);
+
+
+    if(currentHash == lasturl){
+        return;
+    }
+    if(currentAttribute == undefined){
+        loadPage(currentHash);
+    }else{
+        loadPage(currentAttribute);
+    }
 
     // close navbar when clicked
     $('.navbar-toggle').click()
@@ -141,7 +155,10 @@ function updateAuthentication(auth : Authentication) {
     // user os logged in
     if (auth.isAuthenticated()) {
         loginButton.text("SIGNED IN AS " + auth.getUser().username + " ");
-
+        // show inventory if user == admin/inventory
+        if(auth.getUser() && (auth.getUser().hasRole(common.Roles.ADMIN) || auth.getUser().hasRole(common.Roles.INVENTORY))){
+            $("#inventory").show();
+        }
         link.text("Logout");
         link.click(function () {
             auth.logout();

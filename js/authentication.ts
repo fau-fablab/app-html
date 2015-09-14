@@ -1,6 +1,7 @@
 /// <reference path="util/RestClient.ts" />
 /// <reference path="common/model/CartEntry.ts"/>
 /// <reference path="common/model/User.ts"/>
+/// <reference path="jquery.d.ts" />
 
 class Authentication {
     private user : common.User = new common.User();
@@ -25,6 +26,10 @@ class Authentication {
         this.user.clear();
         this._isAuthenticated = false;
         this.loginCallbackExt = null;
+        $("#inventory").hide();
+        if(window.location.hash == "#inventory"){
+            window.location.hash = "#news";
+        }
     }
 
     authenticate () {
@@ -51,6 +56,11 @@ class Authentication {
 
         if (this.loginCallbackExt)
             this.loginCallbackExt(this);
+
+        // show inventory if user == admin/inventory
+        if(this.user && (this.user.hasRole(common.Roles.ADMIN) || this.user.hasRole(common.Roles.INVENTORY))){
+            $("#inventory").show();
+        }
     }
 
     callbackError(errorCode : number, errorMessage : string) {

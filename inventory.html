@@ -1,6 +1,10 @@
 <div class="jumbotron inventory_container">
 
-
+    <span id="inventory_delete_tooltip" data-toggle="tooltip" data-trigger="hover">
+        <button id="inventory_delete" data-target='#inventory_modal' data-toggle="modal" type="button" class="btn btn-primary btn-sm ">
+            <span  class='glyphicon glyphicon-trash'></span>
+        </button>
+    </span>
     <button id="inventory_print" data-toggle="tooltip" type='button' class='btn btn-warning btn-sm'>
         <span  class='glyphicon glyphicon-print'></span>
     </button>
@@ -17,6 +21,28 @@
         <div id="inventory_list">
 
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="inventory_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alle Einträge aus der Datenbank löschen?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Wenn die Einträge gelöscht werden, können sie nicht wiederhergestellt werden.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="inventory_modal_delete" type="button" class="btn btn-primary" >Löschen</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+            </div>
+        </div>
+
     </div>
 </div>
 

@@ -27,7 +27,7 @@ class RestClient{
 		  xhr.onload = function() {
               var response : string;
 
-              if (method == "POST") {
+              if (method == "POST" || method == "DELETE") {
                   response = xhr.responseText;
               } else if (xhr.responseText.length > 0) {
                   response = JSON.parse(xhr.responseText);
@@ -45,6 +45,10 @@ class RestClient{
 			  console.log("send Postrequest");
               xhr.setRequestHeader('Content-Type', 'application/json');
               xhr.send(param);
+		  }else if (method == "DELETE"){
+			  xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.setRequestHeader("Authorization", "Basic " + btoa(param));
+              xhr.send();
 		  }else{
 			  xhr.send();
 		  }
