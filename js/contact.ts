@@ -1,18 +1,28 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="common/model/FabTool.ts" />
+/// <reference path="common/rest/DataApi.ts" />
 /// <reference path="common/model/Product.ts" />
+/// <reference path="common/model/MailAddresses.ts" />
 /// <reference path="lib.d.ts" />
 // General REST class
 
 var toolArray: Array<common.FabTool>;
-
+var dataApi: DataApi = new DataApi();
 
 $(document).ready(function () {
     $('#contact-form').hide();
     var restClient:RestClient = new RestClient();
     restClient.request("GET","/drupal/tools",drupalCallback);
+    dataApi.getMailAdresses(callbackEmail);
+
 });
+
+function callbackEmail(aValue:common.MailAddresses){
+
+    var emailFeedback = aValue.feedbackMail;
+    $("#contact_email_feedback").text(emailFeedback);
+}
 
 function sendMail() {
     var restClient:RestClient = new RestClient();
@@ -103,20 +113,8 @@ function getSelectedFabTool(aValue: string): common.FabTool{
     return null;
 }
 
-/*
-function selected(){
-    var selectedItem = $('#error_message_toolsection').find(":selected").text();
-    console.log("Selected title: " + selectedItem);
-    var selectedFabTool: common.FabTool = getSelectedFabTool(selectedItem);
 
-    var fabToolImage = $('#error_message_fabtool_image').attr("src", selectedFabTool.link);
-    console.log("Link: " + selectedFabTool.link);
-    console.log("LinkToPicture: " + selectedFabTool.linkToPicture);
-    var fabToolTitle = $('#error_message_fabtool_title').text(selectedFabTool.title);
-    var fabToolDescription= $('#error_message_fabtool_description').text(selectedFabTool.description);
-    var fabToolDetails= $('#error_message_fabtool_details').text(selectedFabTool.details);
-}
-*/
+
 
 
 

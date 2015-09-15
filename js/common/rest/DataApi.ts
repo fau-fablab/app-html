@@ -8,6 +8,6 @@ class DataApi{
     }
 
     public getMailAdresses(callback: (value: any) => any): void{
-        this._restClient.requestGET("/data/addresses",callback);
+        this._restClient.requestGET("/data/mail-addresses",callback);
     }
 }
