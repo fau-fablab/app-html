@@ -7,8 +7,14 @@
     display: none;
 }
 
+@media (max-width: 767px) {
+    #search_container{
+        padding: 18px;
+    }
+}
+
 @media(min-width: 768px){
-    .search_container{
+    #search_container{
         margin-top: 35px;
     }
 }
