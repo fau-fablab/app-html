@@ -7,9 +7,6 @@
 //always show quantity in header
 $( document ).ready(function() {
     adaptQuantityInHeader();
-    // let it bounce
-    if(getCart().length >0)
-        bounceShoppingCartIcon();
 });
 
 

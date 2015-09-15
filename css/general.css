@@ -34,3 +34,39 @@
 #inventory{
     display: none;
 }
+
+
+/*-------- shopping cart icon badge--------*/
+#cart_button_quantity{
+    font-size: 10px;
+    padding: 1px 3px 2px 3px;
+    width: 20px;
+    min-width: 20px;
+    height: 13px;
+    min-height: 13px;
+}
+
+@media(min-width: 688px){
+    #cart_button_container{
+        position: relative;
+    }
+
+    #cart_button_quantity{
+        position: absolute;
+        z-index: 2;
+        top: 5px;
+        left: 20px;
+        font-size: 10px;
+        padding: 1px 3px 2px 3px;
+        width: 20px;
+        min-width: 20px;
+        height: 13px;
+        min-height: 13px;
+    }
+
+    #cart_button_icon{
+        z-index: 1;
+        margin-right:8px;
+    }
+
+}
