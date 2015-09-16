@@ -100,43 +100,8 @@
     </ul>
 </div>
 
-<table class="tree">
-    <tr class="treegrid-1">
-        <td>Root node</td>
-    </tr>
-    <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-    </tr>
-    <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-    </tr>
-    <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-    </tr>
-    <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-    </tr>
-    <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-    </tr>
-    <tr class="treegrid-3 treegrid-parent-1">
-        <td>Node 1-2</td>
-    </tr>
-    <tr class="treegrid-4 treegrid-parent-3">
-        <td>Node 1-2-1</td>
-    </tr>
-    <tr class="treegrid-5 treegrid-parent-3">
-        <td>Node 1-2-1</td>
-    </tr>
-    <tr class="treegrid-4 treegrid-parent-3">
-        <td>Node 1-2-1</td>
-    </tr>
-    <tr class="treegrid-5 treegrid-parent-3">
-        <td>Node 1-2-1</td>
-    </tr>
 
 
-</table>
 
 
 <!-- Modal Produkt-->
@@ -278,6 +243,19 @@
 
 
 <script type="text/javascript">
-    $('.tree').treegrid();
+    $(function () {
+        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+        $('.tree li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+            }
+            e.stopPropagation();
+        });
+    });
 </script>
 
