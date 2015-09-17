@@ -30,13 +30,6 @@ function checkout(){
         var val:any = $("#qrCodeInput").val();
         var qrCodeInfo:any = $("#qrCodeInfo");
         var qrCodeStatus:any = $("#qrCodeStatus");
-        if(isNaN(Number(val))){
-            qrCodeStatus.toggleClass("cart_checkoutError", true);
-            qrCodeStatus.toggleClass("cart_checkoutSuccess", false);
-            qrCodeStatus.html("Falscher QR Code");
-            qrCodeInfo.html("Überprüfe den QR Code!<br/>Er besteht aus negativen oder positiven Zahl.");
-            return;
-        }
 
         // remove old information
         qrCodeInfo.html("");
