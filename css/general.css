@@ -16,6 +16,9 @@
     margin: 1px;
     text-align: left;
 }
+.navbar-right{
+    cursor: pointer;
+}
 
 @media(min-width: 768px){
     #h1_div{
