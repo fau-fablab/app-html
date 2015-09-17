@@ -23,20 +23,18 @@
     }
 }
 
-
 /*--------- remove margins --------*/
-
 .navbar{
     margin-bottom: 0 !important;
 }
+
 
 /*-------- disable inventory --------*/
 #inventory{
     display: none;
 }
 
-
-/*-------- shopping cart icon badge--------*/
+/*-------- shopping cart icon badge --------*/
 #cart_button_quantity{
     font-size: 10px;
     padding: 1px 3px 2px 3px;
@@ -46,7 +44,81 @@
     min-height: 13px;
 }
 
-@media(min-width: 688px){
+@media (max-width: 767px) {
+    .navbar-brand{
+        height: 35px;
+        padding:0px;
+        margin: 0px;
+        position: relative;
+    }
+    #doorState{
+        position: relative;
+        top: 5px;
+    }
+
+    .navbar .nav > li > a {
+        font-size: 14px;
+    }
+    #cart_button_quantity{
+        position: absolute;
+        z-index: 2;
+        top: 5px;
+        left: 22px;
+        font-size: 8px;
+        padding: 1px 3px 2px 3px;
+        width: 15px;
+        min-width: 15px;
+        height: 10px;
+        min-height: 10px;
+    }
+
+    #cart_button_icon{
+        font-size: 18px!important;
+        z-index: 1;
+        top:0;
+        margin-left:0px;
+        margin-top: -15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 925px) {
+    .navbar-right{
+        position: absolute;
+        top: 2px!important;
+        right: 5px!important;
+        display: block;
+        cursor: pointer;
+    }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1040px) {
+
+    .navbar{
+        position: relative;
+    }
+
+    #navbar-brand-container{
+        float: left;
+        position: relative;
+    }
+    #doorState{
+        left: 0px;
+        top: -10px;
+        margin-top: -5px;
+        margin-bottom: 0!important;
+    }
+    .navbar-brand{
+        height: 35px;
+        padding:0px;
+        margin: 0px;
+        display: block;
+        float: none;
+    }
+    .navbar .nav > li > a {
+        font-size: 15px;
+    }
+
     #cart_button_container{
         position: relative;
     }
@@ -55,7 +127,53 @@
         position: absolute;
         z-index: 2;
         top: 5px;
-        left: 20px;
+        left: 25px;
+        font-size: 10px;
+        padding: 1px 3px 2px 3px;
+        width: 20px;
+        min-width: 20px;
+        height: 13px;
+        min-height: 13px;
+    }
+
+    #cart_button_icon{
+        z-index: 1;
+        margin-right:8px;
+    }
+}
+
+
+@media(min-width: 1041px){
+    #navbar-brand-container{
+        float: left;
+        position: relative;
+    }
+    #doorState{
+        left: 0px;
+        top: -10px;
+        margin-top: -5px;
+        margin-bottom: 0!important;
+    }
+    .navbar-brand{
+        height: 40px;
+        padding:0px;
+        margin: 0px;
+        display: block;
+        float: none;
+    }
+    .navbar .nav > li > a {
+        font-size: 16px;
+    }
+
+    #cart_button_container{
+        position: relative;
+    }
+
+    #cart_button_quantity{
+        position: absolute;
+        z-index: 2;
+        top: 5px;
+        left: 25px;
         font-size: 10px;
         padding: 1px 3px 2px 3px;
         width: 20px;
