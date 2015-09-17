@@ -53,9 +53,9 @@ function addNews(news):void {
         news[i].descriptionShort +"'><div class='col-xs-3 col-sm-4 col-lg-4 nopadding'>" +
             "<a href='"+image+"' data-lightbox='news_img_"+image+pubDate+"' data-title='"+news[i].title+"'>" +
             "<img class='news-img' src='"+image+"'></a></div>" +
-            "<div class='col-xs-9 col-sm-8 col-lg-8 card nopadding'>" +
+            "<div class='col-xs-9 col-sm-8 col-lg-8 card nopadding news-title'>" +
             "<h5>"+pubDate+"</h5>"+
-            "<h2>" + news[i].title + "</h2>" +
+            "<h2 >" + news[i].title + "</h2>" +
             "</div></div>" +
             "<div class='row'><div class='col-xs-12 col-sm-12 col-lg-12'><p class='trunc'>" + news[i].descriptionShort +
             " </p></div></div>" +
@@ -77,6 +77,11 @@ function addNews(news):void {
 
     truncatedTexts.on('click','.read-less', function () {
         (<any>$(this)).parent().trunk8();
+        return false;
+    });
+
+    $(".news-title").on("click", function(){
+        (<any>$(this)).parent().parent().find(".trunc span").trigger("click");
         return false;
     });
 
@@ -172,7 +177,8 @@ function addICals(icals):void{
         scrollX: true,
         probeType: 3,
         scrollbars: true,
-        interactiveScrollbars: true
+        interactiveScrollbars: true,
+        click: true
     });
 
     // check scroll position to load dynamically more icals
