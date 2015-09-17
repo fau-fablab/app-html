@@ -31,7 +31,6 @@ $(document).ready(function () {
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 
-
     var currentHash = window.location.hash;
     var nav_links:any = $("a.nav_link");
     nav_links.click(reloadPage);
