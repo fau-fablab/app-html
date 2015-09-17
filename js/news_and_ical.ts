@@ -256,6 +256,7 @@ function addICals(icals):void{
         // show dialog
         (<any>$('#icalModal')).modal('show');
 
+        $("body").css("overflow", "hidden");
     });
 
     // close dialog

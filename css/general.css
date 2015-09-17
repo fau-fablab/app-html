@@ -20,6 +20,10 @@
     cursor: pointer;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 @media(min-width: 768px){
     #h1_div{
         display: none;
