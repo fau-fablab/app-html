@@ -33,14 +33,23 @@ class Reservation {
     public updateToolListCallback(list) {
         this.toolArray = list;
         var select = $('#machineSelector');
+        var urlVars = this._util.getUrlVars();
+        var preselection:boolean = false;
 
-        for (var index = 0; index < this.toolArray.length; index++) {
+        for (var i = 0; i < this.toolArray.length; i++) {
             var option = $(document.createElement('option'));
-            option.val(String(this.toolArray[index].id));
-            option.text(this.toolArray[index].title);
+            option.val(String(this.toolArray[i].id));
+            option.text(this.toolArray[i].title);
             option.appendTo(select);
+
+            if (urlVars["id"] && urlVars["id"] == this.toolArray[i].id) {
+                option.attr("selected", true);
+                preselection = true;
+                this.getUsageList(urlVars["id"]);
+            }
         }
-        select.prop("selectedIndex", 0);
+        if (!preselection)
+            select.prop("selectedIndex", 0);
     }
 
     public getUsageList(machineId:number) {

@@ -42,6 +42,18 @@ class Utils {
         return hours + " h " + minutes + " m"
     }
 
-
-
+    public getUrlVars()
+    {
+        var vars = [];
+        var queryString:string = window.location.href.slice(window.location.href.indexOf('?') + 1);
+        queryString = queryString.replace(window.location.hash, '');
+        var hashes = queryString.split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            var elem = hashes[i].split('=');
+            vars.push(elem[0]);
+            vars[elem[0]] = elem[1];
+        }
+        return vars;
+    }
 }

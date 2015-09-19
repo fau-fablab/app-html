@@ -10,7 +10,7 @@ $( document ).ready(function() {
 
     // get user info and return to news  if no admin
     var user:common.User = Authentication.getUserInfo();
-    if(!(user && (user.hasRole(common.Roles.ADMIN) || user.hasRole(common.Roles.INVENTORY)))){
+    if(window.location.hash == "#inventory" && !(user && (user.hasRole(common.Roles.ADMIN) || user.hasRole(common.Roles.INVENTORY)))){
         window.location.hash = "#news";
         return;
     }
