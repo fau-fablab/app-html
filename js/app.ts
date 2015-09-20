@@ -121,13 +121,8 @@ function loadPage(url):void{
 
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
-
     var currentHash = window.location.hash;
 
-
-    if(currentHash == lasturl){
-        return;
-    }
     if(currentAttribute == undefined){
         loadPage(currentHash);
     }else{
