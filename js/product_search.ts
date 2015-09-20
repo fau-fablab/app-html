@@ -18,6 +18,7 @@ var categoryApi:CategoryApi = new CategoryApi();
 var formatter:Formatter = new Formatter();
 var productCounter:ProductCounter;
 var utils:Utils = new Utils();
+var api = new CategoryApi();
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -42,7 +43,7 @@ $(document).ready(function () {
     $('#loadMoreProductsLoader').hide();
     var selectElement = $('#category_options');
     categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
-
+    categoryApi.findAll(callBackCategories);
     var productApi:ProductApi = new ProductApi();
     productApi.getAutocompletions(callbackAutoCompletions);
 
@@ -60,6 +61,11 @@ $(document).ready(function () {
         }
     });
 });
+
+function callBackCategories(records:Array<common.Category>){
+    api.getCategoriesAsTree(records);
+}
+
 function callbackCategoryAutoCompletions(records):void{
     var selectedElement = $('#category_options');
     for(var index = 0; index < records.length;index++){

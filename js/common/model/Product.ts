@@ -35,7 +35,9 @@ module common {
             this._locationString = record.location;
             this._locationForProductMap = record.locationForProductMap;
 
-            this._categoryObject = new common.Category(record.category);
+
+            var category:common.Category = record.category
+            this._categoryObject = category;
 
             this._uomObject = new common.Uom(record.uom);
         }

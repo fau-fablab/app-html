@@ -3,6 +3,7 @@
 /// <reference path="common/rest/ProductApi.ts"/>
 /// <reference path="util/Utils.ts"/>
 /// <reference path="jquery.d.ts" />
+/// <reference path="common/rest/CategoryApi" />
 
 var spaceapi:SpaceApi = null;
 var auth:Authentication = null;
@@ -28,6 +29,7 @@ function triggerDoorStateUpdate() {
 
 $(document).ready(function () {
     // initialize space api / door state
+
     spaceapi = new SpaceApi("FAU+FabLab", updateDoorState);
     $("#doorState").click(triggerDoorStateUpdate);
 
