@@ -294,9 +294,10 @@ $(document).ready(function () {
     // register callback to delete all entries
     if (user && user.hasRole(common.Roles.ADMIN)) {
         var removeEntries = $("#removeAllEntries");
-
         removeEntries.toggle(true);
-        removeEntries.click(function () {
+
+        var removeEntriesSubmit = $("#toolUsageDeleteConfirmSubmit");
+        removeEntriesSubmit.click(function () {
             reservation.deleteEntriesForTool(reservation.getSelectedMachineId());
         });
     }
