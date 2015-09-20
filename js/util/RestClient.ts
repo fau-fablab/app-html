@@ -47,7 +47,6 @@ class RestClient{
               xhr.send(param);
 		  }else if (method == "DELETE"){
 			  xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.setRequestHeader("Authorization", "Basic " + btoa(param));
               xhr.send();
 		  }else{
 			  xhr.send();

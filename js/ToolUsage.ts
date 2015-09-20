@@ -208,6 +208,17 @@ class Reservation {
         );
     }
 
+    public deleteEntriesForTool(id:number) {
+        var r:Reservation = this;
+        this.client.request(
+            "DELETE",
+            "/toolUsage/" + id + "/",
+            function (results) {
+                r.deleteEntryCallback(results);
+            }
+        );
+    }
+
     public deleteEntryCallback(result) {
         this.loadTable();
     }
@@ -223,6 +234,7 @@ class Reservation {
         $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
         $("#addEntrySubmit").prop("disabled", flag);
+        $("#removeAllEntries").prop("disabled", flag);
     }
 
     private getToken():string {
@@ -267,6 +279,8 @@ $(document).ready(function () {
     reservation = new Reservation();
     reservation.disableAddEntry(true);
 
+    var user:common.User = Authentication.getUserInfo();
+
     // load list of usage items on change
     $("#machineSelector").change(function () {
         reservation.loadTable();
@@ -276,6 +290,16 @@ $(document).ready(function () {
     $("#addEntrySubmit").click(function () {
         reservation.addEntry();
     });
+
+    // register callback to delete all entries
+    if (user && user.hasRole(common.Roles.ADMIN)) {
+        var removeEntries = $("#removeAllEntries");
+
+        removeEntries.toggle(true);
+        removeEntries.click(function () {
+            reservation.deleteEntriesForTool(reservation.getSelectedMachineId());
+        });
+    }
 
     // set and initialise tooltip
     var tooltip:any = $("#toolUsage_tooltip");
