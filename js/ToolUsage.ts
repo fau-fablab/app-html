@@ -33,14 +33,23 @@ class Reservation {
     public updateToolListCallback(list) {
         this.toolArray = list;
         var select = $('#machineSelector');
+        var urlVars = this._util.getUrlVars();
+        var preselection:boolean = false;
 
-        for (var index = 0; index < this.toolArray.length; index++) {
+        for (var i = 0; i < this.toolArray.length; i++) {
             var option = $(document.createElement('option'));
-            option.val(String(this.toolArray[index].id));
-            option.text(this.toolArray[index].title);
+            option.val(String(this.toolArray[i].id));
+            option.text(this.toolArray[i].title);
             option.appendTo(select);
+
+            if (urlVars["id"] && urlVars["id"] == this.toolArray[i].id) {
+                option.attr("selected", true);
+                preselection = true;
+                this.getUsageList(urlVars["id"]);
+            }
         }
-        select.prop("selectedIndex", 0);
+        if (!preselection)
+            select.prop("selectedIndex", 0);
     }
 
     public getUsageList(machineId:number) {
@@ -151,20 +160,19 @@ class Reservation {
             return;
         }
 
-        if (parseInt(inputDuration.val()) > this.maxUsageTime) {
+        var duration = parseInt(inputDuration.val()) || -1;
+        if (duration > this.maxUsageTime ||
+                duration <= 0 ||
+                duration == NaN
+        ) {
             $("#errorMessageDurationTime").show();
-            return;
-        }
-
-        if (parseInt(inputDuration.val()) == 0) {
             return;
         }
 
         usage.toolId = this.getSelectedMachineId();
         usage.user = inputUser.val();
         usage.project = inputProj.val();
-
-        usage.duration = parseInt(inputDuration.val());
+        usage.duration = duration;
 
         this.submitNewEntry(usage);
         this.cleanFieldsEntry();
@@ -200,6 +208,17 @@ class Reservation {
         );
     }
 
+    public deleteEntriesForTool(id:number) {
+        var r:Reservation = this;
+        this.client.request(
+            "DELETE",
+            "/toolUsage/" + id + "/",
+            function (results) {
+                r.deleteEntryCallback(results);
+            }
+        );
+    }
+
     public deleteEntryCallback(result) {
         this.loadTable();
     }
@@ -215,6 +234,7 @@ class Reservation {
         $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
         $("#addEntrySubmit").prop("disabled", flag);
+        $("#removeAllEntries").prop("disabled", flag);
     }
 
     private getToken():string {
@@ -259,6 +279,8 @@ $(document).ready(function () {
     reservation = new Reservation();
     reservation.disableAddEntry(true);
 
+    var user:common.User = Authentication.getUserInfo();
+
     // load list of usage items on change
     $("#machineSelector").change(function () {
         reservation.loadTable();
@@ -268,6 +290,17 @@ $(document).ready(function () {
     $("#addEntrySubmit").click(function () {
         reservation.addEntry();
     });
+
+    // register callback to delete all entries
+    if (user && user.hasRole(common.Roles.ADMIN)) {
+        var removeEntries = $("#removeAllEntries");
+        removeEntries.toggle(true);
+
+        var removeEntriesSubmit = $("#toolUsageDeleteConfirmSubmit");
+        removeEntriesSubmit.click(function () {
+            reservation.deleteEntriesForTool(reservation.getSelectedMachineId());
+        });
+    }
 
     // set and initialise tooltip
     var tooltip:any = $("#toolUsage_tooltip");

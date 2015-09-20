@@ -37,17 +37,13 @@ $(document).ready(function () {
     var nav_links:any = $("a.nav_link");
     nav_links.click(reloadPage);
 
+    // we need to check if user changed #hash in browser address bar
+    setInterval("reloadPage()",250);
 
-
-    //setInterval("reloadPage()",250);
+    // #news should be default page
     if(currentHash == "" || currentHash == null){
         currentHash = "#news";
         window.location.hash = currentHash;
-    }
-
-    if(currentHash != lasturl){
-        lasturl=currentHash;
-        loadPage(currentHash);
     }
 
     // initialize authentication
@@ -61,10 +57,13 @@ $(document).ready(function () {
 
         auth.login(user, password, updateAuthentication);
     });
+
+    loadPage(currentHash);
 });
 
 function loadPage(url):void{
     console.log(url);
+
     // remove hashtag from URL
     var newUrl = url.replace('#','');
 
@@ -98,7 +97,6 @@ function loadPage(url):void{
             break;
     }
 
-
     // create full URL
     var fullURL:string = newUrl + ".html";
 
@@ -123,13 +121,11 @@ function loadPage(url):void{
 
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
-
     var currentHash = window.location.hash;
 
-
-    if(currentHash == lasturl){
+    if (currentHash == lasturl)
         return;
-    }
+
     if(currentAttribute == undefined){
         loadPage(currentHash);
     }else{
@@ -137,8 +133,7 @@ function reloadPage(){
     }
 
     // close navbar when clicked
-    $('.navbar-toggle').click()
-
+    $('.navbar-toggle').click();
 }
 
 // set menue item active
@@ -156,10 +151,12 @@ function updateAuthentication(auth : Authentication) {
     // user os logged in
     if (auth.isAuthenticated()) {
         loginButton.text(auth.getUser().username + " ");
+
         // show inventory if user == admin/inventory
         if(auth.getUser() && (auth.getUser().hasRole(common.Roles.ADMIN) || auth.getUser().hasRole(common.Roles.INVENTORY))){
             $("#inventory").show();
         }
+
         link.text("Logout");
         link.click(function () {
             auth.logout();
@@ -173,6 +170,11 @@ function updateAuthentication(auth : Authentication) {
         link.attr("data-toggle", "modal");
         link.attr("data-target", "#loginDialog");
         link.text("Login");
+
+        $("#inventory").hide();
+        if(window.location.hash == "#inventory"){
+            window.location.hash = "#news";
+        }
     }
     link.appendTo(loginButton);
 }

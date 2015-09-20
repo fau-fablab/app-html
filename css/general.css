@@ -20,9 +20,11 @@
     cursor: pointer;
 }
 
-body{
-    overflow-x: hidden;
+.modal{
+    overflow-y: scroll;
+    min-height: 100vh!important;
 }
+
 
 @media(min-width: 768px){
     #h1_div{

@@ -10,10 +10,12 @@ $( document ).ready(function() {
 
     // get user info and return to news  if no admin
     var user:common.User = Authentication.getUserInfo();
-    if(!(user && (user.hasRole(common.Roles.ADMIN) || user.hasRole(common.Roles.INVENTORY)))){
+    if(window.location.hash == "#inventory" && !(user && (user.hasRole(common.Roles.ADMIN) || user.hasRole(common.Roles.INVENTORY)))){
         window.location.hash = "#news";
         return;
     }
+
+    client.checkAuthentication();
 
     // show tooltips
     var print_btn:any = $("#inventory_print");
@@ -57,16 +59,16 @@ $( document ).ready(function() {
     // add click listener for delete button in modal
     var delete_btn:any = $("#inventory_modal_delete");
     delete_btn.click(function (){
-        var credentials:string = user.username + ":" + user.password;
+
         // send request
-        client.request("DELETE","/inventory", callbackDeletion, credentials);
+        client.request("DELETE","/inventory", callbackDeletion);
         (<any>$('#inventory_modal')).modal("hide");
     });
 });
 
 // callback of delete request
 function callbackDeletion(response){
-    console.log("Inventory deletion succesfull: " + response);
+    console.log("Inventory deletion successful: " + response);
     // empty dom
     $("#inventory_empty").show();
     $("#inventory_list").empty();
