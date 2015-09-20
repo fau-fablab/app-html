@@ -154,10 +154,12 @@ function updateAuthentication(auth : Authentication) {
     // user os logged in
     if (auth.isAuthenticated()) {
         loginButton.text(auth.getUser().username + " ");
+
         // show inventory if user == admin/inventory
         if(auth.getUser() && (auth.getUser().hasRole(common.Roles.ADMIN) || auth.getUser().hasRole(common.Roles.INVENTORY))){
             $("#inventory").show();
         }
+
         link.text("Logout");
         link.click(function () {
             auth.logout();
@@ -171,6 +173,11 @@ function updateAuthentication(auth : Authentication) {
         link.attr("data-toggle", "modal");
         link.attr("data-target", "#loginDialog");
         link.text("Login");
+
+        $("#inventory").hide();
+        if(window.location.hash == "#inventory"){
+            window.location.hash = "#news";
+        }
     }
     link.appendTo(loginButton);
 }

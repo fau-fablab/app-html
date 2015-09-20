@@ -26,10 +26,6 @@ class Authentication {
         this.user.clear();
         this._isAuthenticated = false;
         this.loginCallbackExt = null;
-        $("#inventory").hide();
-        if(window.location.hash == "#inventory"){
-            window.location.hash = "#news";
-        }
     }
 
     authenticate () {
@@ -56,11 +52,6 @@ class Authentication {
 
         if (this.loginCallbackExt)
             this.loginCallbackExt(this);
-
-        // show inventory if user == admin/inventory
-        if(this.user && (this.user.hasRole(common.Roles.ADMIN) || this.user.hasRole(common.Roles.INVENTORY))){
-            $("#inventory").show();
-        }
     }
 
     callbackError(errorCode : number, errorMessage : string) {
