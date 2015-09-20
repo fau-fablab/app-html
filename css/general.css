@@ -24,6 +24,15 @@ body{
     overflow-x: hidden;
 }
 
+html{
+    overflow-y: scroll;
+}
+
+.modal{
+    overflow-y: scroll;
+}
+
+
 @media(min-width: 768px){
     #h1_div{
         display: none;

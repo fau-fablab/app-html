@@ -164,7 +164,6 @@ function prepareDialogFunktions() {
         var currentProduct:common.Product = currentProcutList[arrayIndex];
         productCounter = new ProductCounter(currentProduct.uomObject.rounding);
         productDialog = new ProductDialog(currentProduct);
-
     });
 }
 
