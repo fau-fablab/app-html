@@ -6,7 +6,6 @@
 
 var spaceapi:SpaceApi = null;
 var auth:Authentication = null;
-var lasturl: string = "";
 
 function updateDoorState(state : SpaceApi) {
     var message : string;
@@ -35,17 +34,9 @@ $(document).ready(function () {
     var nav_links:any = $("a.nav_link");
     nav_links.click(reloadPage);
 
-
-
-    setInterval("reloadPage()",250);
     if(currentHash == "" || currentHash == null){
         currentHash = "#news";
         window.location.hash = currentHash;
-    }
-
-    if(currentHash != lasturl){
-        lasturl=currentHash;
-        loadPage(currentHash);
     }
 
     // initialize authentication
@@ -59,6 +50,8 @@ $(document).ready(function () {
 
         auth.login(user, password, updateAuthentication);
     });
+
+    loadPage(currentHash);
 });
 
 function loadPage(url):void{
@@ -105,7 +98,6 @@ function loadPage(url):void{
 
     // load site content
     (<any>$).get(fullURL, function(data){
-        lasturl = url;
         pageContent = data;
         $("#content").fadeOut("fast", function(){
             $("#content").html(pageContent).fadeIn("fast");
@@ -130,8 +122,7 @@ function reloadPage(){
     }
 
     // close navbar when clicked
-    $('.navbar-toggle').click()
-
+    $('.navbar-toggle').click();
 }
 
 // set menue item active
