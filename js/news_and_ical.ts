@@ -256,13 +256,12 @@ function addICals(icals):void{
         // show dialog
         (<any>$('#icalModal')).modal('show');
 
-        $("body").css("overflow", "hidden");
-    });
+        // close dialog
+        $(".closeICalDialog").click(function(event){
+            $('body').css('overflow','auto');
+            $('body').css('position','relative');
+        });
 
-    // close dialog
-    $("#closeICalDialog").click(function(event){
-        // allow scrolling again
-        $('body').css('overflow', 'auto').off('touchmove');
     });
 
     // hide loader
@@ -336,9 +335,8 @@ function parseICalEvent(ical){
 
 // disable scroll when a dialog is opened
 function disableScroll():void{
-    $('body').css('overflow', 'hidden').on('touchmove', function(event) {
-        event.preventDefault();
-    });
+    $('body').css('overflow','hidden');
+    $('body').css('position','fixed');
 }
 
 // find links in the description and convert them to real links

@@ -20,16 +20,9 @@
     cursor: pointer;
 }
 
-body{
-    overflow-x: hidden;
-}
-
-html{
-    overflow-y: scroll;
-}
-
 .modal{
     overflow-y: scroll;
+    min-height: 100vh!important;
 }
 
 
