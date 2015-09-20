@@ -15,6 +15,8 @@ $( document ).ready(function() {
         return;
     }
 
+    client.checkAuthentication();
+
     // show tooltips
     var print_btn:any = $("#inventory_print");
     print_btn.prop("title", "Liste drucken");
@@ -57,16 +59,16 @@ $( document ).ready(function() {
     // add click listener for delete button in modal
     var delete_btn:any = $("#inventory_modal_delete");
     delete_btn.click(function (){
-        var credentials:string = user.username + ":" + user.password;
+
         // send request
-        client.request("DELETE","/inventory", callbackDeletion, credentials);
+        client.request("DELETE","/inventory", callbackDeletion);
         (<any>$('#inventory_modal')).modal("hide");
     });
 });
 
 // callback of delete request
 function callbackDeletion(response){
-    console.log("Inventory deletion succesfull: " + response);
+    console.log("Inventory deletion successful: " + response);
     // empty dom
     $("#inventory_empty").show();
     $("#inventory_list").empty();
