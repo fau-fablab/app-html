@@ -160,20 +160,19 @@ class Reservation {
             return;
         }
 
-        if (parseInt(inputDuration.val()) > this.maxUsageTime) {
+        var duration = parseInt(inputDuration.val()) || -1;
+        if (duration > this.maxUsageTime ||
+                duration <= 0 ||
+                duration == NaN
+        ) {
             $("#errorMessageDurationTime").show();
-            return;
-        }
-
-        if (parseInt(inputDuration.val()) == 0) {
             return;
         }
 
         usage.toolId = this.getSelectedMachineId();
         usage.user = inputUser.val();
         usage.project = inputProj.val();
-
-        usage.duration = parseInt(inputDuration.val());
+        usage.duration = duration;
 
         this.submitNewEntry(usage);
         this.cleanFieldsEntry();
