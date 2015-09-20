@@ -6,6 +6,7 @@
 
 var spaceapi:SpaceApi = null;
 var auth:Authentication = null;
+var lasturl: string = "";
 
 function updateDoorState(state : SpaceApi) {
     var message : string;
@@ -34,6 +35,10 @@ $(document).ready(function () {
     var nav_links:any = $("a.nav_link");
     nav_links.click(reloadPage);
 
+    // we need to check if user changed #hash in browser address bar
+    setInterval("reloadPage()",250);
+
+    // #news should be default page
     if(currentHash == "" || currentHash == null){
         currentHash = "#news";
         window.location.hash = currentHash;
@@ -56,6 +61,7 @@ $(document).ready(function () {
 
 function loadPage(url):void{
     console.log(url);
+
     // remove hashtag from URL
     var newUrl = url.replace('#','');
 
@@ -89,7 +95,6 @@ function loadPage(url):void{
             break;
     }
 
-
     // create full URL
     var fullURL:string = newUrl + ".html";
 
@@ -98,6 +103,7 @@ function loadPage(url):void{
 
     // load site content
     (<any>$).get(fullURL, function(data){
+        lasturl = url;
         pageContent = data;
         $("#content").fadeOut("fast", function(){
             $("#content").html(pageContent).fadeIn("fast");
@@ -114,6 +120,9 @@ function loadPage(url):void{
 function reloadPage(){
     var currentAttribute = $(this).attr("href");
     var currentHash = window.location.hash;
+
+    if (currentHash == lasturl)
+        return;
 
     if(currentAttribute == undefined){
         loadPage(currentHash);
