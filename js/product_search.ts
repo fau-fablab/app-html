@@ -158,12 +158,21 @@ function showProducts(records:any):void {
 var productDialog:ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function () {
+        $('body').css('overflow','hidden');
+        $('body').css('position','fixed');
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
         productCounter = new ProductCounter(currentProduct.uomObject.rounding);
         productDialog = new ProductDialog(currentProduct);
+
+        // close dialog
+        $(".closeSearchDialog").click(function(event){
+            $('body').css('overflow','auto');
+            $('body').css('position','relative');
+        });
+
     });
 }
 
