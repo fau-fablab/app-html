@@ -13,7 +13,7 @@ SSL Certificates for apache web server should be placed in [docker](https://gith
 
 ###2. Using existing apache instance
 
-Required is an apache server with following modules (other web server should work as well, if they support redirecting requests similar to mod_proxy):
+Required is an apache server with following modules (other web servers should work as well, if they support redirecting requests similar to mod_proxy):
 - mod_php
 - mod_proxy
 
@@ -39,10 +39,7 @@ tsc --target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
 
 To cleanup the mess before deploying the sources to the web server root some files and directories can be removed
 ```
-rm -rvf docker \
-Dockerfile
-.git
-
+rm -rvf docker Dockerfile .git
 find ./ -name "*.ts" -exec rm -rvf {} +
 ```
 ## License
