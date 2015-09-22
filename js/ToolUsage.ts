@@ -1,4 +1,5 @@
 /// <reference path="jquery.d.ts" />
+/// <reference path="jqueryui.d.ts" />
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="authentication.ts" />
 /// <reference path="common/model/FabTool.ts" />
@@ -80,6 +81,7 @@ class Reservation {
         for (var r in results) {
 
             var tr = $(document.createElement('tr'));
+            tr.attr("machineUsageId", results[i].id);
             var td_nr = $(document.createElement('td'));
             td_nr.text((i + 1).toString());
             td_nr.appendTo(tr);
@@ -223,6 +225,22 @@ class Reservation {
         this.loadTable();
     }
 
+    public moveEntry(toolId:number, usageId:number, afterId:number) {
+        var r:Reservation = this;
+        this.client.request(
+            "POST",
+            "/toolUsage/" + toolId + "/" + usageId + "/?afterId=" + afterId,
+            function (results) {
+                r.moveEntryCallback(results);
+            },
+            "{}"
+        );
+    }
+
+    public moveEntryCallback(result) {
+        this.loadTable();
+    }
+
     public cleanFieldsEntry(){
         $("#addEntryUser").val("");
         $("#addEntryProject").val("");
@@ -272,8 +290,37 @@ class Reservation {
 
         return idList.indexOf(id) >= 0;
     }
-}
 
+    public changeElementPosition(event, ui) {
+        var elementID:number = parseInt(ui.item.attr("machineUsageId")) || -1;
+
+        if (elementID < 0) {
+            this.loadTable();
+            return;
+        }
+
+        var tableBody = $( "#machineUsageTableBody" );
+        var tableRows = tableBody.find("tr");
+
+        var ancestorRow:number = - 1;
+        tableRows.each(function (i, el) {
+            var elem = $( el );
+
+            if (parseInt(elem.attr("machineUsageId")) == elementID) {
+                ancestorRow = i - 1;
+            }
+        });
+
+        if (ancestorRow == -1) {
+            this.loadTable();
+            return;
+        }
+
+        var ancestorId = parseInt(tableRows[ancestorRow].getAttribute("machineUsageId")) || -1;
+
+        this.moveEntry(this.getSelectedMachineId(), elementID, ancestorId);
+    }
+}
 
 $(document).ready(function () {
     reservation = new Reservation();
@@ -291,8 +338,8 @@ $(document).ready(function () {
         reservation.addEntry();
     });
 
-    // register callback to delete all entries
     if (user && user.hasRole(common.Roles.ADMIN)) {
+        // register callback to delete all entries
         var removeEntries = $("#removeAllEntries");
         removeEntries.toggle(true);
 
@@ -300,6 +347,12 @@ $(document).ready(function () {
         removeEntriesSubmit.click(function () {
             reservation.deleteEntriesForTool(reservation.getSelectedMachineId());
         });
+
+        // register sortable to be able to move elements
+        var tableBody = $( "#machineUsageTableBody" );
+        tableBody.sortable();
+        tableBody.disableSelection();
+        tableBody.on( "sortupdate", function(event, ui) { reservation.changeElementPosition(event, ui); } );
     }
 
     // set and initialise tooltip
