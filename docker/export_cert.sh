@@ -1,4 +1,8 @@
+#!/bin/bash
+# helper script to export certificate from java keystore
+
 KEYSTORE=$1
+CRTALIAS=$2
 
 if [ -z "$KEYSTORE" ]; then
 	echo Please specify path to keystore
@@ -11,7 +15,6 @@ if [ -z "$FABLAB_KEYSTORE_PASSWORD" ]; then
 fi
 
 TMPKEYSTORE=/tmp/fab_pkcs12.p12
-CRTALIAS=selfsigned
 
 # convert keystore
 keytool -importkeystore -srckeystore $KEYSTORE -srcstorepass "$FABLAB_KEYSTORE_PASSWORD" -destkeystore $TMPKEYSTORE -deststoretype PKCS12 -srcalias $CRTALIAS -deststorepass "$FABLAB_KEYSTORE_PASSWORD" -destkeypass "$FABLAB_KEYSTORE_PASSWORD"
