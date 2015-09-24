@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+- '0.10'
+before_install:
+- npm install -g typescript@1.0
+script:
+- tsc -target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
