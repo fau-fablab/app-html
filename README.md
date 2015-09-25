@@ -1,4 +1,4 @@
-# fablab-html
+# fablab-html [![Build Status](https://travis-ci.org/FAU-Inf2/fablab-html.svg)](https://travis-ci.org/FAU-Inf2/fablab-html)
 fablab-html is an TypeScript and HTML5 based web application that uses a [Dropwizard](http://www.dropwizard.io) based [REST-server](https://github.com/FAU-Inf2/fablab-server).
 
 ## How to install
