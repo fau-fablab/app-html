@@ -4,4 +4,4 @@ node_js:
 before_install:
 - npm install -g typescript@1.0
 script:
-- tsc -target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
+- tsc --allowimportmodule -target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
