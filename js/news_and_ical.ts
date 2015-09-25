@@ -173,13 +173,14 @@ function addICals(icals):void{
 
 
     // add horizontal touch scrolling
-    horScroll = new IScroll("#wrapperICal",{
+    var options:IScrollOptions = {
         scrollX: true,
         probeType: 3,
         scrollbars: true,
         interactiveScrollbars: true,
         click: true
-    });
+    };
+    horScroll = new IScroll("#wrapperICal",options);
 
     // check scroll position to load dynamically more icals
     horScroll.on("scroll", loadMoreICals);
