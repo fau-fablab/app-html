@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- '0.10'
+ - '0.10'
 before_install:
-- npm install -g typescript
+ - npm install -g typescript@1.6
 script:
-- tsc --allowimportmodule -target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
+ - tsc --allowimportmodule -target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
