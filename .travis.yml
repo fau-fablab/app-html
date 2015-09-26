@@ -1,7 +1,15 @@
 language: node_js
+sudo: required
+
+services:
+  - docker
+
 node_js:
  - '0.10'
+
 before_install:
  - npm install -g typescript@1.6
+
 script:
  - ./build.sh
+ - ./docker/create.sh
