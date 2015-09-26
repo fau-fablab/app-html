@@ -28,13 +28,14 @@ RUN a2enmod proxy_http
 
 # copy compile type script files
 COPY ./ /var/www/html
-RUN tsc --target es5 /var/www/html/js/*.ts /var/www/html/js/common/rest/*.ts /var/www/html/js/common/model/*.ts
+RUN cd /var/www/html && ./build.sh
 
 #delete some files
 RUN rm -rvf /var/www/html/index.html \
     /var/www/html/docker \
     /var/www/html/Dockerfile \
     /var/www/html/.git \
+    /var/www/html/build.sh \
     /var/www/html/npm-debug.log
 
 RUN find /var/www/html/ -name "*.ts" -exec rm -rvf {} +

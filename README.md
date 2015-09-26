@@ -32,9 +32,9 @@ ProxyPass /api https://url.to.rest.server.de:433
 ProxyPassReverse /api https://url.to.rest.server.de:433
 ```
 
-TypeScript files need to be compiled by the TypeScript compiler.
+TypeScript files need to be compiled by the TypeScript compiler. Simply call [build script](//github.com/FAU-Inf2/fablab-html/blob/master/build.sh) to get this step executed.
 ```
-tsc --target es5 js/*.ts js/common/rest/*.ts js/common/model/*.ts
+./build.sh
 ```
 
 To cleanup the mess before deploying the sources to the web server root some files and directories can be removed
