@@ -14,5 +14,5 @@ script:
  - ./build.sh
  - cd docker
  - touch fablab_html_cert.pem
- - touchh fablab_html_key.pem
+ - touch fablab_html_key.pem
  - ./create.sh
