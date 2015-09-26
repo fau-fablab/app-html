@@ -7,7 +7,7 @@ It can be installed using two different methods.
 
 ###1. Using Docker container
 
-Docker container can be created and started using scripts in the "[docker](https://github.com/FAU-Inf2/fablab-html/blob/master/docker)" subdirectory. Inside the docker container an apache server will be started using the configuration provided. It will start a web server listening on port 80 (http) and 443 (https). mod_rewrite will be used to forward http requests to https. mod_proxy will be used to forward requests to the [REST-Server](https://github.com/FAU-Inf2/fablab-server). URL to REST-Server should be changed in [apache-vhost-ssl.conf](https://github.com/FAU-Inf2/fablab-html/blob/master/docker/apache-vhost-ssl.conf).
+Docker container can be created and started using scripts in the [docker](https://github.com/FAU-Inf2/fablab-html/blob/master/docker) subdirectory. Inside the docker container an apache server will be started using the configuration provided. It will start a web server listening on port 80 (http) and 443 (https). mod_rewrite will be used to forward http requests to https. mod_proxy will be used to forward requests to the [REST-Server](https://github.com/FAU-Inf2/fablab-server). URL to REST-Server should be changed in [apache-vhost-ssl.conf](https://github.com/FAU-Inf2/fablab-html/blob/master/docker/apache-vhost-ssl.conf).
 
 SSL Certificates for apache web server should be placed in [docker](https://github.com/FAU-Inf2/fablab-html/blob/master/docker) subdirectory. There is a [helper script](https://github.com/FAU-Inf2/fablab-html/blob/master/docker/export_cert.sh) available to export a certificate from a Java keystore.
 
@@ -27,7 +27,7 @@ SSLProxyEngine On
 ProxyRequests Off
 ProxyPreserveHost On
 
-# specify endpoint to rest server vis mod_proxy:
+# specify endpoint to rest server using mod_proxy:
 ProxyPass /api https://url.to.rest.server.de:433
 ProxyPassReverse /api https://url.to.rest.server.de:433
 ```
