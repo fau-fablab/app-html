@@ -30,15 +30,8 @@ RUN a2enmod proxy_http
 COPY ./ /var/www/html
 RUN cd /var/www/html && ./build.sh
 
-#delete some files
-RUN rm -rvf /var/www/html/index.html \
-    /var/www/html/docker \
-    /var/www/html/Dockerfile \
-    /var/www/html/.git \
-    /var/www/html/build.sh \
-    /var/www/html/npm-debug.log
-
-RUN find /var/www/html/ -name "*.ts" -exec rm -rvf {} +
+# delete some files
+RUN cd /var/www/html && ./deployCleanup.sh
 
 EXPOSE 80 443
 
