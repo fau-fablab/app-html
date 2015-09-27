@@ -98,7 +98,7 @@ class Reservation {
             var td_duration = $(document.createElement('td'));
             var duration = results[i].duration;
             var durationString = this._util.convertToHoursAndMinuteString(duration);
-            var creationTimeInMilli = results[i].creationTime;
+            var creationTimeInMilli = results[i].startTime;
             var finishTime = creationTimeInMilli + duration * 60 * 1000; // duration -> minutes to millisec.
             var finishDate = new Date(finishTime);
             var timeString = finishDate.toLocaleTimeString();

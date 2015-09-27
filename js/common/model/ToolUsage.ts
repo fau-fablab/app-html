@@ -7,7 +7,7 @@ module common {
         public duration : number;
         public toolId : number;
         public successorId : number;
-        public creationTime: number;
+        public startTime: number;
 
         constructor () {
 
