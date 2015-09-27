@@ -98,16 +98,11 @@ class Reservation {
             var td_duration = $(document.createElement('td'));
             var duration = results[i].duration;
             var durationString = this._util.convertToHoursAndMinuteString(duration);
-            if (i == 0) {
-                var creationTimeInMilli = results[i].creationTime;
-                var finishTime = creationTimeInMilli + duration * 60000; // duration -> minutes to millisec.
-                var finishDate = new Date(finishTime);
-                var timeString = finishDate.toLocaleTimeString();
-                td_duration.text(durationString + " (" + timeString + " Uhr)");
-            }
-            else {
-                td_duration.text(durationString);
-            }
+            var creationTimeInMilli = results[i].creationTime;
+            var finishTime = creationTimeInMilli + duration * 60 * 1000; // duration -> minutes to millisec.
+            var finishDate = new Date(finishTime);
+            var timeString = finishDate.toLocaleTimeString();
+            td_duration.text(durationString + " (" + timeString + " Uhr)");
             td_duration.appendTo(tr);
 
 
