@@ -8,6 +8,10 @@
             <select class="form-control" id="machineSelector">
                 <option value="-1">--- Bitte Maschine auswählen ---</option>
             </select>
+            <label id="actionSelectorLabel" for="actionSelector" class="control-label collapse">Aktion</label>
+            <select class="form-control collapse" id="actionSelector">
+                <option value="-1">--- Bitte Aktion auswählen ---</option>
+            </select>
         </caption>
         <thead>
         <tr>
@@ -39,9 +43,6 @@
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
             <button id="addEntrySubmit" type="button" class="btn btn-success" data-container="body" >
                 Eintragen
-            </button>
-            <button id="removeAllEntries" data-target='#toolUsageDeleteConfirm' data-toggle="modal" type="button" class="btn btn-danger collapse">
-                Alle Einträge löschen
             </button>
         </div>
     </div>
