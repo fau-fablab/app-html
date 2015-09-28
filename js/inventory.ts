@@ -96,7 +96,7 @@ function callbackInventory(response):void{
 
     // enable reload
     $("#inventory_reload").prop("disabled", false);
-    
+
     // hide loader
     $("#inventoryLoader").hide();
 

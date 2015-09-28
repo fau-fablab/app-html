@@ -53,13 +53,6 @@ $(document).ready(function () {
         "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
     tooltip.tooltip({placement: 'bottom'});
 
-    // add change listener for data list to start search when option is selected
-    $("#inputSuche").on("input", function () {
-        var found:boolean = (<any>$).inArray($(this).val(), autoComplitionArray) > -1;
-        if (found) {
-            search();
-        }
-    });
 });
 
 function callBackCategories(records:Array<common.Category>){
@@ -76,14 +69,20 @@ function callbackCategoryAutoCompletions(records):void{
 
 function callbackAutoCompletions(records):void {
     autoComplitionArray = records;
-    var datalist = $("#product_options");
-    for (var index = 0; index < autoComplitionArray.length; index++) {
-        datalist.append("<option value='" + autoComplitionArray[index] + "'></option>");
-    }
     // enable search
     $("#inputSuche").prop("disabled", false);
     $("#search_btn").prop("disabled", false);
     $("#loadDataLoader").hide();
+
+    // autocompletion
+    (<any>$("#inputSuche")).autocomplete({
+        minLength: 2,
+        source: autoComplitionArray,
+        select: function( event, ui ) {
+            $("#inputSuche").val(ui.item.value);
+            search();
+        }
+    });
 }
 
 function search():void {
