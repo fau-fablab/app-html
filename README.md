@@ -32,15 +32,14 @@ ProxyPass /api https://url.to.rest.server.de:433
 ProxyPassReverse /api https://url.to.rest.server.de:433
 ```
 
-TypeScript files need to be compiled by the TypeScript compiler. Simply call [build script](//github.com/FAU-Inf2/fablab-html/blob/master/build.sh) to get this step executed.
+TypeScript files need to be compiled by the TypeScript compiler. Simply call [build script](https://github.com/FAU-Inf2/fablab-html/blob/master/build.sh) to get this step executed.
 ```
 ./build.sh
 ```
 
-To cleanup the mess before deploying the sources to the web server root some files and directories can be removed
+To [cleanup](https://github.com/FAU-Inf2/fablab-html/blob/master/deployCleanup.sh) the mess before deploying the sources to the web server root some files and directories can be removed
 ```
-rm -rvf docker Dockerfile .git
-find ./ -name "*.ts" -exec rm -rvf {} +
+./deployCleanup.sh
 ```
 ## License
     

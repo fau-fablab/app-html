@@ -9,6 +9,13 @@ RUN npm install -g typescript
 
 RUN if [ ! -f "/usr/bin/node" ]; then ln -s /usr/bin/nodejs /usr/bin/node; fi
 
+# enable some apache settings
+RUN a2ensite default-ssl
+RUN a2enmod ssl
+RUN a2enmod rewrite
+RUN a2enmod proxy
+RUN a2enmod proxy_http
+
 # copy all files to docker image
 COPY docker/runApache.sh runApache.sh
 COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
@@ -19,26 +26,12 @@ COPY docker/fablab_html_key.pem /etc/ssl/private/ssl-cert-snakeoil.key
 # fix exec permissions
 RUN chmod 755 /runApache.sh
 
-# enable some apache settings
-RUN a2ensite default-ssl
-RUN a2enmod ssl
-RUN a2enmod rewrite
-RUN a2enmod proxy
-RUN a2enmod proxy_http
-
 # copy compile type script files
 COPY ./ /var/www/html
 RUN cd /var/www/html && ./build.sh
 
-#delete some files
-RUN rm -rvf /var/www/html/index.html \
-    /var/www/html/docker \
-    /var/www/html/Dockerfile \
-    /var/www/html/.git \
-    /var/www/html/build.sh \
-    /var/www/html/npm-debug.log
-
-RUN find /var/www/html/ -name "*.ts" -exec rm -rvf {} +
+# delete some files
+RUN cd /var/www/html && ./deployCleanup.sh
 
 EXPOSE 80 443
 

@@ -12,4 +12,7 @@ before_install:
 
 script:
  - ./build.sh
- - ./docker/create.sh
+ - cd docker
+ - touch fablab_html_cert.pem
+ - touch fablab_html_key.pem
+ - ./create.sh
