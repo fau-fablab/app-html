@@ -70,8 +70,8 @@ $( document ).ready(function() {
 function callbackDeletion(response){
     console.log("Inventory deletion successful: " + response);
     // empty dom
-    $("#inventory_empty").show();
     $("#inventory_list").empty();
+    getInventory();
 }
 
 // send inventory get request to server
@@ -94,14 +94,16 @@ function callbackInventory(response):void{
     // empty old entries for the case of refresh
     $("#inventory_list").empty();
 
+    // enable reload
+    $("#inventory_reload").prop("disabled", false);
+    
     // hide loader
     $("#inventoryLoader").hide();
 
     if(response.length == 0){
-        // no items -> show info and enable refresh button
+        // no items -> show info
         $("#inventory_empty").show();
-        $("#inventory_reload").prop("disabled", false);
-        //$("#inventory_delete").prop("disabled", true);
+        $("#inventory_delete").prop("disabled", true);
     }else{
         // show items
         var html:string = "<div class='row row-inventory-head'>" + "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+
