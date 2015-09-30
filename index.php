@@ -1,4 +1,3 @@
-// <!-- <head> part -->
 <?php require_once("includes/header.html"); ?>
 
 <!-- <body> begin with navigation -->
