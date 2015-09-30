@@ -30,6 +30,14 @@ $( document ).ready(function() {
     delete_tooltip.prop("title", "Liste löschen");
     delete_tooltip.tooltip({ placement: 'top' });
 
+    var export_csv:any = $("#inventory_export_csv");
+    export_csv.prop("title", "Export CSV");
+    export_csv.tooltip({ placement: 'top' });
+
+    var export_json:any = $("#inventory_export_json");
+    export_json.prop("title", "Export JSON");
+    export_json.tooltip({ placement: 'top' });
+
     // get list
     getInventory();
 

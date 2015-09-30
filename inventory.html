@@ -2,14 +2,24 @@
 
     <span id="inventory_delete_tooltip" data-toggle="tooltip" data-trigger="hover">
         <button id="inventory_delete" data-target='#inventory_modal' data-toggle="modal" type="button" class="btn btn-primary btn-sm ">
-            <span  class='glyphicon glyphicon-trash'></span>
+            <span class='glyphicon glyphicon-trash'></span>
         </button>
     </span>
+    <a href="/api/inventory/inventory.csv" target="_new">
+        <button id="inventory_export_csv" data-toggle="tooltip" type="button" class="btn btn-info btn-sm ">
+            <span class='fa fa-table'></span>
+        </button>
+    </a>
+    <a href="/api/inventory/" target="_new">
+        <button id="inventory_export_json" data-toggle="tooltip" type="button" class="btn btn-info btn-sm ">
+            <span class="fa">{&nbsp;}</span>
+        </button>
+    </a>
     <button id="inventory_print" data-toggle="tooltip" type='button' class='btn btn-warning btn-sm'>
-        <span  class='glyphicon glyphicon-print'></span>
+        <span class='glyphicon glyphicon-print'></span>
     </button>
     <button id="inventory_reload" data-toggle="tooltip" type="button" class="btn btn-info btn-sm ">
-        <span  class='glyphicon glyphicon-refresh'></span>
+        <span class='glyphicon glyphicon-refresh'></span>
     </button>
 
     <div id="inventory_print_container">
