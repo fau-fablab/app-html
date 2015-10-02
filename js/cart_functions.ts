@@ -204,7 +204,7 @@ function updateCartEntry(entry:common.CartEntry, card_total_price){
     bounceShoppingCartIcon();
 
     // change total price for card
-    card_total_price.text((entry.amount*entry.product.price).toFixed(2));
+    card_total_price.text((entry.amount*entry.product.price).toFixed(2) + " €");
 
     // change total price
     $("#cart_total_price_text").text(getTotalPrice().toFixed(2).toString()+ " €");
