@@ -153,9 +153,6 @@ function showProducts(records:any):void {
     createTableRows(currentProcutList);
     prepareDialogFunktions();
     $('#loadMoreProductsLoader').hide();
-    // add vertical touch scrolling
-    // check scroll position to load dynamically more Products
-    // Products loaded -> new iCals can be loaded while scrolling
     searchingProducts = false;
 }
 
@@ -191,10 +188,10 @@ function createTableRows(productArray:Array<common.Product>) {
         var productRow = $("");
 
         $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
-            " <td id='productId' '>" + product.productId + "</td>" +
-            " <td id='productName'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
-            " <td id='productLocation'>" + product.locationString + "</td>" +
-            " <td id='productPrice'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
+            " <td id='productId' class='col-md-2 col-xs-2'>" + product.productId + "</td>" +
+            " <td id='productName' class='col-md-3 col-xs-3'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
+            " <td id='productLocation' class='col-md-5 col-xs-5'>" + product.locationString + "</td>" +
+            " <td id='productPrice' class='col-md-2 col-xs-2'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
             "</tr>");
     }
 
