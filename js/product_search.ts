@@ -7,6 +7,8 @@
 /// <reference path="util/Formatter.ts"/>
 /// <reference path="elements/ProductCounter.ts"/>
 /// <reference path="elements/ProductDialog.ts"/>
+/// <reference path="elements/CategoryView.ts"/>
+
 /// <reference path="util/Utils.ts"/>
 
 var currentProcutList:Array<common.Product> = [];
@@ -19,6 +21,7 @@ var formatter:Formatter = new Formatter();
 var productCounter:ProductCounter;
 var utils:Utils = new Utils();
 var api = new CategoryApi();
+var categoryView: CategoryView;
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -33,7 +36,6 @@ document.onkeydown = function (event) {
 };
 
 $(document).ready(function () {
-
 
     // disable input til list is loaded
     $("#inputSuche").prop("disabled", true);
@@ -63,7 +65,11 @@ $(document).ready(function () {
 });
 
 function callBackCategories(records:Array<common.Category>){
-    api.getCategoriesAsTree(records);
+    var categoryTree: common.Category = api.getCategoriesAsTree(records);
+    var categoryTreeFirstLevel: Array<any> = new Array();
+    var categoryViewElement = $("#category_search_result");
+    categoryView = new CategoryView($("#category_search_result"));
+    categoryView.createNewCategoryView(categoryTree);
 }
 
 function callbackCategoryAutoCompletions(records):void{

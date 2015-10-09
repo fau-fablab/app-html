@@ -8,25 +8,10 @@ module common {
         private _locationId:number;
         private _parentCategoryId:number;
         private _categoryChilds: Array<number>;
-        private _childCategories: Array<common.Category>;
+        private _childCategoryObjects: Array<common.Category>;
 
 
         constructor() {
-            /*if(!(record == "undefined")){
-            this._categoryId = record.categoryId || 0;
-            this._name = record.name || "root";
-            this._locationString = record.locationString || "no location";
-            this._parentCategoryId = record.parentCategoryId || -1;
-            this._locationId = record.location_id || -1;
-            this._childCategoriesAsIDArray = record.categoryChilds || new Array();
-            this._childCategories = new Array();
-            }
-            else{
-                console.log("record is undefined");
-            }
-            */
-
-
         }
 
 
@@ -78,12 +63,12 @@ module common {
             this._parentCategoryId = value;
         }
 
-        public get childCategories():Array<common.Category> {
-            return this._childCategories;
+        public get childCategoryObjects():Array<common.Category> {
+            return this._childCategoryObjects;
         }
 
-        public set childCategories(value:Array<common.Category>) {
-            this._childCategories = value;
+        public set childCategoryObjects(value:Array<common.Category>) {
+            this._childCategoryObjects = value;
         }
     }
 }
