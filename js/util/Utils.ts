@@ -4,6 +4,10 @@ class Utils {
 
     }
 
+    public getRandomInteger(){
+        return Math.floor((Math.random() * 1000000) + 1); ;
+    }
+
     public isInteger(value:String):boolean {
         for (var index = 0; index < value.length; index++) {
             if (value[index].search(/[0-9]/) == -1) {

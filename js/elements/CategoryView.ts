@@ -1,12 +1,14 @@
 /// <reference path="../common/model/Category.ts" />
 /// <reference path="../common/rest/ProductApi.ts" />
-
+/// <reference path="../util/Utils.ts" />
 class CategoryView{
 
+    private _util:Utils;
     private _categoryView: any;
     //private _productApi: ProductApi = new ProductApi();
 
     constructor(aCategoryView:any){
+        this._util = new Utils();
         this._categoryView = aCategoryView
     }
 
@@ -50,47 +52,51 @@ class CategoryView{
             var categories = aCategoryTree.childCategoryObjects[index].childCategoryObjects;
             for(var indexSecond in categories){
 
-                var secondElementId = "second" + indexSecond;
                 var currentElementObject:common.Category = categories[indexSecond];
                 var currentProducts: Array<common.Product> = this.findProductsForCategory(currentElementObject,aProducts);
 
                 if((currentProducts.length != 0) || (currentElementObject.categoryChilds.length != 0)){
-                    tree = tree + this.createNewNode(categories[indexSecond],secondElementId);
 
-                    tree = tree + this.createStartCollapseDiv(secondElementId);
-                    if(currentProducts.length != 0){
-                        for(var indexThird in currentProducts){
-                            tree = tree + this.createProductLeaf(currentProducts[indexThird]);
-                        }
-                    }
-
-                    if(currentElementObject.categoryChilds.length != 0){
-                        var nextCategoryChilds = currentElementObject.childCategoryObjects;
-                        for(var indexThird in nextCategoryChilds){
-                            var nextLevelId = "third" + indexSecond + indexThird;
-                            var nextCurrentCategory = nextCategoryChilds[indexThird]
-                            tree = tree + this.createNewNode(nextCurrentCategory,nextLevelId);
-                            tree = tree + this.createStartCollapseDiv(nextLevelId);
-
-                            var currentProducts: Array<common.Product> = this.findProductsForCategory(nextCurrentCategory,aProducts);
-                            for(var indexThirdProducts in currentProducts){
-                                tree = tree + this.createProductLeaf(currentProducts[indexThirdProducts]);
-                            }
-                            tree = tree + this.createEndCollapseDiv();
-                        }
-                    }
-                    tree = tree + this.createEndCollapseDiv();
+                    tree = tree + this.createNewNodeLevel(currentElementObject,aProducts,currentProducts);
                 }
             }
             tree = tree + this.createEndCollapseDiv();
 
         }
         tree = tree + treeTail;
-        //console.log(tree);
+        console.log(tree);
         this._categoryView.append(tree);
     }
 
+private createNewNodeLevel(aCategory:common.Category,aProducts:Array<common.Product>,aCurrentProducts:Array<common.Product>):string{
+    var treePart = "";
+    var collapseId = ""+ this._util.getRandomInteger();
+    treePart = treePart + this.createNewNode(aCategory,collapseId);
 
+    treePart = treePart + this.createStartCollapseDiv(collapseId);
+    if(aCurrentProducts.length != 0){
+        for(var index in aCurrentProducts){
+            treePart = treePart + this.createProductLeaf(aCurrentProducts[index]);
+        }
+    }
+
+    if(aCategory.categoryChilds.length != 0){
+        var nextCategoryChilds = aCategory.childCategoryObjects;
+        for(var index in nextCategoryChilds){
+
+            var currentElementObject:common.Category = nextCategoryChilds[index];
+            var currentProducts: Array<common.Product> = this.findProductsForCategory(currentElementObject,aProducts);
+
+            if((currentProducts.length != 0) || (currentElementObject.categoryChilds.length != 0)){
+                treePart = treePart + this.createNewNodeLevel(currentElementObject,aProducts,currentProducts);
+            }
+        }
+    }
+    treePart = treePart + this.createEndCollapseDiv();
+
+
+    return treePart;
+}
 
     private createProductLeaf(aProduct:common.Product): any{
         return "<li>"+ aProduct.name + "</li>";

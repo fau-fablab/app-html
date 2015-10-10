@@ -9,7 +9,7 @@ class RestClient{
 	private _authentication:string;
 
 	constructor(){
-		this._url = "/api";
+		this._url = "http://192.168.2.101:8080";
 		this._authentication = "";
 	}
 	
