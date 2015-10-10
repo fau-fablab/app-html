@@ -5,7 +5,6 @@ class CategoryView{
 
     private _util:Utils;
     private _categoryView: any;
-    //private _productApi: ProductApi = new ProductApi();
 
     constructor(aCategoryView:any){
         this._util = new Utils();
@@ -64,7 +63,6 @@ class CategoryView{
 
         }
         tree = tree + treeTail;
-        console.log(tree);
         this._categoryView.append(tree);
     }
 
@@ -99,7 +97,7 @@ private createNewNodeLevel(aCategory:common.Category,aProducts:Array<common.Prod
 }
 
     private createProductLeaf(aProduct:common.Product): any{
-        return "<li>"+ aProduct.name + "</li>";
+        return "<li id='"+aProduct.productId+"' class='collapse_list_entry'>"+ aProduct.name + "</li>";
     }
 
     private createNewNode(aCategory:common.Category,aButtonID:string): any{

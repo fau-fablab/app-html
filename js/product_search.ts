@@ -8,7 +8,6 @@
 /// <reference path="elements/ProductCounter.ts"/>
 /// <reference path="elements/ProductDialog.ts"/>
 /// <reference path="elements/CategoryView.ts"/>
-
 /// <reference path="util/Utils.ts"/>
 
 var currentProcutList:Array<common.Product> = [];
@@ -16,7 +15,7 @@ var autoComplitionArray:Array<string> = [];
 var LOADLIMIT:number = 10;
 var OFFSET:number = 0;
 var _productApi:ProductApi = new ProductApi();
-var categoryApi:CategoryApi = new CategoryApi();
+var _categoryApi:CategoryApi = new CategoryApi();
 var formatter:Formatter = new Formatter();
 var productCounter:ProductCounter;
 var utils:Utils = new Utils();
@@ -42,14 +41,15 @@ $(document).ready(function () {
     $("#search_btn").prop("disabled", true);
     $("#loadDataLoader").show();
     $('#loadMoreProductsLoader').hide();
+    $("#search_results_container").hide();
+    $("#search_result_category_container").hide();
     // loadAllProducts
-
 
     productApi.findAll(0,0,callBackAllProducts);
 
     var selectElement = $('#category_options');
-    categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
-    categoryApi.findAll(callBackCategories);
+    _categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
+
 
     productApi.getAutocompletions(callbackAutoCompletions);
 
@@ -65,14 +65,17 @@ var _categoryTree: common.Category;
 var _categoryView: CategoryView;
 var _allProducts: Array<common.Product> = new Array();
 
-function callBackCategories(records:Array<common.Category>){
-    _categoryTree = api.getCategoriesAsTree(records);
-    if(_allProducts.length != 0){
-        var categoryViewElement = $("#category_search_result");
-        _categoryView = new CategoryView($("#category_search_result"));
-        _categoryView.createNewCategoryView(_categoryTree,_allProducts);
-    }
+function callBackCategoryTree(records:Array<common.Category>){
 
+
+        _categoryTree = api.getCategoriesAsTree(records);
+        if(_allProducts.length != 0){
+            var categoryViewElement = $("#category_search_result");
+            _categoryView = new CategoryView($("#category_search_result"));
+            _categoryView.createNewCategoryView(_categoryTree,_allProducts);
+        }
+
+    $("#loadDataLoader").hide();
 }
 
 function callBackAllProducts(records:Array<common.Product>){
@@ -88,11 +91,12 @@ function callbackCategoryAutoCompletions(records):void{
 }
 
 function callbackAutoCompletions(records):void {
-    autoComplitionArray = records;
-    // enable search
     $("#inputSuche").prop("disabled", false);
     $("#search_btn").prop("disabled", false);
+
     $("#loadDataLoader").hide();
+    autoComplitionArray = records;
+    // enable search
 
     // autocompletion
     (<any>$("#inputSuche")).autocomplete({
@@ -109,6 +113,7 @@ function search():void {
     cleanTable();
     var errorLabel = $("#errorMessageSearch");
     errorLabel.hide();
+
     var researchCriteria:any = $('#inputSuche').val();
     var selectedElement = $('#category_options');
     var selectedValue = selectedElement.find(":selected").val();
@@ -116,30 +121,46 @@ function search():void {
     var checkedValue = $('#wellform input:radio:checked').val();
     switch (checkedValue) {
         case "byName":
+            $("#search_result_category_container").hide();
+            $("#search_results_container").show();
             _productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "allProducts":
+            $("#search_result_category_container").hide();
+            $("#search_results_container").show();
             _productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "byId":
+            $("#search_result_category_container").hide();
+            $("#search_results_container").show();
             if(researchCriteria.length > 0) {
                 if (utils.isInteger(researchCriteria)) {
                     _productApi.findById(researchCriteria, showProduct);
                     $('#loadMoreProductsLoader').show();
                 }
                 else{
-                    showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 008 oder 1342)");
+                    showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 0008 oder 1342)");
                 }
             }else{
-                showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 008 oder 1342)");
+                showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 0008 oder 1342)");
             }
             break;
         case "byCategory":
+            $("#search_result_category_container").hide();
+            $("#search_results_container").show();
             _productApi.findByCategory(selectedValue,0,0,showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
+        case "byCategoryTree":
+            $("#category_search_result").empty();
+            $("#search_results_container").hide();
+            $("#search_result_category_container").show();
+            $('#loadMoreProductsLoader').show();
+            _categoryApi.findAll(callBackCategoryTree);
+            break;
+
     }
 }
 function showErrorMessage(aValue: string){
@@ -196,6 +217,10 @@ function prepareDialogFunktions() {
         });
 
     });
+}
+
+function prepareDialogForTreeListFunctions(){
+
 }
 
 function createTableRows(productArray:Array<common.Product>) {

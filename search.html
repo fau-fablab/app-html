@@ -38,6 +38,12 @@
                                     Suche Produkte nach Kategorien
                                 </label>
                             </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="searchRadios5" value="byCategoryTree">
+                                    Alle Kategorien mit Produkten
+                                </label>
+                            </div>
                         </div>
                         <div class="col-xs-12" style="margin-top: 20px">
                             <select id="category_options" class="form-control">
@@ -93,7 +99,7 @@
     <div id="loadMoreProductsLoader"><img src="img/ajax-loader.gif"/></div>
 </div>
 
-<div class="container jumbotron search_container">
+<div class="container jumbotron search_container" id="search_result_category_container">
     <ul id="category_search_result">
 
     </ul>
