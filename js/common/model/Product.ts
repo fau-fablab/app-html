@@ -17,7 +17,7 @@ module common {
         private _categoryId:number;
         private _oumId:number;
 
-        private _categoryObject: common.Category;
+        private _category: common.Category;
         private _uomObject: common.Uom;
 
         constructor(record) {
@@ -37,7 +37,7 @@ module common {
 
 
             var category:common.Category = record.category
-            this._categoryObject = category;
+            this._category = category;
 
             this._uomObject = new common.Uom(record.uom);
         }
@@ -123,12 +123,12 @@ module common {
             this._oumId = value;
         }
 
-        public get categoryObject():common.Category {
-            return this._categoryObject;
+        public get category():common.Category {
+            return this._category;
         }
 
-        public set categoryObject(value:common.Category) {
-            this._categoryObject = value;
+        public set category(value:common.Category) {
+            this._category = value;
         }
 
         public get uomObject():common.Uom {

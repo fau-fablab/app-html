@@ -1,3 +1,4 @@
+/// <reference path="../model/Product.ts" />
 module common {
     export class Category {
 
@@ -9,11 +10,20 @@ module common {
         private _parentCategoryId:number;
         private _categoryChilds: Array<number>;
         private _childCategoryObjects: Array<common.Category>;
+        private _productObjects: Array<common.Product>;
 
 
         constructor() {
         }
 
+
+        public get productObjects():Array<common.Product> {
+            return this._productObjects;
+        }
+
+        public set productObjects(value:Array<common.Product>) {
+            this._productObjects = value;
+        }
 
         public get categoryChilds():Array<number> {
             return this._categoryChilds;

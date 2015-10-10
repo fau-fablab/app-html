@@ -15,13 +15,13 @@ var currentProcutList:Array<common.Product> = [];
 var autoComplitionArray:Array<string> = [];
 var LOADLIMIT:number = 10;
 var OFFSET:number = 0;
-var productApi:ProductApi = new ProductApi();
+var _productApi:ProductApi = new ProductApi();
 var categoryApi:CategoryApi = new CategoryApi();
 var formatter:Formatter = new Formatter();
 var productCounter:ProductCounter;
 var utils:Utils = new Utils();
 var api = new CategoryApi();
-var categoryView: CategoryView;
+
 // scrollelement
 
 // prevent loading further products when they are already loading
@@ -36,17 +36,21 @@ document.onkeydown = function (event) {
 };
 
 $(document).ready(function () {
-
+    var productApi:ProductApi = new ProductApi();
     // disable input til list is loaded
     $("#inputSuche").prop("disabled", true);
     $("#search_btn").prop("disabled", true);
     $("#loadDataLoader").show();
-
     $('#loadMoreProductsLoader').hide();
+    // loadAllProducts
+
+
+    productApi.findAll(0,0,callBackAllProducts);
+
     var selectElement = $('#category_options');
     categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
     categoryApi.findAll(callBackCategories);
-    var productApi:ProductApi = new ProductApi();
+
     productApi.getAutocompletions(callbackAutoCompletions);
 
     // set and initialise tooltip
@@ -57,12 +61,22 @@ $(document).ready(function () {
 
 });
 
+var _categoryTree: common.Category;
+var _categoryView: CategoryView;
+var _allProducts: Array<common.Product> = new Array();
+
 function callBackCategories(records:Array<common.Category>){
-    var categoryTree: common.Category = api.getCategoriesAsTree(records);
-    var categoryTreeFirstLevel: Array<any> = new Array();
-    var categoryViewElement = $("#category_search_result");
-    categoryView = new CategoryView($("#category_search_result"));
-    categoryView.createNewCategoryView(categoryTree);
+    _categoryTree = api.getCategoriesAsTree(records);
+    if(_allProducts.length != 0){
+        var categoryViewElement = $("#category_search_result");
+        _categoryView = new CategoryView($("#category_search_result"));
+        _categoryView.createNewCategoryView(_categoryTree,_allProducts);
+    }
+
+}
+
+function callBackAllProducts(records:Array<common.Product>){
+    _allProducts = records;
 }
 
 function callbackCategoryAutoCompletions(records):void{
@@ -102,17 +116,17 @@ function search():void {
     var checkedValue = $('#wellform input:radio:checked').val();
     switch (checkedValue) {
         case "byName":
-            productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
+            _productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "allProducts":
-            productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
+            _productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "byId":
             if(researchCriteria.length > 0) {
                 if (utils.isInteger(researchCriteria)) {
-                    productApi.findById(researchCriteria, showProduct);
+                    _productApi.findById(researchCriteria, showProduct);
                     $('#loadMoreProductsLoader').show();
                 }
                 else{
@@ -123,7 +137,7 @@ function search():void {
             }
             break;
         case "byCategory":
-            productApi.findByCategory(selectedValue,0,0,showSearchResults);
+            _productApi.findByCategory(selectedValue,0,0,showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
     }
@@ -189,7 +203,7 @@ function createTableRows(productArray:Array<common.Product>) {
 
     for (var index = 0; index < productArray.length; index++) {
         var product = productArray[index];
-        var categoryName:string = product.categoryObject.name;
+        var categoryName:string = product.category.name;
         var uomName:string = product.uomObject.name;
         var productRow = $("");
 
