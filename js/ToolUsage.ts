@@ -26,7 +26,15 @@ class Reservation {
 
     public updateToolList() {
         var r:Reservation = this;
-        this.client.requestGET("/drupal/tools", function (result) {
+
+        // check for admin user, if admin user, all tools should be disabled
+        var url:string = "/toolUsage/tools";
+        var user:common.User = Authentication.getUserInfo();
+        if (user && user.hasRole(common.Roles.ADMIN)) {
+            url = "/drupal/tools"
+        }
+
+        this.client.requestGET(url, function (result) {
             r.updateToolListCallback(result)
         });
     }
@@ -42,6 +50,14 @@ class Reservation {
             option.val(String(this.toolArray[i].id));
             option.text(this.toolArray[i].title);
             option.appendTo(select);
+
+            var user:common.User = Authentication.getUserInfo();
+            if (user && user.hasRole(common.Roles.ADMIN)) {
+                if (this.toolArray[i].enabledForMachineUsage)
+                    option.attr("class", "machineUsageEnabled");
+                else
+                    option.attr("class", "machineUsageDisabled");
+            }
 
             if (urlVars["id"] && urlVars["id"] == this.toolArray[i].id) {
                 option.attr("selected", true);
@@ -70,13 +86,35 @@ class Reservation {
         var table = $('#machineUsageTable');
         table.find("tbody").empty();
 
-
         if (machineId < 0) {
             this.disableAddEntry(true);
             return;
         }
 
         var user:common.User = Authentication.getUserInfo();
+        var actionSelector = $("#actionSelector");
+        actionSelector.empty();
+        actionSelector.append('<option value="-1">--- Bitte Aktion auswählen ---</option>');
+        actionSelector.append('<option value="deleteAll">Alle Einträge für diese Maschie entfernen</option>');
+
+        // add some actions to action selector
+        if (user && user.hasRole(common.Roles.ADMIN)) {
+            var opt = $(document.createElement('option'));
+            var tool:common.FabTool = this.findTool(machineId);
+
+            if (tool) {
+                if (tool.enabledForMachineUsage) {
+                    opt.val("disableMachine");
+                    opt.text("Maschine für die Reservierung deaktivieren");
+                }
+                else {
+                    opt.val("enableMachine");
+                    opt.text("Maschine für die Reservierung aktivieren");
+                }
+                opt.appendTo(actionSelector);
+            }
+        }
+
         var i:number = 0;
         for (var r in results) {
 
@@ -98,16 +136,11 @@ class Reservation {
             var td_duration = $(document.createElement('td'));
             var duration = results[i].duration;
             var durationString = this._util.convertToHoursAndMinuteString(duration);
-            if (i == 0) {
-                var creationTimeInMilli = results[i].creationTime;
-                var finishTime = creationTimeInMilli + duration * 60000; // duration -> minutes to millisec.
-                var finishDate = new Date(finishTime);
-                var timeString = finishDate.toLocaleTimeString();
-                td_duration.text(durationString + " (" + timeString + " Uhr)");
-            }
-            else {
-                td_duration.text(durationString);
-            }
+            var creationTimeInMilli = results[i].startTime;
+            var finishTime = creationTimeInMilli + duration * 60 * 1000; // duration -> minutes to millisec.
+            var finishDate = new Date(finishTime);
+            var timeString = finishDate.toLocaleTimeString();
+            td_duration.text(durationString + " (" + timeString + " Uhr)");
             td_duration.appendTo(tr);
 
 
@@ -139,16 +172,19 @@ class Reservation {
         }
     }
 
-    public getSelectedMachineId():number {
+    public  getSelectedMachineId():number {
         return $("#machineSelector").val();
     }
 
     public loadTable() {
         var machineId:number = this.getSelectedMachineId();
-        if (machineId != -1)
+        if (machineId != -1) {
             this.getUsageList(machineId);
-        else
+            window.history.replaceState(null, "Machine usage", "?id=" + machineId + window.location.hash);
+        }
+        else {
             this.usageListCallback(-1, null);
+        }
     }
 
     public addEntry() {
@@ -237,6 +273,23 @@ class Reservation {
         );
     }
 
+    public setToolEnabled(toolId:number, flag:boolean) {
+        var r:Reservation = this;
+
+        this.client.request(
+            "POST",
+            "/toolUsage/tools/" + toolId + "/?enable=" + flag,
+            function (results) {
+                r.toolEnabledCallback(results);
+            },
+            "{}"
+        );
+    }
+
+    public toolEnabledCallback(result) {
+        window.location.reload();
+    }
+
     public moveEntryCallback(result) {
         this.loadTable();
     }
@@ -252,7 +305,7 @@ class Reservation {
         $("#addEntryProject").prop("disabled", flag);
         $("#addEntryDuration").prop("disabled", flag);
         $("#addEntrySubmit").prop("disabled", flag);
-        $("#removeAllEntries").prop("disabled", flag);
+        $("#actionSelector").prop("disabled", flag);
     }
 
     private getToken():string {
@@ -320,6 +373,31 @@ class Reservation {
 
         this.moveEntry(this.getSelectedMachineId(), elementID, ancestorId);
     }
+
+    public processAction() {
+        var actionSelector = $("#actionSelector");
+        var action:string = actionSelector.val();
+
+        if (action == "deleteAll") {
+            (<any>$("#toolUsageDeleteConfirm")).modal("show");
+        } else if (action == "disableMachine") {
+            this.setToolEnabled(this.getSelectedMachineId(), false);
+        }
+        else if (action == "enableMachine") {
+            this.setToolEnabled(this.getSelectedMachineId(), true);
+        }
+
+        actionSelector.prop("selectedIndex", 0);
+    }
+
+    private findTool(id:number) : common.FabTool {
+        for (var i = 0; i < this.toolArray.length; i++) {
+            if (this.toolArray[i].id == id)
+                return this.toolArray[i];
+        }
+
+        return null;
+    }
 }
 
 $(document).ready(function () {
@@ -340,8 +418,14 @@ $(document).ready(function () {
 
     if (user && user.hasRole(common.Roles.ADMIN)) {
         // register callback to delete all entries
-        var removeEntries = $("#removeAllEntries");
-        removeEntries.toggle(true);
+        var actionSelector = $("#actionSelector");
+        actionSelector.toggle(true);
+        actionSelector.change(function() {
+            reservation.processAction();
+        });
+
+        var actionSelectorLabel = $("#actionSelectorLabel");
+        actionSelectorLabel.toggle();
 
         var removeEntriesSubmit = $("#toolUsageDeleteConfirmSubmit");
         removeEntriesSubmit.click(function () {

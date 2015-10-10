@@ -40,6 +40,17 @@
 
 #inventory_reload{
     float: right;
+    margin-left: 2px;
+}
+
+#inventory_export_csv{
+    float: right;
+    margin-left: 2px;
+}
+
+#inventory_export_json {
+    float: right;
+    margin-left: 2px;
 }
 
 #inventoryLoader{

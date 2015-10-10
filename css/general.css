@@ -92,9 +92,7 @@
 @media (min-width: 768px) and (max-width: 925px) {
     .navbar-right{
         position: absolute;
-        top: 2px!important;
-        right: 5px!important;
-        display: block;
+        right: 20px;
         cursor: pointer;
     }
 

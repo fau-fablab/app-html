@@ -59,6 +59,13 @@ $(document).ready(function () {
     });
 
     loadPage(currentHash);
+
+    // add scrolling observation to close menue when start scrolling
+    $(window).scroll(function(){
+            if($(window).height() > 360){
+                (<any>$('#bs-example-navbar-collapse-1')).collapse('hide');
+            }
+    });
 });
 
 function loadPage(url):void{

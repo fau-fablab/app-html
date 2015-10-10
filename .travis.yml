@@ -1,0 +1,18 @@
+language: node_js
+sudo: required
+
+services:
+  - docker
+
+node_js:
+ - '0.10'
+
+before_install:
+ - npm install -g typescript@1.6
+
+script:
+ - ./build.sh
+ - cd docker
+ - touch fablab_html_cert.pem
+ - touch fablab_html_key.pem
+ - ./create.sh

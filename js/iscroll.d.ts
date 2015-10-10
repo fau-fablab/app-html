@@ -67,6 +67,10 @@ interface IScrollOptions {
 
     ///Boolean or string
     eventPassthrough?: any;
+
+    probeType?: number;
+    scrollbars?:boolean;
+    interactiveScrollbars?:boolean;
 }
 
 declare class IScroll {

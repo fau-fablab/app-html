@@ -6,6 +6,7 @@ module common {
         private _description:string;
         private _details;
         private _linkToPicture;
+        private _enabledForMachineUsage:boolean;
 
 
         constructor(record:any) {
@@ -15,6 +16,7 @@ module common {
             this._description = record.description;
             this._details = record.details;
             this._linkToPicture = record.linkToPicture;
+            this._enabledForMachineUsage = record.enabledForMachineUsage;
         }
 
 
@@ -64,6 +66,14 @@ module common {
 
         public set linkToPicture(value) {
             this._linkToPicture = value;
+        }
+
+        public get enabledForMachineUsage():boolean {
+            return this._enabledForMachineUsage;
+        }
+
+        public set enabledForMachineUsage(value:boolean) {
+            this._enabledForMachineUsage = value;
         }
     }
 }

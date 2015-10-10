@@ -55,13 +55,6 @@ $(document).ready(function () {
         "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
     tooltip.tooltip({placement: 'bottom'});
 
-    // add change listener for data list to start search when option is selected
-    $("#inputSuche").on("input", function () {
-        var found:boolean = (<any>$).inArray($(this).val(), autoComplitionArray) > -1;
-        if (found) {
-            search();
-        }
-    });
 });
 
 function callBackCategories(records:Array<common.Category>){
@@ -82,14 +75,20 @@ function callbackCategoryAutoCompletions(records):void{
 
 function callbackAutoCompletions(records):void {
     autoComplitionArray = records;
-    var datalist = $("#product_options");
-    for (var index = 0; index < autoComplitionArray.length; index++) {
-        datalist.append("<option value='" + autoComplitionArray[index] + "'></option>");
-    }
     // enable search
     $("#inputSuche").prop("disabled", false);
     $("#search_btn").prop("disabled", false);
     $("#loadDataLoader").hide();
+
+    // autocompletion
+    (<any>$("#inputSuche")).autocomplete({
+        minLength: 2,
+        source: autoComplitionArray,
+        select: function( event, ui ) {
+            $("#inputSuche").val(ui.item.value);
+            search();
+        }
+    });
 }
 
 function search():void {
@@ -160,9 +159,6 @@ function showProducts(records:any):void {
     createTableRows(currentProcutList);
     prepareDialogFunktions();
     $('#loadMoreProductsLoader').hide();
-    // add vertical touch scrolling
-    // check scroll position to load dynamically more Products
-    // Products loaded -> new iCals can be loaded while scrolling
     searchingProducts = false;
 }
 
@@ -198,10 +194,10 @@ function createTableRows(productArray:Array<common.Product>) {
         var productRow = $("");
 
         $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
-            " <td id='productId' '>" + product.productId + "</td>" +
-            " <td id='productName'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
-            " <td id='productLocation'>" + product.locationString + "</td>" +
-            " <td id='productPrice'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
+            " <td id='productId' class='col-md-2 col-xs-2'>" + product.productId + "</td>" +
+            " <td id='productName' class='col-md-3 col-xs-3'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
+            " <td id='productLocation' class='col-md-5 col-xs-5'>" + product.locationString + "</td>" +
+            " <td id='productPrice' class='col-md-2 col-xs-2'><div>" + formatter.formatNumberToPrice(product.price) + " <span class=\"glyphicon glyphicon-euro\"></span></div><div>" + uomName + "</div></td>" +
             "</tr>");
     }
 
