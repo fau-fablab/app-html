@@ -129,6 +129,7 @@ function addICals(icals):void{
         horScroll.destroy();
     }
 
+    // add iCals to DOM
     var alreadyLoadedICals:number = $("#ical_container span").length;
     for (var i = alreadyLoadedICals; i < icals.length + alreadyLoadedICals; i++) {
         // get parsed ical Event

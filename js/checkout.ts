@@ -7,7 +7,7 @@ $(document).ready(function () {
     // initialise and set tooltip
     var tooltip:any =  $("#cart_tooltip");
     tooltip.prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
-        "und klicke hier auf den \"Zur Kasse\"-Button. Nun musst du den QR Code abtippen, auf \"Absende\" klicken " +
+        "und klicke hier auf den \"Zur Kasse\"-Button. Nun musst du den QR Code abtippen, auf \"Absenden\" klicken " +
         "und anschließend bequem im FABLAB bezahlen.");
     tooltip.tooltip({placement: 'top'});
 });
@@ -55,8 +55,7 @@ function checkout(){
         }
         cartServer.cartItems = cartEntriesServer;
 
-        // REST CALL
-        // post cart
+        // REST CALL - adapt JSON to remove cyclic references
         var res = JSON.stringify(cartServer, function(key, val) {
             // remove cyclic references
             if(key == 'cart') {
@@ -189,7 +188,7 @@ function callbackPolling(response){
 }
 
 
-/** Helping Functions **/
+/** helping functions **/
 
 // reset checkout modal
 function resetCheckoutDialog(){

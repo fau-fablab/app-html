@@ -4,7 +4,7 @@
 /// <reference path="checkout.ts"/>
 /// <reference path="util/Utils.ts"/>
 
-//always show quantity in header
+// always show quantity in header
 $( document ).ready(function() {
     adaptQuantityInHeader();
 });
@@ -231,6 +231,7 @@ function addProduct(entry:common.CartEntry):void{
         return;
     }
 
+    // save product
     cart.push(key);
     localStorage.setItem("cart", JSON.stringify(cart));
 

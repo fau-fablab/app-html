@@ -77,6 +77,7 @@ function loadPage(url):void{
     // URL as h1 title for page
     var title:string = newUrl.toUpperCase();
 
+    // adatap h1 title
     switch(title){
         case "NEWS":
             break;
