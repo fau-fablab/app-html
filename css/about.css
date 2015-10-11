@@ -12,6 +12,7 @@ h1 > img{
     margin: 0px 5px 0px 5px;
 }
 
+/*--------- adaptions for the different resolutions ---------*/
 @media(min-width: 768px){
     .about_container{
         margin-top: 35px;

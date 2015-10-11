@@ -1,5 +1,14 @@
 /** CSS class for the toolUsage page **/
 
+.machineUsageEnabled {
+    background-color: rgba(0,255,0,0.1);
+}
+
+.machineUsageDisabled {
+    background-color: rgba(255,0,0,0.1);
+}
+
+/*--------- adaptions for the different resolutions ---------*/
 @media(min-width: 768px){
     .toolUsage_container{
         margin-top: 35px;
@@ -20,12 +29,4 @@
     #addEntrySubmit{
         margin-top: 10px;
     }
-}
-
-.machineUsageEnabled {
-    background-color: rgba(0,255,0,0.1);
-}
-
-.machineUsageDisabled {
-    background-color: rgba(255,0,0,0.1);
 }

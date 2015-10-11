@@ -73,6 +73,7 @@
     display: none;
 }
 
+/*--------- adaptions for the different resolutions ---------*/
 @media(min-width: 768px){
     .inventory_container{
         margin-top: 35px;

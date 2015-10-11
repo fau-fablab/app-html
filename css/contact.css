@@ -1,5 +1,6 @@
 /** CSS class for the contact page **/
 
+/*--------- adaptions for the different resolutions ---------*/
 @media(min-width: 768px){
     .contact_container{
         margin-top: 35px;

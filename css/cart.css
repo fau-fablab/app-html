@@ -1,4 +1,4 @@
-/** CSS class for the cart page **/
+/** CSS class for the cart page including checkout**/
 
 /*--------- Cart ---------*/
 
@@ -99,6 +99,8 @@ h4{
     text-align: center;
 }
 
+
+/*--------- adaptions for the different resolutions ---------*/
 @media(min-width: 768px){
     #cart_container{
         margin-top: 35px;

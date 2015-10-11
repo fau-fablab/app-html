@@ -1,4 +1,4 @@
-/** general CSS class **/
+/** general CSS class including navigation and general attributes that count for all pages**/
 
 /*--------- heading of a page ---------*/
 #h1_div{
@@ -53,6 +53,7 @@
     min-height: 13px;
 }
 
+/*--------- adaptions for the different resolutions ---------*/
 @media (max-width: 767px) {
     .navbar-brand{
         height: 35px;
