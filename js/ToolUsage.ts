@@ -45,13 +45,25 @@ class Reservation {
         var urlVars = this._util.getUrlVars();
         var preselection:boolean = false;
 
+        var user:common.User = Authentication.getUserInfo();
+        if (this.toolArray == null || this.toolArray.length == 0) {
+            var disableLabel = $("#disableLabel");
+            if (user && user.hasRole(common.Roles.ADMIN)) {
+                disableLabel.toggle(false);
+                select.prop("disabled", false);
+            }
+            else {
+                disableLabel.toggle(true);
+                select.prop("disabled", true);
+            }
+        }
+
         for (var i = 0; i < this.toolArray.length; i++) {
             var option = $(document.createElement('option'));
             option.val(String(this.toolArray[i].id));
             option.text(this.toolArray[i].title);
             option.appendTo(select);
 
-            var user:common.User = Authentication.getUserInfo();
             if (user && user.hasRole(common.Roles.ADMIN)) {
                 if (this.toolArray[i].enabledForMachineUsage)
                     option.attr("class", "machineUsageEnabled");
