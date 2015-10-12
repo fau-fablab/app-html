@@ -29,6 +29,21 @@ var _formatter:Formatter = new Formatter();
 var _productCounter:ProductCounter;
 var _utils:Utils = new Utils();
 
+var extendedSearchLink;
+var searchButton = $("#search_btn");
+var searchInfoButton = $("#search_tooltip");
+var searchInputField = $("#inputSuche");
+var searchErrorField = $("#errorMessageSearch");
+
+var resultProductContainer = $("#search_results_container");
+var resultProductTable = $("#search_results");
+var autocomplicationLoaderImage = $("#loadDataLoader");
+var productResultLoaderImage = $('#loadMoreProductsLoader');
+
+var resultCategoryContainer = $("#search_result_category_container");
+var resultCategoryList = $("#category_search_result");
+var categoryResultLoaderImage = $("#loadMoreProductsLoaderForCategories");
+var categorySelectionField = $('#category_options');
 
 document.onkeydown = function (event) {
     if (event.keyCode == 13) {
@@ -38,43 +53,43 @@ document.onkeydown = function (event) {
 
 $(document).ready(function () {
     // disable input til list is loaded
-    $('#category_options').hide();
+    categorySelectionField.hide();
     $( ".radio" ).change(function() {
         var checkedValue = $('#wellform input:radio:checked').val();
         switch (checkedValue) {
             case "byName":
-                $("#inputSuche").prop("disabled", false);
-                $('#category_options').hide();
+                searchInputField.prop("disabled", false);
+                categorySelectionField.hide();
                 break;
             case "allProducts":
-                $("#inputSuche").prop("disabled", false);
-                $('#category_options').hide();
+                searchInputField.prop("disabled", false);
+                categorySelectionField.hide();
                 break;
             case "byId":
-                $("#inputSuche").prop("disabled", false);
-                $('#category_options').hide();
+                searchInputField.prop("disabled", false);
+                categorySelectionField.hide();
                 break;
             case "byCategory":
-                $("#inputSuche").prop("disabled", true);
-                $('#category_options').show();
+                searchInputField.prop("disabled", true);
+                categorySelectionField.show();
                 break;
             case "byCategoryTree":
-                $("#inputSuche").prop("disabled", false);
-                $('#category_options').hide();
+                searchInputField.prop("disabled", false);
+                categorySelectionField.hide();
                 break;
         }
     });
-    $("#inputSuche").prop("disabled", true);
-    $("#search_btn").prop("disabled", true);
-    $("#loadDataLoader").show();
-    $('#loadMoreProductsLoader').hide();
-    $("#search_results_container").hide();
-    $("#search_result_category_container").hide();
+    searchInputField.prop("disabled", true);
+    searchButton.prop("disabled", true);
+    autocomplicationLoaderImage.show();
+    productResultLoaderImage.hide();
+    resultProductContainer.hide();
+    resultCategoryContainer.hide();
     // loadAllProducts
 
     _productApi.findAll(0,0,callBackAllProducts);
 
-    var selectElement = $('#category_options');
+    var selectElement = categorySelectionField;
     _categoryApi.getAutocompletions(callbackCategoryAutoCompletions);
 
 
@@ -82,7 +97,7 @@ $(document).ready(function () {
 
     // set and initialise tooltip
     console.log("vor tooltip");
-    var tooltip:any = $("#search_tooltip");
+    var tooltip:any = searchInfoButton;
     tooltip.prop("title", _infoResource.productInfo);
     tooltip.tooltip({placement: 'bottom'});
     console.log("nach tooltip");
@@ -92,12 +107,12 @@ $(document).ready(function () {
 function callBackCategoryTree(records:Array<common.Category>){
     _categoryTree = _categoryApi.getCategoriesAsTree(records);
     if(_allProducts.length != 0){
-        var categoryViewElement = $("#category_search_result");
-        _categoryView = new CategoryView($("#category_search_result"));
+        var categoryViewElement = resultCategoryList;
+        _categoryView = new CategoryView(resultCategoryList);
         _categoryView.createNewCategoryView(_categoryTree,_allProducts);
     }
     prepareDialogForTreeListFunctions();
-    $("#loadMoreProductsLoaderForCategories").hide();
+    categoryResultLoaderImage.hide();
 }
 
 function callBackAllProducts(records:any){
@@ -108,7 +123,7 @@ function callBackAllProducts(records:any){
 }
 
 function callbackCategoryAutoCompletions(records):void{
-    var selectedElement = $('#category_options');
+    var selectedElement = categorySelectionField;
     for(var index = 0; index < records.length;index++){
         selectedElement.append("<option>"+records[index]+"</option>");
     }
@@ -116,19 +131,19 @@ function callbackCategoryAutoCompletions(records):void{
 }
 
 function callbackAutoCompletions(records):void {
-    $("#inputSuche").prop("disabled", false);
-    $("#search_btn").prop("disabled", false);
+    searchInputField.prop("disabled", false);
+    searchButton.prop("disabled", false);
 
-    $("#loadDataLoader").hide();
+    autocomplicationLoaderImage.hide();
     _autoComplitionProductArray = records;
     // enable search
 
     // autocompletion
-    (<any>$("#inputSuche")).autocomplete({
+    (<any>searchInputField).autocomplete({
         minLength: 2,
         source: _autoComplitionProductArray,
         select: function( event, ui ) {
-            $("#inputSuche").val(ui.item.value);
+            searchInputField.val(ui.item.value);
             search();
         }
     });
@@ -136,37 +151,34 @@ function callbackAutoCompletions(records):void {
 
 function search():void {
     cleanTable();
-    var errorLabel = $("#errorMessageSearch");
+    var errorLabel = searchErrorField;
     errorLabel.hide();
 
     var researchCriteria:any = $('#inputSuche').val();
-    var selectedElement = $('#category_options');
+    var selectedElement = categorySelectionField;
     var selectedValue = selectedElement.find(":selected").val();
 
     var checkedValue = $('#wellform input:radio:checked').val();
     switch (checkedValue) {
         case "byName":
-
-            $("#search_result_category_container").hide();
-            $("#search_results_container").show();
+            resultCategoryContainer.hide();
+            resultProductContainer.show();
             _productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
-            $('#loadMoreProductsLoader').show();
+            productResultLoaderImage.show();
             break;
         case "allProducts":
-
-            $("#search_result_category_container").hide();
-            $("#search_results_container").show();
+            resultCategoryContainer.hide();
+            resultProductContainer.show();
             _productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
-            $('#loadMoreProductsLoader').show();
+            productResultLoaderImage.show();
             break;
         case "byId":
-
-            $("#search_result_category_container").hide();
-            $("#search_results_container").show();
-            if(researchCriteria.length > 0) {
+            resultCategoryContainer.hide();
+            resultProductContainer.show();
+            if(researchCriteria.length == 4) {
                 if (_utils.isInteger(researchCriteria)) {
                     _productApi.findById(researchCriteria, showProduct);
-                    $('#loadMoreProductsLoader').show();
+                    productResultLoaderImage.show();
                 }
                 else{
                     showErrorMessage("Geben Sie bitte eine vierstellige Zahl ein. (z.B. 0008 oder 1342)");
@@ -177,23 +189,23 @@ function search():void {
             break;
         case "byCategory":
 
-            $("#search_result_category_container").hide();
-            $("#search_results_container").show();
+            resultCategoryContainer.hide();
+            resultProductContainer.show();
             _productApi.findByCategory(selectedValue,0,0,showSearchResults);
-            $('#loadMoreProductsLoader').show();
+            productResultLoaderImage.show();
             break;
         case "byCategoryTree":
-            $("#category_search_result").empty();
-            $("#search_results_container").hide();
-            $("#search_result_category_container").show();
-            $('#loadMoreProductsLoaderForCategories').show();
+            resultCategoryList.empty();
+            resultProductContainer.hide();
+            resultCategoryContainer.show();
+            categoryResultLoaderImage.show();
             _categoryApi.findAll(callBackCategoryTree);
             break;
 
     }
 }
 function showErrorMessage(aValue: string){
-    var errorLabel = $("#errorMessageSearch");
+    var errorLabel = searchErrorField;
     errorLabel.text(aValue);
     errorLabel.show();
 }
@@ -222,7 +234,7 @@ function showProducts(records:any):void {
     }
     createTableRows(_currentProcutList);
     prepareDialogFunktions();
-    $('#loadMoreProductsLoader').hide();
+    productResultLoaderImage.hide();
 }
 
 
@@ -292,7 +304,7 @@ function createTableRows(productArray:Array<common.Product>) {
         var uomName:string = product.uomObject.name;
         var productRow = $("");
 
-        $("#search_results").append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
+        resultProductTable.append("<tr data-toggle='modal' data-target='#myModal' class='product_row' productid='" + product.productId + "' arrayindex='" + index + "'> " +
             " <td id='productId' class='col-md-2 col-xs-2'>" + product.productId + "</td>" +
             " <td id='productName' class='col-md-3 col-xs-3'><div>" + product.name + "</div><div>" + categoryName + "</div></td>" +
             " <td id='productLocation' class='col-md-5 col-xs-5'>" + product.locationString + "</td>" +
@@ -305,7 +317,7 @@ function createTableRows(productArray:Array<common.Product>) {
 }
 
 function createTableHeader() {
-    $("#search_results").append("<tr> " +
+    resultProductTable.append("<tr> " +
         " <th onclick='sortById()'>" + "Id" + "</th>" +
         " <th onclick='sortByName()'>" + "Name" + "</th>" +
         " <th onclick='sortByLocation()'>" + "Lagerort" + "</th>" +
@@ -315,7 +327,7 @@ function createTableHeader() {
 
 
 function cleanTable():void {
-    $("#search_results").empty();
+    resultProductTable.empty();
     createTableHeader();
 }
 
