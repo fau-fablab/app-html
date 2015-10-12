@@ -97,7 +97,7 @@ private createNewNodeLevel(aCategory:common.Category,aProducts:Array<common.Prod
 }
 
     private createProductLeaf(aProduct:common.Product): any{
-        return "<li id='"+aProduct.productId+"' class='collapse_list_entry'>"+ aProduct.name + "</li>";
+        return "<li data-toggle='modal' data-target='#myModal' productid='" + aProduct.productId + "' class='collapse_list_entry'>"+ aProduct.name + "</li>";
     }
 
     private createNewNode(aCategory:common.Category,aButtonID:string): any{

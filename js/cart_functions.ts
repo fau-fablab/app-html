@@ -54,6 +54,7 @@ function showAllCartEntries() {
         var product:any = JSON.parse(localStorage[key]);
         product.__proto__ = common.CartEntry.prototype;
         product.product.__proto__ = common.Product.prototype;
+
         product.product.uomObject.__proto__ = common.Uom.prototype;
         str += createProductForDom(product);
         entries.push(product);
@@ -224,6 +225,8 @@ function addProduct(entry:common.CartEntry):void{
     var key:string = entry.product.productId.toString();
 
     // store product and cart
+    console.log(entry);
+    console.log(JSON.stringify(entry));
     localStorage.setItem(key, JSON.stringify(entry));
 
     // product already exists?

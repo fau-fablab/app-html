@@ -66,20 +66,21 @@ var _categoryView: CategoryView;
 var _allProducts: Array<common.Product> = new Array();
 
 function callBackCategoryTree(records:Array<common.Category>){
-
-
-        _categoryTree = api.getCategoriesAsTree(records);
-        if(_allProducts.length != 0){
-            var categoryViewElement = $("#category_search_result");
-            _categoryView = new CategoryView($("#category_search_result"));
-            _categoryView.createNewCategoryView(_categoryTree,_allProducts);
-        }
-
+    _categoryTree = api.getCategoriesAsTree(records);
+    if(_allProducts.length != 0){
+        var categoryViewElement = $("#category_search_result");
+        _categoryView = new CategoryView($("#category_search_result"));
+        _categoryView.createNewCategoryView(_categoryTree,_allProducts);
+    }
+    prepareDialogForTreeListFunctions();
     $("#loadDataLoader").hide();
 }
 
-function callBackAllProducts(records:Array<common.Product>){
-    _allProducts = records;
+function callBackAllProducts(records:any){
+    for (var index = 0; index < records.length; index++) {
+        var product = new common.Product(records[index]);
+        _allProducts.push(product);
+    }
 }
 
 function callbackCategoryAutoCompletions(records):void{
@@ -201,26 +202,58 @@ function showProducts(records:any):void {
 var productDialog:ProductDialog;
 function prepareDialogFunktions() {
     $(".product_row").click(function () {
-        $('body').css('overflow','hidden');
-        $('body').css('position','fixed');
+        //$('body').css('overflow','hidden');
+        //$('body').css('position','fixed');
         var currentElement = $(this);
         var productId = currentElement.attr("productid");
         var arrayIndex = currentElement.attr("arrayindex");
         var currentProduct:common.Product = currentProcutList[arrayIndex];
+        console.log(currentProduct);
         productCounter = new ProductCounter(currentProduct.uomObject.rounding);
         productDialog = new ProductDialog(currentProduct);
 
         // close dialog
         $(".closeSearchDialog").click(function(event){
-            $('body').css('overflow','auto');
-            $('body').css('position','relative');
+            //$('body').css('overflow','auto');
+            //$('body').css('position','relative');
         });
 
     });
 }
 
 function prepareDialogForTreeListFunctions(){
+    console.log("Anzahl der Produkte: " + _allProducts.length);
+    $(".collapse_list_entry").click(function () {
+        console.log("Anzahl der Produkte: " + _allProducts.length);
+        //$('body').css('overflow','hidden');
+        //$('body').css('position','fixed');
+        var currentElement = $(this);
+        var productId = currentElement.attr("productid");
+        currentProcutList = _allProducts;
+        var productObject:common.Product = getProductByID(currentProcutList, parseInt(productId));
+        //var productObject:common.Product = findProductByID(productId,_allProducts);
+        console.log("Found productID: " + productId);
+        console.log(productObject);
+        productCounter = new ProductCounter(productObject.uomObject.rounding);
+        productDialog = new ProductDialog(productObject);
 
+        // close dialog
+        $(".closeSearchDialog").click(function(event){
+            //$('body').css('overflow','auto');
+            //$('body').css('position','relative');
+        });
+
+    });
+}
+
+function findProductByID(aProductId:any,aProducts: Array<common.Product>):common.Product{
+    for(var index in aProducts){
+        if(aProductId == aProducts[index].productId){
+            return aProducts[index];
+        }
+    }
+    console.log("No Product found for id " + aProductId + "!");
+    return;
 }
 
 function createTableRows(productArray:Array<common.Product>) {
@@ -351,6 +384,10 @@ $("#modal-productAddToCart").click(function () {
     var cartButtonQuantity = $("#cart_button_quantity");
     cartButtonQuantity.hide();
 
+    console.log("Product");
+    console.log(product);
+    console.log("count");
+    console.log(count);
     addProduct(new common.CartEntry(product, count));
     // let it bounce
 
