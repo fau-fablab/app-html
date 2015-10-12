@@ -37,6 +37,37 @@ document.onkeydown = function (event) {
 $(document).ready(function () {
     var productApi:ProductApi = new ProductApi();
     // disable input til list is loaded
+    $('#category_options').hide();
+    $( ".radio" ).change(function() {
+        var checkedValue = $('#wellform input:radio:checked').val();
+        switch (checkedValue) {
+            case "byName":
+                console.log("byName");
+                $("#inputSuche").prop("disabled", false);
+                $('#category_options').hide();
+                break;
+            case "allProducts":
+                console.log("AllProduct");
+                $("#inputSuche").prop("disabled", false);
+                $('#category_options').hide();
+                break;
+            case "byId":
+                console.log("byid");
+                $("#inputSuche").prop("disabled", false);
+                $('#category_options').hide();
+                break;
+            case "byCategory":
+                console.log("byCategory");
+                $("#inputSuche").prop("disabled", true);
+                $('#category_options').show();
+                break;
+            case "byCategoryTree":
+                $("#inputSuche").prop("disabled", false);
+                console.log("byCategoryTree");
+                $('#category_options').hide();
+                break;
+        }
+    });
     $("#inputSuche").prop("disabled", true);
     $("#search_btn").prop("disabled", true);
     $("#loadDataLoader").show();
@@ -55,8 +86,9 @@ $(document).ready(function () {
 
     // set and initialise tooltip
     var tooltip:any = $("#search_tooltip");
-    tooltip.prop("title", "Gib dein gewünschtes Produkt ein und drücke auf Suchen. Wenn du alle Produkte finden willst, " +
-        "dann lasse das Feld frei und suche direkt. Alternativ kannst du auch die Produktid eingeben.");
+    tooltip.prop("title", "Gib das gewünschte Produkt ein und drücke auf Suchen. Wenn du alle Produkte finden willst, " +
+        "dann lasse das Feld frei und suche direkt. Alternativ kannst du auf 'Erweiterte Suche' drücken um weitere Suchoptionen zu erhalten " +
+        "z.B. um Produkte gezielt nach Kategorien zu suchen oder um dir alle Kategorien mit den Produkten anzeigen zu lassen.");
     tooltip.tooltip({placement: 'bottom'});
 
 });
@@ -73,7 +105,7 @@ function callBackCategoryTree(records:Array<common.Category>){
         _categoryView.createNewCategoryView(_categoryTree,_allProducts);
     }
     prepareDialogForTreeListFunctions();
-    $("#loadDataLoader").hide();
+    $("#loadMoreProductsLoaderForCategories").hide();
 }
 
 function callBackAllProducts(records:any){
@@ -122,18 +154,21 @@ function search():void {
     var checkedValue = $('#wellform input:radio:checked').val();
     switch (checkedValue) {
         case "byName":
+
             $("#search_result_category_container").hide();
             $("#search_results_container").show();
             _productApi.findByName(researchCriteria, LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "allProducts":
+
             $("#search_result_category_container").hide();
             $("#search_results_container").show();
             _productApi.findAll(LOADLIMIT, OFFSET, showSearchResults);
             $('#loadMoreProductsLoader').show();
             break;
         case "byId":
+
             $("#search_result_category_container").hide();
             $("#search_results_container").show();
             if(researchCriteria.length > 0) {
@@ -149,6 +184,7 @@ function search():void {
             }
             break;
         case "byCategory":
+
             $("#search_result_category_container").hide();
             $("#search_results_container").show();
             _productApi.findByCategory(selectedValue,0,0,showSearchResults);
@@ -158,7 +194,7 @@ function search():void {
             $("#category_search_result").empty();
             $("#search_results_container").hide();
             $("#search_result_category_container").show();
-            $('#loadMoreProductsLoader').show();
+            $('#loadMoreProductsLoaderForCategories').show();
             _categoryApi.findAll(callBackCategoryTree);
             break;
 
