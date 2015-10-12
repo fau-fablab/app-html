@@ -3,14 +3,18 @@
 /// <reference path="common/model/PlatformType.ts"/>
 /// <reference path="util/RestClient.ts"/>
 /// <reference path="cart_functions.ts"/>
+/// <reference path="elements/InfoResource.ts"/>
+
+
+var _infoResource: InfoResource = new InfoResource();
 $(document).ready(function () {
     // initialise and set tooltip
     var tooltip:any =  $("#cart_tooltip");
-    tooltip.prop("title", "Wenn du bezahlen möchtest, generiere dir an der Kasse im FABLAB einen QR Code " +
-        "und klicke hier auf den \"Zur Kasse\"-Button. Nun musst du den QR Code abtippen, auf \"Absenden\" klicken " +
-        "und anschließend bequem im FABLAB bezahlen.");
+    tooltip.prop("title", _infoResource.cartInfo());
     tooltip.tooltip({placement: 'top'});
 });
+
+
 
 // cart being used right now
 var sentCartCode:string;

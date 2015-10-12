@@ -51,55 +51,6 @@ class ProductDialog {
         this._productCounter = new ProductCounter(aProduct.uomObject.rounding);
 
         this.modalProductCounterValue.val("1");
-
-        /*
-        this.setFunctionIncrementProductCounter();
-        this.setFunctionDeclineProductCounter();
-         */
     }
 
-
-
-
-
-
-/*
-    public setFunctionIncrementProductCounter():any {
-        return (function () {
-            console.log("starteIncrement with Product " + ProductDialog._currentProduct.name);
-            var productCounter = new ProductCounter(ProductDialog._currentProduct.uomObject.rounding);
-            var modalProductCounterValue = $("#modal-number");
-            console.log(modalProductCounterValue.val());
-            var oldValue: number = modalProductCounterValue.val();
-
-            productCounter.incrementValue(Number(oldValue));
-            var newValue:number = productCounter.getCurrentValue();
-
-            modalProductCounterValue.val(newValue + "");
-            var newPrice:number = ProductDialog._currentProduct.price * newValue;
-            var formatedPrice = ProductDialog._formatter.formatNumberToPrice(ProductDialog._currentProduct.price);
-            var formatedNewPrice = ProductDialog._formatter.formatNumberToPrice(newPrice);
-            var modalProductPriceLabel = $("#modal-productprice");
-            modalProductPriceLabel.text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
-        })
-    }
-
-    private setFunctionDeclineProductCounter():void {
-        this.modalProductCounterDown.click(function () {
-            console.log("starteIncrement with Product " + ProductDialog._currentProduct.name);
-            var productCounter = new ProductCounter(ProductDialog._currentProduct.uomObject.rounding);
-            var modalProductCounterValue = $("#modal-number");
-            var oldValue: number = modalProductCounterValue.val();
-            productCounter.declineValue(Number(oldValue));
-            var newValue:number = productCounter.getCurrentValue();
-
-            modalProductCounterValue.val(newValue + "");
-            var newPrice:number = ProductDialog._currentProduct.price * newValue;
-            var formatedPrice = ProductDialog._formatter.formatNumberToPrice(ProductDialog._currentProduct.price);
-            var formatedNewPrice = ProductDialog._formatter.formatNumberToPrice(newPrice);
-            var modalProductPriceLabel = $("#modal-productprice");
-            modalProductPriceLabel.text(formatedPrice + " \u20AC" + " (" + formatedNewPrice + " \u20AC" + ")");
-        });
-    }
-*/
 }

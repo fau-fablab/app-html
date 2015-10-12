@@ -20,10 +20,8 @@ class ProductCounter {
     }
 
     public declineValue(aCurrentValue: number):void {
-        console.log("declineValue currentValue: " + this._currentValue);
         var tempValue = aCurrentValue;
         this._currentValue = aCurrentValue - (this._multiplier);
-        console.log("declineValue newValue: " + this._currentValue);
         if(this._currentValue <= 0){
             this._currentValue = tempValue;
         }

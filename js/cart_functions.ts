@@ -13,6 +13,7 @@ $( document ).ready(function() {
 // scrollelement
 var vertScroll;
 
+
 // get total price of shopping cart
 function getTotalPrice():number{
     var cart:string[] = getCart();

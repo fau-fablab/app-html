@@ -6,9 +6,10 @@
 /// <reference path="common/model/ToolUsage.ts" />
 /// <reference path="common/model/User.ts" />
 /// <reference path="util/Utils.ts" />
+/// <reference path="elements/InfoResource.ts"/>
 
 var reservation:Reservation = null;
-
+var _infoResource: InfoResource = new InfoResource();
 class Reservation {
     _util:Utils = new Utils();
     maxUsageTime:number = 300;
@@ -453,9 +454,6 @@ $(document).ready(function () {
 
     // set and initialise tooltip
     var tooltip:any = $("#toolUsage_tooltip");
-    tooltip.prop("title", "Wähle eine Maschine aus dem Dropdown Menü aus, " +
-        "fülle anschließend die drei gegebenen Felder entsprechend aus und trage dich per Klick in die Warteliste ein. " +
-        "Du sieht anschließend die aktuelle Warteschlange und deine Position. Wenn du doch nicht mehr warten willst oder keine Zeit mehr hast," +
-        " trage dich bitte wieder aus indem du auf das kleine X in deiner Zeile klickst.");
+    tooltip.prop("title", _infoResource.reservationInfo());
     tooltip.tooltip({placement: 'right'});
 });
