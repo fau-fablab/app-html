@@ -99,8 +99,9 @@ class RestClient{
 		xhr.onload = function () {
 
 			if (xhr.status != 200) {
-				if (callbackError(xhr.status, xhr.statusText));
-				return;
+				if (callbackError(xhr.status, xhr.statusText)) {
+					return;
+				}
 			}
 
 			var response : string = JSON.parse(xhr.responseText);
@@ -143,8 +144,9 @@ class RestClient{
 		xhr.onload = function() {
 
 			if (xhr.status != 200) {
-				if (callbackError(xhr.status, xhr.statusText));
-				return;
+				if (callbackError(xhr.status, xhr.statusText)) {
+					return;
+				}
 			}
 
 			var response : string = JSON.parse(xhr.responseText);
